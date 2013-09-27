@@ -10,6 +10,7 @@
 
 #import "AppDelegate.h"
 #import "IntroLayer.h"
+#import "Utilities.h"
 
 @implementation AppController
 
@@ -19,8 +20,11 @@
 {
 	// Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	soundEffect=[[sound alloc] init];
+    [soundEffect initSound];
 	
-	
+    [Utilities createEditableCopyOfDatabaseIfNeeded];
+    
 	// Create an CCGLView with a RGB565 color buffer, and a depth buffer of 0-bits
 	CCGLView *glView = [CCGLView viewWithFrame:[window_ bounds]
 								   pixelFormat:kEAGLColorFormatRGB565	//kEAGLColorFormatRGBA8
@@ -31,14 +35,14 @@
 							   numberOfSamples:0];
 
 	// Enable multiple touches
-	[glView setMultipleTouchEnabled:YES];
+	[glView setMultipleTouchEnabled:NO];
 
 	director_ = (CCDirectorIOS*) [CCDirector sharedDirector];
 	
 	director_.wantsFullScreenLayout = YES;
 	
-	// Display FSP and SPF
-	[director_ setDisplayStats:YES];
+	// Display FSP and SPF by Kamran
+	[director_ setDisplayStats:NO];
 	
 	// set FPS at 60
 	[director_ setAnimationInterval:1.0/60];
@@ -54,7 +58,7 @@
 	//	[director setProjection:kCCDirectorProjection3D];
 	
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-	if( ! [director_ enableRetinaDisplay:YES] )
+	if( ! [director_ enableRetinaDisplay:NO] )
 		CCLOG(@"Retina Display Not supported");
 	
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
