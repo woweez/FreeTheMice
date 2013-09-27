@@ -172,7 +172,7 @@
         CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:[startFrame stringByAppendingString:DOT_PNG_WITH_INDEX],i]];
         [animationFramesArr addObject:frame];
     }
-    CCAnimation *knockedOutAnimation = [CCAnimation animationWithSpriteFrames:animationFramesArr delay:0.03f];
+    CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animationFramesArr delay:0.03f];
     
     CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:[startFrame stringByAppendingString:DOT_PNG_WITH_INDEX], 0]];
     if(!forwardChe){
@@ -183,7 +183,7 @@
     sprite.scale=0.5;
     [spriteSheet addChild:sprite];
     
-    CCAnimate *actionOne = [CCAnimate actionWithAnimation:knockedOutAnimation];
+    CCAnimate *actionOne = [CCAnimate actionWithAnimation:animation];
     [sprite runAction:[CCRepeatForever actionWithAction:actionOne ]];
 
 }
