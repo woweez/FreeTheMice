@@ -29,26 +29,26 @@
     
     }
 
--(void)addAnimation:(NSString *) plistName andNoOfFrames:(int) frames andStartingFrameName:(NSString *) startFrame;
--(void)showAnimationWithMiceIdAndIndex:(int)catId andAnimationIndex:(int) animIndex;
+-(void)addAnimation:(NSString *) plistName noOfFrames:(int) frames startingFrameName:(NSString *) startFrame;
+-(void)showAnimationWithMiceIdAndIndex:(int)miceId andAnimationIndex:(int) animIndex;
 
 -(void)progressBarFunc;
 
 
--(void)playMamaKniveHitAnimation;
--(void)playStrongKniveHitAnimation;
--(void)playGirlKniveHitAnimation;
-
--(void)playMamaWaterHitAnimation;
--(void)playStrongWaterHitAnimation;
--(void)playGirlWaterHitAnimation;
-
--(void)playMamaShockHitAnimation;
--(void)playStrongShockHitAnimation;
--(void)playGirlShockHitAnimation;
-
--(void)playMamaMistHitAnimation;
--(void)playStrongMistHitAnimation;
--(void)playGirlMistHitAnimation;
+//-(void)playMamaKniveHitAnimation;
+//-(void)playStrongKniveHitAnimation;
+//-(void)playGirlKniveHitAnimation;
+//
+//-(void)playMamaWaterHitAnimation;
+//-(void)playStrongWaterHitAnimation;
+//-(void)playGirlWaterHitAnimation;
+//
+//-(void)playMamaShockHitAnimation;
+//-(void)playStrongShockHitAnimation;
+//-(void)playGirlShockHitAnimation;
+//
+//-(void)playMamaMistHitAnimation;
+//-(void)playStrongMistHitAnimation;
+//-(void)playGirlMistHitAnimation;
 
 @end

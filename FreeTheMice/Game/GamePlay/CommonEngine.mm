@@ -23,9 +23,9 @@
     return self;
 }
 
--(void) showAnimationWithMiceIdAndIndex:(int)catId andAnimationIndex:(int)animIndex{
+-(void) showAnimationWithMiceIdAndIndex:(int)miceId andAnimationIndex:(int)animIndex{
     
-    switch (catId) {
+    switch (miceId) {
         case FTM_MAMA_MICE_ID:
             [self showTrappingAnimationForMama:animIndex];
             break;
@@ -99,40 +99,40 @@
 }
 -(void) playMamaKniveHitAnimation{
     
-    [self addAnimation:MAMA_KNIFE_ANIM_PATH andNoOfFrames:23 andStartingFrameName:MAMA_KNIFE_ANIM_FRAME_PATH];
+    [self addAnimation:MAMA_KNIFE_ANIM_PATH noOfFrames:23 startingFrameName:MAMA_KNIFE_ANIM_FRAME_PATH];
 }
 -(void)playStrongKniveHitAnimation{
-    [self addAnimation:STRONG_KNIFE_ANIM_PATH andNoOfFrames:23 andStartingFrameName:STRONG_KNIFE_ANIM_FRAME_PATH];
+    [self addAnimation:STRONG_KNIFE_ANIM_PATH noOfFrames:23 startingFrameName:STRONG_KNIFE_ANIM_FRAME_PATH];
 }
 
 -(void)playGirlKniveHitAnimation{
-    [self addAnimation:GIRL_KNIFE_ANIM_PATH andNoOfFrames:23 andStartingFrameName:GIRL_KNIFE_ANIM_FRAME_PATH];
+    [self addAnimation:GIRL_KNIFE_ANIM_PATH noOfFrames:23 startingFrameName:GIRL_KNIFE_ANIM_FRAME_PATH];
 }
 
 
 -(void)playMamaWaterHitAnimation{
-    [self addAnimation:MAMA_WATER_ANIM_PATH andNoOfFrames:14 andStartingFrameName:MAMA_WATER_ANIM_FRAME_PATH];
+    [self addAnimation:MAMA_WATER_ANIM_PATH noOfFrames:14 startingFrameName:MAMA_WATER_ANIM_FRAME_PATH];
 }
 
 -(void)playStrongWaterHitAnimation{
-    [self addAnimation:STRONG_WATER_ANIM_PATH andNoOfFrames:14 andStartingFrameName:STRONG_WATER_ANIM_FRAME_PATH];
+    [self addAnimation:STRONG_WATER_ANIM_PATH noOfFrames:14 startingFrameName:STRONG_WATER_ANIM_FRAME_PATH];
 }
 
 -(void)playGirlWaterHitAnimation{
-    [self addAnimation:GIRL_WATER_ANIM_PATH andNoOfFrames:14 andStartingFrameName:GIRL_WATER_ANIM_FRAME_PATH];
+    [self addAnimation:GIRL_WATER_ANIM_PATH noOfFrames:14 startingFrameName:GIRL_WATER_ANIM_FRAME_PATH];
 }
 
 
 -(void)playMamaShockHitAnimation{
-    [self addAnimation:MAMA_SHOCK_ANIM_PATH andNoOfFrames:15 andStartingFrameName:MAMA_SHOCK_ANIM_FRAME_PATH];
+    [self addAnimation:MAMA_SHOCK_ANIM_PATH noOfFrames:15 startingFrameName:MAMA_SHOCK_ANIM_FRAME_PATH];
 }
 
 -(void)playStrongShockHitAnimation{
-    [self addAnimation:STRONG_SHOCK_ANIM_PATH andNoOfFrames:15 andStartingFrameName:STRONG_SHOCK_ANIM_FRAME_PATH];
+    [self addAnimation:STRONG_SHOCK_ANIM_PATH noOfFrames:15 startingFrameName:STRONG_SHOCK_ANIM_FRAME_PATH];
 }
 
 -(void)playGirlShockHitAnimation{
-    [self addAnimation:GIRL_SHOCK_ANIM_PATH andNoOfFrames:15 andStartingFrameName:GIRL_SHOCK_ANIM_FRAME_PATH];
+    [self addAnimation:GIRL_SHOCK_ANIM_PATH noOfFrames:15 startingFrameName:GIRL_SHOCK_ANIM_FRAME_PATH];
 }
 
 
@@ -149,19 +149,19 @@
 }
 
 -(void)playMamaFlameHitAnimation{
-    [self addAnimation:MAMA_FLAME_ANIM_PATH andNoOfFrames:29 andStartingFrameName:MAMA_FLAME_ANIM_FRAME_PATH];
+    [self addAnimation:MAMA_FLAME_ANIM_PATH noOfFrames:29 startingFrameName:MAMA_FLAME_ANIM_FRAME_PATH];
 }
 
 -(void)playStrongFlameHitAnimation{
-    [self addAnimation:STRONG_FLAME_ANIM_PATH andNoOfFrames:29 andStartingFrameName:STRONG_FLAME_ANIM_FRAME_PATH];
+    [self addAnimation:STRONG_FLAME_ANIM_PATH noOfFrames:29 startingFrameName:STRONG_FLAME_ANIM_FRAME_PATH];
 }
 
 -(void)playGirlFlameHitAnimation{
-    [self addAnimation:GIRL_FLAME_ANIM_PATH andNoOfFrames:29 andStartingFrameName:GIRL_FLAME_ANIM_FRAME_PATH];
+    [self addAnimation:GIRL_FLAME_ANIM_PATH noOfFrames:29 startingFrameName:GIRL_FLAME_ANIM_FRAME_PATH];
 }
 
 
--(void) addAnimation:(NSString *)plistName andNoOfFrames:(int)frames andStartingFrameName:(NSString *)startFrame{
+-(void) addAnimation:(NSString *)plistName noOfFrames:(int)frames startingFrameName:(NSString *)startFrame{
 
     [cache addSpriteFramesWithFile:[plistName stringByAppendingString:DOT_PLIST]];
     CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:[plistName stringByAppendingString:DOT_PNG]];
