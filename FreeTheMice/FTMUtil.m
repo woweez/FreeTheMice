@@ -10,9 +10,11 @@
 #import "FTMSynthesizeSingletion.h"
 #include <sys/types.h>
 #include <sys/sysctl.h>
+#import "cocos2d.h"
 @implementation FTMUtil
 
 @synthesize mouseClicked ;
+@synthesize isIphone5;
 static FTMUtil *sharedInstance =nil;
 
 +(FTMUtil*)sharedInstance
@@ -28,6 +30,20 @@ static FTMUtil *sharedInstance =nil;
     self=[super init];
     if(self){
         mouseClicked = 1;
+        if([[self getModel] isEqualToString:@"iPhone4S"]){
+            isIphone5 = YES;
+        }
+        else if([[self getModel] isEqualToString:@"Simulator"]){
+            CGSize winSize = [CCDirector sharedDirector].winSize;
+            if(winSize.width > 480 && winSize.height <= 1136){
+                isIphone5 = YES;
+            }else{
+                isIphone5 = NO;
+            }
+        }
+        else{
+            isIphone5 = NO;
+        }
     }
     return  self;
 }
@@ -63,7 +79,7 @@ static FTMUtil *sharedInstance =nil;
     if ([aux rangeOfString:@"iPhone"].location!=NSNotFound) {
         int version = [[aux stringByReplacingOccurrencesOfString:@"iPhone" withString:@""] intValue];
         if (version == 3) return @"iPhone4";
-            if (version >= 4) return @"iPhone4s";
+            if (version >= 4) return @"iPhone4S";
         
     }
     if ([aux rangeOfString:@"iPod"].location!=NSNotFound) {

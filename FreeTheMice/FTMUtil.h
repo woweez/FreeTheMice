@@ -13,6 +13,7 @@
 }
 
 @property (readwrite) int mouseClicked;
+@property (readwrite) BOOL isIphone5;
 + (FTMUtil*) sharedInstance;
 - (NSString *)getModel;
 @end

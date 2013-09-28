@@ -14,12 +14,17 @@
 #define FTM_STRONG_MICE_ID   2
 #define FTM_GIRL_MICE_ID     3
 
-#define isIphone5            0
-
 #define DOT_PLIST               @".plist"
 #define DOT_PNG                 @".png"
 #define DOT_PNG_WITH_INDEX      @"%d.png"
 
+#define MAGNIFIER_ITEM_ID       1
+#define BOOTS_ITEM_ID           2
+#define SPEEDUP_ITEM_ID         3
+#define SPECIAL_CHEESE_ITEM_ID  4
+#define SLOWDOWN_TIME_ITEM_ID   5
+#define MASTER_KEY_ITEM_ID      6
+#define BARKING_DOG_ITEM_ID     7
 //                                  THESE ARE MAMA MOUSE SETTINGS.
 
 
