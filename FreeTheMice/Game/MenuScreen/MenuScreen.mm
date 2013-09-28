@@ -12,8 +12,8 @@
 #import "OptionsScreen.h"
 #import "AboutScreen.h"
 #import "LevelScreen.h"
-#import "ToolShedScreen.h"
-
+//#import "ToolShedScreen.h"
+#import "MyOwnScroller.h"
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 #import "DB.h"
@@ -99,7 +99,7 @@ enum {
         
         CCMenuItem *storeMenuItem = [CCMenuItemImage itemWithNormalImage:@"store.png" selectedImage:@"store_press.png" block:^(id sender) {
             //add functionality here.
-            [[CCDirector sharedDirector] replaceScene:[ToolShedScreen scene]];
+            [[CCDirector sharedDirector] replaceScene:[MyOwnScroller scene]];
 		}];
         [storeMenuItem setScale:0.5];
         CCMenu *storeBtnMenu = [CCMenu menuWithItems:storeMenuItem, nil];
