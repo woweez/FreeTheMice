@@ -5,10 +5,23 @@
 //  Created by Muhammad Kamran on 24/09/2013.
 //
 //
+//get ptm ratio
+#define isIPad UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+//#define PTM_RATIO (isIPad ? 64 : 32)
+#define DEVICESCALE (isIPad ? 2 : 1)
+
+//convenience measurements
+#define SCREEN [[CCDirector sharedDirector] winSize]
+#define CURTIME CACurrentMediaTime()
+
+//convenience functions
+#define random_range(low,high) (arc4random()%(high-low+1))+low
+#define frandom (float)arc4random()/UINT64_C(0x100000000)
+#define frandom_range(low,high) ((high-low)*frandom)+low
+
 
 #ifndef FreeTheMice_FTMConstants_h
 #define FreeTheMice_FTMConstants_h
-
 
 #define FTM_MAMA_MICE_ID     1
 #define FTM_STRONG_MICE_ID   2
@@ -19,10 +32,10 @@
 #define DOT_PNG_WITH_INDEX      @"%d.png"
 
 #define MAGNIFIER_ITEM_ID       1
-#define BOOTS_ITEM_ID           2
-#define SPEEDUP_ITEM_ID         3
-#define SPECIAL_CHEESE_ITEM_ID  4
-#define SLOWDOWN_TIME_ITEM_ID   5
+#define SLOWDOWN_TIME_ITEM_ID   2
+#define BOOTS_ITEM_ID           3
+#define SPEEDUP_ITEM_ID         4
+#define SPECIAL_CHEESE_ITEM_ID  5
 #define MASTER_KEY_ITEM_ID      6
 #define BARKING_DOG_ITEM_ID     7
 //                                  THESE ARE MAMA MOUSE SETTINGS.
