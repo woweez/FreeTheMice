@@ -103,7 +103,6 @@
 		46842FFE170D5FDE00438454 /* cat_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 46842FFC170D5FDE00438454 /* cat_default.png */; };
 		46843001170D675F00438454 /* StrongMouseEngine07.mm in Sources */ = {isa = PBXBuildFile; fileRef = 46842FFF170D675F00438454 /* StrongMouseEngine07.mm */; };
 		4685B89D17F8545E00660516 /* buy_cheese_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4685B88617F8545E00660516 /* buy_cheese_btn.png */; };
-		4685B89E17F8545E00660516 /* cheese.png in Resources */ = {isa = PBXBuildFile; fileRef = 4685B88717F8545E00660516 /* cheese.png */; };
 		4685B89F17F8545E00660516 /* cheese_available.png in Resources */ = {isa = PBXBuildFile; fileRef = 4685B88817F8545E00660516 /* cheese_available.png */; };
 		4685B8A017F8545E00660516 /* costumes_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4685B88917F8545E00660516 /* costumes_btn.png */; };
 		4685B8A117F8545E00660516 /* costumes_btn_disable.png in Resources */ = {isa = PBXBuildFile; fileRef = 4685B88A17F8545E00660516 /* costumes_btn_disable.png */; };
@@ -127,6 +126,9 @@
 		4685B8B617F8569D00660516 /* buy-btn-press.png in Resources */ = {isa = PBXBuildFile; fileRef = 4685B8B317F8569D00660516 /* buy-btn-press.png */; };
 		4685B8B717F8569D00660516 /* buy-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4685B8B417F8569D00660516 /* buy-btn.png */; };
 		4685B8B817F8569D00660516 /* cheese_store_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 4685B8B517F8569D00660516 /* cheese_store_bg.png */; };
+		4685B8BA17F86A8400660516 /* cheese_bite.png in Resources */ = {isa = PBXBuildFile; fileRef = 4685B8B917F86A8400660516 /* cheese_bite.png */; };
+		4685B8BD17F86AC700660516 /* font1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4685B8BB17F86AC600660516 /* font1.png */; };
+		4685B8BE17F86AC700660516 /* font2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4685B8BC17F86AC600660516 /* font2.png */; };
 		468647AC1727F55200CFB4A1 /* GirlMouseEngine05.mm in Sources */ = {isa = PBXBuildFile; fileRef = 468647AA1727F55200CFB4A1 /* GirlMouseEngine05.mm */; };
 		4691198D1744A88800E62DDB /* GameEngine04.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4691198B1744A88800E62DDB /* GameEngine04.mm */; };
 		4691198F1744D25F00E62DDB /* mother_level01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4691198E1744D25F00E62DDB /* mother_level01.jpg */; };
@@ -775,7 +777,6 @@
 		46842FFF170D675F00438454 /* StrongMouseEngine07.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StrongMouseEngine07.mm; sourceTree = "<group>"; };
 		46843000170D675F00438454 /* StrongMouseEngine07.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrongMouseEngine07.h; sourceTree = "<group>"; };
 		4685B88617F8545E00660516 /* buy_cheese_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buy_cheese_btn.png; sourceTree = "<group>"; };
-		4685B88717F8545E00660516 /* cheese.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cheese.png; sourceTree = "<group>"; };
 		4685B88817F8545E00660516 /* cheese_available.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cheese_available.png; sourceTree = "<group>"; };
 		4685B88917F8545E00660516 /* costumes_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = costumes_btn.png; sourceTree = "<group>"; };
 		4685B88A17F8545E00660516 /* costumes_btn_disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = costumes_btn_disable.png; sourceTree = "<group>"; };
@@ -799,6 +800,9 @@
 		4685B8B317F8569D00660516 /* buy-btn-press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy-btn-press.png"; sourceTree = "<group>"; };
 		4685B8B417F8569D00660516 /* buy-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy-btn.png"; sourceTree = "<group>"; };
 		4685B8B517F8569D00660516 /* cheese_store_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cheese_store_bg.png; sourceTree = "<group>"; };
+		4685B8B917F86A8400660516 /* cheese_bite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cheese_bite.png; sourceTree = "<group>"; };
+		4685B8BB17F86AC600660516 /* font1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font1.png; sourceTree = "<group>"; };
+		4685B8BC17F86AC600660516 /* font2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font2.png; sourceTree = "<group>"; };
 		468647AA1727F55200CFB4A1 /* GirlMouseEngine05.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GirlMouseEngine05.mm; sourceTree = "<group>"; };
 		468647AB1727F55200CFB4A1 /* GirlMouseEngine05.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GirlMouseEngine05.h; sourceTree = "<group>"; };
 		4691198B1744A88800E62DDB /* GameEngine04.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameEngine04.mm; sourceTree = "<group>"; };
@@ -1743,11 +1747,11 @@
 		4685B88517F8545E00660516 /* ToolbagShed */ = {
 			isa = PBXGroup;
 			children = (
+				4685B8B917F86A8400660516 /* cheese_bite.png */,
 				4685B8B317F8569D00660516 /* buy-btn-press.png */,
 				4685B8B417F8569D00660516 /* buy-btn.png */,
 				4685B8B517F8569D00660516 /* cheese_store_bg.png */,
 				4685B88617F8545E00660516 /* buy_cheese_btn.png */,
-				4685B88717F8545E00660516 /* cheese.png */,
 				4685B88817F8545E00660516 /* cheese_available.png */,
 				4685B88917F8545E00660516 /* costumes_btn.png */,
 				4685B88A17F8545E00660516 /* costumes_btn_disable.png */,
@@ -2260,6 +2264,8 @@
 		7FDC99C716BEDB090025043B /* Numbers */ = {
 			isa = PBXGroup;
 			children = (
+				4685B8BB17F86AC600660516 /* font1.png */,
+				4685B8BC17F86AC600660516 /* font2.png */,
 				7F81EBFD16BF8FD80063E41E /* numbers.png */,
 				7FDC99C916BEDB090025043B /* 10_levels.png */,
 				7FDC99CA16BEDB090025043B /* 11_levels.png */,
@@ -3360,7 +3366,6 @@
 				46AF0EBB17F2C4B1001874FB /* debugBtn_nor.png in Resources */,
 				46AF0EBC17F2C4B1001874FB /* debugBtn.png in Resources */,
 				4685B89D17F8545E00660516 /* buy_cheese_btn.png in Resources */,
-				4685B89E17F8545E00660516 /* cheese.png in Resources */,
 				4685B89F17F8545E00660516 /* cheese_available.png in Resources */,
 				4685B8A017F8545E00660516 /* costumes_btn.png in Resources */,
 				4685B8A117F8545E00660516 /* costumes_btn_disable.png in Resources */,
@@ -3384,6 +3389,9 @@
 				4685B8B617F8569D00660516 /* buy-btn-press.png in Resources */,
 				4685B8B717F8569D00660516 /* buy-btn.png in Resources */,
 				4685B8B817F8569D00660516 /* cheese_store_bg.png in Resources */,
+				4685B8BA17F86A8400660516 /* cheese_bite.png in Resources */,
+				4685B8BD17F86AC700660516 /* font1.png in Resources */,
+				4685B8BE17F86AC700660516 /* font2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -95,18 +95,18 @@
     buyItemMenu.contentSize = CGSizeMake(buyItem.contentSize.width/4 *scaleFactorX ,buyItem.contentSize.height/4 *scaleFactorY);
     [cell addChild:buyItemMenu];
     
-    CCLabelAtlas *cost = [CCLabelAtlas labelWithString:@"100" charMapFile:@"numbers.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
+    CCLabelAtlas *cost = [CCLabelAtlas labelWithString:@"100" charMapFile:@"font1.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
     cost.position= ccp(buyItemMenu.position.x -15 *scaleFactorX, buyItemMenu.position.y - 28 *scaleFactorY);
     cost.scale=0.5;
     [cell addChild:cost z:0];
     
-    CCLabelAtlas *multiplier = [CCLabelAtlas labelWithString:@" X3" charMapFile:@"numbers.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
+    CCLabelAtlas *multiplier = [CCLabelAtlas labelWithString:@" X3" charMapFile:@"font1.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
     multiplier.position= ccp(powrUpSpr.position.x + 13*scaleFactorX, powrUpSpr.position.y - 20 *scaleFactorY);
     multiplier.scale=0.5;
     [cell addChild:multiplier z:0];
     
     
-    CCSprite *cheeseSpr = [CCSprite spriteWithFile:@"cheese.png"];
+    CCSprite *cheeseSpr = [CCSprite spriteWithFile:@"cheese_bite.png"];
     cheeseSpr.position = ccp(cost.position.x + 32*scaleFactorX, powrUpSpr.position.y - 15 *scaleFactorY);;
     cheeseSpr.scale = 0.5;
     cheeseSpr.tag = itemId;
