@@ -30,6 +30,8 @@
 #define DOT_PLIST               @".plist"
 #define DOT_PNG                 @".png"
 #define DOT_PNG_WITH_INDEX      @"%d.png"
+#define YELLOW_FONT             @"yellowFont.png"
+#define RED_FONT                @"redFont.png"
 
 #define MAGNIFIER_ITEM_ID       1
 #define SLOWDOWN_TIME_ITEM_ID   2

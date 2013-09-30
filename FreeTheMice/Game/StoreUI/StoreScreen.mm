@@ -1,0 +1,87 @@
+//
+//  StoreScreen.m
+//  FreeTheMice
+//
+//  Created by Muhammad Kamran on 30/09/2013.
+//
+//
+
+#import "StoreScreen.h"
+#import "ToolShedScreen.h"
+
+@implementation StoreScreen
+
+
++(CCScene *) scene {
+	
+    CCScene *scene = [CCScene node];
+    StoreScreen *layer = [StoreScreen node];
+    [scene addChild: layer];
+	
+	return scene;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        
+        
+        CGSize screenSize = [CCDirector sharedDirector].winSize;
+        scaleFactorX = screenSize.width/480;
+        scaleFactorY = screenSize.height/320;
+        
+        CCSprite *storeBg = [CCSprite spriteWithFile: @"cheese_store_bg.png"];
+        storeBg.position = ccp(240 *scaleFactorX, 160 *scaleFactorY);
+        storeBg.scaleX = 0.5 * scaleFactorX;
+        storeBg.scaleY = 0.5 * scaleFactorY;
+        [self addChild:storeBg];
+        int cheese = [[NSUserDefaults standardUserDefaults] integerForKey:@"currentCheese"];
+        CCLabelAtlas *totalCheese = [CCLabelAtlas labelWithString:[NSString stringWithFormat:@"%d", cheese] charMapFile:@"numbers.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
+        totalCheese.position= ccp(225 *scaleFactorX, 38 *scaleFactorY);
+        totalCheese.scale=0.8;
+        [self addChild:totalCheese z:0];
+        
+        CCMenuItem *backButtonItem = [CCMenuItemImage itemWithNormalImage:@"back_button_1.png" selectedImage:@"back_button_2.png" block:^(id sender) {
+            [[CCDirector sharedDirector] replaceScene:[ToolShedScreen scene]];
+        }];
+        
+        [backButtonItem setScale:0.45];
+        CCMenu *backMenu = [CCMenu menuWithItems:backButtonItem, nil];
+        backMenu.position = ccp(50 *scaleFactorX, 40 *scaleFactorY);
+        [self addChild:backMenu];
+        
+        [self addBuyButtons];
+        
+    }
+    return self;
+}
+
+-(void) addBuyButtons{
+    for (int i = 1; i<= 3; i++) {
+        CCMenuItem *buyItem = [CCMenuItemImage itemWithNormalImage:@"buy-btn.png" selectedImage:@"buy-btn-press.png" block:^(id sender) {
+            
+        }];
+        CGPoint pos;
+        [buyItem setScale:0.5];
+        switch (i) {
+            case 1:
+                pos = ccp(275 *scaleFactorX, (87) *scaleFactorY);
+                break;
+            case 2:
+                pos = ccp(275 *scaleFactorX, (155) *scaleFactorY);
+                break;
+            case 3:
+                pos = ccp(275 *scaleFactorX, (220) *scaleFactorY);
+                break;
+
+            default:
+                break;
+        }
+        CCMenu *buyItemMenu = [CCMenu menuWithItems:buyItem, nil];
+        buyItemMenu.position = pos;
+        buyItemMenu.tag = i;
+        [self addChild:buyItemMenu];
+    }
+}
+@end

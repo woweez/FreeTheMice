@@ -86,22 +86,29 @@
     
     CCMenuItem *buyItem = [CCMenuItemImage itemWithNormalImage:@"buy-btn.png" selectedImage:@"buy-btn-press.png" block:^(id sender) {
         
+        
     }];
     
     [buyItem setScale:0.45];
     CCMenu *buyItemMenu = [CCMenu menuWithItems:buyItem, nil];
-    buyItemMenu.position = ccp(powrUpSpr.position.x + 87 *scaleFactorX, powrUpSpr.position.y *1.3);
+    buyItemMenu.position = ccp(powrUpSpr.position.x + 87 *scaleFactorX, powrUpSpr.position.y *1.26);
     buyItemMenu.tag = itemId;
     buyItemMenu.contentSize = CGSizeMake(buyItem.contentSize.width/4 *scaleFactorX ,buyItem.contentSize.height/4 *scaleFactorY);
     [cell addChild:buyItemMenu];
     
-    CCLabelAtlas *cost = [CCLabelAtlas labelWithString:@"100" charMapFile:@"font1.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
+    CCLabelAtlas *cost = [CCLabelAtlas labelWithString:[NSString stringWithFormat:@"%d", [self getCostWithItemID:itemId]] charMapFile:@"numbers.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
     cost.position= ccp(buyItemMenu.position.x -15 *scaleFactorX, buyItemMenu.position.y - 28 *scaleFactorY);
     cost.scale=0.5;
     [cell addChild:cost z:0];
     
-    CCLabelAtlas *multiplier = [CCLabelAtlas labelWithString:@" X3" charMapFile:@"font1.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
-    multiplier.position= ccp(powrUpSpr.position.x + 13*scaleFactorX, powrUpSpr.position.y - 20 *scaleFactorY);
+    CCLabelAtlas *name = [CCLabelAtlas labelWithString:@"121242112" charMapFile:@"numbers.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
+    name.position= ccp(powrUpSpr.position.x -20 *scaleFactorX, powrUpSpr.position.y - 35 *scaleFactorY);
+    name.scale=0.5;
+//    [cell addChild:name z:0];
+    
+    
+    CCLabelAtlas *multiplier = [CCLabelAtlas labelWithString:@"3" charMapFile:@"numbers.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
+    multiplier.position= ccp(powrUpSpr.position.x + 16*scaleFactorX, powrUpSpr.position.y - 20 *scaleFactorY);
     multiplier.scale=0.5;
     [cell addChild:multiplier z:0];
     
@@ -122,32 +129,64 @@
 -(CGPoint) getAppropriatePosWithItemID:(int) itemId{
     switch(itemId){
         case MAGNIFIER_ITEM_ID:
-            return ccp(30 *scaleFactorX, 28 *scaleFactorY);
+            return ccp(30 *scaleFactorX, 35 *scaleFactorY);//28
             break;
         case BOOTS_ITEM_ID:
-            return ccp(30 *scaleFactorX, 28 *scaleFactorY);
+            return ccp(30 *scaleFactorX, 35 *scaleFactorY);
             break;
         case SPEEDUP_ITEM_ID:
-            return ccp(30 *scaleFactorX, 28 *scaleFactorY);
+            return ccp(30 *scaleFactorX, 35 *scaleFactorY);
             break;
         case SPECIAL_CHEESE_ITEM_ID:
-            return ccp(30 *scaleFactorX, 28 *scaleFactorY);
+            return ccp(30 *scaleFactorX, 35 *scaleFactorY);
             break;
         case SLOWDOWN_TIME_ITEM_ID:
-            return ccp(30 *scaleFactorX, 28 *scaleFactorY);
+            return ccp(30 *scaleFactorX, 35 *scaleFactorY);
             break;
         case MASTER_KEY_ITEM_ID:
-            return ccp(30 *scaleFactorX, 28*scaleFactorY );
+            return ccp(30 *scaleFactorX, 35*scaleFactorY );
             break;
         case BARKING_DOG_ITEM_ID:
-            return ccp(30 *scaleFactorX, 28 *scaleFactorY);
+            return ccp(30 *scaleFactorX, 35 *scaleFactorY);
             break;
         default:
-            return ccp(30 *scaleFactorX, 28 *scaleFactorY);
+            return ccp(30 *scaleFactorX, 35 *scaleFactorY);
             break;
     }
     
 }
+
+-(int) getCostWithItemID:(int) itemId{
+    
+    switch(itemId){
+        case MAGNIFIER_ITEM_ID:
+            return 20;
+            break;
+        case BOOTS_ITEM_ID:
+            return 30;
+            break;
+        case SPEEDUP_ITEM_ID:
+            return 30;
+            break;
+        case SPECIAL_CHEESE_ITEM_ID:
+            return 150;
+            break;
+        case SLOWDOWN_TIME_ITEM_ID:
+            return 40;
+            break;
+        case MASTER_KEY_ITEM_ID:
+            return 1000;
+            break;
+        case BARKING_DOG_ITEM_ID:
+            return 100;
+            break;
+        default:
+            return 0;
+            break;
+    }
+}
+
+
 -(NSString *) getAppropriateImagePathWithItemID:(int) itemId{
     
     switch(itemId){

@@ -32,7 +32,7 @@
 {
     float x = [CCDirector sharedDirector].winSize.width/480;
     float y = [CCDirector sharedDirector].winSize.height/320;
-    return CGSizeMake(144 *x,63 *y);
+    return CGSizeMake(144 *x,67 *y);//63
 }
 
 @end

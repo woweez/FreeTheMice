@@ -16,6 +16,8 @@
 float scaleFactorX;
 float scaleFactorY;
     SWScrollView *scrollView;
+    CCMenuItem *powerUpItem;
+    CCMenuItem *costumesItem;
 }
 +(CCScene *) scene;
 

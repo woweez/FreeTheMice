@@ -288,6 +288,10 @@ GameEngine02Menu *layer02;
         [self starCheeseSpriteInitilized];
         [self scheduleUpdate];
         
+//        self.scaleX = 0.3;
+//        self.scaleY = 0.4;
+//        self.position = ccp(240, 160);
+
     }
     return self;
 }
