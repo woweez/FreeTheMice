@@ -12,13 +12,15 @@
 #import "FTMConstants.h"
 #import "DB.h"
 #import "HudLayer.h"
+#import "FTMUtil.h"
 
 @implementation CommonEngine
 
 -(id) init
 {
     if( (self=[super init])) {
-        
+        [FTMUtil sharedInstance].isSlowDownTimer = NO;
+        [FTMUtil sharedInstance].isRespawnMice = NO;
     }
     return self;
 }
@@ -189,23 +191,43 @@
 }
 
 -(void)progressBarFunc{
-    gameMinutes+=1;
-    int bValue = 120 - (gameMinutes/60);
-    if(bValue>=0){
-        if((gameMinutes%60)==0){
-            int lMin=0;
-            int lSec=0;
-            lMin=(bValue>60?1:0);
-            lSec=(bValue>60?bValue-60:bValue);
-            if(!mouseWinChe){
-                [hudLayer updateTimeRemaining:lMin andTimeInSec:lSec];
-                if(lMin == 0 && lSec == 0){
-                    [hudLayer showRetryOptionMenu];
-                    self.isTouchEnabled = NO;
-                }
-            }
+    if(isScheduledTime){
+        return;
+    }
+    isScheduledTime = YES;
+    [self schedule:@selector(startTheHudLayerTimer) interval:1];
+}
+
+-(void) startTheHudLayerTimer{
+    elapsedSeconds += 1;
+    
+    if ([FTMUtil sharedInstance].isSlowDownTimer) {
+        [self unschedule:@selector(startTheHudLayerTimer)];
+        [FTMUtil sharedInstance].isSlowDownTimer = NO;
+        [self schedule:@selector(startTheHudLayerTimer) interval:2];
+        
+    }
+    
+    int totalTimeInSec = 120;
+    int oneMinInSec = 60;
+    int remainigTimeInSec = totalTimeInSec - elapsedSeconds;
+    int mins = remainigTimeInSec > oneMinInSec? 1:0;
+    int seconnds = remainigTimeInSec>oneMinInSec?remainigTimeInSec-oneMinInSec:remainigTimeInSec;
+    
+    if(!mouseWinChe){
+           [hudLayer updateTimeRemaining:mins andTimeInSec:seconnds];
         }
+    if(remainigTimeInSec <= 0){
+        [self stopTheHudLayerTimer];
     }
 }
+
+-(void) stopTheHudLayerTimer{
+    
+    [self unschedule:@selector(startTheHudLayerTimer)];
+    // do after timer stuff here...
+}
+
+
 
 @end

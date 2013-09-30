@@ -22,10 +22,11 @@
     CCSprite *heroSprite;
     BOOL forwardChe;
     BOOL mouseWinChe;
+    BOOL isScheduledTime;
     BOOL heroTrappedChe;
     CCSpriteFrameCache *cache;
     HudLayer *hudLayer;
-    int gameMinutes;
+    int elapsedSeconds;
     
     }
 

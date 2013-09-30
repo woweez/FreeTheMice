@@ -15,6 +15,8 @@
 
 @synthesize mouseClicked ;
 @synthesize isIphone5;
+@synthesize isSlowDownTimer;
+@synthesize isRespawnMice;
 static FTMUtil *sharedInstance =nil;
 
 +(FTMUtil*)sharedInstance
@@ -30,6 +32,7 @@ static FTMUtil *sharedInstance =nil;
     self=[super init];
     if(self){
         mouseClicked = 1;
+        isRespawnMice = NO;
         if([[self getModel] isEqualToString:@"iPhone4S"]){
             isIphone5 = YES;
         }

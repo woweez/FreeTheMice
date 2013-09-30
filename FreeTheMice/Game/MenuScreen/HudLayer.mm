@@ -160,8 +160,8 @@
 }
 -(void) addInventoryBtnMenu{
     CCMenuItem *inventoryMenuItem = [CCMenuItemImage itemWithNormalImage:@"inventory_btn.png" selectedImage:@"inventory_btn_press.png" block:^(id sender) {
-        
-        
+        [FTMUtil sharedInstance].isRespawnMice = YES;
+        [self hideFailureScreen];
     }];
     [inventoryMenuItem setScale:0.5];
     inventoryMenuItem.position = ccp(-150 *scaleFactorX, 138 *scaleFactorY);
@@ -263,12 +263,13 @@
 
 -(void ) showRetryOptionMenu{
     
-    [self hideHudItems];
+//    [self hideHudItems];
     CCSprite *optionsBg=[CCSprite spriteWithFile:@"mouse_trapped_background.png"];
     CGSize size = [CCDirector sharedDirector].winSize;
     float scalex = size.width/480;
     float scaley = size.height/320;
     optionsBg.position=ccp(240 *scalex,160*scaley);
+    optionsBg.tag = 999;
     [self addChild:optionsBg z:10000];
     
     CCMenuItem *levelsScreen = [CCMenuItemImage itemWithNormalImage:@"main_menu_button_1.png" selectedImage:@"main_menu_button_2.png" target:self selector:@selector(retryOptionsCallback:)];
@@ -281,9 +282,14 @@
     CCMenu *optionsMenu = [CCMenu menuWithItems: retryLevel,levelsScreen,  nil];
     [optionsMenu alignItemsHorizontallyWithPadding:4.0];
     optionsMenu.position=ccp(241 *scalex,136*scaley);
+    optionsMenu.tag = 998;
     [self addChild: optionsMenu z:10000];
 }
 
+-(void) hideFailureScreen{
+    [self getChildByTag:999].visible = NO;
+    [self getChildByTag:998].visible = NO;
+}
 -(void) showPausingAnimation{
     
     if(pauseScreenBg.tag ==125){

@@ -12,7 +12,7 @@
 #import "LevelScreen.h"
 #import "HudLayer.h"
 #import "LevelCompleteScreen.h"
-
+#import "FTMUtil.h"
 #import "DB.h"
 
 enum {
@@ -380,7 +380,9 @@ GameEngine02Menu *layer02;
     
     int32 velocityIterations = 8;
     int32 positionIterations = 1;
-    
+    if ([FTMUtil sharedInstance].isRespawnMice) {
+        
+    }
     world->Step(dt, velocityIterations, positionIterations);
     
     [self heroJumpingFunc];
@@ -594,13 +596,13 @@ GameEngine02Menu *layer02;
     if(runningChe&&!gameFunc.trappedChe){
         
         if(!forwardChe){
-            platformX+=3.0;
+            platformX+=5.0;
             [gameFunc runningRender:platformX yPosition:platformY fChe:forwardChe];
             platformX=gameFunc.xPosition;
             heroSprite.rotation=0;
             heroRunSprite.rotation=0;
         }else{
-            platformX-=3.0;
+            platformX-=5.0;
             [gameFunc runningRender:platformX yPosition:platformY fChe:forwardChe];
             platformX=gameFunc.xPosition;
             heroSprite.rotation=0;
