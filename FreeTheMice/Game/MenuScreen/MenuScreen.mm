@@ -15,6 +15,9 @@
 #import "ToolShedScreen.h"
 #import "AppDelegate.h"
 #import "DB.h"
+#import "InAppUtils.h"
+
+
 enum {
 	kTagParentNode = 1,
 };
@@ -98,14 +101,22 @@ enum {
         CCMenuItem *storeMenuItem = [CCMenuItemImage itemWithNormalImage:@"store.png" selectedImage:@"store_press.png" block:^(id sender) {
             //add functionality here.
             [[CCDirector sharedDirector] replaceScene:[ToolShedScreen scene]];
+            
 		}];
         [storeMenuItem setScale:0.5];
         CCMenu *storeBtnMenu = [CCMenu menuWithItems:storeMenuItem, nil];
         storeBtnMenu.position = ccp(25 *scaleFactorX, 300 *scaleFactorY);
-        [self addChild:storeBtnMenu z:10];
+        [self addChild:storeBtnMenu z:10];\
         
         CCMenuItem *gameCenterMenuItem = [CCMenuItemImage itemWithNormalImage:@"game_center.png" selectedImage:@"game_center_press.png" block:^(id sender) {
             //add functionality here.
+            [[InAppUtils sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
+                if (success) {
+                    [InAppUtils sharedInstance]._products = products;
+                    
+                    NSLog(@"No of products retrived successfully: %d", [InAppUtils sharedInstance]._products.count);
+                }
+            }];
 		}];
         [gameCenterMenuItem setScale:0.5];
         CCMenu *gameCenterBtnMenu = [CCMenu menuWithItems:gameCenterMenuItem, nil];

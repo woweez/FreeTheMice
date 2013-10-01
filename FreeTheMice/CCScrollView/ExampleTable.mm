@@ -108,7 +108,7 @@
     
     
     CCLabelAtlas *multiplier = [CCLabelAtlas labelWithString:@"3" charMapFile:@"numbers.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
-    multiplier.position= ccp(powrUpSpr.position.x + 16*scaleFactorX, powrUpSpr.position.y - 20 *scaleFactorY);
+    multiplier.position= ccp(powrUpSpr.position.x + 21*scaleFactorX, powrUpSpr.position.y - 20 *scaleFactorY);
     multiplier.scale=0.5;
     [cell addChild:multiplier z:0];
     

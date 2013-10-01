@@ -380,9 +380,7 @@ GameEngine02Menu *layer02;
     
     int32 velocityIterations = 8;
     int32 positionIterations = 1;
-    if ([FTMUtil sharedInstance].isRespawnMice) {
-        
-    }
+
     world->Step(dt, velocityIterations, positionIterations);
     
     [self heroJumpingFunc];

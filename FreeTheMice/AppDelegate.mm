@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "IntroLayer.h"
 #import "Utilities.h"
+#import "InAppUtils.h"
 
 @implementation AppController
 
@@ -22,7 +23,7 @@
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	soundEffect=[[sound alloc] init];
     [soundEffect initSound];
-	
+//	[InAppUtils sharedInstance];
     [Utilities createEditableCopyOfDatabaseIfNeeded];
     
 	// Create an CCGLView with a RGB565 color buffer, and a depth buffer of 0-bits

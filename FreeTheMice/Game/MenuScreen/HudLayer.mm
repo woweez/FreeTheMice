@@ -160,8 +160,8 @@
 }
 -(void) addInventoryBtnMenu{
     CCMenuItem *inventoryMenuItem = [CCMenuItemImage itemWithNormalImage:@"inventory_btn.png" selectedImage:@"inventory_btn_press.png" block:^(id sender) {
-        [FTMUtil sharedInstance].isRespawnMice = YES;
-        [self hideFailureScreen];
+        [FTMUtil sharedInstance].isSlowDownTimer = YES;
+//        [self hideFailureScreen];
     }];
     [inventoryMenuItem setScale:0.5];
     inventoryMenuItem.position = ccp(-150 *scaleFactorX, 138 *scaleFactorY);

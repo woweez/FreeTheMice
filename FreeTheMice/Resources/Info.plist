@@ -41,7 +41,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>FreeTheMice</string>
+	<string>com.woweez.freethemice</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

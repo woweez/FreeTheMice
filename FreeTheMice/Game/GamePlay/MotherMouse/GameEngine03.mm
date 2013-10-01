@@ -386,16 +386,16 @@ GameEngine03Menu *layer03;
     int32 velocityIterations = 8;
     int32 positionIterations = 1;
     
-    if ([FTMUtil sharedInstance].isRespawnMice) {
-        heroTrappedChe = NO;
-        heroSprite.visible = NO;
-        heroStandChe = YES;
-        gameFunc.trappedChe = NO;
-        
-    }
-    if (elapsedSeconds == 40) {
-        [FTMUtil sharedInstance].isRespawnMice = NO;
-    }
+//    if ([FTMUtil sharedInstance].isRespawnMice) {
+//        heroTrappedChe = NO;
+//        heroSprite.visible = NO;
+//        heroStandChe = YES;
+//        gameFunc.trappedChe = NO;
+//        
+//    }
+//    if (elapsedSeconds == 40) {
+//        [FTMUtil sharedInstance].isRespawnMice = NO;
+//    }
     world->Step(dt, velocityIterations, positionIterations);
     
     [self heroJumpingFunc];
@@ -601,9 +601,9 @@ GameEngine03Menu *layer03;
         if(motherLevel==3){
             if(hotIntervel<=650&&hotIntervel>=20){
                 if(!forwardChe && heroSprite.position.x>620 && heroSprite.position.x<= 670&& heroSprite.position.y>270&&heroSprite.position.y<=435&&!heroTrappedChe&&motherLevel==3){
-                    if (![FTMUtil sharedInstance].isRespawnMice) {
+//                    if (![FTMUtil sharedInstance].isRespawnMice) {
                         gameFunc.trappedChe=YES;
-                    }
+//                    }
                 }else if(forwardChe && heroSprite.position.x>620 && heroSprite.position.x<= 680&& heroSprite.position.y>270&&heroSprite.position.y<=425&&!heroTrappedChe&&motherLevel==3){
                     gameFunc.trappedChe=YES;
                 }
@@ -1014,9 +1014,6 @@ GameEngine03Menu *layer03;
         
         
         if(gameFunc.autoJumpChe){
-            if ([FTMUtil sharedInstance].isRespawnMice) {
-                [FTMUtil sharedInstance].isRespawnMice = NO;
-            }
             if(!gameFunc.domChe){
                 jumpPower = 6;
                 jumpAngle=(forwardChe?120:20);

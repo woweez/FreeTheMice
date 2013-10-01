@@ -8,9 +8,9 @@
 
 #import "StoreScreen.h"
 #import "ToolShedScreen.h"
-
+#import <StoreKit/StoreKit.h>
+#import "InAppUtils.h"
 @implementation StoreScreen
-
 
 +(CCScene *) scene {
 	
@@ -50,17 +50,37 @@
         CCMenu *backMenu = [CCMenu menuWithItems:backButtonItem, nil];
         backMenu.position = ccp(50 *scaleFactorX, 40 *scaleFactorY);
         [self addChild:backMenu];
-        
         [self addBuyButtons];
+        
+        
+//        [self schedule:@selector(loadThePricePoints) interval:5];
+        
         
     }
     return self;
 }
 
+-(void) loadThePricePoints{
+    [self unschedule:@selector(loadThePricePoints)];
+    
+    [[InAppUtils sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
+        if (success) {
+            [InAppUtils sharedInstance]._products = products;
+            
+            NSLog(@"No of products retrived successfully: %d", [InAppUtils sharedInstance]._products.count);
+        }
+    }];
+    
+}
 -(void) addBuyButtons{
     for (int i = 1; i<= 3; i++) {
         CCMenuItem *buyItem = [CCMenuItemImage itemWithNormalImage:@"buy-btn.png" selectedImage:@"buy-btn-press.png" block:^(id sender) {
             
+            SKProduct *product = [InAppUtils sharedInstance]._products[1];
+            
+            NSLog(@"Buying %@...", product.productIdentifier);
+            [[InAppUtils sharedInstance] buyProduct:product];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:IAPHelperProductPurchasedNotification object:nil];
         }];
         CGPoint pos;
         [buyItem setScale:0.5];
@@ -83,5 +103,16 @@
         buyItemMenu.tag = i;
         [self addChild:buyItemMenu];
     }
+}
+
+- (void)productPurchased:(NSNotification *)notification {
+    
+    NSString * productIdentifier = notification.object;
+    [[InAppUtils sharedInstance]._products enumerateObjectsUsingBlock:^(SKProduct * product, NSUInteger idx, BOOL *stop) {
+        if ([product.productIdentifier isEqualToString:productIdentifier]) {
+            NSLog(@"Transaction Is fully finalized. %@...", product.productIdentifier);
+        }
+    }];
+    
 }
 @end

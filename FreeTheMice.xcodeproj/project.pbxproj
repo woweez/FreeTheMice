@@ -35,6 +35,9 @@
 		46041A2017E8737500131149 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 46041A0E17E8737500131149 /* twitter.png */; };
 		46041A2317E8950E00131149 /* cat_shadow_animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46041A2117E8950E00131149 /* cat_shadow_animation.plist */; };
 		46041A2417E8950E00131149 /* cat_shadow_animation.png in Resources */ = {isa = PBXBuildFile; fileRef = 46041A2217E8950E00131149 /* cat_shadow_animation.png */; };
+		4604340E17FAB722002B314E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4604340D17FAB722002B314E /* StoreKit.framework */; };
+		4604341217FAB858002B314E /* InAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4604341117FAB858002B314E /* InAppManager.m */; };
+		4604341517FABC26002B314E /* InAppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4604341417FABC26002B314E /* InAppUtils.m */; };
 		461790EF17F955E200CB5D2C /* redFont.plist in Resources */ = {isa = PBXBuildFile; fileRef = 461790EB17F955E200CB5D2C /* redFont.plist */; };
 		461790F017F955E200CB5D2C /* yellowFont.plist in Resources */ = {isa = PBXBuildFile; fileRef = 461790EC17F955E200CB5D2C /* yellowFont.plist */; };
 		461790F117F955E200CB5D2C /* redFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 461790ED17F955E200CB5D2C /* redFont.png */; };
@@ -672,6 +675,11 @@
 		46041A0E17E8737500131149 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
 		46041A2117E8950E00131149 /* cat_shadow_animation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cat_shadow_animation.plist; sourceTree = "<group>"; };
 		46041A2217E8950E00131149 /* cat_shadow_animation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat_shadow_animation.png; sourceTree = "<group>"; };
+		4604340D17FAB722002B314E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		4604341017FAB858002B314E /* InAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppManager.h; sourceTree = "<group>"; };
+		4604341117FAB858002B314E /* InAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppManager.m; sourceTree = "<group>"; };
+		4604341317FABC26002B314E /* InAppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppUtils.h; sourceTree = "<group>"; };
+		4604341417FABC26002B314E /* InAppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppUtils.m; sourceTree = "<group>"; };
 		461790EB17F955E200CB5D2C /* redFont.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = redFont.plist; sourceTree = "<group>"; };
 		461790EC17F955E200CB5D2C /* yellowFont.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = yellowFont.plist; sourceTree = "<group>"; };
 		461790ED17F955E200CB5D2C /* redFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redFont.png; sourceTree = "<group>"; };
@@ -1530,6 +1538,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4604340E17FAB722002B314E /* StoreKit.framework in Frameworks */,
 				7FF333CC16CA0FDB0031FAF7 /* SystemConfiguration.framework in Frameworks */,
 				7F46E65A16C79CD50016108B /* libsqlite3.dylib in Frameworks */,
 				7F46E65B16C79CD50016108B /* libz.dylib in Frameworks */,
@@ -1572,6 +1581,17 @@
 				46041A0E17E8737500131149 /* twitter.png */,
 			);
 			path = MainMenuUI;
+			sourceTree = "<group>";
+		};
+		4604340F17FAB836002B314E /* InApp */ = {
+			isa = PBXGroup;
+			children = (
+				4604341017FAB858002B314E /* InAppManager.h */,
+				4604341117FAB858002B314E /* InAppManager.m */,
+				4604341317FABC26002B314E /* InAppUtils.h */,
+				4604341417FABC26002B314E /* InAppUtils.m */,
+			);
+			path = InApp;
 			sourceTree = "<group>";
 		};
 		4647FBC216D4E5B400784746 /* game lost */ = {
@@ -2325,7 +2345,6 @@
 		7FED58C716AFB4E400A4CB90 = {
 			isa = PBXGroup;
 			children = (
-				7FF333CB16CA0FDB0031FAF7 /* SystemConfiguration.framework */,
 				7FED5B1116AFB60800A4CB90 /* Default-568h@2x.png */,
 				7FED58E816AFB4E400A4CB90 /* FreeTheMice */,
 				7FED58D516AFB4E400A4CB90 /* Frameworks */,
@@ -2344,6 +2363,8 @@
 		7FED58D516AFB4E400A4CB90 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7FF333CB16CA0FDB0031FAF7 /* SystemConfiguration.framework */,
+				4604340D17FAB722002B314E /* StoreKit.framework */,
 				7F46E65816C79CD50016108B /* libsqlite3.dylib */,
 				7F46E65916C79CD50016108B /* libz.dylib */,
 				7FED58D616AFB4E400A4CB90 /* QuartzCore.framework */,
@@ -2362,7 +2383,6 @@
 		7FED58E816AFB4E400A4CB90 /* FreeTheMice */ = {
 			isa = PBXGroup;
 			children = (
-				FA8CBB6217F763910017F58A /* CCScrollView */,
 				7FF333C716CA0E630031FAF7 /* FreeTheMice.entitlements */,
 				7FED5AF316AFB4E800A4CB90 /* AppDelegate.h */,
 				7FED5AF416AFB4E800A4CB90 /* AppDelegate.mm */,
@@ -2930,6 +2950,8 @@
 		7FED5B2216AFB6E400A4CB90 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				4604340F17FAB836002B314E /* InApp */,
+				FA8CBB6217F763910017F58A /* CCScrollView */,
 				4679E71317F6BF0F00EF1E4D /* StoreUI */,
 				7F81EC1416BFB0590063E41E /* GamePlay */,
 				7F81EC1F16BFB0590063E41E /* LevelFinished */,
@@ -2956,7 +2978,8 @@
 				FA8CBB7D17F773BD0017F58A /* SWScrollView.h */,
 				FA8CBB7E17F773BD0017F58A /* SWScrollView.mm */,
 			);
-			path = CCScrollView;
+			name = CCScrollView;
+			path = ../CCScrollView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3633,6 +3656,8 @@
 				460391F317F8202A004117D0 /* SWTableView.m in Sources */,
 				460391F417F8202A004117D0 /* SWTableViewCell.m in Sources */,
 				4676684D17F9650B004F0B4D /* StoreScreen.mm in Sources */,
+				4604341217FAB858002B314E /* InAppManager.m in Sources */,
+				4604341517FABC26002B314E /* InAppUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3764,7 +3789,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_ENTITLEMENTS = FreeTheMice/FreeTheMice.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: karthik g (AGQP5U4ERX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FreeTheMice/Prefix.pch;
@@ -3776,7 +3801,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = FreeTheMice;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DFBA9BAE-3CC5-46F9-9F3F-AFD7C73EAF4B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"FreeTheMice/libs\"";
 				VALIDATE_PRODUCT = YES;
