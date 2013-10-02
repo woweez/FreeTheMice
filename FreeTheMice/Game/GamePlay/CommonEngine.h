@@ -20,10 +20,12 @@
     
     CCSprite *heroRunSprite;
     CCSprite *heroSprite;
+    CCSprite *trappingAnimationSprite;
     BOOL forwardChe;
     BOOL mouseWinChe;
     BOOL isScheduledTime;
     BOOL heroTrappedChe;
+    int miceTrapAnimationType;
     CCSpriteFrameCache *cache;
     HudLayer *hudLayer;
     int elapsedSeconds;
@@ -32,7 +34,7 @@
 
 -(void)addAnimation:(NSString *) plistName noOfFrames:(int) frames startingFrameName:(NSString *) startFrame;
 -(void)showAnimationWithMiceIdAndIndex:(int)miceId andAnimationIndex:(int) animIndex;
-
+-(CCSprite *) getTrappingAnimatedSprite;
 -(void)progressBarFunc;
 
 

@@ -828,45 +828,45 @@ GameEngine03Menu *layer03;
         heroTrappedCount+=1;
         if(heroTrappedCount==10){
             mouseDragSprite.visible=NO;
-            [self showAnimationWithMiceIdAndIndex:FTM_MAMA_MICE_ID andAnimationIndex:MAMA_WATER_ANIM];
-//            for (int i = 0; i < 20; i=i+1)
-//                heroPimpleSprite[i].position=ccp(-100,100);
-//            heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"mother_trapped1.png"];
-//            if(motherLevel==3)
-//                heroTrappedSprite.position = ccp(645, 395);
-//            else if(motherLevel==4)
-//                heroTrappedSprite.position = ccp(658, 298);
-//            else if(motherLevel==5){
-//                if(heroSprite.position.x<350)
-//                    heroTrappedSprite.position = ccp(278, 455);
-//                else
-//                    heroTrappedSprite.position = ccp(535, 335);
-//            }else if(motherLevel == 6){
-//                heroTrappedSprite.position = ccp(795, 304);
-//            }else if(motherLevel == 7){
-//                heroTrappedSprite.position = ccp(797, 344);
-//            }else if(motherLevel == 8){
-//                if(heroSprite.position.x<800)
-//                    heroTrappedSprite.position = ccp(730, 310);
-//                else
-//                    heroTrappedSprite.position = ccp(860, 275);
-//                
-//            }
-//            
-//            
-//            
-//            heroTrappedSprite.scale=0.8;
-//            [spriteSheet addChild:heroTrappedSprite];
-//            
-//            NSMutableArray *animFrames2 = [NSMutableArray array];
-//            for(int i = 3; i < 20; i++) {
-//                if(i!= 3){
-//                    CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"mother_trapped%d.png",i]];
-//                    [animFrames2 addObject:frame];
-//                }
-//            }
-//            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
-//            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+//            [self showAnimationWithMiceIdAndIndex:FTM_MAMA_MICE_ID andAnimationIndex:MAMA_WATER_ANIM];
+            for (int i = 0; i < 20; i=i+1)
+                heroPimpleSprite[i].position=ccp(-100,100);
+            heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"mother_trapped1.png"];
+            if(motherLevel==3)
+                heroTrappedSprite.position = ccp(645, 395);
+            else if(motherLevel==4)
+                heroTrappedSprite.position = ccp(658, 298);
+            else if(motherLevel==5){
+                if(heroSprite.position.x<350)
+                    heroTrappedSprite.position = ccp(278, 455);
+                else
+                    heroTrappedSprite.position = ccp(535, 335);
+            }else if(motherLevel == 6){
+                heroTrappedSprite.position = ccp(795, 304);
+            }else if(motherLevel == 7){
+                heroTrappedSprite.position = ccp(797, 344);
+            }else if(motherLevel == 8){
+                if(heroSprite.position.x<800)
+                    heroTrappedSprite.position = ccp(730, 310);
+                else
+                    heroTrappedSprite.position = ccp(860, 275);
+                
+            }
+            
+            
+            
+            heroTrappedSprite.scale=0.8;
+            [spriteSheet addChild:heroTrappedSprite];
+            
+            NSMutableArray *animFrames2 = [NSMutableArray array];
+            for(int i = 3; i < 20; i++) {
+                if(i!= 3){
+                    CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"mother_trapped%d.png",i]];
+                    [animFrames2 addObject:frame];
+                }
+            }
+            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
+            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
             heroSprite.visible=NO;
         }
     }

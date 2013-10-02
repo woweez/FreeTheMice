@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "LevelScreen.h"
 #import "LevelCompleteScreen.h"
-
+#import "FTMConstants.h"
 #import "DB.h"
 
 enum {
@@ -896,15 +896,24 @@ GameEngine10Menu *layer10;
         }
     }
 }
-
+-(int ) getAnimationTypeForTrapping{
+    
+    if (gameFunc.objectWidth == 70 && gameFunc.objectHeight == 90) {
+        return MAMA_KNIFE_ANIM;
+    }
+    else{
+        return 0;
+    }
+}
 -(void)heroTrappedFunc{
     if(heroTrappedChe){
         heroTrappedCount+=1;
         if(heroTrappedCount==10){
             mouseDragSprite.visible=NO;
+//             NSLog(@"Object width and height==== %d %d %d", gameFunc.objectWidth,gameFunc.objectHeight,gameFunc.sideValueForObject);
             for (int i = 0; i < 20; i=i+1)
                 heroPimpleSprite[i].position=ccp(-100,100);
-            heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"mother_trapped1.png"];
+            heroTrappedSprite = [CCSprite spriteWithFile:@"mm_mist_0.png"];
             int fValue=(forwardChe?heroForwardX:0);
             if(heroSprite.position.x<700){
                 if(mouseTrappedPosValue<230)
@@ -920,25 +929,19 @@ GameEngine10Menu *layer10;
                 
             }
             
-            heroTrappedSprite.scale=0.8;
-            [spriteSheet addChild:heroTrappedSprite];
-            
-            NSMutableArray *animFrames2 = [NSMutableArray array];
-            for(int i = 3; i < 20; i++) {
-                if(i!= 3){
-                    CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"mother_trapped%d.png",i]];
-                    [animFrames2 addObject:frame];
-                }
-            }
-            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
-            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            heroTrappedSprite.scale=0.5;
+            heroTrappedSprite.position = ccp(heroSprite.position.x-fValue, heroSprite.position.y);
+            heroTrappedSprite.scale=0.5;
+            [self addChild:heroTrappedSprite z:1000];
+            CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp(heroSprite.position.x-fValue, 200)];
+            [heroTrappedSprite runAction:move];
             heroSprite.visible=NO;
         }
         if(heroTrappedMove!=0){
             heroTrappedMove+=5;
             int fValue=(forwardChe?heroForwardX:0);
-            heroTrappedSprite.position = ccp(heroSprite.position.x-fValue,heroSprite.position.y-heroTrappedMove);
-            CGPoint copyHeroPosition = ccp(heroSprite.position.x-fValue, heroSprite.position.y-heroTrappedMove);
+            CGPoint pos =ccp(heroSprite.position.x-fValue,heroSprite.position.y-heroTrappedMove);
+            CGPoint copyHeroPosition = pos;
             [self setViewpointCenter:copyHeroPosition];
             if(heroSprite.position.y-heroTrappedMove<=215)
                 heroTrappedMove=0;
