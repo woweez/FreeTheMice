@@ -7,6 +7,8 @@
 #import "AppDelegate.h"
 #import "DB.h"
 #import "LevelCompleteScreen.h"
+#import "FTMConstants.h"
+
 enum {
     kTagParentNode = 1,
 };
@@ -1329,6 +1331,11 @@ StrongMouseEngineMenu08 *sLayer08;
                 heroTrappedMove=1;
             
             mouseDragSprite.visible=NO;
+            
+            if (trappedTypeValue == 1) {
+                [self showAnimationWithMiceIdAndIndex:FTM_STRONG_MICE_ID andAnimationIndex:STRONG_KNIFE_ANIM];
+            }
+            else{
             heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"strong_trapped1.png"];
             if(!forwardChe)
                 heroTrappedSprite.position = ccp(platformX, platformY+5);
@@ -1341,10 +1348,11 @@ StrongMouseEngineMenu08 *sLayer08;
                 
                 CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_trapped%d.png",i]];
                 [animFrames2 addObject:frame];
-                
+            
             }
-            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
-            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+                    CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
+                [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            }
             heroSprite.visible=NO;
         }
         if(heroTrappedMove!=0){
@@ -1358,8 +1366,9 @@ StrongMouseEngineMenu08 *sLayer08;
                 xPos=heroSprite.position.x-(forwardChe?40:-40);
             }
             
-            
-            heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
+            if (trappedTypeValue != 1) {
+                heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
+            }
             CGPoint copyHeroPosition = ccp(heroSprite.position.x-fValue, heroSprite.position.y-heroTrappedMove);
             [self setViewpointCenter:copyHeroPosition];
             if(trappedTypeValue == 1){

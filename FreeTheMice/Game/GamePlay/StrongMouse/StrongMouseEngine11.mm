@@ -10,6 +10,7 @@
 #import "StrongMouseEngine11.h"
 #import "LevelScreen.h"
 #import "LevelCompleteScreen.h"
+#import "FTMConstants.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -844,22 +845,31 @@ StrongMouseEngineMenu11 *sLayer11;
                 heroTrappedMove = 1;
             
             mouseDragSprite.visible=NO;
-            heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"strong_trapped1.png"];
+            
+            heroTrappedSprite = [CCSprite spriteWithFile:@"sm_mist_0.png"];
             if(!forwardChe)
                 heroTrappedSprite.position = ccp(platformX, platformY+5);
             else
                 heroTrappedSprite.position = ccp(platformX+heroForwardX, platformY+5);
-            [spriteSheet addChild:heroTrappedSprite];
             
-            NSMutableArray *animFrames2 = [NSMutableArray array];
-            for(int i = 1; i < 4; i++) {
-                
-                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_trapped%d.png",i]];
-                [animFrames2 addObject:frame];
-                
+            if (trappedTypeValue == 3) {
+                [self showAnimationWithMiceIdAndIndex:FTM_STRONG_MICE_ID andAnimationIndex:STRONG_SHOCK_ANIM];
+                CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp(heroSprite.position.x, 185)];
+                [heroTrappedSprite runAction:move];
             }
-            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
-            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            else{
+                int posY = 0;
+                if(trappedTypeValue == 1){posY = 185;}
+                else if(trappedTypeValue == 2){posY = 570;}
+                heroTrappedSprite.scale=0.5;
+                heroTrappedSprite.position = ccp(heroSprite.position.x, heroSprite.position.y);
+                [self addChild:heroTrappedSprite z:1000];
+                
+                CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp(heroSprite.position.x, posY)];
+                [heroTrappedSprite runAction:move];
+            }
+
+           
             heroSprite.visible=NO;
         }
         if(heroTrappedMove!=0){
@@ -870,7 +880,7 @@ StrongMouseEngineMenu11 *sLayer11;
             else if(trappedTypeValue==2|| trappedTypeValue == 3)
                 xPos=heroSprite.position.x-(forwardChe?40:-40);
             
-            heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
+//            heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
             CGPoint copyHeroPosition = ccp(heroSprite.position.x-fValue, heroSprite.position.y-heroTrappedMove);
             [self setViewpointCenter:copyHeroPosition];
             if(trappedTypeValue == 1 || trappedTypeValue == 3){

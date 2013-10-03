@@ -10,7 +10,7 @@
 #import "StrongMouseEngine05.h"
 #import "LevelScreen.h"
 #import "LevelCompleteScreen.h"
-
+#import "FTMConstants.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -804,7 +804,9 @@ StrongMouseEngineMenu05 *sLayer05;
             
             if(trappedTypeValue>=1||trappedTypeValue<=4)
                 heroTrappedMove=1;
-            
+            if (trappedTypeValue == 4) {
+                [self showAnimationWithMiceIdAndIndex:FTM_STRONG_MICE_ID andAnimationIndex:STRONG_KNIFE_ANIM];
+            }else{
             mouseDragSprite.visible=NO;
             heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"strong_trapped1.png"];
             if(!forwardChe)
@@ -820,6 +822,7 @@ StrongMouseEngineMenu05 *sLayer05;
             }
             CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
             [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            }
             heroSprite.visible=NO;
         }
         if(heroTrappedMove!=0){
@@ -838,8 +841,9 @@ StrongMouseEngineMenu05 *sLayer05;
                     xPos=heroSprite.position.x-(forwardChe?50:-35);
                 else if(trappedTypeValue==3)
                     xPos=130;
-                
-                heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
+                if (trappedTypeValue !=4) {
+                    heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
+                }
                 CGPoint copyHeroPosition = ccp(heroSprite.position.x-fValue, heroSprite.position.y-heroTrappedMove);
                 [self setViewpointCenter:copyHeroPosition];
                 if(trappedTypeValue == 1){
