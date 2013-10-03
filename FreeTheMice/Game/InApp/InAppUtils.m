@@ -17,9 +17,11 @@
     static InAppUtils * sharedInstance;
     dispatch_once(&once, ^{
         NSSet * productIdentifiers = [NSSet setWithObjects:
+                                      @"com.woweez.ftm.pieceofcheese",
+                                      @"com.woweez.ftm.cheesecake",
+                                      @"com.woweez.ftm.cheesecontainer",
                                       @"com.woweez.freethemice.pieceofcheese",
-                                      @"com.woweez.freethemice.pieceofcake",
-                                      @"com.woweez.freethemice.cheesecontainer",
+                                      @"com.woweez.freethemice.cheesecontainertest",
                                       nil];
         sharedInstance = [[self alloc] initWithProductIdentifiers:productIdentifiers];
     });
