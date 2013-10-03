@@ -1335,6 +1335,20 @@ StrongMouseEngineMenu08 *sLayer08;
             if (trappedTypeValue == 1) {
                 [self showAnimationWithMiceIdAndIndex:FTM_STRONG_MICE_ID andAnimationIndex:STRONG_KNIFE_ANIM];
             }
+            else if (trappedTypeValue == 2){
+                heroTrappedSprite = [CCSprite spriteWithFile:@"sm_mist_0.png"];
+                if(!forwardChe)
+                    heroTrappedSprite.position = ccp(heroSprite.position.x+heroForwardX, heroSprite.position.y+5);
+                else
+                    heroTrappedSprite.position = ccp(heroSprite.position.x-heroForwardX, heroSprite.position.y+5);
+                
+                heroTrappedSprite.scale=0.5;
+                [self addChild:heroTrappedSprite z:1000];
+                int posY = 300;
+                
+                CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp(heroTrappedSprite.position.x, posY)];
+                [heroTrappedSprite runAction:move];
+            }
             else{
             heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"strong_trapped1.png"];
             if(!forwardChe)
@@ -1366,7 +1380,7 @@ StrongMouseEngineMenu08 *sLayer08;
                 xPos=heroSprite.position.x-(forwardChe?40:-40);
             }
             
-            if (trappedTypeValue != 1) {
+            if (trappedTypeValue == 3) {
                 heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
             }
             CGPoint copyHeroPosition = ccp(heroSprite.position.x-fValue, heroSprite.position.y-heroTrappedMove);

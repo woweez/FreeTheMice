@@ -1122,9 +1122,9 @@ GirlMouseEngineMenu06 *gLayer06;
                 heroTrappedSprite = [CCSprite spriteWithFile:@"gm_mist_0.png"];
                 heroTrappedSprite.scale=0.5;
                 if(!forwardChe)
-                    heroTrappedSprite.position = ccp(heroSprite.position.x +heroForwardX, heroSprite.position.y + 15);
+                    heroTrappedSprite.position = ccp(heroSprite.position.x +1.25*heroForwardX, heroSprite.position.y + 5);
                 else
-                    heroTrappedSprite.position = ccp(heroSprite.position.x -heroForwardX, heroSprite.position.y +15);
+                    heroTrappedSprite.position = ccp(heroSprite.position.x -1.25*heroForwardX, heroSprite.position.y +5);
                 
                 heroTrappedSprite.scale=0.5;
                 [self addChild:heroTrappedSprite z:1000];

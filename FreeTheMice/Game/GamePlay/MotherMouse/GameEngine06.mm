@@ -914,6 +914,7 @@ GameEngine06Menu *layer06;
             mouseDragSprite.visible=NO;
             if ([self getAnimationTypeForTrapping] == MAMA_KNIFE_ANIM) {
                 [self showAnimationWithMiceIdAndIndex:FTM_MAMA_MICE_ID andAnimationIndex:MAMA_KNIFE_ANIM];
+                [self getTrappingAnimatedSprite].position = ccp(795, 304);
             }
             else{
                 

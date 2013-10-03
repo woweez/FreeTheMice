@@ -807,21 +807,19 @@ StrongMouseEngineMenu05 *sLayer05;
             if (trappedTypeValue == 4) {
                 [self showAnimationWithMiceIdAndIndex:FTM_STRONG_MICE_ID andAnimationIndex:STRONG_KNIFE_ANIM];
             }else{
-            mouseDragSprite.visible=NO;
-            heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"strong_trapped1.png"];
-            if(!forwardChe)
-                heroTrappedSprite.position = ccp(platformX, platformY+5);
-            else
-                heroTrappedSprite.position = ccp(platformX+heroForwardX, platformY+5);
-            [spriteSheet addChild:heroTrappedSprite];
-            
-            NSMutableArray *animFrames2 = [NSMutableArray array];
-            for(int i = 1; i < 4; i++) {
-                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_trapped%d.png",i]];
-                [animFrames2 addObject:frame];
-            }
-            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
-            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+                heroTrappedSprite = [CCSprite spriteWithFile:@"sm_mist_0.png"];
+                if(!forwardChe)
+                    heroTrappedSprite.position = ccp(heroSprite.position.x, heroSprite.position.y+5);
+                else
+                    heroTrappedSprite.position = ccp(heroSprite.position.x, heroSprite.position.y+5);
+                
+                heroTrappedSprite.scale=0.5;
+                [self addChild:heroTrappedSprite z:1000];
+                int posY = 422;
+                
+                CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp(heroTrappedSprite.position.x, posY)];
+                [heroTrappedSprite runAction:move];
+
             }
             heroSprite.visible=NO;
         }
@@ -842,7 +840,7 @@ StrongMouseEngineMenu05 *sLayer05;
                 else if(trappedTypeValue==3)
                     xPos=130;
                 if (trappedTypeValue !=4) {
-                    heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
+//                    heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
                 }
                 CGPoint copyHeroPosition = ccp(heroSprite.position.x-fValue, heroSprite.position.y-heroTrappedMove);
                 [self setViewpointCenter:copyHeroPosition];

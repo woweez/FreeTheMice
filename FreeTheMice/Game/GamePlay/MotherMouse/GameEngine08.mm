@@ -800,6 +800,7 @@ GameEngine08Menu *layer08;
 //            NSLog(@"Object width and height==== %d %d %d", gameFunc.objectWidth,gameFunc.objectHeight,gameFunc.sideValueForObject);
             if ([self getAnimationTypeForTrapping] == MAMA_KNIFE_ANIM) {
                 [self showAnimationWithMiceIdAndIndex:FTM_MAMA_MICE_ID andAnimationIndex:MAMA_KNIFE_ANIM];
+                [self getTrappingAnimatedSprite].position = ccp(900, 275);
             }
             else{
             for (int i = 0; i < 20; i=i+1)

@@ -974,43 +974,20 @@ GameEngineMenu04 *layer04;
     if(heroTrappedChe){
         heroTrappedCount+=1;
         if(heroTrappedCount==10){
-            [self showAnimationWithMiceIdAndIndex:FTM_MAMA_MICE_ID andAnimationIndex:MAMA_SHOCK_ANIM];
-//            heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"mother_trapped1.png"];
-//            if(motherLevel==3)
-//                heroTrappedSprite.position = ccp(645, 395);
-//            else if(motherLevel==4)
-//                heroTrappedSprite.position = ccp(658, 298);
-//            else if(motherLevel==5){
-//                if(heroSprite.position.x<350)
-//                    heroTrappedSprite.position = ccp(278, 455);
-//                else
-//                    heroTrappedSprite.position = ccp(535, 335);
-//            }else if(motherLevel == 6){
-//                heroTrappedSprite.position = ccp(795, 304);
-//            }else if(motherLevel == 7){
-//                heroTrappedSprite.position = ccp(797, 344);
-//            }else if(motherLevel == 8){
-//                if(heroSprite.position.x<800)
-//                    heroTrappedSprite.position = ccp(730, 310);
-//                else
-//                    heroTrappedSprite.position = ccp(860, 275);
-//                
-//            }
-//            
-//            
-//            
-//            heroTrappedSprite.scale=0.8;
-//            [spriteSheet addChild:heroTrappedSprite];
-//            
-//            NSMutableArray *animFrames2 = [NSMutableArray array];
-//            for(int i = 3; i < 20; i++) {
-//                if(i!= 3){
-//                    CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"mother_trapped%d.png",i]];
-//                    [animFrames2 addObject:frame];
-//                }
-//            }
-//            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
-//            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            heroTrappedSprite = [CCSprite spriteWithFile:@"mm_mist_0.png"];
+            heroTrappedSprite.scale=0.5;
+            if(!forwardChe)
+                heroTrappedSprite.position = ccp(heroSprite.position.x , heroSprite.position.y+15);
+            else
+                heroTrappedSprite.position = ccp(heroSprite.position.x , heroSprite.position.y+15);
+            
+            heroTrappedSprite.scale=0.5;
+            [self addChild:heroTrappedSprite z:1000];
+            int posY = 300;
+            
+            CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp(heroTrappedSprite.position.x, posY)];
+            [heroTrappedSprite runAction:move];
+
             heroSprite.visible=NO;
         }
     }
