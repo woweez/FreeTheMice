@@ -11,6 +11,10 @@
 
 @interface StrongGameFunc : NSObject{
     Trigo *trigo;
+    int objectWidth;
+    int objectHeight;
+    int sideValueForObject;
+    
     int gameLevel;
     CGFloat xPosition;
     CGFloat yPosition;
@@ -85,6 +89,10 @@
     BOOL notCollideBlockChe;
     
 }
+
+@property (nonatomic, readwrite) int objectWidth;
+@property (nonatomic, readwrite) int objectHeight;
+@property (nonatomic, readwrite) int sideValueForObject;
 @property (nonatomic, readwrite) CGFloat xPosition;
 @property (nonatomic, readwrite) CGFloat yPosition;
 @property (nonatomic, readwrite) BOOL reverseJump;

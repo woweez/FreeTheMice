@@ -43,6 +43,9 @@
     }
 }
 
+-(CCSprite *) getTrappingAnimatedSprite{
+    return trappingAnimationSprite;
+}
 -(void) showTrappingAnimationForMama: (int) animIndex{
     switch (animIndex) {
         case MAMA_FLAME_ANIM:
@@ -176,17 +179,17 @@
     }
     CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animationFramesArr delay:0.03f];
     
-    CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:[startFrame stringByAppendingString:DOT_PNG_WITH_INDEX], 0]];
+    trappingAnimationSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:[startFrame stringByAppendingString:DOT_PNG_WITH_INDEX], 0]];
     if(!forwardChe){
-        sprite.position = ccp(heroSprite.position.x+heroSprite.contentSize.width/4, heroSprite.position.y -heroSprite.contentSize.height/3);
+        trappingAnimationSprite.position = ccp(heroSprite.position.x+heroSprite.contentSize.width/4, heroSprite.position.y -heroSprite.contentSize.height/3);
     }else{
-        sprite.position = ccp(heroSprite.position.x-heroSprite.contentSize.width/4, heroSprite.position.y -heroSprite.contentSize.height/3);
+        trappingAnimationSprite.position = ccp(heroSprite.position.x-heroSprite.contentSize.width/4, heroSprite.position.y -heroSprite.contentSize.height/3);
     }
-    sprite.scale=0.5;
-    [spriteSheet addChild:sprite];
+    trappingAnimationSprite.scale=0.5;
+    [spriteSheet addChild:trappingAnimationSprite];
     
     CCAnimate *actionOne = [CCAnimate actionWithAnimation:animation];
-    [sprite runAction:[CCRepeatForever actionWithAction:actionOne ]];
+    [trappingAnimationSprite runAction:[CCRepeatForever actionWithAction:actionOne ]];
 
 }
 

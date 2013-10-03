@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "LevelScreen.h"
 #import "LevelCompleteScreen.h"
-
+#import "FTMConstants.h"
 #import "DB.h"
 
 enum {
@@ -933,12 +933,22 @@ GameEngine09Menu *layer09;
     }
 }
 
+-(int ) getAnimationTypeForTrapping{
+    
+    if (gameFunc.objectWidth == 70 && gameFunc.objectHeight == 90) {
+        return MAMA_KNIFE_ANIM;
+    }
+    else{
+        return 0;
+    }
+}
 -(void)heroTrappedFunc{
     
     if(heroTrappedChe){
         heroTrappedCount+=1;
         if(heroTrappedCount==10){
             mouseDragSprite.visible=NO;
+//            NSLog(@"Object width and height==== %d %d %d", gameFunc.objectWidth,gameFunc.objectHeight,gameFunc.sideValueForObject);
             for (int i = 0; i < 20; i=i+1)
                 heroPimpleSprite[i].position=ccp(-100,100);
             heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"mother_trapped1.png"];

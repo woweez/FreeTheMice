@@ -11,6 +11,9 @@
 
 @implementation GameFunc
 
+@synthesize objectWidth;
+@synthesize objectHeight;
+@synthesize sideValueForObject;
 @synthesize xPosition;
 @synthesize yPosition;
 @synthesize reverseJump;
@@ -898,6 +901,7 @@
 }
 
 -(void)jumpTransaction:(CGFloat)heroX  heroY:(CGFloat)heroY objectW:(CGFloat)objectW objectH:(CGFloat)objectH fChe:(BOOL)fChe sideValue:(int)sValue{
+    
     if(!fChe){
         //reverseJump
         if(!reverseJump&&!landingChe){
@@ -905,8 +909,12 @@
                 topHittingCollisionChe=NO;
                 reverseJump=YES;
                 xPosition=heroX-50;
-                if(sValue==6&&!trappedChe)
+                if(sValue==6&&!trappedChe){
                     trappedChe=YES;
+                    objectWidth = objectW;
+                    objectHeight = objectH;
+                    sideValueForObject = sValue;
+                }
             }
             //Land
             if(xPosition >= heroX-50 && xPosition<=((heroX-50)+objectW+20) && yPosition > heroY && yPosition <= heroY+17){
@@ -923,8 +931,12 @@
                             movePlatformX=xPosition;
                             movePlatformY=yPosition;
                             landMoveCount=(!moveSideChe?moveCount2:moveCount3);
-                        }else if(sValue==6&&!trappedChe)
+                        }else if(sValue==6&&!trappedChe){
                             trappedChe=YES;
+                            objectWidth = objectW;
+                            objectHeight = objectH;
+                            sideValueForObject = sValue;
+                        }
                         if(sValue==11&&!visibleLevel9Che)
                             visibleLevel9Che=YES;
                     }else{
@@ -944,8 +956,12 @@
                 topHittingCollisionChe=NO;
                 reverseJump=YES;
                 xPosition=(heroX-10)+objectW;
-                if(sValue==6&&!trappedChe)
+                if(sValue==6&&!trappedChe){
                     trappedChe=YES;
+                    objectWidth = objectW;
+                    objectHeight = objectH;
+                    sideValueForObject = sValue;
+                }
             }
             //Land
             if(xPosition >= heroX-30 && xPosition<=((heroX-10)+objectW-20) && yPosition > heroY && yPosition <= heroY+17){
@@ -962,8 +978,12 @@
                             movePlatformX=xPosition;
                             movePlatformY=yPosition;
                             landMoveCount=(!moveSideChe?moveCount2:moveCount3);
-                        }else if(sValue==6&&!trappedChe)
+                        }else if(sValue==6&&!trappedChe){
                             trappedChe=YES;
+                            objectWidth = objectW;
+                            objectHeight = objectH;
+                            sideValueForObject = sValue;
+                        }
                     }else{
                         autoJumpChe2=YES;
                         autoJumpSpeedValue=1;
@@ -987,14 +1007,19 @@
     backHeroY=yPosition;
 }
 -(void)runTransaction:(CGFloat)heroX  heroY:(CGFloat)heroY objectW:(CGFloat)objectW objectH:(CGFloat)objectH fChe:(BOOL)fChe sideValue:(int)sValue{
+    
     if(!fChe){
         int aValue=(trigoVisibleChe?10:0);
         //Running
         if(xPosition >= heroX-60+aValue && xPosition<=((heroX-60)+20) && yPosition >= (heroY-objectH) && yPosition <= heroY){
             xPosition=heroX-60;
             trigoRunningCheck=YES;
-            if(sValue==6&&!trappedChe)
+            if(sValue==6&&!trappedChe){
                 trappedChe=YES;
+                objectWidth = objectW;
+                objectHeight = objectH;
+                sideValueForObject = sValue;
+            }
         }else if(xPosition >= ((heroX-10)+(objectW-20)) && xPosition<=((heroX-10)+(objectW)) && yPosition > heroY && yPosition <= heroY+17&&!autoJumpChe){
             autoJumpChe=YES;
             if(movePlatformChe)
@@ -1004,8 +1029,12 @@
         if(xPosition >= ((heroX-0)+(objectW-20)) && xPosition<=((heroX-0)+(objectW)) && yPosition >= (heroY-objectH) && yPosition <= heroY){
             xPosition=(heroX-0)+objectW;
             trigoRunningCheck=YES;
-            if(sValue==6&&!trappedChe)
+            if(sValue==6&&!trappedChe){
                 trappedChe=YES;
+                objectWidth = objectW;
+                objectHeight = objectH;
+                sideValueForObject = sValue;
+            }
         }else if(xPosition >= heroX-50 && xPosition<=((heroX-50)+20) && yPosition > heroY && yPosition <= heroY+17&&!autoJumpChe){
             autoJumpChe=YES;
             if(movePlatformChe)

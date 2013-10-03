@@ -12,7 +12,7 @@
 #import "LevelScreen.h"
 #import "LevelCompleteScreen.h"
 #import "DB.h"
-
+#import "FTMConstants.h"
 enum {
     kTagParentNode = 1,
 };
@@ -524,6 +524,7 @@ GameEngine06Menu *layer06;
                 trappedChe){
             catKnockedOut = YES;
             heroTrappedChe = YES;
+            
             gameFunc.trappedChe = YES;
         }else if(hx-iValue>catRunSprite.position.x-80 &&hx-iValue<catRunSprite.position.x -30 &&hy > catRunSprite.position.y+10 &&hy<catRunSprite.position.y+50 &&!gameFunc.
                  trappedChe && catForwardChe){
@@ -896,13 +897,26 @@ GameEngine06Menu *layer06;
         }
     }
 }
-
+-(int ) getAnimationTypeForTrapping{
+    
+    if (gameFunc.objectWidth == 60 && gameFunc.objectHeight == 45) {
+        return MAMA_KNIFE_ANIM;
+    }
+    else{
+        return 0;
+    }
+}
 -(void)heroTrappedFunc{
     
     if(heroTrappedChe){
         heroTrappedCount+=1;
         if(heroTrappedCount==10){
             mouseDragSprite.visible=NO;
+            if ([self getAnimationTypeForTrapping] == MAMA_KNIFE_ANIM) {
+                [self showAnimationWithMiceIdAndIndex:FTM_MAMA_MICE_ID andAnimationIndex:MAMA_KNIFE_ANIM];
+            }
+            else{
+                
             for (int i = 0; i < 20; i=i+1)
                 heroPimpleSprite[i].position=ccp(-100,100);
             heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"mother_trapped1.png"];
@@ -925,6 +939,7 @@ GameEngine06Menu *layer06;
             }
             CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
             [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            }
             heroSprite.visible=NO;
         }
     }

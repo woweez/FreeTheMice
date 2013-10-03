@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "LevelScreen.h"
 #import "LevelCompleteScreen.h"
-
+#import "FTMConstants.h"
 #import "DB.h"
 
 enum {
@@ -553,10 +553,10 @@ GameEngine14Menu *layer14;
     CGFloat yy=[trigo circley:100 a:360-((lCount+73)*1.2)]+630;
     
     if(hx>xx-30 && hx< xx+20 &&hy > yy-30  &&!gameFunc.trappedChe&&!forwardChe){
-        gameFunc.trappedChe=YES;
+//        gameFunc.trappedChe=YES;
         trappedTypeValue=3;
     }else if(hx-iValue > xx-60 &&hx-iValue<xx-20 &&hy > yy-30  &&!gameFunc.trappedChe&&forwardChe){
-        gameFunc.trappedChe=YES;
+//        gameFunc.trappedChe=YES;
         trappedTypeValue=3;
     }
     
@@ -565,7 +565,7 @@ GameEngine14Menu *layer14;
     if(hx-iValue>720 &&hx-iValue<800 &&hy > 570 && hy<600 &&gameFunc.moveCount2==0){
         if(eleAtlas.position.x==820){
             trappedTypeValue=5;
-            gameFunc.trappedChe=YES;
+//            gameFunc.trappedChe=YES;
         }else{
             gameFunc.moveCount=1;
             [switchAtlas[0]  setString:@"1"];
@@ -575,7 +575,7 @@ GameEngine14Menu *layer14;
     }else if(hx-iValue>330 &&hx-iValue<410 && hy>570 && hy<600 &&!gameFunc.trappedChe){
         if(eleAtlas.position.x==430){
             trappedTypeValue=5;
-            gameFunc.trappedChe=YES;
+//            gameFunc.trappedChe=YES;
         }else{
             [switchAtlas[1]  setString:@"1"];
             gameFunc.switchCount=1;
@@ -605,7 +605,7 @@ GameEngine14Menu *layer14;
     
     if(hx-iValue>465 &&hx-iValue<630 && hy==266&&!gameFunc.trappedChe){
         trappedTypeValue=4;
-        gameFunc.trappedChe=YES;
+//        gameFunc.trappedChe=YES;
     }
     
     eleCount+=1;
@@ -918,7 +918,7 @@ GameEngine14Menu *layer14;
         heroRunSprite.visible=NO;
     }
     if(gameFunc.trappedChe){
-        if(heroTrappedChe&&heroTrappedCount>=100&&heroTrappedMove==0){
+        if(heroTrappedChe&&heroTrappedCount>=150&&heroTrappedMove==0){
             menu2.visible=YES;
             mouseTrappedBackground.visible=YES;
         }
@@ -1014,22 +1014,39 @@ GameEngine14Menu *layer14;
             mouseDragSprite.visible=NO;
             for (int i = 0; i < 20; i=i+1)
                 heroPimpleSprite[i].position=ccp(-100,100);
-            heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"mother_trapped1.png"];
+            
             if(trappedTypeValue>=1&&trappedTypeValue<=5)
                 heroTrappedMove=1;
-            
-            heroTrappedSprite.scale=0.8;
-            [spriteSheet addChild:heroTrappedSprite z:1];
-            
-            NSMutableArray *animFrames2 = [NSMutableArray array];
-            for(int i = 3; i < 20; i++) {
-                if(i!= 3){
-                    CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"mother_trapped%d.png",i]];
-                    [animFrames2 addObject:frame];
+            if (trappedTypeValue == 2) {
+                heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"mother_trapped1.png"];
+                heroTrappedSprite.scale=0.8;
+                [spriteSheet addChild:heroTrappedSprite z:1];
+                
+                NSMutableArray *animFrames2 = [NSMutableArray array];
+                for(int i = 3; i < 20; i++) {
+                    if(i!= 3){
+                        CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"mother_trapped%d.png",i]];
+                        [animFrames2 addObject:frame];
+                    }
                 }
+                CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
+                [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];   
             }
-            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
-            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            else if (trappedTypeValue == 4){
+                [self showAnimationWithMiceIdAndIndex:FTM_MAMA_MICE_ID andAnimationIndex:MAMA_WATER_ANIM];
+                [self getTrappingAnimatedSprite].position = ccp([self getTrappingAnimatedSprite].position.x, [self getTrappingAnimatedSprite].position.y+15);
+            }
+            else if (trappedTypeValue == 3){
+                [self showAnimationWithMiceIdAndIndex:FTM_MAMA_MICE_ID andAnimationIndex:MAMA_SHOCK_ANIM];
+                CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp([self getTrappingAnimatedSprite].position.x, 270)];
+                [[self getTrappingAnimatedSprite] runAction:move];
+            }
+            else{
+                [self showAnimationWithMiceIdAndIndex:FTM_MAMA_MICE_ID andAnimationIndex:MAMA_FLAME_ANIM];
+                CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp([self getTrappingAnimatedSprite].position.x, 280)];
+                [[self getTrappingAnimatedSprite] runAction:move];
+            }
+            
             heroSprite.visible=NO;
         }
         if(heroTrappedMove!=0){
@@ -1050,8 +1067,9 @@ GameEngine14Menu *layer14;
             }else if(trappedTypeValue==5){
                 xPos=heroSprite.position.x-fValue;
             }
-            
-            heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
+            if (trappedTypeValue == 2) {
+                heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
+            }
             CGPoint copyHeroPosition = ccp(heroSprite.position.x-fValue, heroSprite.position.y-heroTrappedMove);
             [self setViewpointCenter:copyHeroPosition];
             if(trappedTypeValue == 1){

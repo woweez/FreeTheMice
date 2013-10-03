@@ -903,7 +903,7 @@ GameEngine11Menu *layer11;
             mouseDragSprite.visible=NO;
             for (int i = 0; i < 20; i=i+1)
                 heroPimpleSprite[i].position=ccp(-100,100);
-            heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"mother_trapped1.png"];
+            heroTrappedSprite = [CCSprite spriteWithFile:@"mm_mist_0.png"];
             
             int fValue=(forwardChe?heroForwardX:0);
             if(heroSprite.position.y<570){
@@ -923,25 +923,16 @@ GameEngine11Menu *layer11;
             }else{
                 heroTrappedSprite.position = ccp(heroSprite.position.x-fValue+30, 620);
             }
-            
-            heroTrappedSprite.scale=0.8;
-            [spriteSheet addChild:heroTrappedSprite];
-            
-            NSMutableArray *animFrames2 = [NSMutableArray array];
-            for(int i = 3; i < 20; i++) {
-                if(i!= 3){
-                    CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"mother_trapped%d.png",i]];
-                    [animFrames2 addObject:frame];
-                }
-            }
-            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
-            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            heroTrappedSprite.position = ccp(heroSprite.position.x-fValue, heroSprite.position.y);
+            heroTrappedSprite.scale=0.5;
+            [self addChild:heroTrappedSprite z:1000];
+            CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp(heroSprite.position.x-fValue, 200)];
+            [heroTrappedSprite runAction:move];
             heroSprite.visible=NO;
         }
         if(heroTrappedMove!=0){
             heroTrappedMove+=5;
             int fValue=(forwardChe?heroForwardX:0);
-            heroTrappedSprite.position = ccp(heroSprite.position.x-fValue,heroSprite.position.y-heroTrappedMove);
             CGPoint copyHeroPosition = ccp(heroSprite.position.x-fValue, heroSprite.position.y-heroTrappedMove);
             [self setViewpointCenter:copyHeroPosition];
             if(heroSprite.position.y-heroTrappedMove<=215)

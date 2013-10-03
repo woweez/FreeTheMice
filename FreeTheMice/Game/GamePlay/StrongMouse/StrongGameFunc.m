@@ -11,6 +11,9 @@
 
 @implementation StrongGameFunc
 
+@synthesize objectWidth;
+@synthesize objectHeight;
+@synthesize sideValueForObject;
 @synthesize xPosition;
 @synthesize yPosition;
 @synthesize reverseJump;

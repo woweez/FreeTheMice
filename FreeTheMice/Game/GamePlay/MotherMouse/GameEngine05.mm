@@ -646,9 +646,11 @@ GameEngineMenu05 *layer05;
         }else if(motherLevel==5){
             if(!forwardChe && heroSprite.position.x>220 && heroSprite.position.x<= 300&& heroSprite.position.y>400&&heroSprite.position.y<=600&&!heroTrappedChe&&gameFunc.switchCount==0){
                 gameFunc.trappedChe=YES;
+              //  NSLog(@"Object width and height==== %d %d %d", gameFunc.objectWidth,gameFunc.objectHeight,gameFunc.sideValueForObject);
                 
             }else if(forwardChe && heroSprite.position.x>240 && heroSprite.position.x<= 300&& heroSprite.position.y>400&&heroSprite.position.y<=600&&!heroTrappedChe &&gameFunc.switchCount==0){
                 gameFunc.trappedChe=YES;
+               // NSLog(@"Object width and height==== %d %d %d", gameFunc.objectWidth,gameFunc.objectHeight,gameFunc.sideValueForObject);
             }
         }else if(motherLevel==7){
             if(!forwardChe && heroSprite.position.x>770 && heroSprite.position.x<= 820&& heroSprite.position.y>230&&heroSprite.position.y<=500&&!heroTrappedChe&&gameFunc.switchCount==0){
@@ -796,6 +798,7 @@ GameEngineMenu05 *layer05;
             }
         }else if(gameFunc.trappedChe){
             heroTrappedChe=YES;
+//             NSLog(@"Object width and height==== %d %d %d", gameFunc.objectWidth,gameFunc.objectHeight,gameFunc.sideValueForObject);
             heroSprite.visible=NO;
             heroStandChe=NO;
             heroRunSprite.visible=NO;
@@ -826,6 +829,7 @@ GameEngineMenu05 *layer05;
             }
         }else if(gameFunc.trappedChe){
             heroTrappedChe=YES;
+           // NSLog(@"Object width and height==== %d %d %d", gameFunc.objectWidth,gameFunc.objectHeight,gameFunc.sideValueForObject);
             heroSprite.visible=NO;
             heroStandChe=NO;
             heroRunSprite.visible=NO;
@@ -936,49 +940,61 @@ GameEngineMenu05 *layer05;
     }
 }
 
+-(int ) getAnimationTypeForTrapping{
+    
+    if (gameFunc.objectWidth == 75 && gameFunc.objectHeight == 40) {
+        return MAMA_KNIFE_ANIM;
+    }
+    else{
+        return 0;
+    }
+}
 -(void)heroTrappedFunc{
     
     if(heroTrappedChe){
         heroTrappedCount+=1;
         if(heroTrappedCount==10){
-            [self showAnimationWithMiceIdAndIndex:FTM_MAMA_MICE_ID andAnimationIndex:MAMA_KNIFE_ANIM];
-//            heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"mother_trapped1.png"];
-//            if(motherLevel==3)
-//                heroTrappedSprite.position = ccp(645, 395);
-//            else if(motherLevel==4)
-//                heroTrappedSprite.position = ccp(658, 298);
-//            else if(motherLevel==5){
-//                if(heroSprite.position.x<350)
-//                    heroTrappedSprite.position = ccp(278, 455);
-//                else
-//                    heroTrappedSprite.position = ccp(535, 335);
-//            }else if(motherLevel == 6){
-//                heroTrappedSprite.position = ccp(795, 304);
-//            }else if(motherLevel == 7){
-//                heroTrappedSprite.position = ccp(797, 344);
-//            }else if(motherLevel == 8){
-//                if(heroSprite.position.x<800)
-//                    heroTrappedSprite.position = ccp(730, 310);
-//                else
-//                    heroTrappedSprite.position = ccp(860, 275);
-//                
-//            }
-//            
-//            
-//            
-//            heroTrappedSprite.scale=0.8;
-//            [spriteSheet addChild:heroTrappedSprite];
-//            
-//            NSMutableArray *animFrames2 = [NSMutableArray array];
-//            for(int i = 3; i < 20; i++) {
-//                if(i!= 3){
-//                    CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"mother_trapped%d.png",i]];
-//                    [animFrames2 addObject:frame];
-//                }
-//            }
-//            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
-//            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            if ([self getAnimationTypeForTrapping] == MAMA_KNIFE_ANIM) {
+                [self showAnimationWithMiceIdAndIndex:FTM_MAMA_MICE_ID andAnimationIndex:MAMA_KNIFE_ANIM];
+            }
+            else{
+            heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"mother_trapped1.png"];
+            if(motherLevel==3)
+                heroTrappedSprite.position = ccp(645, 395);
+            else if(motherLevel==4)
+                heroTrappedSprite.position = ccp(658, 298);
+            else if(motherLevel==5){
+                if(heroSprite.position.x<350)
+                    heroTrappedSprite.position = ccp(278, 455);
+                else
+                    heroTrappedSprite.position = ccp(535, 335);
+            }else if(motherLevel == 6){
+                heroTrappedSprite.position = ccp(795, 304);
+            }else if(motherLevel == 7){
+                heroTrappedSprite.position = ccp(797, 344);
+            }else if(motherLevel == 8){
+                if(heroSprite.position.x<800)
+                    heroTrappedSprite.position = ccp(730, 310);
+                else
+                    heroTrappedSprite.position = ccp(860, 275);
+                
+            }
             
+            
+            
+            heroTrappedSprite.scale=0.8;
+            [spriteSheet addChild:heroTrappedSprite];
+            
+            NSMutableArray *animFrames2 = [NSMutableArray array];
+            for(int i = 3; i < 20; i++) {
+                if(i!= 3){
+                    CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"mother_trapped%d.png",i]];
+                    [animFrames2 addObject:frame];
+                }
+            }
+            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
+            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            }
             heroSprite.visible=NO;
         }
     }
