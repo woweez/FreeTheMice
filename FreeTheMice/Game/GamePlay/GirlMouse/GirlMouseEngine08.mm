@@ -9,7 +9,7 @@
 // Import the interfaces
 #import "GirlMouseEngine08.h"
 #import "LevelScreen.h"
-
+#import "FTMConstants.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -1219,22 +1219,29 @@ GirlMouseEngineMenu08 *gLayer08;
             }
             
             mouseDragSprite.visible=NO;
-            heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"girl_trapped1.png"];
-            heroTrappedSprite.scale=0.7;
-            if(!forwardChe)
-                heroTrappedSprite.position = ccp(platformX, platformY+15);
-            else
-                heroTrappedSprite.position = ccp(platformX+heroForwardX, platformY+15);
-            [spriteSheet addChild:heroTrappedSprite];
-            spriteSheet.zOrder=11;
-            
-            NSMutableArray *animFrames2 = [NSMutableArray array];
-            for(int i = 1; i < 8; i++) {
-                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"girl_trapped%d.png",i]];
-                [animFrames2 addObject:frame];
+            if (trappedTypeValue == 1) {
+                [self showAnimationWithMiceIdAndIndex:FTM_GIRL_MICE_ID andAnimationIndex:GIRL_KNIFE_ANIM];
+                CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp([self getTrappingAnimatedSprite].position.x, 230)];
+                [[self getTrappingAnimatedSprite] runAction:move];
+            }else{
+                
+                heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"girl_trapped1.png"];
+                heroTrappedSprite.scale=0.7;
+                if(!forwardChe)
+                    heroTrappedSprite.position = ccp(platformX, platformY+15);
+                else
+                    heroTrappedSprite.position = ccp(platformX+heroForwardX, platformY+15);
+                [spriteSheet addChild:heroTrappedSprite];
+                spriteSheet.zOrder=11;
+                
+                NSMutableArray *animFrames2 = [NSMutableArray array];
+                for(int i = 1; i < 8; i++) {
+                    CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"girl_trapped%d.png",i]];
+                    [animFrames2 addObject:frame];
+                }
+                CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
+                [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
             }
-            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
-            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
             heroSprite.visible=NO;
         }
         if(heroTrappedMove!=0){
@@ -1242,8 +1249,9 @@ GirlMouseEngineMenu08 *gLayer08;
             CGFloat xPos=0;
             if(trappedTypeValue== 1||trappedTypeValue== 2 )
                 xPos=heroSprite.position.x-(forwardChe?40:-40);
-            
-            heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
+            if (trappedTypeValue != 1) {
+                heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
+            }
             CGPoint copyHeroPosition = ccp(heroSprite.position.x-fValue, heroSprite.position.y-heroTrappedMove);
             [self setViewpointCenter:copyHeroPosition];
             if(trappedTypeValue == 1||trappedTypeValue == 2){

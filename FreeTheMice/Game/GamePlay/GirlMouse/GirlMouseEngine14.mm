@@ -9,7 +9,7 @@
 // Import the interfaces
 #import "GirlMouseEngine14.h"
 #import "LevelScreen.h"
-
+#import "FTMConstants.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -988,10 +988,10 @@ GirlMouseEngineMenu14 *gLayer14;
     
     if(hx>xx-30 && hx< xx+20 &&hy > yy-30  &&!gameFunc.trappedChe&&!forwardChe){
         gameFunc.trappedChe=YES;
-        trappedTypeValue=1;
+        trappedTypeValue=4;
     }else if(hx-iValue > xx-60 &&hx-iValue<xx-20 &&hy > yy-30  &&!gameFunc.trappedChe&&forwardChe){
         gameFunc.trappedChe=YES;
-        trappedTypeValue=1;
+        trappedTypeValue=4; // bulb
     }
     
     if(hx-iValue>206&&hx-iValue<420&&hy>=545&&hy<=585&&gameFunc.platformRotateCount==0&&!gameFunc.trappedChe){
@@ -999,7 +999,7 @@ GirlMouseEngineMenu14 *gLayer14;
         trappedTypeValue=1;
     }else if(hx-iValue>206&&hx-iValue<420&&hy>=465&&hy<=515&&gameFunc.platformRotateCount==180&&!gameFunc.trappedChe){
         gameFunc.trappedChe=YES;
-        trappedTypeValue=1;
+        trappedTypeValue=5; // knife
     }
     
     
@@ -1039,13 +1039,13 @@ GirlMouseEngineMenu14 *gLayer14;
     if(screenMovementFindValue2==0){
         if(hx-iValue>400 &&hx-iValue<465 && hy==228&&!gameFunc.trappedChe){
             gameFunc.trappedChe=YES;
-            trappedTypeValue=1;
+            trappedTypeValue=3; // flame
         }else if(hx-iValue>665 &&hx-iValue<745 && hy==228&&!gameFunc.trappedChe){
             gameFunc.trappedChe=YES;
-            trappedTypeValue=1;
+            trappedTypeValue=3;
         }else if(hx-iValue>845 &&hx-iValue<925 && hy==228&&!gameFunc.trappedChe){
             gameFunc.trappedChe=YES;
-            trappedTypeValue=1;
+            trappedTypeValue=3;
         }
     }
     
@@ -1500,48 +1500,70 @@ GirlMouseEngineMenu14 *gLayer14;
             for (int i = 0; i < 20; i=i+1)
                 heroPimpleSprite[i].position=ccp(-100,100);
             
-            if(trappedTypeValue<=2)
+            if(trappedTypeValue<=5)
                 heroTrappedMove=1;
             
             mouseDragSprite.visible=NO;
-            heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"girl_trapped1.png"];
-            heroTrappedSprite.scale=0.7;
-            if(!forwardChe)
-                heroTrappedSprite.position = ccp(platformX, platformY+15);
-            else
-                heroTrappedSprite.position = ccp(platformX+heroForwardX, platformY+15);
-            [spriteSheet addChild:heroTrappedSprite ];
-            spriteSheet.zOrder=8;
             
-            NSMutableArray *animFrames2 = [NSMutableArray array];
-            for(int i = 1; i < 8; i++) {
-                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"girl_trapped%d.png",i]];
-                [animFrames2 addObject:frame];
+            if (trappedTypeValue == 3){//flame
+                [self showAnimationWithMiceIdAndIndex:FTM_GIRL_MICE_ID andAnimationIndex:GIRL_FLAME_ANIM];
+                [self getTrappingAnimatedSprite].position = ccp([self getTrappingAnimatedSprite].position.x, [self getTrappingAnimatedSprite].position.y +15);
+                CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp([self getTrappingAnimatedSprite].position.x, 230)];
+                [[self getTrappingAnimatedSprite] runAction:move];
             }
-            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
-            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            else if (trappedTypeValue == 4){//buld
+                [self showAnimationWithMiceIdAndIndex:FTM_GIRL_MICE_ID andAnimationIndex:GIRL_SHOCK_ANIM];
+                CCMoveTo *move = [CCMoveTo actionWithDuration:1.7 position:ccp([self getTrappingAnimatedSprite].position.x, 230)];
+                [[self getTrappingAnimatedSprite] runAction:move];
+            }
+            else if (trappedTypeValue == 5){ //knife
+                [self showAnimationWithMiceIdAndIndex:FTM_GIRL_MICE_ID andAnimationIndex:GIRL_KNIFE_ANIM];
+                CCMoveTo *move = [CCMoveTo actionWithDuration:1.5 position:ccp([self getTrappingAnimatedSprite].position.x, 230)];
+                [[self getTrappingAnimatedSprite] runAction:move];
+            }
+            else{
+                heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"girl_trapped1.png"];
+                heroTrappedSprite.scale=0.7;
+                if(!forwardChe)
+                    heroTrappedSprite.position = ccp(platformX, platformY+15);
+                else
+                    heroTrappedSprite.position = ccp(platformX+heroForwardX, platformY+15);
+                [spriteSheet addChild:heroTrappedSprite ];
+                spriteSheet.zOrder=8;
+                
+                NSMutableArray *animFrames2 = [NSMutableArray array];
+                for(int i = 1; i < 8; i++) {
+                    CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"girl_trapped%d.png",i]];
+                    [animFrames2 addObject:frame];
+                }
+                CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
+                [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            }
             heroSprite.visible=NO;
         }
         if(heroTrappedMove!=0){
             int fValue = (forwardChe?heroForwardX:0);
             CGFloat xPos=0;
-            if(trappedTypeValue== 1)
+            if(trappedTypeValue== 1 || trappedTypeValue == 3 || trappedTypeValue == 4 || trappedTypeValue == 5)
                 xPos=heroSprite.position.x-(forwardChe?40:-40);
-            else if(trappedTypeValue == 2){
+            else if(trappedTypeValue == 2 || trappedTypeValue == 3 || trappedTypeValue == 4 || trappedTypeValue == 5){
                 if(!forwardChe)
                     xPos=heroSprite.position.x+53;
                 else
                     xPos=heroSprite.position.x-50;
             }
             
-            heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
+            if (trappedTypeValue != 3 && trappedTypeValue != 4 && trappedTypeValue != 5) {
+                heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
+            }
+
             CGPoint copyHeroPosition = ccp(heroSprite.position.x-fValue, heroSprite.position.y-heroTrappedMove);
             [self setViewpointCenter:copyHeroPosition];
-            if(trappedTypeValue == 1){
+            if(trappedTypeValue == 1 || trappedTypeValue == 3 || trappedTypeValue == 4 || trappedTypeValue == 5){
                 heroTrappedMove+=2;
                 if(heroSprite.position.y-heroTrappedMove<=230)
                     heroTrappedMove=0;
-            }else if(trappedTypeValue == 2){
+            }else if(trappedTypeValue == 2 || trappedTypeValue == 3 || trappedTypeValue == 4 || trappedTypeValue == 5){
                 heroTrappedMove+=2;
                 if(heroSprite.position.y-heroTrappedMove<=200)
                     heroTrappedMove=0;

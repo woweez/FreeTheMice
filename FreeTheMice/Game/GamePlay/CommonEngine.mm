@@ -69,7 +69,7 @@
 -(void) showTrappingAnimationForGirl: (int) animIndex{
     switch (animIndex) {
         case GIRL_FLAME_ANIM:
-            
+            [self playGirlFlameHitAnimation];
             break;
         case GIRL_KNIFE_ANIM:
             [self playGirlKniveHitAnimation];
@@ -87,7 +87,7 @@
 -(void) showTrappingAnimationForStrong: (int) animIndex{
     switch (animIndex) {
         case STRONG_FLAME_ANIM:
-            
+            [self playGirlFlameHitAnimation];
             break;
         case STRONG_KNIFE_ANIM:
             [self playStrongKniveHitAnimation];

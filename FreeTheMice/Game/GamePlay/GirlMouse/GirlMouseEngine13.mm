@@ -978,7 +978,7 @@ GirlMouseEngineMenu13 *gLayer13;
     int iValue=(forwardChe?43:0);
     
     if(!gameFunc.trappedChe){
-        trappedTypeValue=1;
+        trappedTypeValue=2;
     }
     
     if(hx-iValue<70&&hy>480 && hy< 532){
@@ -1018,14 +1018,14 @@ GirlMouseEngineMenu13 *gLayer13;
     for(int i=0;i<4;i++){
         if(hx-iValue>iceQubeSprite[i].position.x-60 &&hx-iValue<iceQubeSprite[i].position.x-30 &&hy > iceQubeSprite[i].position.y-30 &&hy<iceQubeSprite[i].position.y+20 &&!gameFunc.trappedChe){
             gameFunc.trappedChe=YES;
-            trappedTypeValue=1;
+            trappedTypeValue=2;
         }
     }
     for(int i=0;i<5;i++){
         for(int j=0;j<2;j++){
             if(hx-iValue>iceSmokingSprite[i][j].position.x-40 &&hx-iValue<iceSmokingSprite[i][j].position.x-30 &&hy > iceSmokingSprite[i][j].position.y-30 &&hy<iceSmokingSprite[i][j].position.y+20 &&!gameFunc.trappedChe){
                 gameFunc.trappedChe=YES;
-                 trappedTypeValue=1;
+                 trappedTypeValue=2;
             }
         }
     }
@@ -1033,7 +1033,7 @@ GirlMouseEngineMenu13 *gLayer13;
     if(hx-iValue>360 && hx-iValue<470 && hy> 615 && hy<630){
         if((pulbCount>50&&pulbCount<70)|| (pulbCount>175&&pulbCount<195)){
             gameFunc.trappedChe=YES;
-            trappedTypeValue=1;
+            trappedTypeValue=2;
         }
     }
     
@@ -1384,23 +1384,38 @@ GirlMouseEngineMenu13 *gLayer13;
                 heroTrappedMove=1;
             }
             
-            mouseDragSprite.visible=NO;
-            heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"girl_trapped1.png"];
-            heroTrappedSprite.scale=0.7;
-            if(!forwardChe)
-                heroTrappedSprite.position = ccp(platformX, platformY+15);
-            else
-                heroTrappedSprite.position = ccp(platformX+heroForwardX, platformY+15);
-            [spriteSheet addChild:heroTrappedSprite];
-            spriteSheet.zOrder=11;
-            
-            NSMutableArray *animFrames2 = [NSMutableArray array];
-            for(int i = 1; i < 8; i++) {
-                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"girl_trapped%d.png",i]];
-                [animFrames2 addObject:frame];
+            if(trappedTypeValue == 2){
+                heroTrappedSprite = [CCSprite spriteWithFile:@"gm_mist_0.png"];
+                heroTrappedSprite.scale=0.5;
+                if(!forwardChe)
+                    heroTrappedSprite.position = ccp(heroSprite.position.x +heroForwardX, heroSprite.position.y+15);
+                else
+                    heroTrappedSprite.position = ccp(heroSprite.position.x - heroForwardX, heroSprite.position.y+15);
+                
+                heroTrappedSprite.scale=0.5;
+                [self addChild:heroTrappedSprite z:1000];
+                CCMoveTo *move = [CCMoveTo actionWithDuration:1.5 position:ccp(heroTrappedSprite.position.x, 230)];
+                [heroTrappedSprite runAction:move];
             }
-            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
-            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            else{
+                mouseDragSprite.visible=NO;
+                heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"girl_trapped1.png"];
+                heroTrappedSprite.scale=0.7;
+                if(!forwardChe)
+                    heroTrappedSprite.position = ccp(platformX, platformY+15);
+                else
+                    heroTrappedSprite.position = ccp(platformX+heroForwardX, platformY+15);
+                [spriteSheet addChild:heroTrappedSprite];
+                spriteSheet.zOrder=11;
+                
+                NSMutableArray *animFrames2 = [NSMutableArray array];
+                for(int i = 1; i < 8; i++) {
+                    CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"girl_trapped%d.png",i]];
+                    [animFrames2 addObject:frame];
+                }
+                CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
+                [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            }
             heroSprite.visible=NO;
         }
         if(heroTrappedMove!=0){
@@ -1408,8 +1423,10 @@ GirlMouseEngineMenu13 *gLayer13;
             CGFloat xPos=0;
             if(trappedTypeValue== 1)
                 xPos=heroSprite.position.x-(forwardChe?40:-40);
-            
-            heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
+            if (trappedTypeValue != 2) {
+                heroTrappedSprite.position = ccp(xPos,heroSprite.position.y-heroTrappedMove);
+            }
+           
             CGPoint copyHeroPosition = ccp(heroSprite.position.x-fValue, heroSprite.position.y-heroTrappedMove);
             [self setViewpointCenter:copyHeroPosition];
             if(trappedTypeValue == 1){
