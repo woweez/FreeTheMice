@@ -19,7 +19,7 @@
 
 
 @implementation ToolShedScreen
-
+NSString *const ToolShedUpdateProductPurchasedNotification = @"ToolShedUpdateProductPurchasedNotification";
 +(CCScene *) scene {
 	
     CCScene *scene = [CCScene node];
@@ -52,7 +52,7 @@
         [self addChild:currentCheeseBg];
         
         int cheese = [[NSUserDefaults standardUserDefaults] integerForKey:@"currentCheese"];
-        CCLabelAtlas *totalCheese = [CCLabelAtlas labelWithString:[NSString stringWithFormat:@"%d", cheese] charMapFile:@"numbers.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
+        totalCheese = [CCLabelAtlas labelWithString:[NSString stringWithFormat:@"%d", cheese] charMapFile:@"numbers.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
         totalCheese.position= ccp(155 *scaleFactorX, 294 *scaleFactorY);
         totalCheese.scale=0.5;
         [self addChild:totalCheese z:11];
@@ -141,10 +141,15 @@
     return self;
 }
 
+
+-(void) updateCheeseCount :(NSString *) notifier{
+    int cheese = [[NSUserDefaults standardUserDefaults] integerForKey:@"currentCheese"];
+    [totalCheese setString:[NSString stringWithFormat:@"%d", cheese]];
+}
 -(void) addScrollVIew{
     
     ExampleTable *exampleTable = [[ExampleTable alloc] init];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCheeseCount:) name:ToolShedUpdateProductPurchasedNotification object:nil];
     CGSize tSize = CGSizeMake(288 *scaleFactorX, 202 *scaleFactorY);//195
     SWMultiColumnTableView *myTable = [SWMultiColumnTableView viewWithDataSource:exampleTable size:tSize];
     myTable.position = ccp(52 *scaleFactorX, 42 *scaleFactorY);
@@ -179,5 +184,10 @@
     
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ToolShedUpdateProductPurchasedNotification object:nil];
+    [super dealloc];
+}
 
 @end

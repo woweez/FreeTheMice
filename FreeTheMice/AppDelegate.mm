@@ -79,10 +79,15 @@
 	
 	// Assume that PVR images have premultiplied alpha
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
-	
-    NSDictionary *appDefaults = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithInt:2500] forKey:@"currentCheese"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+	int cheese = [[NSUserDefaults standardUserDefaults] integerForKey:@"currentCheese"];
+    if (cheese == 0) {
+        NSDictionary *appDefaults = [NSDictionary
+                                     dictionaryWithObject:[NSNumber numberWithInt:cheese] forKey:@"currentCheese"];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+
+    }
+      
+    
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	[director_ pushScene: [IntroLayer scene]]; 
 	

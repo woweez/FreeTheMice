@@ -10,12 +10,15 @@
 #import "ToolShedScreen.h"
 #import <StoreKit/StoreKit.h>
 #import "InAppUtils.h"
+
 @implementation StoreScreen
 
+NSString *const StoreUpdateProductPurchasedNotification = @"StoreUpdateProductPurchasedNotification";
 +(CCScene *) scene {
 	
     CCScene *scene = [CCScene node];
     StoreScreen *layer = [StoreScreen node];
+    layer.tag = 128;
     [scene addChild: layer];
 	
 	return scene;
@@ -37,7 +40,7 @@
         storeBg.scaleY = 0.5 * scaleFactorY;
         [self addChild:storeBg];
         int cheese = [[NSUserDefaults standardUserDefaults] integerForKey:@"currentCheese"];
-        CCLabelAtlas *totalCheese = [CCLabelAtlas labelWithString:[NSString stringWithFormat:@"%d", cheese] charMapFile:@"numbers.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
+        totalCheese = [CCLabelAtlas labelWithString:[NSString stringWithFormat:@"%d", cheese] charMapFile:@"numbers.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
         totalCheese.position= ccp(225 *scaleFactorX, 38 *scaleFactorY);
         totalCheese.scale=0.8;
         [self addChild:totalCheese z:0];
@@ -72,18 +75,26 @@
     }];
     
 }
+
+- (void)updateStoreAboutPurchased:(NSString *) updateNotification {
+    int cheese = [[NSUserDefaults standardUserDefaults] integerForKey:@"currentCheese"];
+    [totalCheese setString:[NSString stringWithFormat:@"%d", cheese]];
+}
 -(void) addBuyButtons{
     for (int i = 1; i<= 3; i++) {
         CCMenuItem *buyItem = [CCMenuItemImage itemWithNormalImage:@"buy-btn.png" selectedImage:@"buy-btn-press.png" block:^(id sender) {
-            
-            SKProduct *product = [InAppUtils sharedInstance]._products[1];
-            
+            if ([[InAppUtils sharedInstance]._products count] <3) {
+                return;
+            }
+            CCMenuItem *item = (CCMenuItem *)sender;
+            SKProduct *product = [InAppUtils sharedInstance]._products[item.tag -1];
             NSLog(@"Buying %@...", product.productIdentifier);
             [[InAppUtils sharedInstance] buyProduct:product];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:IAPHelperProductPurchasedNotification object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateStoreAboutPurchased:) name:StoreUpdateProductPurchasedNotification object:nil];
         }];
         CGPoint pos;
         [buyItem setScale:0.5];
+        buyItem.tag = i;
         switch (i) {
             case 1:
                 pos = ccp(275 *scaleFactorX, (87) *scaleFactorY);
@@ -105,6 +116,11 @@
     }
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:StoreUpdateProductPurchasedNotification object:nil];
+    [super dealloc];
+}
 - (void)productPurchased:(NSNotification *)notification {
     
     NSString * productIdentifier = notification.object;

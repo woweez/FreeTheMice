@@ -12,5 +12,6 @@
 
 + (InAppUtils *)sharedInstance;
 @property (nonatomic, retain) NSArray* _products;
+@property int itemIndex;
 
 @end

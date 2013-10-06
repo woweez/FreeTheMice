@@ -36,7 +36,7 @@
 		46041A2317E8950E00131149 /* cat_shadow_animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46041A2117E8950E00131149 /* cat_shadow_animation.plist */; };
 		46041A2417E8950E00131149 /* cat_shadow_animation.png in Resources */ = {isa = PBXBuildFile; fileRef = 46041A2217E8950E00131149 /* cat_shadow_animation.png */; };
 		4604340E17FAB722002B314E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4604340D17FAB722002B314E /* StoreKit.framework */; };
-		4604341217FAB858002B314E /* InAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4604341117FAB858002B314E /* InAppManager.m */; };
+		4604341217FAB858002B314E /* InAppManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4604341117FAB858002B314E /* InAppManager.mm */; };
 		4604341517FABC26002B314E /* InAppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4604341417FABC26002B314E /* InAppUtils.m */; };
 		461790EF17F955E200CB5D2C /* redFont.plist in Resources */ = {isa = PBXBuildFile; fileRef = 461790EB17F955E200CB5D2C /* redFont.plist */; };
 		461790F017F955E200CB5D2C /* yellowFont.plist in Resources */ = {isa = PBXBuildFile; fileRef = 461790EC17F955E200CB5D2C /* yellowFont.plist */; };
@@ -680,7 +680,7 @@
 		46041A2217E8950E00131149 /* cat_shadow_animation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat_shadow_animation.png; sourceTree = "<group>"; };
 		4604340D17FAB722002B314E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4604341017FAB858002B314E /* InAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppManager.h; sourceTree = "<group>"; };
-		4604341117FAB858002B314E /* InAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppManager.m; sourceTree = "<group>"; };
+		4604341117FAB858002B314E /* InAppManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InAppManager.mm; sourceTree = "<group>"; };
 		4604341317FABC26002B314E /* InAppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppUtils.h; sourceTree = "<group>"; };
 		4604341417FABC26002B314E /* InAppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppUtils.m; sourceTree = "<group>"; };
 		461790EB17F955E200CB5D2C /* redFont.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = redFont.plist; sourceTree = "<group>"; };
@@ -1593,7 +1593,7 @@
 			isa = PBXGroup;
 			children = (
 				4604341017FAB858002B314E /* InAppManager.h */,
-				4604341117FAB858002B314E /* InAppManager.m */,
+				4604341117FAB858002B314E /* InAppManager.mm */,
 				4604341317FABC26002B314E /* InAppUtils.h */,
 				4604341417FABC26002B314E /* InAppUtils.m */,
 			);
@@ -3668,7 +3668,7 @@
 				460391F317F8202A004117D0 /* SWTableView.m in Sources */,
 				460391F417F8202A004117D0 /* SWTableViewCell.m in Sources */,
 				4676684D17F9650B004F0B4D /* StoreScreen.mm in Sources */,
-				4604341217FAB858002B314E /* InAppManager.m in Sources */,
+				4604341217FAB858002B314E /* InAppManager.mm in Sources */,
 				4604341517FABC26002B314E /* InAppUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

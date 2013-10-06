@@ -100,6 +100,15 @@ enum {
         
         CCMenuItem *storeMenuItem = [CCMenuItemImage itemWithNormalImage:@"store.png" selectedImage:@"store_press.png" block:^(id sender) {
             //add functionality here.
+            if ([[InAppUtils sharedInstance]._products count] == 0) {
+                [[InAppUtils sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
+                    if (success) {
+                        [InAppUtils sharedInstance]._products = products;
+                        
+                        NSLog(@"No of products retrived successfully: %d", [InAppUtils sharedInstance]._products.count);
+                    }
+                }];
+            }
             [[CCDirector sharedDirector] replaceScene:[ToolShedScreen scene]];
             
 		}];

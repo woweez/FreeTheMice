@@ -829,6 +829,7 @@ GameEngine03Menu *layer03;
         if(heroTrappedCount==10){
             mouseDragSprite.visible=NO;
             heroTrappedSprite = [CCSprite spriteWithFile:@"mm_mist_0.png"];
+            heroTrappedSprite.visible = YES;
             heroTrappedSprite.scale=0.5;
             if(!forwardChe)
                 heroTrappedSprite.position = ccp(heroSprite.position.x , heroSprite.position.y+15);
@@ -1437,6 +1438,7 @@ GameEngine03Menu *layer03;
         jumpAngle = fabsf( CC_RADIANS_TO_DEGREES( atan2f(-activeVect.y, activeVect.x)));
         [self HeroLiningDraw:0];
     }
+                
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -1472,6 +1474,10 @@ GameEngine03Menu *layer03;
             gameFunc.trigoRunningCheck=NO;
     }
     
+    if ([FTMUtil sharedInstance].isRespawnMice) {
+        heroTrappedChe = NO;
+        heroTrappedCount = 0;
+    }
 }
 -(void)clickMenuButton{
     [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
@@ -1479,6 +1485,18 @@ GameEngine03Menu *layer03;
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
         [[CCDirector sharedDirector] replaceScene:[GameEngine03 scene]];
+//        gameFunc.trappedChe = NO;
+//        safetyJumpChe = YES;
+//        [FTMUtil sharedInstance].isRespawnMice = YES;
+//        menu2.visible=NO;
+//        mouseTrappedBackground.visible=NO;
+//        [gameFunc jumpingRender:(platformX + gameFunc.xPosition)/2 yPosition:gameFunc.yPosition fChe:forwardChe];
+//        for (int i = 1; i<=5 ; i++) {
+//            
+//        }
+//        heroTrappedSprite.visible = NO;
+//        [self endJumping:(platformX + gameFunc.xPosition)/2 yValue:gameFunc.yPosition];
+        
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }

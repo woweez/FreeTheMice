@@ -18,7 +18,8 @@ float scaleFactorY;
     SWScrollView *scrollView;
     CCMenuItem *powerUpItem;
     CCMenuItem *costumesItem;
+    CCLabelAtlas *totalCheese;
 }
 +(CCScene *) scene;
-
+-(void) updateCheeseCount : (NSString *) notifier;
 @end

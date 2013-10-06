@@ -10,18 +10,16 @@
 
 @implementation InAppUtils
  NSMutableArray *_products;
-
+@synthesize itemIndex;
 
 + (InAppUtils *)sharedInstance {
     static dispatch_once_t once;
     static InAppUtils * sharedInstance;
     dispatch_once(&once, ^{
         NSSet * productIdentifiers = [NSSet setWithObjects:
-                                      @"com.woweez.ftm.pieceofcheese",
-                                      @"com.woweez.ftm.cheesecake",
-                                      @"com.woweez.ftm.cheesecontainer",
-                                      @"com.woweez.freethemice.pieceofcheese",
-                                      @"com.woweez.freethemice.cheesecontainertest",
+                                      @"com.woweez.ftmtest.pieceofcheese",
+                                      @"com.woweez.ftmtest.pieceofcake",
+                                      @"com.woweez.ftmtest.cheesecontainer",
                                       nil];
         sharedInstance = [[self alloc] initWithProductIdentifiers:productIdentifiers];
     });

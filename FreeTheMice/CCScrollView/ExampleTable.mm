@@ -28,7 +28,7 @@
 #import "FTMConstants.h"
 #import "SWMultiColumnTableView.h"
 @implementation ExampleTable
-
+NSString *const ToolShedUpdateProductPurchasedNotification = @"ToolShedUpdateProductPurchasedNotification";
 //provide data to your table
 //telling cell size to the table
 -(Class)cellClassForTable:(SWTableView *)table {
@@ -86,10 +86,22 @@
     
     CCMenuItem *buyItem = [CCMenuItemImage itemWithNormalImage:@"buy-btn.png" selectedImage:@"buy-btn-press.png" block:^(id sender) {
         
-        
+        CCMenuItem *item = (CCMenuItem *)sender;
+        int cost = [self getCostWithItemID:item.tag];
+        int cheese = [[NSUserDefaults standardUserDefaults] integerForKey:@"currentCheese"];
+        if(cheese < cost){
+            return;
+        }
+        cheese -= cost;
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:[NSNumber numberWithInt:cheese] forKey:@"currentCheese"];
+        [defaults synchronize];
+        [[NSNotificationCenter defaultCenter] postNotificationName:ToolShedUpdateProductPurchasedNotification object:nil userInfo:nil];
+    
     }];
     
     [buyItem setScale:0.45];
+    buyItem.tag = itemId;
     CCMenu *buyItemMenu = [CCMenu menuWithItems:buyItem, nil];
     buyItemMenu.position = ccp(powrUpSpr.position.x + 87 *scaleFactorX, powrUpSpr.position.y *1.26);
     buyItemMenu.tag = itemId;

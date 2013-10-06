@@ -8,7 +8,7 @@
 
 #import "InAppManager.h"
 #import <StoreKit/StoreKit.h>
-
+#import "InAppUtils.h"
 @interface InAppManager () <SKProductsRequestDelegate , SKPaymentTransactionObserver>
 @end
 
@@ -21,6 +21,7 @@ RequestProductsCompletionHandler _completionHandler;
 NSSet * _productIdentifiers;
 NSMutableSet * _purchasedProductIdentifiers;
 NSString *const IAPHelperProductPurchasedNotification = @"IAPHelperProductPurchasedNotification";
+NSString *const StoreUpdateProductPurchasedNotification = @"StoreUpdateProductPurchasedNotification";
 
 - (id)initWithProductIdentifiers:(NSSet *)productIdentifiers {
     
@@ -121,9 +122,23 @@ NSString *const IAPHelperProductPurchasedNotification = @"IAPHelperProductPurcha
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction {
     NSLog(@"completeTransaction...");
+    int cheese = [[NSUserDefaults standardUserDefaults] integerForKey:@"currentCheese"];
+
+    if ([transaction.payment.productIdentifier isEqualToString:[NSString stringWithFormat:@"com.woweez.ftmtest.pieceofcheese"]]) {
+        cheese +=  100;
+    }
+    if ([transaction.payment.productIdentifier isEqualToString:[NSString stringWithFormat:@"com.woweez.ftmtest.pieceofcake"]]) {
+        cheese +=  500;
+    }
+    if ([transaction.payment.productIdentifier isEqualToString:[NSString stringWithFormat:@"com.woweez.ftmtest.cheesecontainer"]]) {
+        cheese +=  25000;
+    }
     
-    [self provideContentForProductIdentifier:transaction.payment.productIdentifier];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSNumber numberWithInt:cheese] forKey:@"currentCheese"];
+    [defaults synchronize];
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    [[NSNotificationCenter defaultCenter] postNotificationName:StoreUpdateProductPurchasedNotification object:nil userInfo:nil];
 }
 
 - (void)restoreTransaction:(SKPaymentTransaction *)transaction {
@@ -131,6 +146,7 @@ NSString *const IAPHelperProductPurchasedNotification = @"IAPHelperProductPurcha
     
     [self provideContentForProductIdentifier:transaction.originalTransaction.payment.productIdentifier];
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+   
 }
 
 - (void)failedTransaction:(SKPaymentTransaction *)transaction {

@@ -14,7 +14,8 @@
     
     float scaleFactorX;
     float scaleFactorY;
+    CCLabelAtlas *totalCheese;
 }
 +(CCScene *) scene;
-
+- (void)updateStoreAboutPurchased :(NSString *) updateNotification;
 @end
