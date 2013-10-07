@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "LevelScreen.h"
 #import "LevelCompleteScreen.h"
-
+#import "FTMUtil.h"
 #import "DB.h"
 
 enum {
@@ -997,6 +997,10 @@ GameEngine12Menu *layer12;
             mouseDragSprite.visible=NO;
             for (int i = 0; i < 20; i=i+1)
                 heroPimpleSprite[i].position=ccp(-100,100);
+            
+            if (heroTrappedSprite != NULL) {
+                [heroTrappedSprite removeFromParentAndCleanup:YES];
+            }
             heroTrappedSprite = [CCSprite spriteWithFile:@"mm_mist_0.png"];
             int fValue=(forwardChe?heroForwardX:0);
             if(!waterTrappedChe){
@@ -1029,11 +1033,17 @@ GameEngine12Menu *layer12;
             }
             
             heroTrappedSprite.scale=0.4;
-            heroTrappedSprite.position = ccp(heroSprite.position.x-fValue, heroSprite.position.y);
+            int yPosOfTrappedSprite = heroSprite.position.y;
+            if (yPosOfTrappedSprite < 210) {
+                yPosOfTrappedSprite = 210;
+            }
+            heroTrappedSprite.position = ccp(heroSprite.position.x-fValue, yPosOfTrappedSprite);
             heroTrappedSprite.scale=0.5;
             [self addChild:heroTrappedSprite z:1000];
-            int posY = 200;
-            if(waterTrappedChe){posY = 90;}
+            int posY = 210;
+            if(waterTrappedChe){
+                posY = 90;
+            }
             
             CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp(heroSprite.position.x-fValue, posY)];
             [heroTrappedSprite runAction:move];
@@ -1043,7 +1053,6 @@ GameEngine12Menu *layer12;
         if(heroTrappedMove!=0){
             
             int fValue=(forwardChe?heroForwardX:0);
-//            heroTrappedSprite.position = ccp(heroSprite.position.x-fValue,heroSprite.position.y-heroTrappedMove);
             CGPoint copyHeroPosition = ccp(heroSprite.position.x-fValue, heroSprite.position.y-heroTrappedMove);
             [self setViewpointCenter:copyHeroPosition];
             if(!waterTrappedChe){
@@ -1052,8 +1061,10 @@ GameEngine12Menu *layer12;
                     heroTrappedMove=0;
             }else{
                 heroTrappedMove+=1;
-                if(heroSprite.position.y-heroTrappedMove<=90)
+                if(heroSprite.position.y-heroTrappedMove<=90){
+                    waterTrappedChe = NO;
                     heroTrappedMove=0;
+                }
                 
             }
         }
@@ -1635,11 +1646,33 @@ GameEngine12Menu *layer12;
 }
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
-        [[CCDirector sharedDirector] replaceScene:[GameEngine12 scene]];
+//        [[CCDirector sharedDirector] replaceScene:[GameEngine12 scene]];
+        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }
 }
+
+-(void ) respwanTheMice{
+    gameFunc.trappedChe = NO;
+    safetyJumpChe = YES;
+    [FTMUtil sharedInstance].isRespawnMice = YES;
+    menu2.visible=NO;
+    mouseTrappedBackground.visible=NO;
+    heroTrappedSprite.visible = NO;
+    [self endJumping:(platformX + gameFunc.xPosition)/2 yValue:gameFunc.yPosition];
+    [self schedule:@selector(startRespawnTimer) interval:1];
+}
+
+-(void) startRespawnTimer{
+    [self unschedule:@selector(startRespawnTimer)];
+    if ([FTMUtil sharedInstance].isRespawnMice) {
+        [FTMUtil sharedInstance].isRespawnMice = NO;
+        heroTrappedChe = NO;
+        heroTrappedCount = 0;
+    }
+}
+
 -(void) createExplosionX: (float) x y: (float) y {
     [self removeChild:cheeseEmitter cleanup:YES];
     cheeseEmitter = [CCParticleSun node];
