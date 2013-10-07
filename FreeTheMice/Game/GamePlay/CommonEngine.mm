@@ -27,6 +27,7 @@
 
 -(void) showAnimationWithMiceIdAndIndex:(int)miceId andAnimationIndex:(int)animIndex{
     
+    
     switch (miceId) {
         case FTM_MAMA_MICE_ID:
             [self showTrappingAnimationForMama:animIndex];

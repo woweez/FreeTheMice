@@ -13,6 +13,7 @@
 #import "LevelCompleteScreen.h"
 #import "FTMConstants.h"
 #import "DB.h"
+#import "FTMUtil.h"
 
 enum {
     kTagParentNode = 1,
@@ -923,7 +924,7 @@ GameEngine10Menu *layer10;
                 }
             }else{
                 if(heroSprite.position.y<250)
-                    heroTrappedSprite.position = ccp(900, 200);
+                    heroTrappedSprite.position = ccp(900, 215);
                 else
                     heroTrappedSprite.position = ccp(850, 310);
                 
@@ -931,9 +932,8 @@ GameEngine10Menu *layer10;
             
             heroTrappedSprite.scale=0.5;
             heroTrappedSprite.position = ccp(heroSprite.position.x-fValue, heroSprite.position.y);
-            heroTrappedSprite.scale=0.5;
             [self addChild:heroTrappedSprite z:1000];
-            CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp(heroSprite.position.x-fValue, 200)];
+            CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp(heroSprite.position.x-fValue, 215)];
             [heroTrappedSprite runAction:move];
             heroSprite.visible=NO;
         }
@@ -1516,11 +1516,57 @@ GameEngine10Menu *layer10;
 }
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
-        [[CCDirector sharedDirector] replaceScene:[GameEngine10 scene]];
+//        [[CCDirector sharedDirector] replaceScene:[GameEngine10 scene]];
+        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }
 }
+
+-(void ) respwanTheMice{
+    gameFunc.trappedChe = NO;
+    safetyJumpChe = YES;
+    [FTMUtil sharedInstance].isRespawnMice = YES;
+    menu2.visible=NO;
+    mouseTrappedBackground.visible=NO;
+    
+    heroTrappedSprite.visible = NO;
+    if (heroTrappedSprite.position.x > 750 && heroTrappedSprite.position.y < 260) {
+        platformX -= 12;
+        if (jumpingChe) {
+            [self endJumping:platformX  yValue:gameFunc.yPosition];
+            [self schedule:@selector(startRespawnTimer) interval:1];
+        }else{
+            heroTrappedChe = NO;
+            heroSprite.visible = YES;
+            heroStandChe = YES;
+            runningChe = NO;
+            if (!forwardChe) {
+                platformX = platformX - 30;
+            }else{
+                platformX = platformX - 30;
+            }
+            platformY = [gameFunc getPlatformPosition:motherLevel].y;
+            CGPoint copyHeroPosition = ccp(platformX, platformY);
+            heroRunSprite.position=ccp(platformX,platformY+2);
+            [self setViewpointCenter:copyHeroPosition];
+            [self heroUpdateForwardPosFunc];
+        }
+    }else{
+        [self endJumping:(platformX + gameFunc.xPosition)/2 yValue:gameFunc.yPosition];
+        [self schedule:@selector(startRespawnTimer) interval:1];
+    }
+}
+
+-(void) startRespawnTimer{
+    [self unschedule:@selector(startRespawnTimer)];
+    if ([FTMUtil sharedInstance].isRespawnMice) {
+        [FTMUtil sharedInstance].isRespawnMice = NO;
+        heroTrappedChe = NO;
+        heroTrappedCount = 0;
+    }
+}
+
 -(void) createExplosionX: (float) x y: (float) y {
     [self removeChild:cheeseEmitter cleanup:YES];
     cheeseEmitter = [CCParticleSun node];

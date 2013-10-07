@@ -14,6 +14,7 @@
 #import "CommonEngine.h"
 #import "FTMConstants.h"
 #import "DB.h"
+#import "FTMUtil.h"
 
 enum {
     kTagParentNode = 1,
@@ -735,45 +736,7 @@ GameEngineMenu05 *layer05;
             [self setViewpointCenter:copyHeroPosition];
         }
     }
-    if(motherLevel==1){
-        if(platformX>=830&&platformY<=170&&!mouseWinChe&&!heroTrappedChe){
-            if(runningChe){
-                mouseWinChe=YES;
-                heroRunSprite.visible=NO;
-                runningChe=NO;
-            }else if(heroStandChe){
-                mouseWinChe=YES;
-                heroSprite.visible=NO;
-                heroStandChe=NO;
-            }
-        }
-    }else if(motherLevel == 2){
-        
-        int fValue=(!forwardChe?0:30);
-        if(heroSprite.position.x>=920+fValue &&heroSprite.position.y<=430&&!mouseWinChe){
-            if(runningChe||heroStandChe){
-                mouseWinChe=YES;
-                heroStandChe=YES;
-                runningChe=NO;
-                heroRunSprite.visible=NO;
-            }
-        }
-        
-    }else if(motherLevel == 3){
-        int fValue=(!forwardChe?0:30);
-        if(heroSprite.position.x>=920+fValue&&heroSprite.position.y<=430&&!mouseWinChe){
-            if(runningChe||heroStandChe){
-                mouseWinChe=YES;
-                heroStandChe=YES;
-                runningChe=NO;
-                heroRunSprite.visible=NO;
-            }
-        }else if(gameFunc.trappedChe){
-            heroTrappedChe=YES;
-            heroSprite.visible=NO;
-            heroStandChe=NO;
-        }
-    }else if(motherLevel == 4){
+    if(motherLevel == 5 || motherLevel == 6 ){
         int fValue=(!forwardChe?0:30);
         if(heroSprite.position.x>=920+fValue&&heroSprite.position.y<=295&&!mouseWinChe){
             if(runningChe||heroStandChe){
@@ -782,62 +745,16 @@ GameEngineMenu05 *layer05;
                 runningChe=NO;
                 heroRunSprite.visible=NO;
             }
-        }else if(gameFunc.trappedChe){
-            heroTrappedChe=YES;
-            heroSprite.visible=NO;
-            heroStandChe=NO;
-        }
-    }else if(motherLevel == 5 || motherLevel == 6 ){
-        int fValue=(!forwardChe?0:30);
-        if(heroSprite.position.x>=920+fValue&&heroSprite.position.y<=295&&!mouseWinChe){
-            if(runningChe||heroStandChe){
-                mouseWinChe=YES;
-                heroStandChe=YES;
-                runningChe=NO;
-                heroRunSprite.visible=NO;
-            }
-        }else if(gameFunc.trappedChe){
+        }else if(gameFunc.trappedChe && !heroTrappedChe){
             heroTrappedChe=YES;
 //             NSLog(@"Object width and height==== %d %d %d", gameFunc.objectWidth,gameFunc.objectHeight,gameFunc.sideValueForObject);
             heroSprite.visible=NO;
             heroStandChe=NO;
             heroRunSprite.visible=NO;
         }
-    }else if(motherLevel == 7 ){
-        int fValue=(!forwardChe?0:30);
-        if(heroSprite.position.x>=920+fValue&&heroSprite.position.y>=440 && heroSprite.position.y<500 &&!mouseWinChe){
-            if(runningChe||heroStandChe){
-                mouseWinChe=YES;
-                heroStandChe=YES;
-                runningChe=NO;
-                heroRunSprite.visible=NO;
-            }
-        }else if(gameFunc.trappedChe){
-            heroTrappedChe=YES;
-            heroSprite.visible=NO;
-            heroStandChe=NO;
-            heroRunSprite.visible=NO;
-        }
-    }else if(motherLevel == 8){
-        int fValue=(!forwardChe?0:30);
-        if(heroSprite.position.x>=920+fValue&&heroSprite.position.y>=400 && heroSprite.position.y<500 &&!mouseWinChe){
-            if(runningChe||heroStandChe){
-                mouseWinChe=YES;
-                heroStandChe=YES;
-                runningChe=NO;
-                heroRunSprite.visible=NO;
-            }
-        }else if(gameFunc.trappedChe){
-            heroTrappedChe=YES;
-           // NSLog(@"Object width and height==== %d %d %d", gameFunc.objectWidth,gameFunc.objectHeight,gameFunc.sideValueForObject);
-            heroSprite.visible=NO;
-            heroStandChe=NO;
-            heroRunSprite.visible=NO;
-        }
     }
-    
-    if(gameFunc.trappedChe){
-        if(heroTrappedChe&&heroTrappedCount>=150){
+    if(gameFunc.trappedChe ){//&& ![FTMUtil sharedInstance].isRespawnMice
+        if(heroTrappedChe&&heroTrappedCount == 50){
             menu2.visible=YES;
             mouseTrappedBackground.visible=YES;
         }
@@ -883,20 +800,7 @@ GameEngineMenu05 *layer05;
                 mValue=gameFunc.moveCount2;
                 
                 starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12+cheeseX2+mValue,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8+cheeseY2);
-            }else if(motherLevel == 6 && i ==2){
-                if(!gameFunc.moveSideChe){
-                    mValue2=gameFunc.moveCount2;
-                    starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12+cheeseX2,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8+cheeseY2+mValue2);
-                }else{
-                    mValue=gameFunc.moveCount3;
-                    starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12+cheeseX2-mValue,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8+cheeseY2);
-                    mValue=-mValue;
-                }
-            }else if(motherLevel == 7 && i ==3){
-                mValue2=gameFunc.moveCount2;
-                starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12+cheeseX2,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8+cheeseY2+mValue2);
-            }
-            
+            }            
             cheeseAnimationCount+=2;
             cheeseAnimationCount=(cheeseAnimationCount>=500?0:cheeseAnimationCount);
             CGFloat localCheeseAnimationCount=0;
@@ -1076,47 +980,12 @@ GameEngineMenu05 *layer05;
                     platformX=gameFunc.movePlatformX-gameFunc.landMoveCount+gameFunc.moveCount2;
                     [gameFunc runningRender:platformX yPosition:platformY fChe:forwardChe];
                     platformX=gameFunc.xPosition;
-                }else if(motherLevel == 6){
-                    if(!gameFunc.moveSideChe){
-                        platformX+=3.0;
-                        platformY=gameFunc.movePlatformY-gameFunc.landMoveCount+gameFunc.moveCount2;
-                    }else{
-                        gameFunc.movePlatformX+=(!gameFunc.heightMoveChe?3.4:2.8);
-                        platformX=gameFunc.movePlatformX+gameFunc.landMoveCount-gameFunc.moveCount3;
-                    }
-                    
-                    [gameFunc runningRender:platformX yPosition:platformY fChe:forwardChe];
-                    platformY=gameFunc.yPosition;
-                    platformX=gameFunc.xPosition;
-                }else if(motherLevel==7){
-                    platformX+=3.0;
-                    platformY=gameFunc.movePlatformY-gameFunc.landMoveCount+gameFunc.moveCount2;
-                    [gameFunc runningRender:platformX yPosition:platformY fChe:forwardChe];
-                    platformY=gameFunc.yPosition;
-                    platformX=gameFunc.xPosition;
                 }
             }else{
                 if(motherLevel == 5){
                     gameFunc.movePlatformX-=(gameFunc.moveCount<=150?3.4:2.8);
                     platformX=gameFunc.movePlatformX-gameFunc.landMoveCount+gameFunc.moveCount2;
                     [gameFunc runningRender:platformX yPosition:platformY fChe:forwardChe];
-                    platformX=gameFunc.xPosition;
-                }else if(motherLevel == 6){
-                    if(!gameFunc.moveSideChe){
-                        platformX-=3.0;
-                        platformY=gameFunc.movePlatformY-gameFunc.landMoveCount+gameFunc.moveCount2;
-                    }else{
-                        gameFunc.movePlatformX-=(!gameFunc.heightMoveChe?2.2:2.8);
-                        platformX=gameFunc.movePlatformX+gameFunc.landMoveCount-gameFunc.moveCount3;
-                    }
-                    [gameFunc runningRender:platformX yPosition:platformY fChe:forwardChe];
-                    platformY=gameFunc.yPosition;
-                    platformX=gameFunc.xPosition;
-                }else if(motherLevel == 7){
-                    platformX-=3.0;
-                    platformY=gameFunc.movePlatformY-gameFunc.landMoveCount+gameFunc.moveCount2;
-                    [gameFunc runningRender:platformX yPosition:platformY fChe:forwardChe];
-                    platformY=gameFunc.yPosition;
                     platformX=gameFunc.xPosition;
                 }
             }
@@ -1308,7 +1177,8 @@ GameEngineMenu05 *layer05;
                 gameFunc.reverseJump=NO;
                 safetyJumpChe=YES;
                 [self endJumping:gameFunc.xPosition yValue:gameFunc.yPosition];
-            }else if(gameFunc.landingChe){
+            }else if(gameFunc.landingChe ){//&& ![FTMUtil sharedInstance].isRespawnMice
+                
                 yy=gameFunc.yPosition;
                 gameFunc.landingChe=NO;
                 if(safetyJumpChe){
@@ -1317,9 +1187,9 @@ GameEngineMenu05 *layer05;
                 }
                 if(gameFunc.trigoVisibleChe)
                     dragTrigoCheckChe=forwardChe;
-                
-                
-                [self endJumping:gameFunc.xPosition yValue:gameFunc.yPosition];
+                if (!gameFunc.trappedChe) {
+                    [self endJumping:gameFunc.xPosition yValue:gameFunc.yPosition];
+                }
             }
             
             if(xx>950){
@@ -1664,9 +1534,32 @@ GameEngineMenu05 *layer05;
 }
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
-        [[CCDirector sharedDirector] replaceScene:[GameEngine05 scene]];
+//        [[CCDirector sharedDirector] replaceScene:[GameEngine05 scene]];
+        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
+    }
+}
+
+-(void ) respwanTheMice{
+    
+    gameFunc.trappedChe = NO;
+    safetyJumpChe = YES;
+    [FTMUtil sharedInstance].isRespawnMice = YES;
+    menu2.visible=NO;
+    heroTrappedSprite.visible = NO;
+    mouseTrappedBackground.visible=NO;
+    [[self getTrappingAnimatedSprite] removeFromParentAndCleanup:YES];
+    [self endJumping:(platformX + gameFunc.xPosition)/2  yValue:gameFunc.yPosition];
+    [self schedule:@selector(startRespawnTimer) interval:2];
+}
+
+-(void) startRespawnTimer{
+    [self unschedule:@selector(startRespawnTimer)];
+    if ([FTMUtil sharedInstance].isRespawnMice) {
+        [FTMUtil sharedInstance].isRespawnMice = NO;
+        heroTrappedChe = NO;
+        heroTrappedCount = 0;
     }
 }
 -(void) createExplosionX: (float) x y: (float) y {

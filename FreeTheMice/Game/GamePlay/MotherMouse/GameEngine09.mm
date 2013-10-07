@@ -7,12 +7,13 @@
 //
 
 #import "GameEngine09.h"
-
 #import "AppDelegate.h"
 #import "LevelScreen.h"
 #import "LevelCompleteScreen.h"
 #import "FTMConstants.h"
 #import "DB.h"
+#import "FTMUtil.h"
+
 
 enum {
     kTagParentNode = 1,
@@ -1629,11 +1630,34 @@ GameEngine09Menu *layer09;
 }
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
-        [[CCDirector sharedDirector] replaceScene:[GameEngine09 scene]];
+//        [[CCDirector sharedDirector] replaceScene:[GameEngine09 scene]];
+        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }
 }
+
+-(void ) respwanTheMice{
+    gameFunc.trappedChe = NO;
+    safetyJumpChe = YES;
+    [FTMUtil sharedInstance].isRespawnMice = YES;
+    menu2.visible=NO;
+    mouseTrappedBackground.visible=NO;
+    
+    heroTrappedSprite.visible = NO;
+    [self endJumping:(platformX + gameFunc.xPosition)/2 yValue:gameFunc.yPosition];
+    [self schedule:@selector(startRespawnTimer) interval:1];
+}
+
+-(void) startRespawnTimer{
+    [self unschedule:@selector(startRespawnTimer)];
+    if ([FTMUtil sharedInstance].isRespawnMice) {
+        [FTMUtil sharedInstance].isRespawnMice = NO;
+        heroTrappedChe = NO;
+        heroTrappedCount = 0;
+    }
+}
+
 -(void) createExplosionX: (float) x y: (float) y {
     [self removeChild:cheeseEmitter cleanup:YES];
     cheeseEmitter = [CCParticleSun node];

@@ -1419,24 +1419,36 @@ GameEngine08Menu *layer08;
 }
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
-        [[CCDirector sharedDirector] replaceScene:[GameEngine08 scene]];
-//        gameFunc.trappedChe = NO;
-////        [FTMUtil sharedInstance].isRespawnMice = YES;
-//        menu2.visible=NO;
-//        mouseTrappedBackground.visible=NO;
-//        
-//        heroTrappedSprite.visible = NO;
-//        if ([self getTrappingAnimatedSprite] != nil) {
-//            [self getTrappingAnimatedSprite].visible = NO;
-//        }
-//        heroTrappedChe = NO;
-//        heroSprite.visible = YES;
-//        heroStandChe = YES;
-//        platformX = platformX -6;
-//        CGPoint copyHeroPosition = ccp(platformX, platformY);
-//        heroRunSprite.position=ccp(platformX,platformY+2);
-//        [self setViewpointCenter:copyHeroPosition];
-//        [self heroUpdateForwardPosFunc];
+//        [[CCDirector sharedDirector] replaceScene:[GameEngine08 scene]];
+        gameFunc.trappedChe = NO;
+//        [FTMUtil sharedInstance].isRespawnMice = YES;
+        menu2.visible=NO;
+        mouseTrappedBackground.visible=NO;
+        
+        heroTrappedSprite.visible = NO;
+        if ([self getTrappingAnimatedSprite] != nil) {
+            [self getTrappingAnimatedSprite].visible = NO;
+        }
+        heroTrappedChe = NO;
+        heroSprite.visible = YES;
+        heroStandChe = YES;
+        if (!forwardChe) {
+            platformX = platformX - 6;
+        }else{
+            platformX = platformX + 6;
+        }
+        if (platformY > [gameFunc getPlatformPosition:motherLevel].y) {
+            if (!forwardChe) {
+              platformX = platformX - 30;
+            }else{
+                platformX = platformX + 30;
+            }
+            platformY = [gameFunc getPlatformPosition:motherLevel].y;
+        }
+        CGPoint copyHeroPosition = ccp(platformX, platformY);
+        heroRunSprite.position=ccp(platformX,platformY+2);
+        [self setViewpointCenter:copyHeroPosition];
+        [self heroUpdateForwardPosFunc];
 //
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];

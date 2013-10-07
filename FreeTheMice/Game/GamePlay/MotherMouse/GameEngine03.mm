@@ -1474,31 +1474,39 @@ GameEngine03Menu *layer03;
             gameFunc.trigoRunningCheck=NO;
     }
     
-    if ([FTMUtil sharedInstance].isRespawnMice) {
-        heroTrappedChe = NO;
-        heroTrappedCount = 0;
-    }
+   
 }
 -(void)clickMenuButton{
     [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
 }
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
-        [[CCDirector sharedDirector] replaceScene:[GameEngine03 scene]];
-//        gameFunc.trappedChe = NO;
-//        safetyJumpChe = YES;
-//        [FTMUtil sharedInstance].isRespawnMice = YES;
-//        menu2.visible=NO;
-//        mouseTrappedBackground.visible=NO;
-//        [gameFunc jumpingRender:(platformX + gameFunc.xPosition)/2 yPosition:gameFunc.yPosition fChe:forwardChe];
-//        for (int i = 1; i<=5 ; i++) {
-//            
-//        }
-//        heroTrappedSprite.visible = NO;
-//        [self endJumping:(platformX + gameFunc.xPosition)/2 yValue:gameFunc.yPosition];
-        
+//        [[CCDirector sharedDirector] replaceScene:[GameEngine03 scene]];
+
+        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
+    }
+}
+
+-(void ) respwanTheMice{
+    gameFunc.trappedChe = NO;
+    safetyJumpChe = YES;
+    [FTMUtil sharedInstance].isRespawnMice = YES;
+    menu2.visible=NO;
+    mouseTrappedBackground.visible=NO;
+
+    heroTrappedSprite.visible = NO;
+    [self endJumping:(platformX + gameFunc.xPosition)/2 yValue:gameFunc.yPosition];
+    [self schedule:@selector(startRespawnTimer) interval:2];
+}
+
+-(void) startRespawnTimer{
+    [self unschedule:@selector(startRespawnTimer)];
+    if ([FTMUtil sharedInstance].isRespawnMice) {
+        [FTMUtil sharedInstance].isRespawnMice = NO;
+        heroTrappedChe = NO;
+        heroTrappedCount = 0;
     }
 }
 -(void) createExplosionX: (float) x y: (float) y {

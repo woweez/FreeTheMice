@@ -13,6 +13,8 @@
 #import "LevelCompleteScreen.h"
 #import "DB.h"
 #import "FTMConstants.h"
+#import "FTMUtil.h"
+
 enum {
     kTagParentNode = 1,
 };
@@ -911,35 +913,39 @@ GameEngine06Menu *layer06;
     if(heroTrappedChe){
         heroTrappedCount+=1;
         if(heroTrappedCount==10){
+            
             mouseDragSprite.visible=NO;
             if ([self getAnimationTypeForTrapping] == MAMA_KNIFE_ANIM) {
                 [self showAnimationWithMiceIdAndIndex:FTM_MAMA_MICE_ID andAnimationIndex:MAMA_KNIFE_ANIM];
                 [self getTrappingAnimatedSprite].position = ccp(795, 304);
             }
             else{
-                
-            for (int i = 0; i < 20; i=i+1)
-                heroPimpleSprite[i].position=ccp(-100,100);
-            heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"mother_trapped1.png"];
-            if(motherLevel == 6){
-                heroTrappedSprite.position = ccp(795, 304);
-            }
-            if(catKnockedOut){
-                catKnockedOut = NO;
-                heroTrappedSprite.position = ccp(heroSprite.position.x, heroSprite.position.y);
-            }
-            heroTrappedSprite.scale=0.8;
-            [spriteSheet addChild:heroTrappedSprite];
-            
-            NSMutableArray *animFrames2 = [NSMutableArray array];
-            for(int i = 3; i < 20; i++) {
-                if(i!= 3){
-                    CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"mother_trapped%d.png",i]];
-                    [animFrames2 addObject:frame];
+                if (heroTrappedSprite != nil) {
+                    [heroTrappedSprite removeFromParentAndCleanup:YES];
                 }
-            }
-            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
-            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+                for (int i = 0; i < 20; i=i+1)
+                    heroPimpleSprite[i].position=ccp(-100,100);
+                
+                heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"mother_trapped1.png"];
+                if(motherLevel == 6){
+                    heroTrappedSprite.position = ccp(795, 304);
+                }
+                if(catKnockedOut){
+                    catKnockedOut = NO;
+                    heroTrappedSprite.position = ccp(heroSprite.position.x, heroSprite.position.y);
+                }
+                heroTrappedSprite.scale=0.8;
+                [spriteSheet addChild:heroTrappedSprite];
+                
+                NSMutableArray *animFrames2 = [NSMutableArray array];
+                for(int i = 3; i < 20; i++) {
+                    if(i!= 3){
+                        CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"mother_trapped%d.png",i]];
+                        [animFrames2 addObject:frame];
+                    }
+                }
+                CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
+                [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
             }
             heroSprite.visible=NO;
         }
@@ -1561,11 +1567,72 @@ GameEngine06Menu *layer06;
 }
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
-        [[CCDirector sharedDirector] replaceScene:[GameEngine06 scene]];
+//        [[CCDirector sharedDirector] replaceScene:[GameEngine06 scene]];
+        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }
 }
+
+-(void ) respwanTheMice{
+    
+    gameFunc.trappedChe = NO;
+    
+    [FTMUtil sharedInstance].isRespawnMice = YES;
+    menu2.visible=NO;
+    if (heroTrappedSprite != nil) {
+       heroTrappedSprite.visible = NO;
+    }
+    mouseTrappedBackground.visible=NO;
+    if ([self getTrappingAnimatedSprite] != nil) {
+       [self getTrappingAnimatedSprite].visible = NO;
+    }
+    if (jumpingChe) {
+        safetyJumpChe = YES;
+        [self endJumping:(platformX + gameFunc.xPosition)/2  yValue:gameFunc.yPosition];
+        [self schedule:@selector(startRespawnTimer) interval:1];
+    }
+    else if (!runningChe || !heroStandChe) {
+        [FTMUtil sharedInstance].isRespawnMice = NO;
+        heroTrappedChe = NO;
+        runningChe = NO;
+        heroTrappedCount = 0;
+       
+        if ([self getAnimationTypeForTrapping] == MAMA_KNIFE_ANIM) {
+            gameFunc.objectWidth = 0;
+            gameFunc.objectHeight = 0;
+            if (!forwardChe) {
+                platformX = platformX - 24;
+                
+            }
+            else{
+                platformX = platformX + 24;
+            }
+            if (platformY > [gameFunc getPlatformPosition:motherLevel].y) {
+                platformY = [gameFunc getPlatformPosition:motherLevel].y;
+            }
+            CGPoint copyHeroPosition = ccp(platformX, platformY);
+            heroRunSprite.position=ccp(platformX,platformY+2);
+            heroSprite.position=ccp(platformX,platformY+2);
+            [self setViewpointCenter:copyHeroPosition];
+            [self heroUpdateForwardPosFunc];
+        }
+        heroSprite.visible = YES;
+        heroStandChe = YES;
+    }
+    
+}
+
+-(void) startRespawnTimer{
+    [self unschedule:@selector(startRespawnTimer)];
+    if ([FTMUtil sharedInstance].isRespawnMice) {
+        [FTMUtil sharedInstance].isRespawnMice = NO;
+        heroTrappedChe = NO;
+        heroTrappedCount = 0;
+    }
+}
+
+
 -(void) createExplosionX: (float) x y: (float) y {
     [self removeChild:cheeseEmitter cleanup:YES];
     cheeseEmitter = [CCParticleSun node];
