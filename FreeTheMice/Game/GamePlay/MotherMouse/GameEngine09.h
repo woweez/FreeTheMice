@@ -51,7 +51,7 @@
 
     CGFloat saveDottedPath[200][2];
     
-    BOOL jumpingChe;
+//    BOOL jumpingChe;
     CGFloat saveDottedPathCount;
     
     CCParticleSystem	*cheeseEmitter;
@@ -87,7 +87,7 @@
     int heroJumpingAnimationCount;
     int heroJumpingAnimationArrValue;
 //    CCSpriteFrameCache *cache;
-    CCSpriteBatchNode *spriteSheet;
+//    CCSpriteBatchNode *spriteSheet;
     
     NSArray * heroJumpIntervalValue;
     NSArray * cheeseSetValue;
@@ -96,14 +96,14 @@
     NSArray *heroRunningStopArr;
     CGFloat backHeroJumpingY;
     
-    CGFloat platformX,platformY;
-    BOOL landingChe;
-    BOOL runningChe;
-    BOOL heroJumpLocationChe;
-    BOOL firstRunningChe;
-//    BOOL mouseWinChe;
-    BOOL safetyJumpChe;
-    BOOL heroJumpRunningChe;
+//    CGFloat platformX,platformY;
+//    BOOL landingChe;
+//    BOOL runningChe;
+//    BOOL heroJumpLocationChe;
+//    BOOL firstRunningChe;
+////    BOOL mouseWinChe;
+//    BOOL safetyJumpChe;
+//    BOOL heroJumpRunningChe;
 //    BOOL heroTrappedChe;
     BOOL dragTrigoCheckChe;
     

@@ -52,7 +52,7 @@
     CCMenu *menu2;
     
     
-    BOOL jumpingChe;
+//    BOOL jumpingChe;
     int saveDottedPathCount;
     
     CCParticleSystem	*cheeseEmitter;
@@ -96,7 +96,7 @@
     int heroJumpingAnimationCount;
     int heroJumpingAnimationArrValue;
 //    CCSpriteFrameCache *cache;
-    CCSpriteBatchNode *spriteSheet;
+//    CCSpriteBatchNode *spriteSheet;
     CCSpriteFrameCache *catCache;
     CCSpriteBatchNode *catSpriteSheet;
     
@@ -108,14 +108,14 @@
     NSArray *fireXPos;
     CGFloat backHeroJumpingY;
     
-    CGFloat platformX,platformY;
-    BOOL landingChe;
-    BOOL runningChe;
-    BOOL heroJumpLocationChe;
-    BOOL firstRunningChe;
-//    BOOL mouseWinChe;
-    BOOL safetyJumpChe;
-    BOOL heroJumpRunningChe;
+//    CGFloat platformX,platformY;
+//    BOOL landingChe;
+//    BOOL runningChe;
+//    BOOL heroJumpLocationChe;
+//    BOOL firstRunningChe;
+////    BOOL mouseWinChe;
+//    BOOL safetyJumpChe;
+//    BOOL heroJumpRunningChe;
     
     
     CGFloat screenHeroPosX;

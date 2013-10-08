@@ -130,7 +130,7 @@ StrongMouseEngineMenu02 *sLayer02;
         
         mouseDragSprite=[CCSprite spriteWithFile:@"mouse_drag.png"];
         mouseDragSprite.position=ccp(platformX+2,platformY+3);
-        mouseDragSprite.scale=0.6;
+        mouseDragSprite.scale=0.8;
         mouseDragSprite.visible=NO;
         mouseDragSprite.anchorPoint=ccp(0.99f, 0.9f);
         [self addChild:mouseDragSprite z:9];
@@ -685,7 +685,7 @@ StrongMouseEngineMenu02 *sLayer02;
 
         if(heroWinCount==15){
             heroWinSprite = [CCSprite spriteWithSpriteFrameName:@"strong_win1.png"];
-            heroWinSprite.scale = 0.5;
+            heroWinSprite.scale = 0.6;
             if(!forwardChe)
                 heroWinSprite.position = ccp(platformX+30, platformY+5);
             else
@@ -693,11 +693,11 @@ StrongMouseEngineMenu02 *sLayer02;
             [spriteSheet addChild:heroWinSprite];
             
             NSMutableArray *animFrames2 = [NSMutableArray array];
-            for(int i = 0; i < 5; i++) {
+            for(int i = 0; i < 27; i++) {
                 CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_win%d.png",i+1]];
                 [animFrames2 addObject:frame];
             }
-            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
+            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.05f];
             [heroWinSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
 //            [self addLevelCompleteLayerToTheScene];
             heroSprite.visible=NO;
@@ -777,20 +777,7 @@ StrongMouseEngineMenu02 *sLayer02;
 }
 
 -(void)heroAnimationFunc:(int)fValue animationType:(NSString *)type{
-    NSString *fStr=@"";
-    if([type isEqualToString:@"jump"])
-        fStr=[NSString stringWithFormat:@"strong_jump%d.png",fValue+1];
-    else if([type isEqualToString:@"stand"])
-        fStr=[NSString stringWithFormat:@"strong_stand0%d.png",fValue+1];
-    else if([type isEqualToString:@"win"])
-        fStr=@"strong_win1.png";
-    
-    [spriteSheet removeChild:heroSprite cleanup:YES];
-    heroSprite = [CCSprite spriteWithSpriteFrameName:fStr];
-    heroSprite.position = ccp(platformX, platformY);
-    heroSprite.scale = 0.6;
-    //heroSprite.scale=0.9;
-    [spriteSheet addChild:heroSprite z:10];
+    [self updateAnimationOnCurrentType:fValue animationType:type];
     [self heroUpdateForwardPosFunc];
 }
 -(void)heroUpdateForwardPosFunc{
@@ -828,7 +815,7 @@ StrongMouseEngineMenu02 *sLayer02;
                     heroJumpingAnimationArrValue=(heroJumpingAnimationArrValue>=6?6:heroJumpingAnimationArrValue);
                 }
             }
-            if(heroJumpingAnimationCount<=16)//kkk10
+            if(heroJumpingAnimationCount<=10)//kkk10
                 heroJumpingAnimationCount+=1;//(gameFunc.autoJumpChe?5:1);
             
             

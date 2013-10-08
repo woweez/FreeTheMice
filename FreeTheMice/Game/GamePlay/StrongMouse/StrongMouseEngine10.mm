@@ -90,16 +90,17 @@ StrongMouseEngineMenu10 *sLayer10;
         [self addChild:_tileMap z:-1 tag:1];
         
         cache = [CCSpriteFrameCache sharedSpriteFrameCache];
-        [cache addSpriteFramesWithFile:@"strong_default.plist"];
-        spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"strong_default.png"];
+        [cache addSpriteFramesWithFile:@"strong0_default.plist"];
+        spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"strong0_default.png"];
         [self addChild:spriteSheet z:10];
         
         heroRunSprite = [CCSprite spriteWithSpriteFrameName:@"strong_run01.png"];
+        heroRunSprite.scale = 0.6;
         heroRunSprite.position = ccp(200, 200);
         [spriteSheet addChild:heroRunSprite];
         
         NSMutableArray *animFrames = [NSMutableArray array];
-        for(int i = 1; i < 9; i++) {
+        for(int i = 1; i <=12; i++) {
             CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_run0%d.png",i]];
             [animFrames addObject:frame];
         }
@@ -107,11 +108,12 @@ StrongMouseEngineMenu10 *sLayer10;
         [heroRunSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation]]];
         
         heroPushSprite = [CCSprite spriteWithSpriteFrameName:@"push1.png"];
+        heroPushSprite.scale = 0.6;
         heroPushSprite.position = ccp(200, 200);
         heroPushSprite.visible=NO;
         [spriteSheet addChild:heroPushSprite];
         NSMutableArray *animFrames2 = [NSMutableArray array];
-        for(int i = 1; i < 7; i++) {
+        for(int i = 1; i <29; i++) {
             CCSpriteFrame *frame2 = [cache spriteFrameByName:[NSString stringWithFormat:@"push%d.png",i]];
             [animFrames2 addObject:frame2];
         }
@@ -886,20 +888,20 @@ StrongMouseEngineMenu10 *sLayer10;
 }
 
 -(void)starCheeseSpriteInitilized{
-    for(int i=0;i<5;i++){
-        starSprite[i] = [CCSprite spriteWithSpriteFrameName:@"star2.png"];
-        starSprite[i].scale=0.4;
-        starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8);
-        [spriteSheet addChild:starSprite[i] z:10];
-        
-        NSMutableArray *animFrames3 = [NSMutableArray array];
-        for(int j = 0; j <5; j++) {
-            CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"star%d.png",j+1]];
-            [animFrames3 addObject:frame];
-        }
-        CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames3 delay:0.2f];
-        [starSprite[i] runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
-    }
+//    for(int i=0;i<5;i++){
+//        starSprite[i] = [CCSprite spriteWithSpriteFrameName:@"star2.png"];
+//        starSprite[i].scale=0.4;
+//        starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8);
+//        [spriteSheet addChild:starSprite[i] z:10];
+//        
+//        NSMutableArray *animFrames3 = [NSMutableArray array];
+//        for(int j = 0; j <5; j++) {
+//            CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"star%d.png",j+1]];
+//            [animFrames3 addObject:frame];
+//        }
+//        CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames3 delay:0.2f];
+//        [starSprite[i] runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+//    }
 }
 -(void)cheeseCollisionFunc{
     CGFloat heroX=heroSprite.position.x;
@@ -914,7 +916,7 @@ StrongMouseEngineMenu10 *sLayer10;
                 cheeseX2=[cheeseArrX[x] intValue];
                 cheeseY2=[cheeseArrY[x] intValue];
                 
-                starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12+cheeseX2,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8+cheeseY2);
+//                starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12+cheeseX2,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8+cheeseY2);
             }
             
             int mValue=0;
@@ -937,7 +939,7 @@ StrongMouseEngineMenu10 *sLayer10;
                     cheeseSprite[i].visible=NO;
                     cheeseSprite2[i].visible=NO;
                     cheeseCollectedScore+=1;
-                    starSprite[i].visible=NO;
+//                    starSprite[i].visible=NO;
                     [hudLayer updateNoOfCheeseCollected:cheeseCollectedScore andMaxValue:[cheeseSetValue[motherLevel-1] intValue]];
                     [self createExplosionX:cheeseX-mValue y:cheeseY+mValue2];
                     break;
@@ -949,14 +951,14 @@ StrongMouseEngineMenu10 *sLayer10;
                     cheeseSprite[i].visible=NO;
                     cheeseSprite2[i].visible=NO;
                     cheeseCollectedScore+=1;
-                    starSprite[i].visible=NO;
+//                    starSprite[i].visible=NO;
                     [hudLayer updateNoOfCheeseCollected:cheeseCollectedScore andMaxValue:[cheeseSetValue[motherLevel-1] intValue]];
                     [self createExplosionX:cheeseX-mValue y:cheeseY+mValue2];
                     break;
                 }
             }
         }else{
-            starSprite[i].visible=NO;
+//            starSprite[i].visible=NO;
         }
     }
 }
@@ -1043,6 +1045,7 @@ StrongMouseEngineMenu10 *sLayer10;
 
         if(heroWinCount==15){
             heroWinSprite = [CCSprite spriteWithSpriteFrameName:@"strong_win1.png"];
+            heroWinSprite.scale = 0.6;
             if(!forwardChe)
                 heroWinSprite.position = ccp(platformX+30, platformY+5);
             else
@@ -1050,11 +1053,11 @@ StrongMouseEngineMenu10 *sLayer10;
             [spriteSheet addChild:heroWinSprite];
             
             NSMutableArray *animFrames2 = [NSMutableArray array];
-            for(int i = 0; i < 5; i++) {
+            for(int i = 0; i < 27; i++) {
                 CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_win%d.png",i+1]];
                 [animFrames2 addObject:frame];
             }
-            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
+            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.05f];
             [heroWinSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
             heroSprite.visible=NO;
             if(runningChe){
@@ -1182,19 +1185,7 @@ StrongMouseEngineMenu10 *sLayer10;
 }
 
 -(void)heroAnimationFunc:(int)fValue animationType:(NSString *)type{
-    NSString *fStr=@"";
-    if([type isEqualToString:@"jump"])
-        fStr=[NSString stringWithFormat:@"strong_jump%d.png",fValue+1];
-    else if([type isEqualToString:@"stand"])
-        fStr=[NSString stringWithFormat:@"strong_stand0%d.png",fValue+1];
-    else if([type isEqualToString:@"win"])
-        fStr=@"strong_win1.png";
-    
-    [spriteSheet removeChild:heroSprite cleanup:YES];
-    heroSprite = [CCSprite spriteWithSpriteFrameName:fStr];
-    heroSprite.position = ccp(platformX, platformY);
-    //heroSprite.scale=0.9;
-    [spriteSheet addChild:heroSprite z:10];
+    [self updateAnimationOnCurrentType:fValue animationType:type];
     [self heroUpdateForwardPosFunc];
 }
 -(void)heroUpdateForwardPosFunc{
@@ -1604,8 +1595,8 @@ StrongMouseEngineMenu10 *sLayer10;
 }
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
-//        [[CCDirector sharedDirector] replaceScene:[StrongMouseEngine10 scene]];
-        [self respwanTheMice];
+        [[CCDirector sharedDirector] replaceScene:[StrongMouseEngine10 scene]];
+//        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }

@@ -21,6 +21,7 @@
     if( (self=[super init])) {
         [FTMUtil sharedInstance].isSlowDownTimer = NO;
         [FTMUtil sharedInstance].isRespawnMice = NO;
+        currentAnim = 0;
     }
     return self;
 }
@@ -174,8 +175,8 @@
 //        trappingAnimationSprite = nil;
 //    }
     [cache addSpriteFramesWithFile:[plistName stringByAppendingString:DOT_PLIST]];
-    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:[plistName stringByAppendingString:DOT_PNG]];
-    [self addChild:spriteSheet z:10];
+    CCSpriteBatchNode *spriteSheets = [CCSpriteBatchNode batchNodeWithFile:[plistName stringByAppendingString:DOT_PNG]];
+    [self addChild:spriteSheets z:10];
     
     NSMutableArray *animationFramesArr = [NSMutableArray array];
     for(int i = 0; i <= frames; i++) {
@@ -195,6 +196,65 @@
     
     CCAnimate *actionOne = [CCAnimate actionWithAnimation:animation];
     [trappingAnimationSprite runAction:[CCRepeatForever actionWithAction:actionOne ]];
+
+}
+
+-(void)updateAnimationOnCurrentType:(int)frameToLoad animationType:(NSString *)type{
+    NSString *fStr=@"";
+    if([type isEqualToString:@"jump"]){
+        currentAnim =1;
+        fStr=[NSString stringWithFormat:@"strong_jump%d.png",frameToLoad+1];
+        if (jumpingChe && frameToLoad == 1) {
+            [spriteSheet removeChild:heroSprite cleanup:YES];
+            heroSprite = [CCSprite spriteWithSpriteFrameName:fStr];
+            NSMutableArray *animFrames2 = [NSMutableArray array];
+            for(int i = 1; i <= 10; i++) {
+                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_jump%d.png",i]];
+                [animFrames2 addObject:frame];
+            }
+            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.05f];
+            [heroSprite runAction:[CCAnimate actionWithAnimation:animation2]];
+            [spriteSheet addChild:heroSprite z:10];
+        }else if (landingChe){
+            [spriteSheet removeChild:heroSprite cleanup:YES];
+            heroSprite = [CCSprite spriteWithSpriteFrameName:fStr];
+            NSMutableArray *animFrames2 = [NSMutableArray array];
+            for(int i = 11; i <= 16; i++) {
+                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_jump%d.png",i]];
+                [animFrames2 addObject:frame];
+            }
+            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.05f];
+            [heroSprite runAction:[CCAnimate actionWithAnimation:animation2]];
+            [spriteSheet addChild:heroSprite z:10];
+        }
+        else if (frameToLoad == 0){
+            [spriteSheet removeChild:heroSprite cleanup:YES];
+            heroSprite = [CCSprite spriteWithSpriteFrameName:fStr];
+            [spriteSheet addChild:heroSprite z:10];
+        }
+        
+    }
+    else if([type isEqualToString:@"stand"] && currentAnim != 2){
+        currentAnim = 2;
+        fStr=[NSString stringWithFormat:@"strong_stand1.png"];
+        [heroSprite removeAllChildrenWithCleanup:YES];
+        [spriteSheet removeChild:heroSprite cleanup:YES];
+        heroSprite = [CCSprite spriteWithSpriteFrameName:fStr];
+        NSMutableArray *animFrames2 = [NSMutableArray array];
+        for(int i = 1; i <= 26; i++) {
+            CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_stand%d.png",i]];
+            [animFrames2 addObject:frame];
+        }
+        CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.05f];
+        [heroSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+        [spriteSheet addChild:heroSprite z:10];
+    }
+    else if(heroSprite != nil && !heroSprite.visible && !landingChe){
+        heroSprite.visible = YES;
+    }
+    
+    heroSprite.position = ccp(platformX, platformY);
+    heroSprite.scale = 0.6;
 
 }
 
@@ -236,6 +296,9 @@
     // do after timer stuff here...
 }
 
-
+- (void)dealloc
+{
+    [super dealloc];
+}
 
 @end
