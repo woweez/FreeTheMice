@@ -9,7 +9,7 @@
 // Import the interfaces
 #import "StrongMouseEngine14.h"
 #import "LevelScreen.h"
-
+#import "FTMUtil.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -1930,10 +1930,39 @@ StrongMouseEngineMenu14 *sLayer14;
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
         [[CCDirector sharedDirector] replaceScene:[StrongMouseEngine14 scene]];
+//        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }
 }
+
+-(void ) respwanTheMice{
+    gameFunc.trappedChe = NO;
+    safetyJumpChe = YES;
+    [FTMUtil sharedInstance].isRespawnMice = YES;
+    menu2.visible=NO;
+    mouseTrappedBackground.visible=NO;
+    runningChe = NO;
+    heroTrappedSprite.visible = NO;
+//    if ( trappedTypeValue == 2 ||  trappedTypeValue == 1) {
+//        [self endJumping:platformX - 30 yValue:gameFunc.yPosition];
+//        [self schedule:@selector(startRespawnTimer) interval:1];
+//    }else{
+        [self endJumping:(platformX + gameFunc.xPosition)/2 yValue:gameFunc.yPosition];
+        [self schedule:@selector(startRespawnTimer) interval:1];
+//    }
+}
+
+-(void) startRespawnTimer{
+    [self unschedule:@selector(startRespawnTimer)];
+    if ([FTMUtil sharedInstance].isRespawnMice) {
+        [FTMUtil sharedInstance].isRespawnMice = NO;
+        heroTrappedChe = NO;
+        heroTrappedCount = 0;
+    }
+}
+
+
 -(void) createExplosionX: (float) x y: (float) y {
     [self removeChild:cheeseEmitter cleanup:YES];
     cheeseEmitter = [CCParticleSun node];

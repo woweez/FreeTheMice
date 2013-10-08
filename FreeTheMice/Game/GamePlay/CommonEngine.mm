@@ -169,6 +169,10 @@
 
 -(void) addAnimation:(NSString *)plistName noOfFrames:(int)frames startingFrameName:(NSString *)startFrame{
 
+//    if (trappingAnimationSprite != nil) {
+//        [trappingAnimationSprite removeFromParentAndCleanup:YES];
+//        trappingAnimationSprite = nil;
+//    }
     [cache addSpriteFramesWithFile:[plistName stringByAppendingString:DOT_PLIST]];
     CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:[plistName stringByAppendingString:DOT_PNG]];
     [self addChild:spriteSheet z:10];

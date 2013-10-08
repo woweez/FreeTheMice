@@ -63,7 +63,7 @@
     CCSprite *cheeseSprite[5];
     CCSprite *cheeseSprite2[5];
     CCSprite *smokingSprite[6][6];
-    CCSprite *starSprite[6];
+//    CCSprite *starSprite[6];
     
     
     BOOL heroStandChe;

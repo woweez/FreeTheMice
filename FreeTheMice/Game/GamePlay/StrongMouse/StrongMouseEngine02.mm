@@ -94,16 +94,17 @@ StrongMouseEngineMenu02 *sLayer02;
         }
         
         cache = [CCSpriteFrameCache sharedSpriteFrameCache];
-        [cache addSpriteFramesWithFile:@"strong_default.plist"];
-        spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"strong_default.png"];
+        [cache addSpriteFramesWithFile:@"strong0_default.plist"];
+        spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"strong0_default.png"];
         [self addChild:spriteSheet z:10];
         
         heroRunSprite = [CCSprite spriteWithSpriteFrameName:@"strong_run01.png"];
+        heroRunSprite.scale = 0.6;
         heroRunSprite.position = ccp(200, 200);
         [spriteSheet addChild:heroRunSprite];
         
         NSMutableArray *animFrames = [NSMutableArray array];
-        for(int i = 1; i < 9; i++) {
+        for(int i = 1; i <= 12; i++) {
             CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_run0%d.png",i]];
             [animFrames addObject:frame];
         }
@@ -113,11 +114,12 @@ StrongMouseEngineMenu02 *sLayer02;
         
         
         heroPushSprite = [CCSprite spriteWithSpriteFrameName:@"push1.png"];
+        heroPushSprite.scale = 0.6;
         heroPushSprite.position = ccp(200, 200);
         heroPushSprite.visible=NO;
         [spriteSheet addChild:heroPushSprite];
         NSMutableArray *animFrames2 = [NSMutableArray array];
-        for(int i = 1; i < 7; i++) {
+        for(int i = 1; i < 29; i++) {
             CCSpriteFrame *frame2 = [cache spriteFrameByName:[NSString stringWithFormat:@"push%d.png",i]];
             [animFrames2 addObject:frame2];
         }
@@ -272,7 +274,7 @@ StrongMouseEngineMenu02 *sLayer02;
         dotSprite.scale=0.2;
         [self addChild:dotSprite z:10];
         [self addHudLayerToTheScene];
-        [self starCheeseSpriteInitilized];
+//        [self starCheeseSpriteInitilized];
         
         [self scheduleUpdate];
         
@@ -540,22 +542,22 @@ StrongMouseEngineMenu02 *sLayer02;
     }
 }
 
--(void)starCheeseSpriteInitilized{
-    for(int i=0;i<5;i++){
-        starSprite[i] = [CCSprite spriteWithSpriteFrameName:@"star2.png"];
-        starSprite[i].scale=0.4;
-        starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8);
-        [spriteSheet addChild:starSprite[i] z:10];
-        
-        NSMutableArray *animFrames3 = [NSMutableArray array];
-        for(int j = 0; j <5; j++) {
-            CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"star%d.png",j+1]];
-            [animFrames3 addObject:frame];
-        }
-        CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames3 delay:0.2f];
-        [starSprite[i] runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
-    }
-}
+//-(void)starCheeseSpriteInitilized{
+//    for(int i=0;i<5;i++){
+//        starSprite[i] = [CCSprite spriteWithSpriteFrameName:@"star2.png"];
+//        starSprite[i].scale=0.4;
+//        starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8);
+//        [spriteSheet addChild:starSprite[i] z:10];
+//        
+//        NSMutableArray *animFrames3 = [NSMutableArray array];
+//        for(int j = 0; j <5; j++) {
+//            CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"star%d.png",j+1]];
+//            [animFrames3 addObject:frame];
+//        }
+//        CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames3 delay:0.2f];
+//        [starSprite[i] runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+//    }
+//}
 -(void)cheeseCollisionFunc{
     CGFloat heroX=heroSprite.position.x;
     CGFloat heroY=heroSprite.position.y;
@@ -570,19 +572,19 @@ StrongMouseEngineMenu02 *sLayer02;
                 cheeseX2=[cheeseArrX[x] intValue];
                 cheeseY2=[cheeseArrY[x] intValue];
                 
-                starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12+cheeseX2,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8+cheeseY2);
+//                starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12+cheeseX2,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8+cheeseY2);
             }
             
             int mValue=0;
             int mValue2=0;
             if(i==0){
                 mValue=gameFunc.stoolCount;
-                starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12+cheeseX2+mValue,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8+cheeseY2);
+//                starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12+cheeseX2+mValue,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8+cheeseY2);
                 mValue=-mValue;
             }
             if(i==4){
                 mValue2=cheeseFallCount;
-                starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12+cheeseX2,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8+cheeseY2-mValue2);
+//                starSprite[i].position=ccp([gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].x-12+cheeseX2,[gameFunc getCheesePosition:1 gameLevel:motherLevel iValue:i].y+8+cheeseY2-mValue2);
                 mValue2=-mValue2;
             }
             
@@ -598,7 +600,7 @@ StrongMouseEngineMenu02 *sLayer02;
             if(i==2){
                 if(gameFunc.honeyPotCount2==67){
                     ch2=NO;
-                    starSprite[2].visible=NO;
+//                    starSprite[2].visible=NO;
                 }
                 cheeseSprite[2].zOrder=0;
                 cheeseSprite2[2].zOrder=0;
@@ -611,7 +613,7 @@ StrongMouseEngineMenu02 *sLayer02;
                     cheeseSprite[i].visible=NO;
                     cheeseSprite2[i].visible=NO;
                     cheeseCollectedScore+=1;
-                    starSprite[i].visible=NO;
+//                    starSprite[i].visible=NO;
                     
                     [hudLayer updateNoOfCheeseCollected:cheeseCollectedScore andMaxValue:[cheeseSetValue[motherLevel-1] intValue]];
                     [self createExplosionX:cheeseX-mValue y:cheeseY+mValue2];
@@ -624,7 +626,7 @@ StrongMouseEngineMenu02 *sLayer02;
                     cheeseSprite[i].visible=NO;
                     cheeseSprite2[i].visible=NO;
                     cheeseCollectedScore+=1;
-                    starSprite[i].visible=NO;
+//                    starSprite[i].visible=NO;
                     
                     [hudLayer updateNoOfCheeseCollected:cheeseCollectedScore andMaxValue:[cheeseSetValue[motherLevel-1] intValue]];
                     [self createExplosionX:cheeseX-mValue y:cheeseY+mValue2];
@@ -632,7 +634,7 @@ StrongMouseEngineMenu02 *sLayer02;
                 }
             }
         }else{
-            starSprite[i].visible=NO;
+//            starSprite[i].visible=NO;
         }
     }
 }
@@ -683,6 +685,7 @@ StrongMouseEngineMenu02 *sLayer02;
 
         if(heroWinCount==15){
             heroWinSprite = [CCSprite spriteWithSpriteFrameName:@"strong_win1.png"];
+            heroWinSprite.scale = 0.5;
             if(!forwardChe)
                 heroWinSprite.position = ccp(platformX+30, platformY+5);
             else
@@ -785,6 +788,7 @@ StrongMouseEngineMenu02 *sLayer02;
     [spriteSheet removeChild:heroSprite cleanup:YES];
     heroSprite = [CCSprite spriteWithSpriteFrameName:fStr];
     heroSprite.position = ccp(platformX, platformY);
+    heroSprite.scale = 0.6;
     //heroSprite.scale=0.9;
     [spriteSheet addChild:heroSprite z:10];
     [self heroUpdateForwardPosFunc];
@@ -824,7 +828,7 @@ StrongMouseEngineMenu02 *sLayer02;
                     heroJumpingAnimationArrValue=(heroJumpingAnimationArrValue>=6?6:heroJumpingAnimationArrValue);
                 }
             }
-            if(heroJumpingAnimationCount<=10)
+            if(heroJumpingAnimationCount<=16)//kkk10
                 heroJumpingAnimationCount+=1;//(gameFunc.autoJumpChe?5:1);
             
             

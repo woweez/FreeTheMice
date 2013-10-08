@@ -9,7 +9,7 @@
 // Import the interfaces
 #import "StrongMouseEngine13.h"
 #import "LevelScreen.h"
-
+#import "FTMUtil.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -1277,18 +1277,18 @@ StrongMouseEngineMenu13 *sLayer13;
             else{
                 heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"strong_trapped1.png"];
                 if(!forwardChe)
-                heroTrappedSprite.position = ccp(platformX, platformY+5);
-            else
-                heroTrappedSprite.position = ccp(platformX+heroForwardX, platformY+5);
-            [spriteSheet addChild:heroTrappedSprite];
-            
-            NSMutableArray *animFrames2 = [NSMutableArray array];
-            for(int i = 1; i < 4; i++) {
+                    heroTrappedSprite.position = ccp(platformX, platformY+5);
+                else
+                    heroTrappedSprite.position = ccp(platformX+heroForwardX, platformY+5);
+                [spriteSheet addChild:heroTrappedSprite];
                 
-                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_trapped%d.png",i]];
-                [animFrames2 addObject:frame];
-                
-            }
+                NSMutableArray *animFrames2 = [NSMutableArray array];
+                for(int i = 1; i < 4; i++) {
+                    
+                    CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_trapped%d.png",i]];
+                    [animFrames2 addObject:frame];
+                    
+                }
                 CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
                 [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
             }
@@ -1892,10 +1892,38 @@ StrongMouseEngineMenu13 *sLayer13;
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
         [[CCDirector sharedDirector] replaceScene:[StrongMouseEngine13 scene]];
+//        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }
 }
+
+-(void ) respwanTheMice{
+    gameFunc.trappedChe = NO;
+    safetyJumpChe = YES;
+    [FTMUtil sharedInstance].isRespawnMice = YES;
+    menu2.visible=NO;
+    mouseTrappedBackground.visible=NO;
+    runningChe = NO;
+    heroTrappedSprite.visible = NO;
+    if ( trappedTypeValue == 2 ||  trappedTypeValue == 1) {
+        [self endJumping:platformX - 30 yValue:gameFunc.yPosition];
+        [self schedule:@selector(startRespawnTimer) interval:1];
+    }else{
+        [self endJumping:(platformX + gameFunc.xPosition)/2 yValue:gameFunc.yPosition];
+        [self schedule:@selector(startRespawnTimer) interval:1];
+    }
+}
+
+-(void) startRespawnTimer{
+    [self unschedule:@selector(startRespawnTimer)];
+    if ([FTMUtil sharedInstance].isRespawnMice) {
+        [FTMUtil sharedInstance].isRespawnMice = NO;
+        heroTrappedChe = NO;
+        heroTrappedCount = 0;
+    }
+}
+
 -(void) createExplosionX: (float) x y: (float) y {
     [self removeChild:cheeseEmitter cleanup:YES];
     cheeseEmitter = [CCParticleSun node];

@@ -411,7 +411,7 @@ StrongMouseEngineMenu05 *sLayer05;
     int32 positionIterations = 1;
     
     world->Step(dt, velocityIterations, positionIterations);
-    if(!heroTrappedChe)
+//    if(!heroTrappedChe)
         [self heroJumpingFunc];
     [self heroAnimationFrameFunc];
     [self heroLandingFunc];
@@ -1084,10 +1084,10 @@ StrongMouseEngineMenu05 *sLayer05;
             CGFloat xx=platformX+point.x;
             CGFloat yy=platformY+point.y;
             
-            if(safetyJumpChe){
-                xx = xx - 4;
-                yy = yy - 12;
-            }
+//            if(safetyJumpChe){
+//                xx = xx - 4;
+//                yy = yy - 8;
+//            }
             
             if(gameFunc.autoJumpChe2&&autoJumpValue2==0){
                 autoJumpValue2=1;
@@ -1479,14 +1479,28 @@ StrongMouseEngineMenu05 *sLayer05;
 -(void ) respwanTheMice{
     
     gameFunc.trappedChe = NO;
-    safetyJumpChe = YES;
+    
     [FTMUtil sharedInstance].isRespawnMice = YES;
     menu2.visible=NO;
     heroTrappedSprite.visible = NO;
     mouseTrappedBackground.visible=NO;
-    [[self getTrappingAnimatedSprite] removeFromParentAndCleanup:YES];
-    [self endJumping:(platformX + gameFunc.xPosition)/2  yValue:gameFunc.yPosition];
-    [self schedule:@selector(startRespawnTimer) interval:2];
+    safetyJumpChe = YES;
+    if ([self getTrappingAnimatedSprite] != NULL) {
+        [[self getTrappingAnimatedSprite] removeFromParentAndCleanup:YES];
+    }
+    if (trappedTypeValue == 4) {
+        [self endJumping:platformX  yValue:gameFunc.yPosition];
+        [self schedule:@selector(startRespawnTimer) interval:1];
+    }else{
+        if (!forwardChe) {
+            platformX = platformX - 120;
+        }else{
+            platformX = platformX + 120;
+        }
+        [self endJumping:platformX  yValue:gameFunc.yPosition + 60];
+        [self schedule:@selector(startRespawnTimer) interval:1];
+    }
+   
 }
 
 -(void) startRespawnTimer{

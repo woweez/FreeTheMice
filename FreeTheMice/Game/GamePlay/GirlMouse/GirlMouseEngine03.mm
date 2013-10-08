@@ -9,8 +9,7 @@
 // Import the interfaces
 #import "GirlMouseEngine03.h"
 #import "LevelScreen.h"
-
-
+#import "FTMUtil.h"
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 #import "DB.h"
@@ -724,9 +723,9 @@ GirlMouseEngineMenu03 *gLayer03;
             heroTrappedSprite = [CCSprite spriteWithFile:@"gm_mist_0.png"];
             heroTrappedSprite.scale=0.5;
             if(!forwardChe)
-                heroTrappedSprite.position = ccp(heroSprite.position.x , heroSprite.position.y + 15);
+                heroTrappedSprite.position = ccp(heroSprite.position.x + 1.2* heroForwardX, heroSprite.position.y + 15);
             else
-                heroTrappedSprite.position = ccp(heroSprite.position.x , heroSprite.position.y +15);
+                heroTrappedSprite.position = ccp(heroSprite.position.x - 1.2* heroForwardX, heroSprite.position.y +15);
             
             heroTrappedSprite.scale=0.5;
             [self addChild:heroTrappedSprite z:1000];
@@ -1274,10 +1273,33 @@ GirlMouseEngineMenu03 *gLayer03;
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
         [[CCDirector sharedDirector] replaceScene:[GirlMouseEngine03 scene]];
+//        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }
 }
+
+-(void ) respwanTheMice{
+    gameFunc.trappedChe = NO;
+    safetyJumpChe = YES;
+    [FTMUtil sharedInstance].isRespawnMice = YES;
+    menu2.visible=NO;
+    mouseTrappedBackground.visible=NO;
+    runningChe = NO;
+    heroTrappedSprite.visible = NO;
+    [self endJumping:(platformX + gameFunc.xPosition)/2 yValue:gameFunc.yPosition];
+    [self schedule:@selector(startRespawnTimer) interval:2];
+}
+
+-(void) startRespawnTimer{
+    [self unschedule:@selector(startRespawnTimer)];
+    if ([FTMUtil sharedInstance].isRespawnMice) {
+        [FTMUtil sharedInstance].isRespawnMice = NO;
+        heroTrappedChe = NO;
+        heroTrappedCount = 0;
+    }
+}
+
 
 -(void) createExplosionX: (float) x y: (float) y {
     [self removeChild:cheeseEmitter cleanup:YES];

@@ -10,7 +10,7 @@
 #import "GirlMouseEngine05.h"
 #import "LevelScreen.h"
 #import "FTMConstants.h"
-
+#import "FTMUtil.h"
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 #import "DB.h"
@@ -401,8 +401,8 @@ GirlMouseEngineMenu05 *gLayer05;
     
     world->Step(dt, velocityIterations, positionIterations);
     [self level05];
-    if(!gameFunc.trappedChe)
-        [self heroJumpingFunc];
+//    if(!gameFunc.trappedChe)
+    [self heroJumpingFunc];
     [self heroAnimationFrameFunc];
     [self heroLandingFunc];
     [self heroRunFunc];
@@ -1270,7 +1270,7 @@ GirlMouseEngineMenu05 *gLayer05;
     }
 }
 -(void)heroJumpingFunc{
-    if(jumpingChe){
+    if(jumpingChe && !gameFunc.trappedChe){
         if(heroJumpingAnimationArrValue<=5){
             if(heroJumpingAnimationCount==[heroJumpIntervalValue[heroJumpingAnimationArrValue] intValue]){
                 if(safetyJumpChe&&heroJumpingAnimationArrValue==3){
@@ -1727,10 +1727,49 @@ GirlMouseEngineMenu05 *gLayer05;
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
         [[CCDirector sharedDirector] replaceScene:[GirlMouseEngine05 scene]];
+//        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }
 }
+
+-(void ) respwanTheMice{
+    gameFunc.trappedChe = NO;
+    safetyJumpChe = YES;
+    [FTMUtil sharedInstance].isRespawnMice = YES;
+    menu2.visible=NO;
+    mouseTrappedBackground.visible=NO;
+    runningChe = NO;
+    heroTrappedSprite.visible = NO;
+    if (trappedTypeValue == 1) {
+        if ([self getTrappingAnimatedSprite] != nil) {
+            [[self getTrappingAnimatedSprite] removeFromParentAndCleanup:YES];
+        }
+        CGPoint point = CGPointMake(platformX, gameFunc.yPosition);
+        if (!forwardChe) {
+            point = CGPointMake(389, 228);
+        }else{
+            point = CGPointMake(812, 228);
+        }
+        
+        [self endJumping:point.x  yValue:point.y];
+        [self schedule:@selector(startRespawnTimer) interval:1];
+    }
+    else{
+        [self endJumping:(platformX +gameFunc.xPosition)/2  yValue:gameFunc.yPosition];
+        [self schedule:@selector(startRespawnTimer) interval:1];
+    }
+}
+
+-(void) startRespawnTimer{
+    [self unschedule:@selector(startRespawnTimer)];
+    if ([FTMUtil sharedInstance].isRespawnMice) {
+        [FTMUtil sharedInstance].isRespawnMice = NO;
+        heroTrappedChe = NO;
+        heroTrappedCount = 0;
+    }
+}
+
 
 -(void) createExplosionX: (float) x y: (float) y {
     [self removeChild:cheeseEmitter cleanup:YES];

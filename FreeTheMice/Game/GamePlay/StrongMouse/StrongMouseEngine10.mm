@@ -9,7 +9,7 @@
 // Import the interfaces
 #import "StrongMouseEngine10.h"
 #import "LevelScreen.h"
-
+#import "FTMUtil.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -1604,11 +1604,46 @@ StrongMouseEngineMenu10 *sLayer10;
 }
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
-        [[CCDirector sharedDirector] replaceScene:[StrongMouseEngine10 scene]];
+//        [[CCDirector sharedDirector] replaceScene:[StrongMouseEngine10 scene]];
+        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }
 }
+
+-(void ) respwanTheMice{
+    gameFunc.trappedChe = NO;
+    [FTMUtil sharedInstance].isRespawnMice = YES;
+    menu2.visible=NO;
+    heroTrappedSprite.visible = NO;
+    mouseTrappedBackground.visible=NO;
+    safetyJumpChe = YES;
+    runningChe = NO;
+    //
+    //    if (trappedTypeValue == 1) {
+    //        if ([self getTrappingAnimatedSprite] != nil) {
+    //            [[self getTrappingAnimatedSprite] removeFromParentAndCleanup:YES];
+    //        }
+    //        [self endJumping:platformX  yValue:platformY - 50];
+    //        [self schedule:@selector(startRespawnTimer) interval:1];
+    //    }else{
+    [self endJumping:(platformX+gameFunc.xPosition)/2  yValue:gameFunc.yPosition];
+    [self schedule:@selector(startRespawnTimer) interval:1];
+    //    }
+    
+    
+}
+
+-(void) startRespawnTimer{
+    [self unschedule:@selector(startRespawnTimer)];
+    if ([FTMUtil sharedInstance].isRespawnMice) {
+        [FTMUtil sharedInstance].isRespawnMice = NO;
+        heroTrappedChe = NO;
+        heroTrappedCount = 0;
+    }
+}
+
+
 -(void) createExplosionX: (float) x y: (float) y {
     [self removeChild:cheeseEmitter cleanup:YES];
     cheeseEmitter = [CCParticleSun node];
