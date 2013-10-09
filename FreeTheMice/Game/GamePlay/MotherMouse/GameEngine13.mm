@@ -90,6 +90,7 @@ GameEngine13Menu *layer13;
         
         cache = [CCSpriteFrameCache sharedSpriteFrameCache];
         [cache addSpriteFramesWithFile:@"mother_mouse_default.plist"];
+        [cache addSpriteFramesWithFile:@"sink_waterAnim.plist"];
         spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"mother_mouse_default.png"];
         [self addChild:spriteSheet z:10];
         
@@ -108,31 +109,44 @@ GameEngine13Menu *layer13;
         
         
         CCSpriteFrameCache *cache2;
-        CCSpriteBatchNode *spriteSheet2;
+//        CCSpriteBatchNode *spriteSheet2;
         cache2 = [CCSpriteFrameCache sharedSpriteFrameCache];
-        [cache2 addSpriteFramesWithFile:@"waves_default.plist"];
-        spriteSheet2 = [CCSpriteBatchNode batchNodeWithFile:@"waves_default.png"];
-        [self addChild:spriteSheet2 z:10];
+        [cache2 addSpriteFramesWithFile:@"electricity_anim1.plist"];
+        [cache2 addSpriteFramesWithFile:@"electricity_anim2.plist"];
+//        spriteSheet2 = [CCSpriteBatchNode batchNodeWithFile:@"waves_default.png"];
+//        [self addChild:spriteSheet2 z:10];
         
-        wavesSprite = [CCSprite spriteWithSpriteFrameName:@"wave_anim_1.png"];
+        wavesSprite = [CCSprite spriteWithSpriteFrameName:@"moving_electricity_0.png"];
         wavesSprite.position = ccp(570, 630);
-        wavesSprite.scale=0.4;
-        [spriteSheet2 addChild:wavesSprite];
+//        wavesSprite.scale=0.4;
+        [self addChild:wavesSprite];
         
-        wavesSprite2 = [CCSprite spriteWithSpriteFrameName:@"wave_anim_1.png"];
+        wavesSprite2 = [CCSprite spriteWithSpriteFrameName:@"moving_electricity_0.png"];
         wavesSprite2.position = ccp(430, 630);
-        wavesSprite2.scale=0.4;
+//        wavesSprite2.scale=0.4;
         wavesSprite2.flipX=1;
-        [spriteSheet2 addChild:wavesSprite2];
+        [self addChild:wavesSprite2];
         
-        NSMutableArray *animFrames3 = [NSMutableArray array];
-        for(int i = 1; i < 13; i++) {
-            CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"wave_anim_%d.png",i]];
-            [animFrames3 addObject:frame];
+        NSMutableArray *frameArr1 = [NSMutableArray array];
+        for(int i = 0; i <= 35; i++) {
+            CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"moving_electricity_%d.png",i]];
+            [frameArr1 addObject:frame];
         }
-        CCAnimation *animation3 = [CCAnimation animationWithSpriteFrames:animFrames3 delay:0.03f];
-        [wavesSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation3]]];
-        [wavesSprite2 runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation3]]];
+        CCAnimation *animation1 = [CCAnimation animationWithSpriteFrames:frameArr1 delay:0.03f];
+        CCAnimate *anim1 = [CCAnimate actionWithAnimation:animation1];
+        
+        NSMutableArray *frameArr2 = [NSMutableArray array];
+        for(int i = 36; i <= 70; i++) {
+            CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"moving_electricity_%d.png",i]];
+            [frameArr2 addObject:frame];
+        }
+        CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:frameArr2 delay:0.03f];
+        CCAnimate *anim2 = [CCAnimate actionWithAnimation:animation2];
+        
+        CCSequence *seq = [CCSequence actions:anim1,anim2, nil];
+       
+        [wavesSprite runAction:[CCRepeatForever actionWithAction: seq]];
+        [wavesSprite2 runAction:[CCRepeatForever actionWithAction: seq]];
         
         
         mouseDragSprite=[CCSprite spriteWithFile:@"mouse_drag.png"];
@@ -362,6 +376,18 @@ GameEngine13Menu *layer13;
         sprite.position=ccp(450,240);
         [self addChild:sprite z:1];
         
+        sprite=[CCSprite spriteWithSpriteFrameName:@"sink_water_0.png"];
+        sprite.position=ccp(450,230);
+        NSMutableArray *frameArr3 = [NSMutableArray array];
+        for(int i = 0; i <= 29; i++) {
+            CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"sink_water_%d.png",i]];
+            [frameArr3 addObject:frame];
+        }
+        CCAnimation *animation4 = [CCAnimation animationWithSpriteFrames:frameArr3 delay:0.03f];
+        CCAnimate *anim3 = [CCAnimate actionWithAnimation:animation4];
+        [sprite runAction:[CCRepeatForever actionWithAction: anim3]];
+        [self addChild:sprite z:1];
+        
         sprite=[CCSprite spriteWithFile:@"water_sink_2.png"];
         sprite.position=ccp(450,177);
         [self addChild:sprite z:1];
@@ -384,28 +410,30 @@ GameEngine13Menu *layer13;
         sprite.position=ccp(-50,490);
         [self addChild:sprite z:10];
         
-        knifeSprite=[CCSprite spriteWithFile:@"knife.png"];
+        knifeSprite=[CCSprite spriteWithFile:@"knives_shelf.png"];
         knifeSprite.position=ccp(917,500);
-        knifeSprite.scale=0.8;
+//        knifeSprite.scale=0.8;
         [self addChild:knifeSprite z:9 ];
         
-        knifeSprite2=[CCSprite spriteWithFile:@"knife.png"];
+        knifeSprite2=[CCSprite spriteWithFile:@"knives_shelf.png"];
         knifeSprite2.position=ccp(660,610);
-        knifeSprite2.scale=0.8;
+//        knifeSprite2.scale=0.8;
         [self addChild:knifeSprite2 z:9 ];
         
-        knifeSprite3=[CCSprite spriteWithFile:@"knife.png"];
+        knifeSprite3=[CCSprite spriteWithFile:@"knives_shelf.png"];
         knifeSprite3.position=ccp(917,500);
         knifeSprite3.scale=0.8;
         knifeSprite3.scaleY=0.3;
         knifeSprite3.flipY=1;
+        knifeSprite3.visible = NO;
         [self addChild:knifeSprite3 z:9 ];
         
-        knifeSprite4=[CCSprite spriteWithFile:@"knife.png"];
+        knifeSprite4=[CCSprite spriteWithFile:@"knives_shelf.png"];
         knifeSprite4.position=ccp(660,610);
         knifeSprite4.scale=0.8;
         knifeSprite4.scaleY=0.3;
         knifeSprite4.flipY=1;
+        knifeSprite4.visible = NO;
         [self addChild:knifeSprite4 z:9 ];
         
         waterPipeSprite=[CCSprite spriteWithFile:@"water_pipe.png"];
@@ -572,9 +600,9 @@ GameEngine13Menu *layer13;
     
     wavesScaleCount+=0.01;
     if(wavesScaleCount<=0.6){
-        wavesSprite.scale=0.4+wavesScaleCount;
+//        wavesSprite.scale=0.4+wavesScaleCount;
         wavesSprite.position = ccp(570+(wavesScaleCount*810), 630);
-        wavesSprite2.scale=0.4+wavesScaleCount;
+//        wavesSprite2.scale=0.4+wavesScaleCount;
         wavesSprite2.position = ccp(430-(wavesScaleCount*810), 630);
     }else{
         wavesSprite.position = ccp(-500, 630);

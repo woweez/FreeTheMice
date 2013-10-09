@@ -272,9 +272,9 @@ GameEngineMenu05 *layer05;
         windowSprite.scale=0.7;
         [self addChild:windowSprite z:0];
         
-        windowSprite=[CCSprite spriteWithFile:@"vessels.png"];
+        windowSprite=[CCSprite spriteWithFile:@"knives_tray.png"];
         windowSprite.position=ccp(548,280);
-        windowSprite.scale=0.5;
+//        windowSprite.scale=0.5;
         [self addChild:windowSprite z:0];
         
         

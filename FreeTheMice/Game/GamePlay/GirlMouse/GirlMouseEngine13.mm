@@ -87,6 +87,7 @@ GirlMouseEngineMenu13 *gLayer13;
         
         cache = [CCSpriteFrameCache sharedSpriteFrameCache];
         [cache addSpriteFramesWithFile:@"girl_default.plist"];
+        [cache addSpriteFramesWithFile:@"sink_waterAnim.plist"];
         spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"girl_default.png"];
         [self addChild:spriteSheet z:10];
         
@@ -224,6 +225,18 @@ GirlMouseEngineMenu13 *gLayer13;
         
         sprite=[CCSprite spriteWithFile:@"water_sink_1.png"];
         sprite.position=ccp(450,210);
+        [self addChild:sprite z:1];
+        
+        sprite=[CCSprite spriteWithSpriteFrameName:@"sink_water_0.png"];
+        sprite.position=ccp(450,200);
+        NSMutableArray *frameArr3 = [NSMutableArray array];
+        for(int i = 0; i <= 29; i++) {
+            CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"sink_water_%d.png",i]];
+            [frameArr3 addObject:frame];
+        }
+        CCAnimation *animation4 = [CCAnimation animationWithSpriteFrames:frameArr3 delay:0.03f];
+        CCAnimate *anim3 = [CCAnimate actionWithAnimation:animation4];
+        [sprite runAction:[CCRepeatForever actionWithAction: anim3]];
         [self addChild:sprite z:1];
         
         sprite=[CCSprite spriteWithFile:@"water_sink_2.png"];

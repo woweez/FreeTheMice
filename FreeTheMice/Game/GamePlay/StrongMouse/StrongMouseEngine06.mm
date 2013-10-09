@@ -272,9 +272,9 @@ StrongMouseEngineMenu06 *sLayer06;
         pushButtonSprite.scaleX=0.55;
         [self addChild:pushButtonSprite z:1];
         
-        knifeSprite=[CCSprite spriteWithFile:@"knife.png"];
+        knifeSprite=[CCSprite spriteWithFile:@"knives_shelf.png"];
         knifeSprite.position=ccp(910,680);
-        knifeSprite.scaleY=0.65;
+//        knifeSprite.scaleY=0.65;
         [self addChild:knifeSprite z:1];
         
         for(int i=0;i<8;i++){

@@ -91,7 +91,6 @@
 //    CCSpriteBatchNode *spriteSheet;
     CCSpriteFrameCache *catCache;
     CCSpriteBatchNode *catSpriteSheet;
-    
     NSArray * heroJumpIntervalValue;
     NSArray * cheeseSetValue;
     NSArray *cheeseArrX;

@@ -88,6 +88,7 @@ GameEngine14Menu *layer14;
         
         cache = [CCSpriteFrameCache sharedSpriteFrameCache];
         [cache addSpriteFramesWithFile:@"mother_mouse_default.plist"];
+        [cache addSpriteFramesWithFile:@"sink_waterAnim.plist"];
         spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"mother_mouse_default.png"];
         [self addChild:spriteSheet z:10];
         
@@ -341,6 +342,18 @@ GameEngine14Menu *layer14;
         sprite.position=ccp(580,245);
         [self addChild:sprite z:8];
         
+        sprite=[CCSprite spriteWithSpriteFrameName:@"sink_water_0.png"];
+        sprite.position=ccp(580,236);
+        NSMutableArray *frameArr3 = [NSMutableArray array];
+        for(int i = 0; i <= 29; i++) {
+            CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"sink_water_%d.png",i]];
+            [frameArr3 addObject:frame];
+        }
+        CCAnimation *animation4 = [CCAnimation animationWithSpriteFrames:frameArr3 delay:0.03f];
+        CCAnimate *anim3 = [CCAnimate actionWithAnimation:animation4];
+        [sprite runAction:[CCRepeatForever actionWithAction: anim3]];
+        [self addChild:sprite z:100];
+
         sprite=[CCSprite spriteWithFile:@"water_sink_2.png"];
         sprite.position=ccp(580,182);
         [self addChild:sprite z:10];
@@ -351,6 +364,7 @@ GameEngine14Menu *layer14;
         
         waterLineSprite=[CCSprite spriteWithFile:@"water_line.png"];
         waterLineSprite.position=ccp(580,242);
+        waterLineSprite.visible = NO;
         [self addChild:waterLineSprite z:10];
         
         CCSprite *holeSprite=[CCSprite spriteWithFile:@"hole.png"];

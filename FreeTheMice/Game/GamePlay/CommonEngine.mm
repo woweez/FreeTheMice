@@ -355,8 +355,30 @@
 -(void) applyBoostPowerUpFeature{
     [FTMUtil sharedInstance].isBoostPowerUpEnabled = YES;
     
+}
+
+-(void) addFireFlamesAnimation:(CGPoint) position{
+    
+    [cache addSpriteFramesWithFile:@"flamesAnimation.plist"];
+    CCSpriteBatchNode *flamesSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"flamesAnimation.png"];
+    [self addChild:flamesSpriteSheet z:0];
+    
+    CCSprite *flamesSprite = [CCSprite spriteWithSpriteFrameName:@"flames_0.png"];
+    flamesSprite.position = position;
+    [flamesSpriteSheet addChild:flamesSprite z:0];
+    
+    NSMutableArray *animFrames = [NSMutableArray array];
+    for(int i = 0; i <= 32; i++) {
+        CCSpriteFrame *frame4 = [cache spriteFrameByName:[NSString stringWithFormat:@"flames_%d.png",i]];
+        [animFrames addObject:frame4];
+    }
+    
+    CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animFrames delay:0.03f];
+    
+    [flamesSprite runAction:[CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:animation]]];
     
 }
+
 - (void)dealloc
 {
     [super dealloc];

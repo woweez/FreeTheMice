@@ -110,6 +110,8 @@ StrongMouseEngineMenu07 *sLayer07;
         
         catCache = [CCSpriteFrameCache sharedSpriteFrameCache];
         [catCache addSpriteFramesWithFile:@"cat_default.plist"];
+        [catCache addSpriteFramesWithFile:@"dome1.plist"];
+        [catCache addSpriteFramesWithFile:@"dome2.plist"];
         catSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"cat_default.png"];
         [self addChild:catSpriteSheet z:10];
         
@@ -275,8 +277,9 @@ StrongMouseEngineMenu07 *sLayer07;
         appleWoodSprite2.anchorPoint=ccp(0.5f, 0.05f);
         [self addChild:appleWoodSprite2 z:10];
         
-        domeSprite=[CCSprite spriteWithFile:@"dome.png"];
-        domeSprite.position=ccp(-350,479);
+        domeSprite=[CCSprite spriteWithSpriteFrameName:@"dome_0.png"];
+        domeSprite.position=ccp(-348,479);
+        domeSprite.scale = 0.5;
         [self addChild:domeSprite z:9];
         
         tileMove=[CCSprite spriteWithFile:@"move_platform3.png"];
@@ -574,8 +577,28 @@ StrongMouseEngineMenu07 *sLayer07;
     if(gameFunc.heightMoveChe&&gameFunc.domeMoveCount==130){
         domeRotateCount+=1;
         domeRotateCount=(domeRotateCount>200?0:domeRotateCount);
-        int localDomeCount=(domeRotateCount<=100?domeRotateCount:100-(domeRotateCount-100));
-        domeSprite.rotation=(localDomeCount/13.0);
+        if (domeSprite.tag == 11) {
+            
+        }else{
+            domeSprite.tag = 11;
+            NSMutableArray *animFrames1 = [NSMutableArray array];
+            for(int i = 0; i <= 16; i++) {
+                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"dome_%d.png",i]];
+                [animFrames1 addObject:frame];
+            }
+            CCAnimation *animation1 = [CCAnimation animationWithSpriteFrames:animFrames1 delay:0.04f];
+            NSMutableArray *animFrames2 = [NSMutableArray array];
+            for(int i = 17; i <= 32; i++) {
+                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"dome_%d.png",i]];
+                [animFrames2 addObject:frame];
+            }
+            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.04f];
+            CCAnimate *anim1 = [CCAnimate actionWithAnimation:animation1];
+            CCAnimate *anim2 = [CCAnimate actionWithAnimation:animation2];
+            CCSequence *seq = [CCSequence actions:anim1,anim2, nil];
+            [domeSprite runAction:[CCRepeatForever actionWithAction:seq]];
+        }
+//        [spriteSheet addChild:domeSprite z:10];
     }
     if(gameFunc.domChe&&gameFunc.domeEnterChe){
         gameFunc.domeEnterChe=NO;

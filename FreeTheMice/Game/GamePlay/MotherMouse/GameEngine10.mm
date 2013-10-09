@@ -931,7 +931,11 @@ GameEngine10Menu *layer10;
             }
             
             heroTrappedSprite.scale=0.5;
-            heroTrappedSprite.position = ccp(heroSprite.position.x-fValue, heroSprite.position.y);
+            int posY = heroSprite.position.y;
+            if (posY < 215) {
+                posY = 215;
+            }
+            heroTrappedSprite.position = ccp(heroSprite.position.x-fValue, posY);
             [self addChild:heroTrappedSprite z:1000];
             CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp(heroSprite.position.x-fValue, 215)];
             [heroTrappedSprite runAction:move];
@@ -1516,8 +1520,8 @@ GameEngine10Menu *layer10;
 }
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
-//        [[CCDirector sharedDirector] replaceScene:[GameEngine10 scene]];
-        [self respwanTheMice];
+        [[CCDirector sharedDirector] replaceScene:[GameEngine10 scene]];
+//        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }
@@ -1529,7 +1533,7 @@ GameEngine10Menu *layer10;
     [FTMUtil sharedInstance].isRespawnMice = YES;
     menu2.visible=NO;
     mouseTrappedBackground.visible=NO;
-    
+    runningChe = NO;
     heroTrappedSprite.visible = NO;
     if (heroTrappedSprite.position.x > 750 && heroTrappedSprite.position.y < 260) {
         platformX -= 12;

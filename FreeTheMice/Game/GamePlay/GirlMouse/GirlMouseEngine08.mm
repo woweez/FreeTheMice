@@ -259,9 +259,9 @@ GirlMouseEngineMenu08 *gLayer08;
         vegetableCloseSprite.rotation=-15;
         [self addChild:vegetableCloseSprite z:10];
         
-        knifeSprite=[CCSprite spriteWithFile:@"knife.png"];
+        knifeSprite=[CCSprite spriteWithFile:@"knives_shelf.png"];
         knifeSprite.position=ccp(540,329);
-        knifeSprite.scale=0.7;
+//        knifeSprite.scale=0.7;
         [self addChild:knifeSprite z:10];
         
         CCSprite *holeSprite=[CCSprite spriteWithFile:@"hole.png"];

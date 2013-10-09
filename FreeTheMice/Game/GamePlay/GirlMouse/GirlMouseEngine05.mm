@@ -280,19 +280,19 @@ GirlMouseEngineMenu05 *gLayer05;
         cookerSprite.flipX=1;
         [self addChild:cookerSprite z:1];
         
-        CCSprite *vesselsSprite=[CCSprite spriteWithFile:@"vessels.png"];
+        CCSprite *vesselsSprite=[CCSprite spriteWithFile:@"knives_tray.png"];
         vesselsSprite.position=ccp(520,245);
-        vesselsSprite.scale=0.6;
+//        vesselsSprite.scale=0.6;
         [self addChild:vesselsSprite z:1];
         
-        vesselsSprite=[CCSprite spriteWithFile:@"vessels.png"];
+        vesselsSprite=[CCSprite spriteWithFile:@"knives_tray.png"];
         vesselsSprite.position=ccp(620,245);
-        vesselsSprite.scale=0.6;
+//        vesselsSprite.scale=0.6;
         [self addChild:vesselsSprite z:1];
         
-        vesselsSprite=[CCSprite spriteWithFile:@"vessels.png"];
+        vesselsSprite=[CCSprite spriteWithFile:@"knives_tray.png"];
         vesselsSprite.position=ccp(720,245);
-        vesselsSprite.scale=0.6;
+//        vesselsSprite.scale=0.6;
         [self addChild:vesselsSprite z:1];
         
         for(int i=0;i<25;i++){

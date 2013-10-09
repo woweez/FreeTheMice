@@ -1306,7 +1306,7 @@ GameEngine09Menu *layer09;
             
             CGPoint copyHeroPosition = ccp(xx, yy);
             [self setViewpointCenter:copyHeroPosition];
-            saveDottedPathCount+=1.5;
+            saveDottedPathCount+=1.0;
         }
     }
 }

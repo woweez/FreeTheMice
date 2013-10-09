@@ -49,6 +49,7 @@
 -(void)showAnimationWithMiceIdAndIndex:(int)miceId andAnimationIndex:(int) animIndex;
 -(CCSprite *) getTrappingAnimatedSprite;
 -(void) applyBoostPowerUpFeature;
+-(void) addFireFlamesAnimation:(CGPoint) position;
 -(void)progressBarFunc;
 
 

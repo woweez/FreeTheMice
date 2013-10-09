@@ -195,9 +195,9 @@ StrongMouseEngineMenu05 *sLayer05;
         cheeseSprite[3].visible=NO;
         cheeseSprite2[3].visible=NO;
         
-        knifeSprite=[CCSprite spriteWithFile:@"knife.png"];
+        knifeSprite=[CCSprite spriteWithFile:@"knives_shelf.png"];
         knifeSprite.position=ccp(650,235);
-        knifeSprite.scale=0.85;
+//        knifeSprite.scale=0.85;
         knifeSprite.flipY=1;
         [self addChild:knifeSprite z:1];
         
@@ -266,9 +266,9 @@ StrongMouseEngineMenu05 *sLayer05;
             [self addChild:hotSprite[i] z:0];
         }
         
-        vesselsSprite=[CCSprite spriteWithFile:@"vessels.png"];
+        vesselsSprite=[CCSprite spriteWithFile:@"knives_tray.png"];
         vesselsSprite.position=ccp(420,541);
-        vesselsSprite.scale=0.5;
+//        vesselsSprite.scale=0.5;
         [self addChild:vesselsSprite z:1];
         
         crackedWindowSprite=[CCSprite spriteWithFile:@"window1.png"];

@@ -259,15 +259,15 @@ GirlMouseEngineMenu04 *gLayer04;
         holeSprite.position=ccp(970,241);
         [self addChild:holeSprite z:0];
         
-        CCSprite *knifeSprite=[CCSprite spriteWithFile:@"knife.png"];
-        knifeSprite.position=ccp(268,629);
+        CCSprite *knifeSprite=[CCSprite spriteWithFile:@"knives_shelf.png"];
+        knifeSprite.position=ccp(275,629);
         knifeSprite.rotation=90;
-        knifeSprite.scale=0.6;
+//        knifeSprite.scale=0.6;
         [self addChild:knifeSprite z:1];
         
-        knifeSprite=[CCSprite spriteWithFile:@"knife.png"];
-        knifeSprite.position=ccp(940,629);
-        knifeSprite.scale=0.7;
+        knifeSprite=[CCSprite spriteWithFile:@"knives_shelf.png"];
+        knifeSprite.position=ccp(930,629);
+//        knifeSprite.scale=0.7;
         knifeSprite.flipY= 1;
         [self addChild:knifeSprite z:10];
         

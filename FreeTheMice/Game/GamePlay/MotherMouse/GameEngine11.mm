@@ -240,7 +240,7 @@ GameEngine11Menu *layer11;
         [self addChild:bridgeSprite z:0];
 
         CCSprite *iceBoxSprite=[CCSprite spriteWithFile:@"bridge_ice_box2.png"];
-        iceBoxSprite.position=ccp(243,242);
+        iceBoxSprite.position=ccp(200,265);
         [self addChild:iceBoxSprite z:0];
         
         iceBoxSprite=[CCSprite spriteWithFile:@"bridge_ice_box.png"];
@@ -923,10 +923,15 @@ GameEngine11Menu *layer11;
             }else{
                 heroTrappedSprite.position = ccp(heroSprite.position.x-fValue+30, 620);
             }
-            heroTrappedSprite.position = ccp(heroSprite.position.x-fValue, heroSprite.position.y);
+            
+            int posY = heroSprite.position.y;
+            if (posY < 215) {
+                posY = 215;
+            }
+            heroTrappedSprite.position = ccp(heroSprite.position.x-fValue, posY);
             heroTrappedSprite.scale=0.5;
             [self addChild:heroTrappedSprite z:1000];
-            CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp(heroSprite.position.x-fValue, 200)];
+            CCMoveTo *move = [CCMoveTo actionWithDuration:1 position:ccp(heroSprite.position.x-fValue, 215)];
             [heroTrappedSprite runAction:move];
             heroSprite.visible=NO;
         }
@@ -1520,8 +1525,8 @@ GameEngine11Menu *layer11;
 }
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
-//        [[CCDirector sharedDirector] replaceScene:[GameEngine11 scene]];
-        [self respwanTheMice];
+        [[CCDirector sharedDirector] replaceScene:[GameEngine11 scene]];
+//        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }
@@ -1533,7 +1538,7 @@ GameEngine11Menu *layer11;
     [FTMUtil sharedInstance].isRespawnMice = YES;
     menu2.visible=NO;
     mouseTrappedBackground.visible=NO;
-    
+    runningChe = NO;
     heroTrappedSprite.visible = NO;
 
     [self endJumping:(platformX + gameFunc.xPosition)/2 yValue:gameFunc.yPosition];

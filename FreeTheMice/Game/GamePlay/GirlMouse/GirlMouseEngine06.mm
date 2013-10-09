@@ -247,9 +247,9 @@ GirlMouseEngineMenu06 *gLayer06;
         platformSprite.scaleY=1.5;
         [self addChild:platformSprite z:10];
         
-        knifeSprite=[CCSprite spriteWithFile:@"knife.png"];
+        knifeSprite=[CCSprite spriteWithFile:@"knives_shelf.png"];
         knifeSprite.position=ccp(910,720);
-        knifeSprite.scaleY=0.65;
+//        knifeSprite.scaleY=0.65;
         [self addChild:knifeSprite z:1];
         
         

@@ -262,9 +262,9 @@ StrongMouseEngineMenu08 *sLayer08;
         vegetableCloseSprite.rotation=-15;
         [self addChild:vegetableCloseSprite z:10];
         
-        knifeSprite=[CCSprite spriteWithFile:@"knife.png"];
-        knifeSprite.position=ccp(832,381);
-        knifeSprite.scale=0.65;
+        knifeSprite=[CCSprite spriteWithFile:@"knives_shelf.png"];
+        knifeSprite.position=ccp(832,384);
+//        knifeSprite.scale=0.65;
         [self addChild:knifeSprite z:1];
         
         CCSprite *pushButtonSprite=[CCSprite spriteWithFile:@"push_button.png"];
