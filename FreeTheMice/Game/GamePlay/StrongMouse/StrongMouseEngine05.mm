@@ -51,7 +51,6 @@ StrongMouseEngineMenu05 *sLayer05;
 {
     if( (self=[super init])) {
         
-        
         heroJumpIntervalValue = [[NSArray alloc] initWithObjects:@"0",@"2",@"4",@"6",@"8",@"10",@"0",@"11",@"13",@"15",nil];
         cheeseSetValue= [[NSArray alloc] initWithObjects:@"5",@"5",@"5",@"5",@"5",@"5",@"5",@"5",@"5",@"5",@"5",@"5",@"5",@"5",@"5",@"5",nil];
         cheeseArrX=[[NSArray alloc] initWithObjects:@"0",@"20",@"0",   @"20",@"10",nil];
@@ -93,7 +92,7 @@ StrongMouseEngineMenu05 *sLayer05;
         [self addChild:spriteSheet z:10];
         
         heroRunSprite = [CCSprite spriteWithSpriteFrameName:@"strong_run01.png"];
-        heroRunSprite.scale = 0.6;
+        heroRunSprite.scale = STRONG_SCALE;
         heroRunSprite.position = ccp(200, 200);
         [spriteSheet addChild:heroRunSprite];
         
@@ -105,13 +104,12 @@ StrongMouseEngineMenu05 *sLayer05;
         CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animFrames delay:0.08f];
         [heroRunSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation]]];
         
-        
-        
         heroPushSprite = [CCSprite spriteWithSpriteFrameName:@"push1.png"];
-        heroPushSprite.scale = 0.6;
+        heroPushSprite.scale = STRONG_SCALE;
         heroPushSprite.position = ccp(200, 200);
         heroPushSprite.visible=NO;
         [spriteSheet addChild:heroPushSprite];
+        
         NSMutableArray *animFrames2 = [NSMutableArray array];
         for(int i = 1; i < 29; i++) {
             CCSpriteFrame *frame2 = [cache spriteFrameByName:[NSString stringWithFormat:@"push%d.png",i]];
@@ -124,7 +122,7 @@ StrongMouseEngineMenu05 *sLayer05;
         
         mouseDragSprite=[CCSprite spriteWithFile:@"mouse_drag.png"];
         mouseDragSprite.position=ccp(platformX+2,platformY+3);
-        mouseDragSprite.scale=0.6;
+        mouseDragSprite.scale = 0.6;
         mouseDragSprite.visible=NO;
         mouseDragSprite.anchorPoint=ccp(0.99f, 0.9f);
         [self addChild:mouseDragSprite z:9];
@@ -878,7 +876,7 @@ StrongMouseEngineMenu05 *sLayer05;
 
         if(heroWinCount==15){
             heroWinSprite = [CCSprite spriteWithSpriteFrameName:@"strong_win1.png"];
-            heroWinSprite.scale = 0.6;
+            heroWinSprite.scale = STRONG_SCALE;
             if(!forwardChe)
                 heroWinSprite.position = ccp(platformX+30, platformY+5);
             else
@@ -1301,11 +1299,11 @@ StrongMouseEngineMenu05 *sLayer05;
     
     
     if(!forwardChe){
-        mouseDragSprite.position=ccp(platformX+10,platformY-11+tValue);
+        mouseDragSprite.position=ccp(platformX - DRAG_SPRITE_OFFSET_X,platformY-DRAG_SPRITE_OFFSET_Y+tValue);
         if(gameFunc.trigoVisibleChe)
             heroSprite.position=ccp(platformX,platformY+3+tValue);
     }else{
-        mouseDragSprite.position=ccp(platformX-10+heroForwardX,platformY-11+tValue);
+        mouseDragSprite.position=ccp(platformX+DRAG_SPRITE_OFFSET_X/2+heroForwardX,platformY-DRAG_SPRITE_OFFSET_Y/2+tValue);
         if(gameFunc.trigoVisibleChe)
             heroSprite.position=ccp(platformX+heroForwardX,platformY+tValue);
     }
@@ -1373,11 +1371,11 @@ StrongMouseEngineMenu05 *sLayer05;
                 [self heroAnimationFunc:0 animationType:@"jump"];
                 mouseDragSprite.visible=YES;
                 if(!forwardChe){
-                    mouseDragSprite.position=ccp(platformX+10,platformY-11);
+                    mouseDragSprite.position=ccp(platformX -DRAG_SPRITE_OFFSET_X,platformY-DRAG_SPRITE_OFFSET_Y);
                     mouseDragSprite.rotation=(180-0)-170;
                 }else{
                     mouseDragSprite.rotation=(180-180)-170;
-                    mouseDragSprite.position=ccp(platformX-10+heroForwardX,platformY-11);
+                    mouseDragSprite.position=ccp(platformX + DRAG_SPRITE_OFFSET_X/2 +heroForwardX,platformY-DRAG_SPRITE_OFFSET_Y/2);
                 }
                 startVect = b2Vec2(location.x, location.y);
                 activeVect = startVect - b2Vec2(location.x, location.y);

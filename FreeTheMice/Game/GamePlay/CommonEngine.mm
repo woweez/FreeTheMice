@@ -22,6 +22,11 @@
         [FTMUtil sharedInstance].isSlowDownTimer = NO;
         [FTMUtil sharedInstance].isRespawnMice = NO;
         currentAnim = 0;
+        isLandingAnimationAdded = NO;
+        
+        if ([FTMUtil sharedInstance].mouseClicked == FTM_STRONG_MICE_ID) {
+            bootsSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"test"];
+        }
     }
     return self;
 }
@@ -192,7 +197,7 @@
         trappingAnimationSprite.position = ccp(heroSprite.position.x-heroSprite.contentSize.width/4, heroSprite.position.y -heroSprite.contentSize.height/3);
     }
     trappingAnimationSprite.scale=0.5;
-    [spriteSheet addChild:trappingAnimationSprite];
+    [spriteSheets addChild:trappingAnimationSprite];
     
     CCAnimate *actionOne = [CCAnimate actionWithAnimation:animation];
     [trappingAnimationSprite runAction:[CCRepeatForever actionWithAction:actionOne ]];
@@ -203,31 +208,16 @@
     NSString *fStr=@"";
     if([type isEqualToString:@"jump"]){
         currentAnim =1;
-        fStr=[NSString stringWithFormat:@"strong_jump%d.png",frameToLoad+1];
         if (jumpingChe && frameToLoad == 1) {
-            [spriteSheet removeChild:heroSprite cleanup:YES];
-            heroSprite = [CCSprite spriteWithSpriteFrameName:fStr];
-            NSMutableArray *animFrames2 = [NSMutableArray array];
-            for(int i = 1; i <= 10; i++) {
-                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_jump%d.png",i]];
-                [animFrames2 addObject:frame];
-            }
-            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.05f];
-            [heroSprite runAction:[CCAnimate actionWithAnimation:animation2]];
-            [spriteSheet addChild:heroSprite z:10];
-        }else if (landingChe){
-            [spriteSheet removeChild:heroSprite cleanup:YES];
-            heroSprite = [CCSprite spriteWithSpriteFrameName:fStr];
-            NSMutableArray *animFrames2 = [NSMutableArray array];
-            for(int i = 11; i <= 16; i++) {
-                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_jump%d.png",i]];
-                [animFrames2 addObject:frame];
-            }
-            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.05f];
-            [heroSprite runAction:[CCAnimate actionWithAnimation:animation2]];
-            [spriteSheet addChild:heroSprite z:10];
+            [self playJumpingAnimation];
+            
+        }else if (frameToLoad == 6 && !isLandingAnimationAdded){
+            [self playLandingAnimation];
+            
         }
         else if (frameToLoad == 0){
+            fStr=[NSString stringWithFormat:[self getJumpingFrameNameForMice],1];
+            isLandingAnimationAdded = NO;
             [spriteSheet removeChild:heroSprite cleanup:YES];
             heroSprite = [CCSprite spriteWithSpriteFrameName:fStr];
             [spriteSheet addChild:heroSprite z:10];
@@ -235,19 +225,7 @@
         
     }
     else if([type isEqualToString:@"stand"] && currentAnim != 2){
-        currentAnim = 2;
-        fStr=[NSString stringWithFormat:@"strong_stand1.png"];
-        [heroSprite removeAllChildrenWithCleanup:YES];
-        [spriteSheet removeChild:heroSprite cleanup:YES];
-        heroSprite = [CCSprite spriteWithSpriteFrameName:fStr];
-        NSMutableArray *animFrames2 = [NSMutableArray array];
-        for(int i = 1; i <= 26; i++) {
-            CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_stand%d.png",i]];
-            [animFrames2 addObject:frame];
-        }
-        CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.05f];
-        [heroSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
-        [spriteSheet addChild:heroSprite z:10];
+        [self playStandingAnimation];
     }
     else if(heroSprite != nil && !heroSprite.visible && !landingChe){
         heroSprite.visible = YES;
@@ -257,7 +235,85 @@
     heroSprite.scale = 0.6;
 
 }
+-(void) playJumpingAnimation{
+    NSString *frameName = [self getJumpingFrameNameForMice];
+    isLandingAnimationAdded = NO;
+    [spriteSheet removeChild:heroSprite cleanup:YES];
+    heroSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:frameName,2]];
+    NSMutableArray *animFrames2 = [NSMutableArray array];
+    for(int i = 2; i <= 10; i++) {
+        CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:frameName,i]];
+        [animFrames2 addObject:frame];
+    }
+    CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.04f];
+    [heroSprite runAction:[CCAnimate actionWithAnimation:animation2]];
+    [spriteSheet addChild:heroSprite z:10];
+}
 
+-(NSString *) getJumpingFrameNameForMice{
+    NSString *frameName = nil;
+    switch ([FTMUtil sharedInstance].mouseClicked) {
+        case FTM_MAMA_MICE_ID:
+            frameName = @"mother_jump%d.png";
+            break;
+        case FTM_STRONG_MICE_ID:
+            frameName = @"strong_jump%d.png";
+            break;
+        case FTM_GIRL_MICE_ID:
+            frameName = @"girl_jump%d.png";
+            break;
+        default:
+            break;
+    }
+    return frameName;
+}
+
+-(NSString *) getStandingFrameNameForMice{
+    NSString *frameName = nil;
+    switch ([FTMUtil sharedInstance].mouseClicked) {
+        case FTM_MAMA_MICE_ID:
+            frameName = @"mother_stand%d.png";
+            break;
+        case FTM_STRONG_MICE_ID:
+            frameName = @"strong_stand%d.png";
+            break;
+        case FTM_GIRL_MICE_ID:
+            frameName = @"girl_stand%d.png";
+            break;
+        default:
+            break;
+    }
+    return frameName;
+}
+-(void) playLandingAnimation{
+    NSString *frameName = [self getJumpingFrameNameForMice];
+    isLandingAnimationAdded = YES;
+    [spriteSheet removeChild:heroSprite cleanup:YES];
+    heroSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:frameName,11]];
+    NSMutableArray *animFrames2 = [NSMutableArray array];
+    for(int i = 11; i <= 16; i++) {
+        CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:frameName,i]];
+        [animFrames2 addObject:frame];
+    }
+    CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.03f];
+    [heroSprite runAction:[CCAnimate actionWithAnimation:animation2]];
+    [spriteSheet addChild:heroSprite z:10];
+}
+-(void) playStandingAnimation{
+    currentAnim = 2;
+    NSString *frameName = [self getStandingFrameNameForMice];
+    [heroSprite removeAllChildrenWithCleanup:YES];
+    [spriteSheet removeChild:heroSprite cleanup:YES];
+    heroSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:frameName, 1]];
+    NSMutableArray *animFrames2 = [NSMutableArray array];
+    for(int i = 1; i <= 26; i++) {
+        CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:frameName,i]];
+        [animFrames2 addObject:frame];
+    }
+    CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:2];
+    [heroSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+    [spriteSheet addChild:heroSprite z:10];
+}
 -(void)progressBarFunc{
     if(isScheduledTime){
         return;
@@ -296,6 +352,11 @@
     // do after timer stuff here...
 }
 
+-(void) applyBoostPowerUpFeature{
+    [FTMUtil sharedInstance].isBoostPowerUpEnabled = YES;
+    
+    
+}
 - (void)dealloc
 {
     [super dealloc];

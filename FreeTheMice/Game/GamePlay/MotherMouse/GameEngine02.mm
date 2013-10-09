@@ -594,13 +594,13 @@ GameEngine02Menu *layer02;
     if(runningChe&&!gameFunc.trappedChe){
         
         if(!forwardChe){
-            platformX+=5.0;
+            platformX+=3.0;
             [gameFunc runningRender:platformX yPosition:platformY fChe:forwardChe];
             platformX=gameFunc.xPosition;
             heroSprite.rotation=0;
             heroRunSprite.rotation=0;
         }else{
-            platformX-=5.0;
+            platformX-=3.0;
             [gameFunc runningRender:platformX yPosition:platformY fChe:forwardChe];
             platformX=gameFunc.xPosition;
             heroSprite.rotation=0;

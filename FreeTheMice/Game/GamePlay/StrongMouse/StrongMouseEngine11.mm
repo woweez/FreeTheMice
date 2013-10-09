@@ -1302,9 +1302,9 @@ StrongMouseEngineMenu11 *sLayer11;
     }
     
     if(!forwardChe)
-        mouseDragSprite.position=ccp(platformX+10,platformY-11);
+        mouseDragSprite.position=ccp(platformX - DRAG_SPRITE_OFFSET_X,platformY-DRAG_SPRITE_OFFSET_Y);
     else
-        mouseDragSprite.position=ccp(platformX-10+heroForwardX,platformY-11);
+        mouseDragSprite.position=ccp(platformX + DRAG_SPRITE_OFFSET_X/2 +heroForwardX,platformY-DRAG_SPRITE_OFFSET_Y/2);
     
     mouseDragSprite.rotation=(180-angle)-170;
     mouseDragSprite.scale=0.3+(jumpPower/40.0);
@@ -1369,11 +1369,11 @@ StrongMouseEngineMenu11 *sLayer11;
                 [self heroAnimationFunc:0 animationType:@"jump"];
                 mouseDragSprite.visible=YES;
                 if(!forwardChe){
-                    mouseDragSprite.position=ccp(platformX+10,platformY-11);
+                    mouseDragSprite.position=ccp(platformX -DRAG_SPRITE_OFFSET_X,platformY-DRAG_SPRITE_OFFSET_Y);
                     mouseDragSprite.rotation=(180-0)-170;
                 }else{
                     mouseDragSprite.rotation=(180-180)-170;
-                    mouseDragSprite.position=ccp(platformX-10+heroForwardX,platformY-11);
+                    mouseDragSprite.position=ccp(platformX + DRAG_SPRITE_OFFSET_X/2+heroForwardX,platformY-DRAG_SPRITE_OFFSET_Y/2);
                 }
                 startVect = b2Vec2(location.x, location.y);
                 activeVect = startVect - b2Vec2(location.x, location.y);

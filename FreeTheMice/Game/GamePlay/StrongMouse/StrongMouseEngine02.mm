@@ -11,7 +11,7 @@
 #import "LevelScreen.h"
 #import "HudLayer.h"
 #import "LevelCompleteScreen.h"
-
+#import "FTMConstants.h"
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 #import "DB.h"
@@ -97,7 +97,7 @@ StrongMouseEngineMenu02 *sLayer02;
         [cache addSpriteFramesWithFile:@"strong0_default.plist"];
         spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"strong0_default.png"];
         [self addChild:spriteSheet z:10];
-        
+
         heroRunSprite = [CCSprite spriteWithSpriteFrameName:@"strong_run01.png"];
         heroRunSprite.scale = 0.6;
         heroRunSprite.position = ccp(200, 200);
@@ -129,7 +129,7 @@ StrongMouseEngineMenu02 *sLayer02;
         
         
         mouseDragSprite=[CCSprite spriteWithFile:@"mouse_drag.png"];
-        mouseDragSprite.position=ccp(platformX+2,platformY+3);
+        mouseDragSprite.position=ccp(platformX +2,platformY+3);
         mouseDragSprite.scale=0.8;
         mouseDragSprite.visible=NO;
         mouseDragSprite.anchorPoint=ccp(0.99f, 0.9f);
@@ -1040,9 +1040,9 @@ StrongMouseEngineMenu02 *sLayer02;
         heroPimpleSprite[i].position=ccp(xx,yy);
     }
     if(!forwardChe)
-        mouseDragSprite.position=ccp(platformX+10,platformY-11);
+        mouseDragSprite.position=ccp(platformX - DRAG_SPRITE_OFFSET_X,platformY-DRAG_SPRITE_OFFSET_Y);
     else
-        mouseDragSprite.position=ccp(platformX-10+heroForwardX,platformY-11);
+        mouseDragSprite.position=ccp(platformX+DRAG_SPRITE_OFFSET_X/2+heroForwardX ,platformY-DRAG_SPRITE_OFFSET_Y/2);
     
     mouseDragSprite.rotation=(180-angle)-170;
     mouseDragSprite.scale=0.3+(jumpPower/40.0);
@@ -1107,11 +1107,11 @@ StrongMouseEngineMenu02 *sLayer02;
                 [self heroAnimationFunc:0 animationType:@"jump"];
                 mouseDragSprite.visible=YES;
                 if(!forwardChe){
-                    mouseDragSprite.position=ccp(platformX+10,platformY-11);
+                    mouseDragSprite.position=ccp(platformX -DRAG_SPRITE_OFFSET_X,platformY-DRAG_SPRITE_OFFSET_Y);
                     mouseDragSprite.rotation=(180-0)-170;
                 }else{
                     mouseDragSprite.rotation=(180-180)-170;
-                    mouseDragSprite.position=ccp(platformX-10+heroForwardX,platformY-11);
+                    mouseDragSprite.position=ccp(platformX+DRAG_SPRITE_OFFSET_X/2+heroForwardX,platformY-DRAG_SPRITE_OFFSET_Y/2);
                 }
                 startVect = b2Vec2(location.x, location.y);
                 activeVect = startVect - b2Vec2(location.x, location.y);

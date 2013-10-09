@@ -11,6 +11,7 @@
 #import "LevelScreen.h"
 #import "LevelCompleteScreen.h"
 #import "FTMUtil.h"
+#import "FTMConstants.h"
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 #import "DB.h"
@@ -1215,9 +1216,9 @@ StrongMouseEngineMenu04 *sLayer04;
         heroPimpleSprite[i].position=ccp(xx,yy);
     }
     if(!forwardChe)
-        mouseDragSprite.position=ccp(platformX+10,platformY-11);
+        mouseDragSprite.position=ccp(platformX -DRAG_SPRITE_OFFSET_X,platformY-DRAG_SPRITE_OFFSET_Y);
     else
-        mouseDragSprite.position=ccp(platformX-10+heroForwardX,platformY-11);
+        mouseDragSprite.position=ccp(platformX + DRAG_SPRITE_OFFSET_X/2 +heroForwardX,platformY-DRAG_SPRITE_OFFSET_Y/2);
     
     mouseDragSprite.rotation=(180-angle)-170;
     mouseDragSprite.scale=0.3+(jumpPower/40.0);

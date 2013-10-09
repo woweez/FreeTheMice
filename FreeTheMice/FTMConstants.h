@@ -61,6 +61,11 @@
 //                                 THESE ARE STRONG/MUSSLE MOUSE SETTINGS.
 
 
+#define DRAG_SPRITE_OFFSET_X     12
+#define DRAG_SPRITE_OFFSET_Y     8
+
+#define STRONG_SCALE            0.65
+
 #define STRONG_SHOCK_ANIM     1
 #define STRONG_WATER_ANIM     2
 #define STRONG_FLAME_ANIM     3

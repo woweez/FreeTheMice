@@ -16,6 +16,7 @@
 @property (readwrite) BOOL isIphone5;
 @property (readwrite) BOOL isSlowDownTimer;
 @property (readwrite) BOOL isRespawnMice;
+@property (readwrite) BOOL isBoostPowerUpEnabled;
 
 + (FTMUtil*) sharedInstance;
 - (NSString *)getModel;

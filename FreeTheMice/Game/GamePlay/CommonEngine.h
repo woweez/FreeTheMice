@@ -21,6 +21,7 @@
     CCSprite *heroRunSprite;
     CCSprite *heroSprite;
     CCSpriteBatchNode *spriteSheet;
+    CCSpriteBatchNode *bootsSpriteSheet;
     CCSprite *trappingAnimationSprite;
     BOOL forwardChe;
     BOOL mouseWinChe;
@@ -33,6 +34,7 @@
     BOOL safetyJumpChe;
     BOOL heroJumpRunningChe;
     BOOL jumpingChe;
+    BOOL isLandingAnimationAdded;
     int miceTrapAnimationType;
     int currentAnim;
     CCSpriteFrameCache *cache;
@@ -46,6 +48,7 @@
 -(void)updateAnimationOnCurrentType:(int)frameToLoad animationType:(NSString *)type;
 -(void)showAnimationWithMiceIdAndIndex:(int)miceId andAnimationIndex:(int) animIndex;
 -(CCSprite *) getTrappingAnimatedSprite;
+-(void) applyBoostPowerUpFeature;
 -(void)progressBarFunc;
 
 

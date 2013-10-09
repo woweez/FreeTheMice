@@ -11,6 +11,7 @@
 #import "LevelScreen.h"
 #import "LevelCompleteScreen.h"
 #import "FTMUtil.h"
+#import "FTMConstants.h"
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 #import "DB.h"
@@ -884,22 +885,22 @@ StrongMouseEngineMenu06 *sLayer06;
             
             
             mouseDragSprite.visible=NO;
-            heroTrappedSprite = [CCSprite spriteWithSpriteFrameName:@"strong_trapped1.png"];
+            heroTrappedSprite = [CCSprite spriteWithFile:@"sm_mist_0.png"];
             if(!forwardChe)
                 heroTrappedSprite.position = ccp(platformX, platformY+5);
             else
                 heroTrappedSprite.position = ccp(platformX+heroForwardX, platformY+5);
-            [spriteSheet addChild:heroTrappedSprite];
-            
-            NSMutableArray *animFrames2 = [NSMutableArray array];
-            for(int i = 1; i < 4; i++) {
-                
-                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_trapped%d.png",i]];
-                [animFrames2 addObject:frame];
-                
-            }
-            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
-            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            heroTrappedSprite.scale = 0.5;
+            [self addChild:heroTrappedSprite];
+//            NSMutableArray *animFrames2 = [NSMutableArray array];
+//            for(int i = 1; i < 4; i++) {
+//                
+//                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_trapped%d.png",i]];
+//                [animFrames2 addObject:frame];
+//                
+//            }
+//            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.1f];
+//            [heroTrappedSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
             heroSprite.visible=NO;
         }
         if(heroTrappedMove!=0){
@@ -1310,9 +1311,9 @@ StrongMouseEngineMenu06 *sLayer06;
     }
     
     if(!forwardChe)
-        mouseDragSprite.position=ccp(platformX+10,platformY-11);
+        mouseDragSprite.position=ccp(platformX - DRAG_SPRITE_OFFSET_X,platformY- DRAG_SPRITE_OFFSET_Y);
     else
-        mouseDragSprite.position=ccp(platformX-10+heroForwardX,platformY-11);
+        mouseDragSprite.position=ccp(platformX + DRAG_SPRITE_OFFSET_X/2+heroForwardX,platformY-DRAG_SPRITE_OFFSET_Y/2);
     
     mouseDragSprite.rotation=(180-angle)-170;
     mouseDragSprite.scale=0.3+(jumpPower/40.0);
@@ -1377,11 +1378,11 @@ StrongMouseEngineMenu06 *sLayer06;
                 [self heroAnimationFunc:0 animationType:@"jump"];
                 mouseDragSprite.visible=YES;
                 if(!forwardChe){
-                    mouseDragSprite.position=ccp(platformX+10,platformY-11);
+                    mouseDragSprite.position=ccp(platformX - DRAG_SPRITE_OFFSET_X,platformY-DRAG_SPRITE_OFFSET_Y);
                     mouseDragSprite.rotation=(180-0)-170;
                 }else{
                     mouseDragSprite.rotation=(180-180)-170;
-                    mouseDragSprite.position=ccp(platformX-10+heroForwardX,platformY-11);
+                    mouseDragSprite.position=ccp(platformX + DRAG_SPRITE_OFFSET_X/2 +heroForwardX,platformY-DRAG_SPRITE_OFFSET_Y/2);
                 }
                 startVect = b2Vec2(location.x, location.y);
                 activeVect = startVect - b2Vec2(location.x, location.y);
