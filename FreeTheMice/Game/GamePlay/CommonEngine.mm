@@ -53,6 +53,10 @@
 -(CCSprite *) getTrappingAnimatedSprite{
     return trappingAnimationSprite;
 }
+
+-(CCSprite *) getFireAnimatedSprite{
+    return flamesSprite;
+}
 -(void) showTrappingAnimationForMama: (int) animIndex{
     switch (animIndex) {
         case MAMA_FLAME_ANIM:
@@ -310,7 +314,7 @@
         CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:frameName,i]];
         [animFrames2 addObject:frame];
     }
-    CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:2];
+    CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.06];
     [heroSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
     [spriteSheet addChild:heroSprite z:10];
 }
@@ -357,15 +361,15 @@
     
 }
 
--(void) addFireFlamesAnimation:(CGPoint) position{
+-(CCSprite *) addFireFlamesAnimation:(CGPoint) position{
     
     [cache addSpriteFramesWithFile:@"flamesAnimation.plist"];
-    CCSpriteBatchNode *flamesSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"flamesAnimation.png"];
-    [self addChild:flamesSpriteSheet z:0];
+//    CCSpriteBatchNode *flamesSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"flamesAnimation.png"];
+//    [self addChild:flamesSpriteSheet z:0];
     
-    CCSprite *flamesSprite = [CCSprite spriteWithSpriteFrameName:@"flames_0.png"];
-    flamesSprite.position = position;
-    [flamesSpriteSheet addChild:flamesSprite z:0];
+    CCSprite * flames= [CCSprite spriteWithSpriteFrameName:@"flames_0.png"];
+    flames.position = position;
+//    [flamesSpriteSheet addChild:flamesSprite z:0];
     
     NSMutableArray *animFrames = [NSMutableArray array];
     for(int i = 0; i <= 32; i++) {
@@ -375,8 +379,10 @@
     
     CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animFrames delay:0.03f];
     
-    [flamesSprite runAction:[CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:animation]]];
-    
+    [flames runAction:[CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:animation]]];
+//    [self addChild:flames z:0];
+
+    return flames;
 }
 
 - (void)dealloc

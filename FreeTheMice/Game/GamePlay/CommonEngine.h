@@ -20,6 +20,7 @@
     
     CCSprite *heroRunSprite;
     CCSprite *heroSprite;
+    CCSprite *flamesSprite;
     CCSpriteBatchNode *spriteSheet;
     CCSpriteBatchNode *bootsSpriteSheet;
     CCSprite *trappingAnimationSprite;
@@ -48,8 +49,9 @@
 -(void)updateAnimationOnCurrentType:(int)frameToLoad animationType:(NSString *)type;
 -(void)showAnimationWithMiceIdAndIndex:(int)miceId andAnimationIndex:(int) animIndex;
 -(CCSprite *) getTrappingAnimatedSprite;
+-(CCSprite *) getFireAnimatedSprite;
 -(void) applyBoostPowerUpFeature;
--(void) addFireFlamesAnimation:(CGPoint) position;
+-(CCSprite *) addFireFlamesAnimation:(CGPoint) position;
 -(void)progressBarFunc;
 
 

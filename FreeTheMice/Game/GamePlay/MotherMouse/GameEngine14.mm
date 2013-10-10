@@ -194,44 +194,44 @@ GameEngine14Menu *layer14;
         clockArrowSprite.anchorPoint=ccp(0.2f, 0.2f);
         clockArrowSprite.rotation=-40;
         [layer14 addChild:clockArrowSprite z:0];
-        
-        for(int i=0;i<4;i++){
-            iceQubeSprite[i]=[CCSprite spriteWithFile:@"fire.png"];
-            iceQubeSprite[i].position=ccp(-107,525);
-            iceQubeSprite[i].scale=0.9;
-            iceQubeSprite[i].rotation=arc4random() % 360 + 1;
-            [self addChild:iceQubeSprite[i] z:10];
+        ;
+//        for(int i=0;i<4;i++){
+            iceQubeSprite[0]=[self addFireFlamesAnimation:ccp(0, 0)];
+            iceQubeSprite[0].position = ccp(373,350);
+            iceQubeSprite[0].scale=0.9;
+//            iceQubeSprite[0].rotation=arc4random() % 360 + 1;
+            [self addChild:iceQubeSprite[0] z:10];
             
-            iceQubeSprite2[i]=[CCSprite spriteWithFile:@"fire.png"];
-            iceQubeSprite2[i].position=ccp(-107,525);
-            iceQubeSprite2[i].scale=0.9;
-            iceQubeSprite2[i].rotation=arc4random() % 360 + 1;
-            [self addChild:iceQubeSprite2[i] z:10];
+//            iceQubeSprite2[i]=[CCSprite spriteWithFile:@"fire.png"];
+//            iceQubeSprite2[i].position=ccp(-107,525);
+//            iceQubeSprite2[i].scale=0.9;
+//            iceQubeSprite2[i].rotation=arc4random() % 360 + 1;
+//            [self addChild:iceQubeSprite2[i] z:10];
             
-            iceQubeSprite3[i]=[CCSprite spriteWithFile:@"fire.png"];
-            iceQubeSprite3[i].position=ccp(-107,525);
-            iceQubeSprite3[i].scale=0.9;
-            iceQubeSprite3[i].rotation=arc4random() % 360 + 1;
-            [self addChild:iceQubeSprite3[i] z:10];
+            iceQubeSprite3[1]=[self addFireFlamesAnimation:ccp(0, 0)];
+            iceQubeSprite3[1].position=ccp(660,350);
+            iceQubeSprite3[1].scale=0.9;
+//            iceQubeSprite3[1].rotation=arc4random() % 360 + 1;
+            [self addChild:iceQubeSprite3[1] z:10];
             
-            iceQubeSprite4[i]=[CCSprite spriteWithFile:@"fire.png"];
-            iceQubeSprite4[i].position=ccp(-107,525);
-            iceQubeSprite4[i].scale=0.9;
-            iceQubeSprite4[i].rotation=arc4random() % 360 + 1;
-            [self addChild:iceQubeSprite4[i] z:10];
+//            iceQubeSprite4[i]=[CCSprite spriteWithFile:@"fire.png"];
+//            iceQubeSprite4[i].position=ccp(-107,525);
+//            iceQubeSprite4[i].scale=0.9;
+//            iceQubeSprite4[i].rotation=arc4random() % 360 + 1;
+//            [self addChild:iceQubeSprite4[i] z:10];
             
-            iceQubeSprite5[i]=[CCSprite spriteWithFile:@"fire.png"];
-            iceQubeSprite5[i].position=ccp(-107,525);
-            iceQubeSprite5[i].scale=0.9;
-            iceQubeSprite5[i].rotation=arc4random() % 360 + 1;
-            [self addChild:iceQubeSprite5[i] z:10];
+            iceQubeSprite5[2]=[self addFireFlamesAnimation:ccp(0, 0)];
+            iceQubeSprite5[2].position=ccp(760,350);
+            iceQubeSprite5[2].scale=0.9;
+//            iceQubeSprite5[2].rotation=arc4random() % 360 + 1;
+            [self addChild:iceQubeSprite5[2] z:10];
             
-            iceQubeSprite6[i]=[CCSprite spriteWithFile:@"fire.png"];
-            iceQubeSprite6[i].position=ccp(-107,525);
-            iceQubeSprite6[i].scale=0.9;
-            iceQubeSprite6[i].rotation=arc4random() % 360 + 1;
-            [self addChild:iceQubeSprite6[i] z:10];
-        }
+//            iceQubeSprite6[i]=[CCSprite spriteWithFile:@"fire.png"];
+//            iceQubeSprite6[i].position=ccp(-107,525);
+//            iceQubeSprite6[i].scale=0.9;
+//            iceQubeSprite6[i].rotation=arc4random() % 360 + 1;
+//            [self addChild:iceQubeSprite6[i] z:10];
+//        }
         
         for(int i=0;i<10;i++){
             NSString *fNameStr=@"";
@@ -507,7 +507,7 @@ GameEngine14Menu *layer14;
     [self hotSmokingFunc];
     [self iceQubeAnimation];
     [self switchFunc];
-    [self iceCubeCollision];
+//    [self iceCubeCollision];
     
     gameFunc.runChe=runningChe;
     [gameFunc render];
