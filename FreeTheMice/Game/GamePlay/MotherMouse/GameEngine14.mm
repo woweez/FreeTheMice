@@ -195,43 +195,20 @@ GameEngine14Menu *layer14;
         clockArrowSprite.rotation=-40;
         [layer14 addChild:clockArrowSprite z:0];
         ;
-//        for(int i=0;i<4;i++){
             iceQubeSprite[0]=[self addFireFlamesAnimation:ccp(0, 0)];
-            iceQubeSprite[0].position = ccp(373,350);
-            iceQubeSprite[0].scale=0.9;
-//            iceQubeSprite[0].rotation=arc4random() % 360 + 1;
+            iceQubeSprite[0].position = ccp(450,282);
+            iceQubeSprite[0].scale=0.7;
             [self addChild:iceQubeSprite[0] z:10];
-            
-//            iceQubeSprite2[i]=[CCSprite spriteWithFile:@"fire.png"];
-//            iceQubeSprite2[i].position=ccp(-107,525);
-//            iceQubeSprite2[i].scale=0.9;
-//            iceQubeSprite2[i].rotation=arc4random() % 360 + 1;
-//            [self addChild:iceQubeSprite2[i] z:10];
-            
-            iceQubeSprite3[1]=[self addFireFlamesAnimation:ccp(0, 0)];
-            iceQubeSprite3[1].position=ccp(660,350);
-            iceQubeSprite3[1].scale=0.9;
-//            iceQubeSprite3[1].rotation=arc4random() % 360 + 1;
-            [self addChild:iceQubeSprite3[1] z:10];
-            
-//            iceQubeSprite4[i]=[CCSprite spriteWithFile:@"fire.png"];
-//            iceQubeSprite4[i].position=ccp(-107,525);
-//            iceQubeSprite4[i].scale=0.9;
-//            iceQubeSprite4[i].rotation=arc4random() % 360 + 1;
-//            [self addChild:iceQubeSprite4[i] z:10];
-            
-            iceQubeSprite5[2]=[self addFireFlamesAnimation:ccp(0, 0)];
-            iceQubeSprite5[2].position=ccp(760,350);
-            iceQubeSprite5[2].scale=0.9;
-//            iceQubeSprite5[2].rotation=arc4random() % 360 + 1;
-            [self addChild:iceQubeSprite5[2] z:10];
-            
-//            iceQubeSprite6[i]=[CCSprite spriteWithFile:@"fire.png"];
-//            iceQubeSprite6[i].position=ccp(-107,525);
-//            iceQubeSprite6[i].scale=0.9;
-//            iceQubeSprite6[i].rotation=arc4random() % 360 + 1;
-//            [self addChild:iceQubeSprite6[i] z:10];
-//        }
+
+            iceQubeSprite[1]=[self addFireFlamesAnimation:ccp(0, 0)];
+            iceQubeSprite[1].position=ccp(715,282);
+            iceQubeSprite[1].scale=0.7;
+            [self addChild:iceQubeSprite[1] z:10];
+        
+            iceQubeSprite[2]=[self addFireFlamesAnimation:ccp(0, 0)];
+            iceQubeSprite[2].position=ccp(895,282);
+            iceQubeSprite[2].scale=0.7;
+            [self addChild:iceQubeSprite[2] z:10];
         
         for(int i=0;i<10;i++){
             NSString *fNameStr=@"";
@@ -507,7 +484,7 @@ GameEngine14Menu *layer14;
     [self hotSmokingFunc];
     [self iceQubeAnimation];
     [self switchFunc];
-//    [self iceCubeCollision];
+    [self iceCubeCollision];
     
     gameFunc.runChe=runningChe;
     [gameFunc render];
@@ -527,28 +504,10 @@ GameEngine14Menu *layer14;
     CGFloat hy=heroSprite.position.y;
     int iValue=(forwardChe?60:0);
     
-    
-    for(int i=0;i<5;i++){
-        if(gateCount!=0){
-            if(hx-iValue>iceQubeSprite[i].position.x-30 &&hx-iValue<iceQubeSprite[i].position.x+20 &&hy > iceQubeSprite[i].position.y-30 &&hy<iceQubeSprite[i].position.y+50 &&!gameFunc.trappedChe){
+   for(int i=0;i<3;i++){
+        if(hx-iValue>iceQubeSprite[i].position.x-60 &&hx-iValue<iceQubeSprite[i].position.x+20 &&hy > iceQubeSprite[i].position.y-30 &&hy<iceQubeSprite[i].position.y+50 &&!gameFunc.trappedChe){
                 gameFunc.trappedChe=YES;
                 trappedTypeValue=1;
-            }else if(hx-iValue>iceQubeSprite2[i].position.x-30 &&hx-iValue<iceQubeSprite2[i].position.x+20 &&hy > iceQubeSprite2[i].position.y-30 &&hy<iceQubeSprite2[i].position.y+50 &&!gameFunc.trappedChe){
-                gameFunc.trappedChe=YES;
-                trappedTypeValue=1;
-            }else if(hx-iValue>iceQubeSprite3[i].position.x-30 &&hx-iValue<iceQubeSprite3[i].position.x+20 &&hy > iceQubeSprite3[i].position.y-30 &&hy<iceQubeSprite3[i].position.y+50 &&!gameFunc.trappedChe){
-                gameFunc.trappedChe=YES;
-                trappedTypeValue=1;
-            }else if(hx-iValue>iceQubeSprite4[i].position.x-30 &&hx-iValue<iceQubeSprite4[i].position.x+20 &&hy > iceQubeSprite4[i].position.y-30 &&hy<iceQubeSprite4[i].position.y+50 &&!gameFunc.trappedChe){
-                gameFunc.trappedChe=YES;
-                trappedTypeValue=1;
-            }else if(hx-iValue>iceQubeSprite5[i].position.x-30 &&hx-iValue<iceQubeSprite5[i].position.x+20 &&hy > iceQubeSprite5[i].position.y-30 &&hy<iceQubeSprite5[i].position.y+50 &&!gameFunc.trappedChe){
-                gameFunc.trappedChe=YES;
-                trappedTypeValue=1;
-            }else if(hx-iValue>iceQubeSprite6[i].position.x-30 &&hx-iValue<iceQubeSprite6[i].position.x+20 &&hy > iceQubeSprite6[i].position.y-30 &&hy<iceQubeSprite6[i].position.y+50 &&!gameFunc.trappedChe){
-                gameFunc.trappedChe=YES;
-                trappedTypeValue=1;
-            }
         }
     }
     
@@ -634,52 +593,52 @@ GameEngine14Menu *layer14;
 
 -(void)iceQubeAnimation{
     if(!screenMoveChe){
-        for(int i=0;i<5;i++){
-            if(iceQubeCount[i]!=0){
-                if(iceQubeCount[i]!=0)
-                    iceQubeCount[i]+=2.5;
-                
-                iceQubeSprite[i].position=ccp([fireXPos[0] intValue],250+iceQubeCount[i]-(iceQubeCount[i]/4));
-                iceQubeSprite[i].scale=(iceQubeCount[i]/250.0);
-                iceQubeSprite2[i].position=ccp([fireXPos[1] intValue],250+iceQubeCount[i]-(iceQubeCount[i]/4));
-                iceQubeSprite2[i].scale=(iceQubeCount[i]/250.0);
-                iceQubeSprite3[i].position=ccp([fireXPos[2] intValue],250+iceQubeCount[i]-(iceQubeCount[i]/4));
-                iceQubeSprite3[i].scale=(iceQubeCount[i]/250.0);
-                
-                iceQubeSprite4[i].position=ccp([fireXPos[0] intValue]+36,250+iceQubeCount[i]-(iceQubeCount[i]/4));
-                iceQubeSprite4[i].scale=(iceQubeCount[i]/250.0);
-                iceQubeSprite5[i].position=ccp([fireXPos[1] intValue]+36,250+iceQubeCount[i]-(iceQubeCount[i]/4));
-                iceQubeSprite5[i].scale=(iceQubeCount[i]/250.0);
-                iceQubeSprite6[i].position=ccp([fireXPos[2] intValue]+36,250+iceQubeCount[i]-(iceQubeCount[i]/4));
-                iceQubeSprite6[i].scale=(iceQubeCount[i]/250.0);
-                
-            }
-            
-            if(iceQubeCount[i]>=100){
-                iceQubeSprite[i].rotation=arc4random() % 360 + 1;
-                iceQubeSprite[i].position=ccp(-283,250);
-                iceQubeSprite2[i].rotation=arc4random() % 360 + 1;
-                iceQubeSprite2[i].position=ccp(-283,250);
-                iceQubeSprite3[i].rotation=arc4random() % 360 + 1;
-                iceQubeSprite3[i].position=ccp(-283,250);
-                iceQubeSprite4[i].rotation=arc4random() % 360 + 1;
-                iceQubeSprite4[i].position=ccp(-283,250);
-                iceQubeSprite5[i].rotation=arc4random() % 360 + 1;
-                iceQubeSprite5[i].position=ccp(-283,250);
-                iceQubeSprite6[i].rotation=arc4random() % 360 + 1;
-                iceQubeSprite6[i].position=ccp(-283,250);
-                iceQubeCount[i]=0;
-            }
-        }
-        
-        if(fireReleaseCount==0&&fireStartCount<=100&&gateCount!=0){
-            for(int i=0;i<5;i++){
-                if(iceQubeCount[i]==0){
-                    iceQubeCount[i]=1;
-                    break;
-                }
-            }
-        }
+//        for(int i=0;i<5;i++){
+//            if(iceQubeCount[i]!=0){
+//                if(iceQubeCount[i]!=0)
+//                    iceQubeCount[i]+=2.5;
+//                
+//                iceQubeSprite[i].position=ccp([fireXPos[0] intValue],250+iceQubeCount[i]-(iceQubeCount[i]/4));
+//                iceQubeSprite[i].scale=(iceQubeCount[i]/250.0);
+//                iceQubeSprite2[i].position=ccp([fireXPos[1] intValue],250+iceQubeCount[i]-(iceQubeCount[i]/4));
+//                iceQubeSprite2[i].scale=(iceQubeCount[i]/250.0);
+//                iceQubeSprite3[i].position=ccp([fireXPos[2] intValue],250+iceQubeCount[i]-(iceQubeCount[i]/4));
+//                iceQubeSprite3[i].scale=(iceQubeCount[i]/250.0);
+//                
+//                iceQubeSprite4[i].position=ccp([fireXPos[0] intValue]+36,250+iceQubeCount[i]-(iceQubeCount[i]/4));
+//                iceQubeSprite4[i].scale=(iceQubeCount[i]/250.0);
+//                iceQubeSprite5[i].position=ccp([fireXPos[1] intValue]+36,250+iceQubeCount[i]-(iceQubeCount[i]/4));
+//                iceQubeSprite5[i].scale=(iceQubeCount[i]/250.0);
+//                iceQubeSprite6[i].position=ccp([fireXPos[2] intValue]+36,250+iceQubeCount[i]-(iceQubeCount[i]/4));
+//                iceQubeSprite6[i].scale=(iceQubeCount[i]/250.0);
+//                
+//            }
+//            
+//            if(iceQubeCount[i]>=100){
+//                iceQubeSprite[i].rotation=arc4random() % 360 + 1;
+//                iceQubeSprite[i].position=ccp(-283,250);
+//                iceQubeSprite2[i].rotation=arc4random() % 360 + 1;
+//                iceQubeSprite2[i].position=ccp(-283,250);
+//                iceQubeSprite3[i].rotation=arc4random() % 360 + 1;
+//                iceQubeSprite3[i].position=ccp(-283,250);
+//                iceQubeSprite4[i].rotation=arc4random() % 360 + 1;
+//                iceQubeSprite4[i].position=ccp(-283,250);
+//                iceQubeSprite5[i].rotation=arc4random() % 360 + 1;
+//                iceQubeSprite5[i].position=ccp(-283,250);
+//                iceQubeSprite6[i].rotation=arc4random() % 360 + 1;
+//                iceQubeSprite6[i].position=ccp(-283,250);
+//                iceQubeCount[i]=0;
+//            }
+//        }
+//        
+//        if(fireReleaseCount==0&&fireStartCount<=100&&gateCount!=0){
+//            for(int i=0;i<5;i++){
+//                if(iceQubeCount[i]==0){
+//                    iceQubeCount[i]=1;
+//                    break;
+//                }
+//            }
+//        }
         
         fireReleaseCount+=1;
         if(fireReleaseCount>=10){
@@ -1715,8 +1674,8 @@ GameEngine14Menu *layer14;
 }
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
-//        [[CCDirector sharedDirector] replaceScene:[GameEngine14 scene]];
-        [self respwanTheMice];
+        [[CCDirector sharedDirector] replaceScene:[GameEngine14 scene]];
+//        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }

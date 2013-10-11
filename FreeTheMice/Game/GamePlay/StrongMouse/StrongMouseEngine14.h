@@ -72,11 +72,6 @@
     CCSprite *blockSprite[6];
     CCSprite *hotSprite[10];
     CCSprite *iceQubeSprite[5];
-    CCSprite *iceQubeSprite2[5];
-    CCSprite *iceQubeSprite3[5];
-    CCSprite *iceQubeSprite4[5];
-    CCSprite *iceQubeSprite5[5];
-    CCSprite *iceQubeSprite6[5];
     CCSprite *gateSprite;
     
     CCSprite *dotSprite;
