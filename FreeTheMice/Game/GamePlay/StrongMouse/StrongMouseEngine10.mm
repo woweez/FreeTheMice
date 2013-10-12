@@ -336,16 +336,19 @@ StrongMouseEngineMenu10 *sLayer10;
         freezeWindowSprite.scale=0.5;
         [self addChild:freezeWindowSprite z:0];
         
-        CCSprite *combSprite=[CCSprite spriteWithFile:@"com_b.png"];
+        CCSprite *combSprite=[CCSprite spriteWithFile:@"b.png"];
         combSprite.position=ccp(427,420);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_a.png"];
+        combSprite=[CCSprite spriteWithFile:@"a.png"];
         combSprite.position=ccp(509,420);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_c.png"];
+        combSprite=[CCSprite spriteWithFile:@"c.png"];
         combSprite.position=ccp(589,420);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
         combSprite=[CCSprite spriteWithFile:@"com_bca.png"];

@@ -313,36 +313,43 @@ GameEngine12Menu *layer12;
         bridgeSprite.position=ccp(550,412);
         [self addChild:bridgeSprite z:0];
         
-        CCSprite *combSprite=[CCSprite spriteWithFile:@"com_b.png"];
+        CCSprite *combSprite=[CCSprite spriteWithFile:@"b.png"];
         combSprite.position=ccp(186,475);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_a.png"];
+        combSprite=[CCSprite spriteWithFile:@"a.png"];
         combSprite.position=ccp(528,484);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_c.png"];
+        combSprite=[CCSprite spriteWithFile:@"c.png"];
         combSprite.position=ccp(480,358);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_d.png"];
+        combSprite=[CCSprite spriteWithFile:@"d.png"];
         combSprite.position=ccp(864,518);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_box.png"];
+        combSprite=[CCSprite spriteWithFile:@"box.png"];
         combSprite.position=ccp(898,518);
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_c.png"];
+        combSprite=[CCSprite spriteWithFile:@"c.png"];
         combSprite.position=ccp(884,519);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_a.png"];
+        combSprite=[CCSprite spriteWithFile:@"a.png"];
         combSprite.position=ccp(896,519);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_b.png"];
+        combSprite=[CCSprite spriteWithFile:@"b.png"];
         combSprite.position=ccp(909,519);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
         CCSprite *sprite=[CCSprite spriteWithFile:@"bridge_ice_box3.png"];

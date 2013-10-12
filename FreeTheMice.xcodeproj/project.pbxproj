@@ -690,6 +690,10 @@
 		7FF333CC16CA0FDB0031FAF7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FF333CB16CA0FDB0031FAF7 /* SystemConfiguration.framework */; };
 		7FFC245416BAE5C8005E4389 /* mother_mouse_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FFC245216BAE5C8005E4389 /* mother_mouse_default.plist */; };
 		7FFC245516BAE5C8005E4389 /* mother_mouse_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FFC245316BAE5C8005E4389 /* mother_mouse_default.png */; };
+		FA72A9961808C74200312ED5 /* a.png in Resources */ = {isa = PBXBuildFile; fileRef = FA72A9921808C74200312ED5 /* a.png */; };
+		FA72A9971808C74200312ED5 /* b.png in Resources */ = {isa = PBXBuildFile; fileRef = FA72A9931808C74200312ED5 /* b.png */; };
+		FA72A9981808C74200312ED5 /* c.png in Resources */ = {isa = PBXBuildFile; fileRef = FA72A9941808C74200312ED5 /* c.png */; };
+		FA72A9991808C74200312ED5 /* d.png in Resources */ = {isa = PBXBuildFile; fileRef = FA72A9951808C74200312ED5 /* d.png */; };
 		FA8CBB7F17F773BD0017F58A /* SWScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA8CBB7E17F773BD0017F58A /* SWScrollView.mm */; };
 		FA92F2A217EF903000A35AD0 /* FTMUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FA92F2A117EF903000A35AD0 /* FTMUtil.m */; };
 		FAE8B85517FCAB93005FDE1E /* sm_mist_0.png in Resources */ = {isa = PBXBuildFile; fileRef = FAE8B85417FCAB93005FDE1E /* sm_mist_0.png */; };
@@ -1641,6 +1645,10 @@
 		7FF333CB16CA0FDB0031FAF7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7FFC245216BAE5C8005E4389 /* mother_mouse_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = mother_mouse_default.plist; sourceTree = "<group>"; };
 		7FFC245316BAE5C8005E4389 /* mother_mouse_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mother_mouse_default.png; sourceTree = "<group>"; };
+		FA72A9921808C74200312ED5 /* a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = a.png; sourceTree = "<group>"; };
+		FA72A9931808C74200312ED5 /* b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b.png; sourceTree = "<group>"; };
+		FA72A9941808C74200312ED5 /* c.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = c.png; sourceTree = "<group>"; };
+		FA72A9951808C74200312ED5 /* d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = d.png; sourceTree = "<group>"; };
 		FA8CBB7D17F773BD0017F58A /* SWScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWScrollView.h; sourceTree = "<group>"; };
 		FA8CBB7E17F773BD0017F58A /* SWScrollView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWScrollView.mm; sourceTree = "<group>"; };
 		FA92F2A017EF8F9D00A35AD0 /* FTMUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMUtil.h; sourceTree = "<group>"; };
@@ -2166,6 +2174,10 @@
 		46C70B5317F0342D002E0DAC /* inGameUI */ = {
 			isa = PBXGroup;
 			children = (
+				FA72A9921808C74200312ED5 /* a.png */,
+				FA72A9931808C74200312ED5 /* b.png */,
+				FA72A9941808C74200312ED5 /* c.png */,
+				FA72A9951808C74200312ED5 /* d.png */,
 				4600FFB81806A5AD0010683E /* newInGameAssets */,
 				469239E317F18FB9008B6D80 /* apple_wood_back.png */,
 				469239E417F18FB9008B6D80 /* apple_wood.png */,
@@ -3764,6 +3776,10 @@
 				4600FFCE1806A5AD0010683E /* knives_tray.png in Resources */,
 				4600FFCF1806A5AD0010683E /* push_button_green.png in Resources */,
 				4600FFD01806A5AD0010683E /* stick_platform.png in Resources */,
+				FA72A9961808C74200312ED5 /* a.png in Resources */,
+				FA72A9971808C74200312ED5 /* b.png in Resources */,
+				FA72A9981808C74200312ED5 /* c.png in Resources */,
+				FA72A9991808C74200312ED5 /* d.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

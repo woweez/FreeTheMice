@@ -269,16 +269,19 @@ GirlMouseEngineMenu10 *gLayer10;
         switchAtlas3.scale=0.7;
         [self addChild:switchAtlas3 z:1];
         
-        CCSprite *combSprite=[CCSprite spriteWithFile:@"com_c.png"];
+        CCSprite *combSprite=[CCSprite spriteWithFile:@"c.png"];
         combSprite.position=ccp(427,523);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_a.png"];
+        combSprite=[CCSprite spriteWithFile:@"a.png"];
         combSprite.position=ccp(510,523);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_b.png"];
+        combSprite=[CCSprite spriteWithFile:@"b.png"];
         combSprite.position=ccp(587,523);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
         CCSprite *sprite=[CCSprite spriteWithFile:@"ice_box.png"];

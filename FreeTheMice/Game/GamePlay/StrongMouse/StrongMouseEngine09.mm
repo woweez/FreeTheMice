@@ -383,44 +383,53 @@ StrongMouseEngineMenu09 *sLayer09;
             [self addChild:boxSprite[i] z:1];
         }
         
-        CCSprite *combSprite=[CCSprite spriteWithFile:@"com_a.png"];
+        CCSprite *combSprite=[CCSprite spriteWithFile:@"a.png"];
         combSprite.position=ccp(809,260);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_b.png"];
+        combSprite=[CCSprite spriteWithFile:@"b.png"];
         combSprite.position=ccp(579,260);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_c.png"];
+        combSprite=[CCSprite spriteWithFile:@"c.png"];
         combSprite.position=ccp(359,260);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
         combSprite=[CCSprite spriteWithFile:@"com_box.png"];
         combSprite.position=ccp(960,490);
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_c.png"];
+        combSprite=[CCSprite spriteWithFile:@"c.png"];
         combSprite.position=ccp(948,490);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_a.png"];
+        combSprite=[CCSprite spriteWithFile:@"a.png"];
         combSprite.position=ccp(960,490);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_b.png"];
+        combSprite=[CCSprite spriteWithFile:@"b.png"];
         combSprite.position=ccp(972,490);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        comBoxSprite[0]=[CCSprite spriteWithFile:@"com_a.png"];
+        comBoxSprite[0]=[CCSprite spriteWithFile:@"a.png"];
         comBoxSprite[0].position=ccp(-399,282);
+        comBoxSprite[0].scale = 0.4;
         [self addChild:comBoxSprite[0] z:1];
         
-        comBoxSprite[1]=[CCSprite spriteWithFile:@"com_c.png"];
+        comBoxSprite[1]=[CCSprite spriteWithFile:@"c.png"];
         comBoxSprite[1].position=ccp(-399,282);
+        comBoxSprite[1].scale = 0.4;
         [self addChild:comBoxSprite[1] z:1];
         
-        comBoxSprite[2]=[CCSprite spriteWithFile:@"com_b.png"];
+        comBoxSprite[2]=[CCSprite spriteWithFile:@"b.png"];
         comBoxSprite[2].position=ccp(-399,282);
+        comBoxSprite[2].scale = 0.4;
         [self addChild:comBoxSprite[2] z:1];
         
         for(int i=0;i<20;i++){

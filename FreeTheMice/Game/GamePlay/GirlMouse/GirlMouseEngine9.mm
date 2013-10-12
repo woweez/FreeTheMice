@@ -345,44 +345,53 @@ GirlMouseEngineMenu09 *gLayer09;
         fridgeSprite.position=ccp(925,394);
         [self addChild:fridgeSprite z:0];
         
-        CCSprite *combSprite=[CCSprite spriteWithFile:@"com_a.png"];
+        CCSprite *combSprite=[CCSprite spriteWithFile:@"a.png"];
         combSprite.position=ccp(930,320);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_b.png"];
+        combSprite=[CCSprite spriteWithFile:@"b.png"];
         combSprite.position=ccp(930,562);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_c.png"];
+        combSprite=[CCSprite spriteWithFile:@"c.png"];
         combSprite.position=ccp(930,440);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
         combSprite=[CCSprite spriteWithFile:@"com_box.png"];
         combSprite.position=ccp(960,390);
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_b.png"];
+        combSprite=[CCSprite spriteWithFile:@"b.png"];
         combSprite.position=ccp(948,390);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_c.png"];
+        combSprite=[CCSprite spriteWithFile:@"c.png"];
         combSprite.position=ccp(960,390);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_a.png"];
+        combSprite=[CCSprite spriteWithFile:@"a.png"];
         combSprite.position=ccp(972,390);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_a.png"];
+        combSprite=[CCSprite spriteWithFile:@"a.png"];
         combSprite.position=ccp(410,325);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_b.png"];
+        combSprite=[CCSprite spriteWithFile:@"b.png"];
         combSprite.position=ccp(110,690);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
-        combSprite=[CCSprite spriteWithFile:@"com_c.png"];
+        combSprite=[CCSprite spriteWithFile:@"c.png"];
         combSprite.position=ccp(940,610);
+        combSprite.scale = 0.4;
         [self addChild:combSprite z:1];
         
         
