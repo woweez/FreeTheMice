@@ -109,7 +109,7 @@ StrongMouseEngineMenu03 *sLayer03;
             CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_run0%d.png",i]];
             [animFrames addObject:frame];
         }
-        CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animFrames delay:0.08f];
+        CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animFrames delay:0.03f];
         [heroRunSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation]]];
         
         
@@ -124,7 +124,7 @@ StrongMouseEngineMenu03 *sLayer03;
             CCSpriteFrame *frame2 = [cache spriteFrameByName:[NSString stringWithFormat:@"push%d.png",i]];
             [animFrames2 addObject:frame2];
         }
-        CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.08f];
+        CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.03f];
         [heroPushSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
         
         

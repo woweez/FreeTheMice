@@ -1403,8 +1403,8 @@ GameEngine07Menu *layer07;
 }
 -(void)clickLevel:(CCMenuItem *)sender {
     if(sender.tag == 1){
-//        [[CCDirector sharedDirector] replaceScene:[GameEngine07 scene]];
-        [self respwanTheMice];
+        [[CCDirector sharedDirector] replaceScene:[GameEngine07 scene]];
+//        [self respwanTheMice];
     }else if(sender.tag ==2){
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }
