@@ -66,7 +66,6 @@
     CCSprite *cheeseCollectedSprite;
     CCSprite *mouseTrappedBackground;
     CCSprite *timeCheeseSprite;
-    CCSprite *catSprite;
     CCSprite *catSprite2;
     CCSprite *cheeseSprite[5];
     CCSprite *cheeseSprite2[5];

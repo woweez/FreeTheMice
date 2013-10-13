@@ -89,18 +89,7 @@ StrongMouseEngineMenu09 *sLayer09;
         spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"strong0_default.png"];
         [self addChild:spriteSheet z:10];
         
-        heroRunSprite = [CCSprite spriteWithSpriteFrameName:@"strong_run01.png"];
-        heroRunSprite.scale = 0.6;
-        heroRunSprite.position = ccp(200, 200);
-        [spriteSheet addChild:heroRunSprite];
-        
-        NSMutableArray *animFrames = [NSMutableArray array];
-        for(int i = 1; i <=12; i++) {
-            CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"strong_run0%d.png",i]];
-            [animFrames addObject:frame];
-        }
-        CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animFrames delay:0.08f];
-        [heroRunSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation]]];
+        [self addStrongMouseRunningSprite];
         
         catCache = [CCSpriteFrameCache sharedSpriteFrameCache];
         [catCache addSpriteFramesWithFile:@"cat_default.plist"];
@@ -119,18 +108,7 @@ StrongMouseEngineMenu09 *sLayer09;
         CCAnimation *animation4 = [CCAnimation animationWithSpriteFrames:animFrames4 delay:0.03f];
         [catRunSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation4]]];
         
-        heroPushSprite = [CCSprite spriteWithSpriteFrameName:@"push1.png"];
-        heroPushSprite.scale = 0.6;
-        heroPushSprite.position = ccp(200, 200);
-        heroPushSprite.visible=NO;
-        [spriteSheet addChild:heroPushSprite];
-        NSMutableArray *animFrames2 = [NSMutableArray array];
-        for(int i = 1; i <29; i++) {
-            CCSpriteFrame *frame2 = [cache spriteFrameByName:[NSString stringWithFormat:@"push%d.png",i]];
-            [animFrames2 addObject:frame2];
-        }
-        CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.08f];
-        [heroPushSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+        [self addStrongMousePushingSprite];
         
         mouseDragSprite=[CCSprite spriteWithFile:@"mouse_drag.png"];
         mouseDragSprite.position=ccp(platformX+2,platformY+3);

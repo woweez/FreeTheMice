@@ -871,7 +871,13 @@ static BOOL configured = FALSE;
 		return [soundId intValue];
 	}
 }
-
+-(int) getSoundIdForFile:(NSString *)filePath{
+    NSNumber* soundId = (NSNumber*)[loadedBuffers objectForKey:filePath];
+    if (soundId!= nil) {
+        return [soundId intValue];
+    }
+    return 0;
+}
 -(void) releaseBufferForFile:(NSString *) filePath {
 	int bufferId = [self bufferForFile:filePath create:NO];
 	if (bufferId != kCDNoBuffer) {

@@ -13,7 +13,8 @@
 #import "LevelCompleteScreen.h"
 #import "HudLayer.h"
 #import "DB.h"
-
+#import "FTMConstants.h"
+#import "SimpleAudioEngine.h"
 enum {
     kTagParentNode = 1,
 };
@@ -457,6 +458,7 @@ GameEngine01Menu *layer01;
                     cheeseSprite2[i].visible=NO;
                     cheeseCollectedScore+=1;
                     starSprite[i].visible=NO;
+                    [[SimpleAudioEngine sharedEngine] playEffect:CHEESE_1 loop:NO];
                     [hudLayer updateNoOfCheeseCollected:cheeseCollectedScore andMaxValue:[cheeseSetValue[motherLevel-1] intValue]];
                     [self createExplosionX:cheeseX+mValue y:cheeseY];
                     break;
@@ -469,6 +471,7 @@ GameEngine01Menu *layer01;
                     cheeseSprite2[i].visible=NO;
                     cheeseCollectedScore+=1;
                     starSprite[i].visible=NO;
+                    [[SimpleAudioEngine sharedEngine] playEffect:CHEESE_1 loop:NO];
                     [hudLayer updateNoOfCheeseCollected:cheeseCollectedScore andMaxValue:[cheeseSetValue[motherLevel-1] intValue]];
                     [self createExplosionX:cheeseX+mValue y:cheeseY];
                     break;

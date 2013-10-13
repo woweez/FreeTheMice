@@ -14,7 +14,8 @@
 #import "LevelCompleteScreen.h"
 #import "FTMUtil.h"
 #import "DB.h"
-
+#import "FTMConstants.h"
+#import "SimpleAudioEngine.h"
 enum {
     kTagParentNode = 1,
 };

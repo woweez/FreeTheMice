@@ -53,7 +53,7 @@
 #import "FTMUtil.h"
 #import "FTMConstants.h"
 #import "DB.h"
-
+#import "SimpleAudioEngine.h"
 
 @implementation HudLayer
 
@@ -124,6 +124,7 @@
     CCMenuItem *pauseMenuItem = [CCMenuItemImage itemWithNormalImage:@"pause_btn.png" selectedImage:@"pause_btn_press.png" block:^(id sender) {
         
         [self showPausingAnimation];
+        [[SimpleAudioEngine sharedEngine] setMute:YES];
         
     }];
     [pauseMenuItem setScale:0.5];
@@ -175,7 +176,7 @@
 
 -(void) addMagnifyingBtnMenu{
     CCMenuItem *magnifyMenuItem = [CCMenuItemImage itemWithNormalImage:@"zoom_btn.png" selectedImage:@"zoom_btn_press.png" block:^(id sender) {
-        
+        [FTMUtil sharedInstance].isBoostPowerUpEnabled = YES;
         
     }];
     [magnifyMenuItem setScale:0.5];
@@ -219,6 +220,7 @@
     
     CCMenuItem *levelsMenuItem = [CCMenuItemImage itemWithNormalImage:@"level_select_btn.png" selectedImage:@"level_select_btn_press.png" block:^(id sender) {
         [[CCDirector sharedDirector] resume];
+        [[SimpleAudioEngine sharedEngine] setMute:NO];
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }];
 
@@ -233,6 +235,7 @@
     
     CCMenuItem *homeMenuItem = [CCMenuItemImage itemWithNormalImage:@"home_btn.png" selectedImage:@"home_btn_press.png" block:^(id sender) {
         [[CCDirector sharedDirector] resume];
+        [[SimpleAudioEngine sharedEngine] setMute:NO];
         [[CCDirector sharedDirector] replaceScene:[MenuScreen scene]];
     }];
 
@@ -240,6 +243,7 @@
     
     CCMenuItem *resumeMenuItem = [CCMenuItemImage itemWithNormalImage:@"play_btn.png" selectedImage:@"play_btn_press.png" block:^(id sender) {
         [self showPausingAnimation];
+        [[SimpleAudioEngine sharedEngine] setMute:NO];
         
     }];
     

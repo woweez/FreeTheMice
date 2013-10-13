@@ -57,7 +57,6 @@
 //    CCSprite *heroRunSprite;
     CCSprite *heroWinSprite;
     CCSprite *heroTrappedSprite;
-    CCSprite *heroPushSprite;
     CCSprite *mouseDragSprite;
     CCSprite *progressBarBackSprite;
     CCSprite *cheeseCollectedSprite;

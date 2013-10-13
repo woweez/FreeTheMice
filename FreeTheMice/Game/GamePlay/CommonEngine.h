@@ -21,8 +21,18 @@
     CCSprite *heroRunSprite;
     CCSprite *heroSprite;
     CCSprite *flamesSprite;
+    CCSprite *heroPushSprite;
+    CCSprite *catSprite;
     CCSpriteBatchNode *spriteSheet;
+    //boots power up feature..
     CCSpriteBatchNode *bootsSpriteSheet;
+    CCSprite *bootsRunSprite;
+    CCSprite *bootsJumpSprite;
+    CCSprite *bootsStandSprite;
+    CCAnimation *heroRunningAnimation;
+    CCAnimation *heroBootsRunningAnimation;
+    
+    
     CCSprite *trappingAnimationSprite;
     BOOL forwardChe;
     BOOL mouseWinChe;
@@ -52,6 +62,9 @@
 -(CCSprite *) getFireAnimatedSprite;
 -(void) applyBoostPowerUpFeature;
 -(CCSprite *) addFireFlamesAnimation:(CGPoint) position;
+-(void) switchAnimationsForBootsPowerUp;
+-(void) addStrongMouseRunningSprite;
+-(void) addStrongMousePushingSprite;
 -(void)progressBarFunc;
 
 

@@ -60,7 +60,6 @@
 //    CCSprite *heroRunSprite;
     CCSprite *heroWinSprite;
     CCSprite *heroTrappedSprite;
-    CCSprite *heroPushSprite;
     CCSprite *mouseTrappedBackground;
     CCSprite *mouseDragSprite;
     CCSprite *progressBarBackSprite;
@@ -81,7 +80,6 @@
     CCSprite *iceSmokingSprite[5][2];
     CCSprite *hoenyPotSprite;
     CCSprite *iceQubeSprite[4];
-    CCSprite *catSprite;
     CCSprite *catStopWoodSprite;
     CCSprite *pulbSprite;
     

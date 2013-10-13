@@ -238,6 +238,7 @@ static const int kCDNoBuffer = -1;
 -(id) initWithEngine:(CDSoundEngine *) theSoundEngine;
 -(int) bufferForFile:(NSString*) filePath create:(BOOL) create;
 -(void) releaseBufferForFile:(NSString *) filePath;
+-(int) getSoundIdForFile:(NSString *) filePath;
 
 @end
 
