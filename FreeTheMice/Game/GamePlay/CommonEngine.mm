@@ -282,11 +282,11 @@
     heroSprite.tag = HERO_SPRITE_TAG;
     heroSprite.scale = STRONG_SCALE;
     NSMutableArray *animFrames2 = [NSMutableArray array];
-    int length = 16;
+    int length = 12;
     if ([FTMUtil sharedInstance].isBoostPowerUpEnabled) {
         length = 11;
     }
-    for(int i = 11; i <= length; i++) {
+    for(int i = 9; i <= length; i++) {
 
         CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:frameName,i]];
         [animFrames2 addObject:frame];
