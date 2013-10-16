@@ -15,7 +15,7 @@
 #import "GLES-Render.h"
 #import "AppDelegate.h"
 #import "HudLayer.h"
-
+#import "CatObject.h"
 @interface CommonEngine : CCLayer {
     
     CCSprite *heroRunSprite;
@@ -23,6 +23,7 @@
     CCSprite *flamesSprite;
     CCSprite *heroPushSprite;
     CCSprite *catSprite;
+
     CCSpriteBatchNode *spriteSheet;
     //boots power up feature..
     CCSpriteBatchNode *bootsSpriteSheet;
@@ -31,7 +32,6 @@
     CCSprite *bootsStandSprite;
     CCAnimation *heroRunningAnimation;
     CCAnimation *heroBootsRunningAnimation;
-    
     
     CCSprite *trappingAnimationSprite;
     BOOL forwardChe;

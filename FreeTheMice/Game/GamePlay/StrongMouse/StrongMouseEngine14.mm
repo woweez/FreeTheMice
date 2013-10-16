@@ -112,11 +112,12 @@ StrongMouseEngineMenu14 *sLayer14;
             [self addChild:blockSprite[i] z:0];
         }
         
-        catCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-        [catCache addSpriteFramesWithFile:@"cat_default.plist"];
-        catSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"cat_default.png"];
-        [self addChild:catSpriteSheet z:0];
-        
+
+//        catCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+//        [catCache addSpriteFramesWithFile:@"cat_default.plist"];
+//        catSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"cat_default.png"];
+//        [self addChild:catSpriteSheet z:0];
+//        
         [self addStrongMousePushingSprite];
         
         mouseDragSprite=[CCSprite spriteWithFile:@"mouse_drag.png"];
@@ -480,7 +481,11 @@ StrongMouseEngineMenu14 *sLayer14;
 
 -(void)catFunc{
     
-    
+    if(!catJumpChe && catObj == nil){
+        catObj = [[StrongLevel14Cat alloc] init];
+        [catObj runCurrentSequence];
+        [self addChild:catObj];
+    }
     if(catRunningSection ==1){
         if(!catBackChe){
             if(catMovementCount<=135){
@@ -742,11 +747,11 @@ StrongMouseEngineMenu14 *sLayer14;
     catAnimationCount+=2;
     catAnimationCount=(catAnimationCount>=43?0:catAnimationCount);
     
-    if(turnAnimationCount==0)
-        catSprite.position=ccp(catX,catY+16);
-    else
-        catSprite.position=ccp(catX,catY+13);
-    
+//    if(turnAnimationCount==0)
+//        catSprite.position=ccp(catX,catY+16);
+//    else
+//        catSprite.position=ccp(catX,catY+13);
+//    
     if(catSpillTimeCount>=1){
         if(milkStopChe)
             catSpillTimeCount+=1;
@@ -758,25 +763,25 @@ StrongMouseEngineMenu14 *sLayer14;
 
 
 -(void)catSpriteGenerate:(int)fValue animationType:(NSString *)type{
-    NSString *fStr=@"";
-    if([type isEqualToString:@"run"])
-        fStr=[NSString stringWithFormat:@"cat_run%d.png",fValue+1];
-    else if([type isEqualToString:@"turn"]){
-        fStr=[NSString stringWithFormat:@"cat_turn_run%d.png",fValue];
-    }else if([type isEqualToString:@"jump"])
-        fStr=[NSString stringWithFormat:@"cat_jump%d.png",fValue];
-    
-    [catSpriteSheet removeChild:catSprite cleanup:YES];
-    catSprite = [CCSprite spriteWithSpriteFrameName:fStr];
-    catSprite.position = ccp(catX,catY);
-    catSprite.scale=0.6;
-    if(!catForwardChe){
-        catSprite.flipX=0;
-    }else{
-        catSprite.flipX=1;
-    }
-    [catSpriteSheet addChild:catSprite z:10];
-    
+//    NSString *fStr=@"";
+//    if([type isEqualToString:@"run"])
+//        fStr=[NSString stringWithFormat:@"cat_run%d.png",fValue+1];
+//    else if([type isEqualToString:@"turn"]){
+//        fStr=[NSString stringWithFormat:@"cat_turn_run%d.png",fValue];
+//    }else if([type isEqualToString:@"jump"])
+//        fStr=[NSString stringWithFormat:@"cat_jump%d.png",fValue];
+//    
+//    [catSpriteSheet removeChild:catSprite cleanup:YES];
+//    catSprite = [CCSprite spriteWithSpriteFrameName:fStr];
+//    catSprite.position = ccp(catX,catY);
+//    catSprite.scale=0.6;
+//    if(!catForwardChe){
+//        catSprite.flipX=0;
+//    }else{
+//        catSprite.flipX=1;
+//    }
+//    [catSpriteSheet addChild:catSprite z:10];
+//    
     
 }
 
@@ -787,7 +792,7 @@ StrongMouseEngineMenu14 *sLayer14;
     CGFloat hy=heroSprite.position.y;
     int iValue=(forwardChe?43:0);
     
-    if(hx-iValue>catSprite.position.x-90 &&hx-iValue<catSprite.position.x+40 &&hy > catSprite.position.y-30 &&hy<catSprite.position.y+50 &&!gameFunc.
+    if(hx-iValue>[catObj getCatSprite].position.x-90 &&hx-iValue<[catObj getCatSprite].position.x+40 &&hy > [catObj getCatSprite].position.y-30 &&hy<[catObj getCatSprite].position.y+50 &&!gameFunc.
        trappedChe){
         gameFunc.trappedChe=YES;
         trappedTypeValue=3;
@@ -928,7 +933,7 @@ StrongMouseEngineMenu14 *sLayer14;
         screenShowX2=platformX;
         screenShowY2=platformY;
     }
-    if(hx-iValue>catSprite.position.x-90 &&hx-iValue<catSprite.position.x+40 &&hy > catSprite.position.y-30 &&hy<catSprite.position.y+50 &&!gameFunc.
+    if(hx-iValue>[catObj getCatSprite].position.x-90 &&hx-iValue<[catObj getCatSprite].position.x+40 &&hy > [catObj getCatSprite].position.y-30 &&hy<[catObj getCatSprite].position.y+50 &&!gameFunc.
        trappedChe){
         gameFunc.trappedChe=YES;
         trappedTypeValue=3;

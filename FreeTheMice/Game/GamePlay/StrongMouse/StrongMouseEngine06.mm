@@ -15,6 +15,8 @@
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 #import "DB.h"
+#import "StrongLevel6Cat.h"
+
 enum {
     kTagParentNode = 1,
 };
@@ -91,23 +93,23 @@ StrongMouseEngineMenu06 *sLayer06;
         
         [self addStrongMouseRunningSprite];
         
-        catCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-        [catCache addSpriteFramesWithFile:@"cat_default.plist"];
-        catSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"cat_default.png"];
-        [self addChild:catSpriteSheet z:10];
-        
-        catRunSprite = [CCSprite spriteWithSpriteFrameName:@"cat_run1.png"];
-        catRunSprite.position = ccp(200, 300);
-        catRunSprite.scale=0.7;
-        [catSpriteSheet addChild:catRunSprite];
-        NSMutableArray *animFrames4 = [NSMutableArray array];
-        for(int i = 1; i <= 30; i++) {
-            CCSpriteFrame *frame4 = [cache spriteFrameByName:[NSString stringWithFormat:@"cat_run%d.png",i]];
-            [animFrames4 addObject:frame4];
-        }
-        CCAnimation *animation4 = [CCAnimation animationWithSpriteFrames:animFrames4 delay:0.03f];
-        [catRunSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation4]]];
-        
+//        catCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+//        [catCache addSpriteFramesWithFile:@"cat_default.plist"];
+//        catSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"cat_default.png"];
+//        [self addChild:catSpriteSheet z:10];
+//        
+//        catRunSprite = [CCSprite spriteWithSpriteFrameName:@"cat_run1.png"];
+//        catRunSprite.position = ccp(200, 300);
+//        catRunSprite.scale=0.7;
+//        [catSpriteSheet addChild:catRunSprite];
+//        NSMutableArray *animFrames4 = [NSMutableArray array];
+//        for(int i = 1; i <= 30; i++) {
+//            CCSpriteFrame *frame4 = [cache spriteFrameByName:[NSString stringWithFormat:@"cat_run%d.png",i]];
+//            [animFrames4 addObject:frame4];
+//        }
+//        CCAnimation *animation4 = [CCAnimation animationWithSpriteFrames:animFrames4 delay:0.03f];
+//        [catRunSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation4]]];
+
         [self addStrongMousePushingSprite];
         
         mouseDragSprite=[CCSprite spriteWithFile:@"mouse_drag.png"];
@@ -411,7 +413,11 @@ StrongMouseEngineMenu06 *sLayer06;
 
 -(void)catFunc{
        
-    
+    if(!catJumpChe && catObj == nil){
+        catObj = [[StrongLevel6Cat alloc] init];
+        [catObj runCurrentSequence];
+        [self addChild:catObj];
+    }
     if(!catJumpChe){
         if(!catForwardChe){
             if(turnAnimationCount==0){
@@ -420,14 +426,14 @@ StrongMouseEngineMenu06 *sLayer06;
                     if(catMovementValue>=200&&catY>400){
                         catJumpChe=YES;
                         catX=catX+catMovementValue;
-                        catRunSprite.visible=NO;
+//                        catRunSprite.visible=NO;
                     }
                 }else{
                     
                     if(catMovementValue>=(gameFunc.catStopWoodCount<=50?170:260)){
                         catForwardChe=YES;
-                        catRunSprite.visible=NO;
-                        catTurnSprite.visible=YES;
+//                        catRunSprite.visible=NO;
+//                        catTurnSprite.visible=YES;
                         turnAnimationCount=3;
                     }
                 }
@@ -438,8 +444,8 @@ StrongMouseEngineMenu06 *sLayer06;
                 if(catMovementValue<=20){
                     catMovementValue=20;
                     catForwardChe=NO;
-                    catRunSprite.visible=NO;
-                    catTurnSprite.visible=YES;
+//                    catRunSprite.visible=NO;
+//                    catTurnSprite.visible=YES;
                     turnAnimationCount=3;
                 }
             }
@@ -451,16 +457,16 @@ StrongMouseEngineMenu06 *sLayer06;
             if(turnAnimationCount>=40){
                 turnAnimationCount=0;
                 if(!catForwardChe){
-                    catRunSprite.flipX=0;
+//                    catRunSprite.flipX=0;
                 }else{
-                    catRunSprite.flipX=1;
+//                    catRunSprite.flipX=1;
                 }
-                catRunSprite.visible=YES;
-                catTurnSprite.visible=NO;
+//                catRunSprite.visible=YES;
+//                catTurnSprite.visible=NO;
             }
         }
-        catRunSprite.position=ccp(catX+catMovementValue,catY-3);
-        catTurnSprite.position=ccp(catX+catMovementValue,catY-3);
+//        catRunSprite.position=ccp(catX+catMovementValue,catY-3);
+//        catTurnSprite.position=ccp(catX+catMovementValue,catY-3);
     }else{
         if(catJumpingAnimationCount<55){
             catJumpingAnimationCount+=1;
@@ -475,22 +481,22 @@ StrongMouseEngineMenu06 *sLayer06;
                 [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
             catJumpingCount+=1.8;
             catJumpingCount=(catJumpingCount>125?125:catJumpingCount);
-            catJumpingSprite.position=ccp([self catJumpingFunc:catJumpingCount position:0],[self catJumpingFunc:catJumpingCount position:1]);
+//            catJumpingSprite.position=ccp([self catJumpingFunc:catJumpingCount position:0],[self catJumpingFunc:catJumpingCount position:1]);
         }else if(catJumpingCount>=125){
             if(catJumpingAnimationCount<=105){
                 catJumpingAnimationCount+=1;
                 if(catJumpingAnimationCount%5 == 0)
                     [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
-                catJumpingSprite.position=ccp([self catJumpingFunc:catJumpingCount position:0],[self catJumpingFunc:catJumpingCount position:1]);
+//                catJumpingSprite.position=ccp([self catJumpingFunc:catJumpingCount position:0],[self catJumpingFunc:catJumpingCount position:1]);
             }else{
                 catJumpChe=NO;
                 catPatrolChe=NO;
                 catX=[self catJumpingFunc:catJumpingCount position:0];
                 catY=[self catJumpingFunc:catJumpingCount position:1];
                 catMovementValue=0;
-                catRunSprite.visible=YES;
-                catJumpingSprite.visible=NO;
-                catRunSprite.position=ccp(-300,catY);
+//                catRunSprite.visible=YES;
+//                catJumpingSprite.visible=NO;
+//                catRunSprite.position=ccp(-300,catY);
             }
         }
     }
@@ -525,29 +531,23 @@ StrongMouseEngineMenu06 *sLayer06;
 
 
 -(void)catSpriteGenerate:(int)fValue animationType:(NSString *)type{
-    NSString *fStr=@"";
-    if([type isEqualToString:@"turn"]){
-        fStr=[NSString stringWithFormat:@"cat_turn_run%d.png",fValue];
-        [catSpriteSheet removeChild:catTurnSprite cleanup:YES];
-        catTurnSprite = [CCSprite spriteWithSpriteFrameName:fStr];
-        catTurnSprite.position = ccp(catX+catMovementValue,catY);
-        catTurnSprite.scale=0.7;
-        if(catForwardChe)
-            catTurnSprite.flipX=0;
-        else
-            catTurnSprite.flipX=1;
-        
-        [catSpriteSheet addChild:catTurnSprite z:10];
-    }else if([type isEqualToString:@"jump"]){
-        fStr=[NSString stringWithFormat:@"cat_jump%d.png",fValue];
-        [catSpriteSheet removeChild:catJumpingSprite cleanup:YES];
-        catJumpingSprite = [CCSprite spriteWithSpriteFrameName:fStr];
-        catJumpingSprite.position = ccp(catX,catY);
-        catJumpingSprite.scale=0.7;
-        [catSpriteSheet addChild:catJumpingSprite z:10];
-    }
-    
-    
+//    NSString *fStr=@"";
+//    if([type isEqualToString:@"turn"]){
+//        fStr=[NSString stringWithFormat:@"cat_turn_run%d.png",fValue];
+//        [catSpriteSheet removeChild:catTurnSprite cleanup:YES];
+//        catTurnSprite = [CCSprite spriteWithSpriteFrameName:fStr];
+//        catTurnSprite.position = ccp(catX+catMovementValue,catY);
+//        catTurnSprite.scale=0.7;
+//        if(catForwardChe)
+//            catTurnSprite.flipX=0;
+//        else
+//            catTurnSprite.flipX=1;
+//        
+//        [catSpriteSheet addChild:catTurnSprite z:10];
+//    if([type isEqualToString:@"jump"]){
+//        
+//        catObj.isJumpEnabled = YES;
+//    }
 }
 
 -(void)plateCollision{
@@ -566,7 +566,7 @@ StrongMouseEngineMenu06 *sLayer06;
         }
     }
     
-    if(hx-iValue>catRunSprite.position.x-90 &&hx-iValue<catRunSprite.position.x+40 &&hy > catRunSprite.position.y-30 &&hy<catRunSprite.position.y+50 &&!gameFunc.
+    if(hx-iValue>[catObj getCatSprite].position.x-90 &&hx-iValue<[catObj getCatSprite].position.x+40 &&hy > [catObj getCatSprite].position.y-30 &&hy<[catObj getCatSprite].position.y+50 &&!gameFunc.
        trappedChe){
         gameFunc.trappedChe=YES;
         trappedTypeValue=2;
@@ -678,6 +678,7 @@ StrongMouseEngineMenu06 *sLayer06;
             screenShowY+=10;
             if(screenShowY>580)
                 screenShowY=580;
+            
             if(gameFunc.catStopWoodCount>=50)
                 catPatrolChe=YES;
             if(catJumpChe)
@@ -749,6 +750,10 @@ StrongMouseEngineMenu06 *sLayer06;
     if(gameFunc.honeyPotCount>=1){
         honeyPotSprite.position=ccp(620+gameFunc.honeyPotCount,282);
         catStopWoodSprite.position=ccp(260,460+gameFunc.catStopWoodCount);
+        
+        if (gameFunc.catStopWoodCount == 30) {
+            catObj.isJumpEnabled = YES;
+        }
     }
     
     if(!mouseWinChe){
@@ -1336,6 +1341,7 @@ StrongMouseEngineMenu06 *sLayer06;
     
     
 }
+
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *myTouch = [touches anyObject];
     CGPoint location = [myTouch locationInView:[myTouch view]];
@@ -1343,7 +1349,7 @@ StrongMouseEngineMenu06 *sLayer06;
     
     CGPoint prevLocation = [myTouch previousLocationInView: [myTouch view]];
     prevLocation = [[CCDirector sharedDirector] convertToGL: prevLocation];
-    
+
     if(!mouseWinChe&&!heroTrappedChe&&!screenMoveChe){
         
         int forwadeValue=(!forwardChe?0:heroForwardX);

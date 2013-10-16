@@ -26,8 +26,10 @@
         isLandingAnimationAdded = NO;
         if ([FTMUtil sharedInstance].mouseClicked == FTM_STRONG_MICE_ID) {
             cache = [CCSpriteFrameCache sharedSpriteFrameCache];
+
             [cache addSpriteFramesWithFile:@"strong0_boots.plist"];
             bootsSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"strong0_boots.png"];
+
             [self addChild:bootsSpriteSheet z:100];
         }
 
@@ -224,7 +226,7 @@
             
         }
         else if (frameToLoad == 0){
-            fStr=[NSString stringWithFormat:[self getJumpingFrameNameForMice],1];
+            fStr=[NSString stringWithFormat:[self getJumpingFrameNameForMice],0];
             isLandingAnimationAdded = NO;
             [self removeHeroSpriteFromBatchNode];
             heroSprite = [CCSprite spriteWithSpriteFrameName:fStr];
@@ -257,7 +259,7 @@
     heroSprite.tag = HERO_SPRITE_TAG;
     heroSprite.scale = STRONG_SCALE;
     NSMutableArray *animFrames2 = [NSMutableArray array];
-    for(int i = 2; i <= 10; i++) {
+    for(int i = 2; i <= 8; i++) {
         CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:frameName,i]];
         [animFrames2 addObject:frame];
     }
@@ -285,6 +287,7 @@
         length = 11;
     }
     for(int i = 11; i <= length; i++) {
+
         CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:frameName,i]];
         [animFrames2 addObject:frame];
     }
@@ -312,6 +315,7 @@
 
     if([FTMUtil sharedInstance].isBoostPowerUpEnabled) {
         for(int i =1; i <= 25; i++) {//kamran
+
             CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:frameName,i]];
             [animFrames2 addObject:frame];
         }
@@ -421,6 +425,7 @@
     }
     CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.03f];
     [heroPushSprite runAction:[CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:animation2]]];
+
 // for boots.
 //    
 //    [self removeHeroRunningSpriteFromBatchNode];
@@ -462,6 +467,7 @@
         frameName = @"strong_run_boots_%d.png";
         heroRunSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:frameName,1]];
         for(int i =1; i <= 11; i++) {//kamran
+
             CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:frameName,i]];
             [animFrames addObject:frame];
         }
@@ -481,6 +487,7 @@
     heroRunSprite.tag = HERO_RUN_SPRITE_TAG;
     heroRunSprite.position = ccp(200, 200);
     CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animFrames delay:0.04f];
+
     [heroRunSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation]]];
 }
 
@@ -493,6 +500,7 @@
         case FTM_STRONG_MICE_ID:
             if ([FTMUtil sharedInstance].isBoostPowerUpEnabled) {
                 frameName = @"strong_jump_boots_%d.png";
+
             }else{
                 frameName = @"strong_jump%d.png";
             }
@@ -515,6 +523,7 @@
         case FTM_STRONG_MICE_ID:
             if([FTMUtil sharedInstance].isBoostPowerUpEnabled) {
                 frameName = @"strong_stand_boots_%d.png";
+
             }else{
                 frameName = @"strong_stand%d.png";
             }
@@ -527,8 +536,6 @@
     }
     return frameName;
 }
-
-
 
 -(void) switchAnimationsForBootsPowerUp{
     [self playStandingAnimation];

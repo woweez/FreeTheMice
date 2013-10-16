@@ -21,7 +21,7 @@
 #import "HudLayer.h"
 #import "LevelCompleteScreen.h"
 #import "CommonEngine.h"
-
+#import "StrongLevel13Cat.h"
 #define PTM_RATIO 32
 
 @interface StrongMouseEngineMenu13 : CCLayer {
@@ -44,7 +44,8 @@
     float32 jumpPower,jumpAngle;
     CCSprite *heroPimpleSprite[20];
     BOOL heroReleaseChe;
-    
+    BOOL isNotScheduled;
+    StrongLevel13Cat *catObj;
     CCTMXTiledMap *_tileMap;
     CCTMXLayer *_background;
     
@@ -70,16 +71,17 @@
 //    CCSprite *starSprite[6];
     CCSprite *clockBackgroundSprite;
     CCSprite *clockArrowSprite;
-    CCSprite *catJumpingSprite;
+//    CCSprite *catJumpingSprite;
     CCSprite *milkSprite;
     CCSprite *waterDropsSprite[20];
     CCSprite *movePlatformSprite;
-    CCSprite *catTurnSprite;
-    CCSprite *catRunSprite;
+//    CCSprite *catTurnSprite;
+//    CCSprite *catRunSprite;
     CCSprite *fridgeSprite;
     CCSprite *iceSmokingSprite[5][2];
     CCSprite *hoenyPotSprite;
     CCSprite *iceQubeSprite[4];
+
     CCSprite *catStopWoodSprite;
     CCSprite *pulbSprite;
     
@@ -93,8 +95,8 @@
     int heroJumpingAnimationArrValue;
 //    CCSpriteFrameCache *cache;
 //    CCSpriteBatchNode *spriteSheet;
-    CCSpriteFrameCache *catCache;
-    CCSpriteBatchNode *catSpriteSheet;
+//    CCSpriteFrameCache *catCache;
+//    CCSpriteBatchNode *catSpriteSheet;
     
     NSArray * heroJumpIntervalValue;
     NSArray * cheeseSetValue;

@@ -7,19 +7,6 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "FreeTheMice/Game/MenuScreen/HudLayer.mm"
-         timestampString = "402269200.371877"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "267"
-         endingLineNumber = "267"
-         landmarkName = "-showRetryOptionMenu"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "FreeTheMice/Game/GamePlay/MotherMouse/GameEngine05.mm"
          timestampString = "402809054.23707"
          startingColumnNumber = "9223372036854775807"
@@ -47,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "FreeTheMice/Game/GamePlay/StrongMouse/StrongMouseEngine02.mm"
-         timestampString = "402959775.162554"
+         timestampString = "403310369.980034"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "539"
-         endingLineNumber = "539"
+         startingLineNumber = "512"
+         endingLineNumber = "512"
          landmarkName = "-level01"
          landmarkType = "5">
       </FileBreakpoint>

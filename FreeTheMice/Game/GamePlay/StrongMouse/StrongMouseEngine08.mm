@@ -84,10 +84,10 @@ StrongMouseEngineMenu08 *sLayer08;
         
         [self addStrongMouseRunningSprite];
         
-        catCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-        [catCache addSpriteFramesWithFile:@"cat_default.plist"];
-        catSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"cat_default.png"];
-        [self addChild:catSpriteSheet z:10];
+//        catCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+//        [catCache addSpriteFramesWithFile:@"cat_default.plist"];
+//        catSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"cat_default.png"];
+//        [self addChild:catSpriteSheet z:10];
         
         [self addStrongMousePushingSprite];
         
@@ -498,14 +498,11 @@ StrongMouseEngineMenu08 *sLayer08;
 
 -(void)catFunc{
     
-    /*catMovementCount+=1;
-     if(catMovementCount>=0&&catMovementCount<50){
-     if(catAnimationCount%3 == 0){
-     [self catSpriteGenerate:catAnimationCount/3 animationType:@"run"];
-     printf("%d ",catAnimationCount/3);
-     }
-     catSprite.position=ccp(catX+catMovementCount,catY);
-     }*/
+    if(!catJumpChe && catObj == nil){
+        catObj = [[StrongLevel8Cat alloc] init];
+        [catObj runCurrentSequence];
+        [self addChild:catObj];
+    }
     
     if(catSpillTimeCount==0){
         if(!catBackChe){
@@ -513,7 +510,7 @@ StrongMouseEngineMenu08 *sLayer08;
                 catX=[trigo circlex:catMovementCount a:359]+770;
                 catY=[trigo circley:catMovementCount a:359]+570;
                 if(catAnimationCount%2 == 0)
-                    [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
+//                    [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
                 catMovementCount+=1;
                 if(catMovementCount>=30)
                     turnAnimationCount=1;
@@ -523,7 +520,7 @@ StrongMouseEngineMenu08 *sLayer08;
                     catX=[trigo circlex:catMovementCount a:180]+845;
                     catY=[trigo circley:catMovementCount a:180]+571;
                     if(catAnimationCount%2 == 0)
-                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
+//                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
                     catMovementCount+=1;
                     if(catMovementCount>=60)
                         catJumpChe=YES;
@@ -537,8 +534,8 @@ StrongMouseEngineMenu08 *sLayer08;
                     if(catJumpingAnimationCount>=55){
                         catJumpingAnimationCount+=1;
                         catJumpingAnimationCount=(catJumpingAnimationCount>=90?90:catJumpingAnimationCount);
-                        if(catJumpingAnimationCount%5==0)
-                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
+//                        if(catJumpingAnimationCount%5==0)
+//                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
                     }
                 }
             }else if(catMovementCount>174 && catMovementCount<=222){
@@ -546,15 +543,15 @@ StrongMouseEngineMenu08 *sLayer08;
                     catX=[trigo circlex:catMovementCount a:359]+460;
                     catY=[trigo circley:catMovementCount a:359]+500;
                     catMovementCount+=1;
-                    if(catAnimationCount%2 == 0)
-                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
+//                    if(catAnimationCount%2 == 0)
+//                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
                     
                 }else{
                     if(catJumpChe){
                         if(catJumpingAnimationCount<=105){
                             catJumpingAnimationCount+=1;
-                            if(catJumpingAnimationCount%5 == 0)
-                                [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
+//                            if(catJumpingAnimationCount%5 == 0)
+//                                [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
                         }else{
                             catJumpingAnimationCount=0;
                             catJumpChe=NO;
@@ -572,24 +569,24 @@ StrongMouseEngineMenu08 *sLayer08;
                     if(catJumpingAnimationCount>=55&&catJumpingAnimationCount<=90){
                         catJumpingAnimationCount+=1;
                         catJumpingAnimationCount=(catJumpingAnimationCount>=90?90:catJumpingAnimationCount);
-                        if(catJumpingAnimationCount%5==0)
-                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
+//                        if(catJumpingAnimationCount%5==0)
+//                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
                     }
                 }
             }else if(catMovementCount>360 && catMovementCount<=430){
                 if(!catJumpChe){
                     catX=[trigo circlex:catMovementCount a:359]+450;
                     catY=[trigo circley:catMovementCount a:359]+405;
-                    if(catAnimationCount%2 == 0)
-                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
+//                    if(catAnimationCount%2 == 0)
+//                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
                     catMovementCount+=1;
                     if(catMovementCount>=430)
                         turnAnimationCount=1;
                 }else{
                     if(catJumpingAnimationCount<=105){
                         catJumpingAnimationCount+=1;
-                        if(catJumpingAnimationCount%5 == 0)
-                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
+//                        if(catJumpingAnimationCount%5 == 0)
+//                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
                     }else{
                         catJumpingAnimationCount=0;
                         catJumpChe=NO;
@@ -599,8 +596,8 @@ StrongMouseEngineMenu08 *sLayer08;
                 if(turnAnimationCount==0){
                     catX=[trigo circlex:catMovementCount a:179]+1528;
                     catY=[trigo circley:catMovementCount a:179]+405;
-                    if(catAnimationCount%2 == 0)
-                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
+//                    if(catAnimationCount%2 == 0)
+//                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
                     catMovementCount+=1;
                     if(catMovementCount>=500)
                         catJumpChe=YES;
@@ -613,8 +610,8 @@ StrongMouseEngineMenu08 *sLayer08;
                     if(catJumpingAnimationCount>=55){
                         catJumpingAnimationCount+=1;
                         catJumpingAnimationCount=(catJumpingAnimationCount>=90?90:catJumpingAnimationCount);
-                        if(catJumpingAnimationCount%5==0)
-                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
+//                        if(catJumpingAnimationCount%5==0)
+//                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
                     }
                 }
             }else if(catMovementCount<=805){
@@ -622,8 +619,8 @@ StrongMouseEngineMenu08 *sLayer08;
                     if(catMovementCount<705){
                         catX=[trigo circlex:(catMovementCount-615) a:179]+663;
                         catY=[trigo circley:catMovementCount-615 a:179]+255;
-                        if(catAnimationCount%2 == 0)
-                            [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
+//                        if(catAnimationCount%2 == 0)
+//                            [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
                         catMovementCount+=1;
                         
                     }else{
@@ -645,8 +642,8 @@ StrongMouseEngineMenu08 *sLayer08;
                 }else{
                     if(catJumpingAnimationCount<=105){
                         catJumpingAnimationCount+=1;
-                        if(catJumpingAnimationCount%5 == 0)
-                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
+//                        if(catJumpingAnimationCount%5 == 0)
+//                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
                     }else{
                         catJumpingAnimationCount=0;
                         catJumpChe=NO;
@@ -659,8 +656,8 @@ StrongMouseEngineMenu08 *sLayer08;
                 if(turnAnimationCount==0){
                     catX=[trigo circlex:(catMovementCount-615) a:179]+663;
                     catY=[trigo circley:catMovementCount-615 a:179]+255;
-                    if(catAnimationCount%2 == 0)
-                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
+//                    if(catAnimationCount%2 == 0)
+//                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
                     catMovementCount-=1;
                     if(catMovementCount<=615)
                         catJumpChe=YES;
@@ -673,24 +670,24 @@ StrongMouseEngineMenu08 *sLayer08;
                     if(catJumpingAnimationCount>=55&&catMovementCount<540){
                         catJumpingAnimationCount+=1;
                         catJumpingAnimationCount=(catJumpingAnimationCount>=90?90:catJumpingAnimationCount);
-                        if(catJumpingAnimationCount%5==0)
-                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
+//                        if(catJumpingAnimationCount%5==0)
+//                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
                     }
                 }
             }else if(catMovementCount>=430 && catMovementCount<500){
                 if(!catJumpChe){
                     catX=[trigo circlex:catMovementCount a:179]+1528;
                     catY=[trigo circley:catMovementCount a:179]+405;
-                    if(catAnimationCount%2 == 0)
-                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
+//                    if(catAnimationCount%2 == 0)
+//                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
                     catMovementCount-=1;
                     if(catMovementCount<=430)
                         turnAnimationCount=1;
                 }else{
                     if(catJumpingAnimationCount<=105){
                         catJumpingAnimationCount+=1;
-                        if(catJumpingAnimationCount%5 == 0)
-                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
+//                        if(catJumpingAnimationCount%5 == 0)
+//                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
                     }else{
                         catJumpingAnimationCount=0;
                         catJumpChe=NO;
@@ -700,8 +697,8 @@ StrongMouseEngineMenu08 *sLayer08;
                 if(turnAnimationCount==0){
                     catX=[trigo circlex:catMovementCount a:359]+450;
                     catY=[trigo circley:catMovementCount a:359]+405;
-                    if(catAnimationCount%2 == 0)
-                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
+//                    if(catAnimationCount%2 == 0)
+//                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
                     catMovementCount-=1;
                     if(catMovementCount<=360)
                         catJumpChe=YES;
@@ -714,8 +711,8 @@ StrongMouseEngineMenu08 *sLayer08;
                     if(catJumpingAnimationCount>=55&&catMovementCount<270){
                         catJumpingAnimationCount+=1;
                         catJumpingAnimationCount=(catJumpingAnimationCount>=90?90:catJumpingAnimationCount);
-                        if(catJumpingAnimationCount%5==0)
-                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
+//                        if(catJumpingAnimationCount%5==0)
+//                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
                     }
                 }
             }else if(catMovementCount>=174 && catMovementCount<222){
@@ -723,16 +720,16 @@ StrongMouseEngineMenu08 *sLayer08;
                     catX=[trigo circlex:catMovementCount a:359]+460;
                     catY=[trigo circley:catMovementCount a:359]+500;
                     catMovementCount-=1;
-                    if(catAnimationCount%2 == 0)
-                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
+//                    if(catAnimationCount%2 == 0)
+//                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
                     if(catMovementCount<=174){
                         turnAnimationCount=1;
                     }
                 }else{
                     if(catJumpingAnimationCount<=105){
                         catJumpingAnimationCount+=1;
-                        if(catJumpingAnimationCount%5 == 0)
-                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
+//                        if(catJumpingAnimationCount%5 == 0)
+//                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
                     }else{
                         catJumpingAnimationCount=0;
                         catJumpChe=NO;
@@ -748,24 +745,24 @@ StrongMouseEngineMenu08 *sLayer08;
                     if(catJumpingAnimationCount>=55&&catMovementCount<100){
                         catJumpingAnimationCount+=1;
                         catJumpingAnimationCount=(catJumpingAnimationCount>=90?90:catJumpingAnimationCount);
-                        if(catJumpingAnimationCount%5==0)
-                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
+//                        if(catJumpingAnimationCount%5==0)
+//                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
                     }
                 }
             }else if(catMovementCount>=30 &&catMovementCount<60){
                 if(!catJumpChe){
                     catX=[trigo circlex:catMovementCount a:180]+845;
                     catY=[trigo circley:catMovementCount a:180]+571;
-                    if(catAnimationCount%2 == 0)
-                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
+//                    if(catAnimationCount%2 == 0)
+//                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
                     catMovementCount-=1;
                     if(catMovementCount<=30)
                         turnAnimationCount=1;
                 }else{
                     if(catJumpingAnimationCount<=105){
                         catJumpingAnimationCount+=1;
-                        if(catJumpingAnimationCount%5 == 0)
-                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
+//                        if(catJumpingAnimationCount%5 == 0)
+//                            [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
                     }else{
                         catJumpingAnimationCount=0;
                         catJumpChe=NO;
@@ -775,8 +772,8 @@ StrongMouseEngineMenu08 *sLayer08;
                 if(turnAnimationCount==0){
                     catX=[trigo circlex:catMovementCount a:359]+770;
                     catY=[trigo circley:catMovementCount a:359]+570;
-                    if(catAnimationCount%2 == 0)
-                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
+//                    if(catAnimationCount%2 == 0)
+//                        [self catSpriteGenerate:catAnimationCount/2 animationType:@"run"];
                     catMovementCount-=1;
                     if(catMovementCount<=0){
                         catBackChe=NO;
@@ -791,8 +788,8 @@ StrongMouseEngineMenu08 *sLayer08;
     
     if(turnAnimationCount>0){
         turnAnimationCount+=1;
-        if(turnAnimationCount%4==0)
-            [self catSpriteGenerate:turnAnimationCount/4 animationType:@"turn"];
+//        if(turnAnimationCount%4==0)
+//            [self catSpriteGenerate:turnAnimationCount/4 animationType:@"turn"];
         if(turnAnimationCount>=40){
             turnAnimationCount=0;
             if(!catForwardChe)
@@ -805,18 +802,18 @@ StrongMouseEngineMenu08 *sLayer08;
     if(catJumpChe){
         if(catJumpingAnimationCount<55){
             catJumpingAnimationCount+=1;
-            if(catJumpingAnimationCount%5==0)
-                [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
+//            if(catJumpingAnimationCount%5==0)
+//                [self catSpriteGenerate:catJumpingAnimationCount/5 animationType:@"jump"];
         }
     }
     
     catAnimationCount+=2;
     catAnimationCount=(catAnimationCount>=43?0:catAnimationCount);
     
-    if(turnAnimationCount==0)
-        catSprite.position=ccp(catX,catY+17);
-    else
-        catSprite.position=ccp(catX,catY+14);
+//    if(turnAnimationCount==0)
+//        catSprite.position=ccp(catX,catY+17);
+//    else
+//        catSprite.position=ccp(catX,catY+14);
     
     if(catSpillTimeCount>=1){
         if(milkStopChe)
@@ -827,24 +824,24 @@ StrongMouseEngineMenu08 *sLayer08;
 
 
 -(void)catSpriteGenerate:(int)fValue animationType:(NSString *)type{
-    NSString *fStr=@"";
-    if([type isEqualToString:@"run"])
-        fStr=[NSString stringWithFormat:@"cat_run%d.png",fValue+1];
-    else if([type isEqualToString:@"turn"]){
-        fStr=[NSString stringWithFormat:@"cat_turn_run%d.png",fValue];
-    }else if([type isEqualToString:@"jump"])
-        fStr=[NSString stringWithFormat:@"cat_jump%d.png",fValue];
-    
-    [catSpriteSheet removeChild:catSprite cleanup:YES];
-    catSprite = [CCSprite spriteWithSpriteFrameName:fStr];
-    catSprite.position = ccp(catX,catY);
-    catSprite.scale=0.6;
-    if(!catForwardChe){
-        catSprite.flipX=0;
-    }else{
-        catSprite.flipX=1;
-    }
-    [catSpriteSheet addChild:catSprite z:10];
+//    NSString *fStr=@"";
+//    if([type isEqualToString:@"run"])
+//        fStr=[NSString stringWithFormat:@"cat_run%d.png",fValue+1];
+//    else if([type isEqualToString:@"turn"]){
+//        fStr=[NSString stringWithFormat:@"cat_turn_run%d.png",fValue];
+//    }else if([type isEqualToString:@"jump"])
+//        fStr=[NSString stringWithFormat:@"cat_jump%d.png",fValue];
+//    
+//    [catSpriteSheet removeChild:catSprite cleanup:YES];
+//    catSprite = [CCSprite spriteWithSpriteFrameName:fStr];
+//    catSprite.position = ccp(catX,catY);
+//    catSprite.scale=0.6;
+//    if(!catForwardChe){
+//        catSprite.flipX=0;
+//    }else{
+//        catSprite.flipX=1;
+//    }
+//    [catSpriteSheet addChild:catSprite z:10];
     
 }
 
@@ -1119,7 +1116,7 @@ StrongMouseEngineMenu08 *sLayer08;
         trappedTypeValue=1;
     }
     
-    if(hx-iValue>catSprite.position.x-90 &&hx-iValue<catSprite.position.x+40 &&hy > catSprite.position.y-30 &&hy<catSprite.position.y+50 &&!gameFunc.
+    if(hx-iValue>[catObj getCatSprite].position.x-90 &&hx-iValue<[catObj getCatSprite].position.x+40 &&hy > [catObj getCatSprite].position.y-30 &&hy<[catObj getCatSprite].position.y+50 &&!gameFunc.
        trappedChe){
         
         

@@ -91,10 +91,10 @@ StrongMouseEngineMenu13 *sLayer13;
         
         [self addStrongMouseRunningSprite];
         
-        catCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-        [catCache addSpriteFramesWithFile:@"cat_default.plist"];
-        catSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"cat_default.png"];
-        [self addChild:catSpriteSheet z:0];
+//        catCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+//        [catCache addSpriteFramesWithFile:@"cat_default.plist"];
+//        catSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"cat_default.png"];
+//        [self addChild:catSpriteSheet z:0];
         
         [self addStrongMousePushingSprite];
         
@@ -482,8 +482,29 @@ StrongMouseEngineMenu13 *sLayer13;
     
 }
 
+
+-(void) startCatResumeTimer{
+    [self unschedule:@selector(startCatResumeTimer)];
+    [[catObj getCatSprite] resumeSchedulerAndActions];
+    [self schedule:@selector(enableCatSchedular) interval:1];
+}
+-(void) enableCatSchedular{
+    [self unschedule:@selector(enableCatSchedular)];
+    isNotScheduled = NO;
+}
 -(void)catFunc{
     
+    if(!catJumpChe && catObj == nil){
+        catObj = [[StrongLevel13Cat alloc] init];
+        [catObj runCurrentSequence];
+        [self addChild:catObj];
+    }
+    
+    if (milkStopChe && [catObj getCatSprite].position.x == 650 && !isNotScheduled) {
+        isNotScheduled = YES;
+        [[catObj getCatSprite] pauseSchedulerAndActions];
+        [self schedule:@selector(startCatResumeTimer) interval:5];
+    }
     BOOL ch2=YES;
     if(screenMoveChe&&screenMovementFindValue!=0)
         ch2=NO;
@@ -611,8 +632,9 @@ StrongMouseEngineMenu13 *sLayer13;
                     }else{
                         catMovementCount+=1;
                         if(gameFunc.milkRotateCount>=90&&catMovementCount<=708){
-                            catSpillTimeCount=1;
+                            catSpillTimeCount=1; // kamran. pasuse all actions.
                             catMovementCount=709;
+                            
                         }
                         if(catSpillTimeCount==0){
                             if(catMovementCount>=710 &&catMovementCount<=712&&turnAnimationCount==0){
@@ -788,39 +810,40 @@ StrongMouseEngineMenu13 *sLayer13;
     catAnimationCount+=2;
     catAnimationCount=(catAnimationCount>=43?0:catAnimationCount);
     
-    if(turnAnimationCount==0)
-        catSprite.position=ccp(catX,catY+16);
-    else
-        catSprite.position=ccp(catX,catY+13);
+//    if(turnAnimationCount==0)
+//        catSprite.position=ccp(catX,catY+16);
+//    else
+//        catSprite.position=ccp(catX,catY+13);
     
     if(catSpillTimeCount>=1){
         if(milkStopChe)
             catSpillTimeCount+=1;
         catSpillTimeCount=(catSpillTimeCount>=1500?0:catSpillTimeCount);
+        
     }
 }
 
 
 
 -(void)catSpriteGenerate:(int)fValue animationType:(NSString *)type{
-    NSString *fStr=@"";
-    if([type isEqualToString:@"run"])
-        fStr=[NSString stringWithFormat:@"cat_run%d.png",fValue+1];
-    else if([type isEqualToString:@"turn"]){
-        fStr=[NSString stringWithFormat:@"cat_turn_run%d.png",fValue];
-    }else if([type isEqualToString:@"jump"])
-        fStr=[NSString stringWithFormat:@"cat_jump%d.png",fValue];
+//    NSString *fStr=@"";
+//    if([type isEqualToString:@"run"])
+//        fStr=[NSString stringWithFormat:@"cat_run%d.png",fValue+1];
+//    else if([type isEqualToString:@"turn"]){
+//        fStr=[NSString stringWithFormat:@"cat_turn_run%d.png",fValue];
+//    }else if([type isEqualToString:@"jump"])
+//        fStr=[NSString stringWithFormat:@"cat_jump%d.png",fValue];
     
-    [catSpriteSheet removeChild:catSprite cleanup:YES];
-    catSprite = [CCSprite spriteWithSpriteFrameName:fStr];
-    catSprite.position = ccp(catX,catY);
-    catSprite.scale=0.6;
-    if(!catForwardChe){
-        catSprite.flipX=0;
-    }else{
-        catSprite.flipX=1;
-    }
-    [catSpriteSheet addChild:catSprite z:10];
+//    [catSpriteSheet removeChild:catSprite cleanup:YES];
+//    catSprite = [CCSprite spriteWithSpriteFrameName:fStr];
+//    catSprite.position = ccp(catX,catY);
+//    catSprite.scale=0.6;
+//    if(!catForwardChe){
+//        catSprite.flipX=0;
+//    }else{
+//        catSprite.flipX=1;
+//    }
+//    [catSpriteSheet addChild:catSprite z:10];
     
     
 }
@@ -894,6 +917,7 @@ StrongMouseEngineMenu13 *sLayer13;
                     waterDropsCount[i]=156;
                     waterDropsSprite[i].position=ccp(xx-(i*2),yy);
                     milkStopChe=YES;
+                    [[catObj getCatSprite] resumeSchedulerAndActions];
                 }
             }
         }
@@ -984,7 +1008,7 @@ StrongMouseEngineMenu13 *sLayer13;
         }
     }
     
-    if(hx-iValue>catSprite.position.x-90 &&hx-iValue<catSprite.position.x+40 &&hy > catSprite.position.y-30 &&hy<catSprite.position.y+50 &&!gameFunc.
+    if(hx-iValue>[catObj getCatSprite].position.x-90 &&hx-iValue<[catObj getCatSprite].position.x+40 &&hy > [catObj getCatSprite].position.y-30 &&hy<[catObj getCatSprite].position.y+50 &&!gameFunc.
        trappedChe){
         gameFunc.trappedChe=YES;
         trappedTypeValue=3;
@@ -992,6 +1016,7 @@ StrongMouseEngineMenu13 *sLayer13;
     
     if(hx-iValue>375&&hx-iValue<=401 && hy==266&&!screenMoveChe&&screenMovementFindValue2==0){
         screenMoveChe=YES;
+        [[catObj getCatSprite] pauseSchedulerAndActions];
         screenMovementFindValue2=1;
         screenShowX=platformX;
         screenShowY=platformY;
@@ -1011,6 +1036,7 @@ StrongMouseEngineMenu13 *sLayer13;
 -(void)switchFunc{
     if(!screenMoveChe&&gameFunc.milkRotateCount>=10&&screenMovementFindValue==0){
         screenMoveChe=YES;
+        [[catObj getCatSprite] pauseSchedulerAndActions];
         screenMovementFindValue=1;
         screenShowX=platformX;
         screenShowY=platformY;
@@ -1040,6 +1066,7 @@ StrongMouseEngineMenu13 *sLayer13;
                 screenShowY=screenShowY2;
                 screenMovementFindValue=5;
                 screenMoveChe=NO;
+                [[catObj getCatSprite] resumeSchedulerAndActions];
                 screenHeroPosX=platformX;
                 screenHeroPosY=platformY;
                 screenShowX=platformX;
@@ -1074,6 +1101,7 @@ StrongMouseEngineMenu13 *sLayer13;
                 screenShowY=screenShowY2;
                 screenMovementFindValue2=5;
                 screenMoveChe=NO;
+                [[catObj getCatSprite] resumeSchedulerAndActions];
                 screenHeroPosX=platformX;
                 screenHeroPosY=platformY;
                 screenShowX=platformX;
@@ -1109,6 +1137,9 @@ StrongMouseEngineMenu13 *sLayer13;
     milkSprite.position=ccp(665,428-(gameFunc.milkRotateCount/15));
     
     catStopWoodSprite.position=ccp(808,603+gameFunc.catStopWoodCount);
+    if (gameFunc.catStopWoodCount == 50) {
+        catObj.isJumpEnabled = YES;
+    }
     pulbCount+=1.7;
     pulbCount=(pulbCount>=250?0:pulbCount);
     if(pulbCount<=125){

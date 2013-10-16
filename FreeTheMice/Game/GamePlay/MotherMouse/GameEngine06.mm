@@ -112,7 +112,7 @@ GameEngine06Menu *layer06;
             CCSpriteFrame *frame4 = [cache spriteFrameByName:[NSString stringWithFormat:@"cat_run%d.png",i]];
             [animFrames4 addObject:frame4];
         }
-        CCAnimation *animation4 = [CCAnimation animationWithSpriteFrames:animFrames4 delay:0.03f];
+        CCAnimation *animation4 = [CCAnimation animationWithSpriteFrames:animFrames4 delay:0.06f];
         [catRunSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation4]]];
         
         heroRunSprite = [CCSprite spriteWithSpriteFrameName:@"mother_run01.png"];
@@ -130,8 +130,8 @@ GameEngine06Menu *layer06;
             CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"mother_run0%d.png",i]];
             [animFrames addObject:frame];
         }
-        CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animFrames delay:0.06f];
-        [heroRunSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation]]];
+        heroRunningAnimation = [CCAnimation animationWithSpriteFrames:animFrames delay:0.06f];
+        [heroRunSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:heroRunningAnimation]]];
         
         mouseDragSprite=[CCSprite spriteWithFile:@"mouse_drag.png"];
         mouseDragSprite.position=ccp(platformX+2,platformY+3);

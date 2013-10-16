@@ -21,6 +21,7 @@
 #import "HudLayer.h"
 #import "LevelCompleteScreen.h"
 #import "CommonEngine.h"
+#import "StrongLevel14Cat.h"
 
 #define PTM_RATIO 32
 
@@ -45,6 +46,7 @@
     CCSprite *heroPimpleSprite[20];
     BOOL heroReleaseChe;
     
+    StrongLevel14Cat *catObj;
     CCTMXTiledMap *_tileMap;
     CCTMXLayer *_background;
     CCMenu *menu;
@@ -67,6 +69,7 @@
     CCSprite *cheeseSprite[5];
     CCSprite *cheeseSprite2[5];
 //    CCSprite *starSprite[6];
+
     CCSprite *blockSprite[6];
     CCSprite *hotSprite[10];
     CCSprite *iceQubeSprite[5];
@@ -82,9 +85,9 @@
     int heroJumpingAnimationArrValue;
 //    CCSpriteFrameCache *cache;
 //    CCSpriteBatchNode *spriteSheet;
-    CCSpriteFrameCache *catCache;
-    CCSpriteBatchNode *catSpriteSheet;
-    
+//    CCSpriteFrameCache *catCache;
+//    CCSpriteBatchNode *catSpriteSheet;
+//    
     NSArray * heroJumpIntervalValue;
     NSArray * cheeseSetValue;
     NSArray *cheeseArrX;

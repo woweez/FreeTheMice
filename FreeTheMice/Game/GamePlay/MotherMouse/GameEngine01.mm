@@ -15,6 +15,8 @@
 #import "DB.h"
 #import "FTMConstants.h"
 #import "SimpleAudioEngine.h"
+#import "CatObject.h"
+
 enum {
     kTagParentNode = 1,
 };
@@ -237,6 +239,22 @@ GameEngine01Menu *layer01;
     hudLayer.tag = 1;
     [layer01 addChild: hudLayer z:2000];
     [hudLayer updateNoOfCheeseCollected:0 andMaxValue:[cheeseSetValue[motherLevel-1] intValue]];
+    
+//    [cache addSpriteFramesWithFile:@"cat_default.plist"];
+//    CCSpriteBatchNode *catSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"cat_default.png"];
+//    [self addChild:catSpriteSheet z:10];
+//    
+//    NSMutableArray *animationFramesArr = [NSMutableArray array];
+//    for(int i = 1; i <= 30; i++) {
+//        CCSpriteFrame *frame = [cache spriteFrameByName:@"cat_run13.png"];
+//        [animationFramesArr addObject:frame];
+//    }
+//    CCAnimation *aanimation = [CCAnimation animationWithSpriteFrames:animationFramesArr delay:0.03f];
+
+    
+    CatObject *cat = [[CatObject alloc] init];
+//    [cat addCatMovingAnimation];
+    [self addChild:cat z:99999];
 }
 
 -(void) addLevelCompleteLayerToTheScene{

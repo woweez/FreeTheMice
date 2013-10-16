@@ -20,7 +20,7 @@
 #import "Trigo.h"
 #import "HudLayer.h"
 #import "CommonEngine.h"
-
+#import "StrongLevel7Cat.h"
 #define PTM_RATIO 32
 
 @interface StrongMouseEngineMenu07 : CCLayer {
@@ -66,13 +66,14 @@
     CCSprite *timeCheeseSprite;
     CCSprite *cheeseSprite[5];
     CCSprite *cheeseSprite2[5];
+    StrongLevel7Cat *catObj;
 //    CCSprite *starSprite[6];
     
     CCSprite *clockBackgroundSprite;
     CCSprite *clockArrowSprite;
     CCSprite *hotSprite[10];
-    CCSprite *catTurnSprite;
-    CCSprite *catRunSprite;
+//    CCSprite *catTurnSprite;
+//    CCSprite *catRunSprite;
     CCSprite *domeSprite;
     CCSprite *tileMove;
     
@@ -88,8 +89,8 @@
     int heroJumpingAnimationArrValue;
 //    CCSpriteFrameCache *cache;
 //    CCSpriteBatchNode *spriteSheet;
-    CCSpriteFrameCache *catCache;
-    CCSpriteBatchNode *catSpriteSheet;
+//    CCSpriteFrameCache *catCache;
+//    CCSpriteBatchNode *catSpriteSheet;
     NSArray * heroJumpIntervalValue;
     NSArray * cheeseSetValue;
     NSArray *cheeseArrX;

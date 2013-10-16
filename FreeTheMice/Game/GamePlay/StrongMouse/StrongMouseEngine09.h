@@ -20,6 +20,7 @@
 #import "Trigo.h"
 #import "HudLayer.h"
 #import "CommonEngine.h"
+#import "StrongLevel9Cat.h"
 
 #define PTM_RATIO 32
 
@@ -43,7 +44,7 @@
     float32 jumpPower,jumpAngle;
     CCSprite *heroPimpleSprite[20];
     BOOL heroReleaseChe;
-    
+    StrongLevel9Cat *catObj;
     CCTMXTiledMap *_tileMap;
     CCTMXLayer *_background;
     
@@ -69,15 +70,15 @@
 //    CCSprite *starSprite[6];
     CCSprite *clockBackgroundSprite;
     CCSprite *clockArrowSprite;
-    CCSprite *catJumpingSprite;
+//    CCSprite *catJumpingSprite;
     CCSprite *milkSprite;
     CCSprite *waterDropsSprite[20];
     CCSprite  *visibleSprite[6];
     CCSprite *boxSprite[3];
     CCSprite *comBoxSprite[3];
     CCSprite *movePlatformSprite;
-    CCSprite *catTurnSprite;
-    CCSprite *catRunSprite;
+//    CCSprite *catTurnSprite;
+//    CCSprite *catRunSprite;
     CCSprite *dotSprite;
     
     BOOL heroStandChe;
@@ -88,8 +89,8 @@
     int heroJumpingAnimationArrValue;
 //    CCSpriteFrameCache *cache;
 //    CCSpriteBatchNode *spriteSheet;
-    CCSpriteFrameCache *catCache;
-    CCSpriteBatchNode *catSpriteSheet;
+//    CCSpriteFrameCache *catCache;
+//    CCSpriteBatchNode *catSpriteSheet;
     
     NSArray * heroJumpIntervalValue;
     NSArray * cheeseSetValue;

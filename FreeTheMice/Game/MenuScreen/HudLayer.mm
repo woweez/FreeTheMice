@@ -176,8 +176,7 @@
 
 -(void) addMagnifyingBtnMenu{
     CCMenuItem *magnifyMenuItem = [CCMenuItemImage itemWithNormalImage:@"zoom_btn.png" selectedImage:@"zoom_btn_press.png" block:^(id sender) {
-        [FTMUtil sharedInstance].isBoostPowerUpEnabled = YES;
-        
+
     }];
     [magnifyMenuItem setScale:0.5];
     magnifyMenuItem.position = ccp(220 *scaleFactorX, 138 *scaleFactorY);

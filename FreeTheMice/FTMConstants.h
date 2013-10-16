@@ -40,6 +40,11 @@
 #define SPECIAL_CHEESE_ITEM_ID  5
 #define MASTER_KEY_ITEM_ID      6
 #define BARKING_DOG_ITEM_ID     7
+
+
+
+#define HERO_SPRITE_TAG         211 // don't know why karthik name mice sprite to hero..
+#define HERO_RUN_SPRITE_TAG          212  
 //                                  THESE ARE MAMA MOUSE SETTINGS.
 
 
@@ -67,7 +72,7 @@
 #define HERO_SPRITE_TAG          211
 #define HERO_RUN_SPRITE_TAG      212
 
-#define STRONG_SCALE             0.7
+#define STRONG_SCALE            0.7
 
 #define STRONG_SHOCK_ANIM     1
 #define STRONG_WATER_ANIM     2

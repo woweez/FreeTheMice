@@ -97,27 +97,28 @@ StrongMouseEngineMenu07 *sLayer07;
         [self addChild:woodSprite z:0];
         
         [self addStrongMouseRunningSprite];
+
         
         
-        catCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-        [catCache addSpriteFramesWithFile:@"cat_default.plist"];
-        [catCache addSpriteFramesWithFile:@"dome1.plist"];
-        [catCache addSpriteFramesWithFile:@"dome2.plist"];
-        catSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"cat_default.png"];
-        [self addChild:catSpriteSheet z:10];
-        
-        catRunSprite = [CCSprite spriteWithSpriteFrameName:@"cat_run1.png"];
-        catRunSprite.position = ccp(200, 300);
-        catRunSprite.scale=0.7;
-        [catSpriteSheet addChild:catRunSprite z:0];
-        NSMutableArray *animFrames4 = [NSMutableArray array];
-        for(int i = 1; i <= 30; i++) {
-            CCSpriteFrame *frame4 = [cache spriteFrameByName:[NSString stringWithFormat:@"cat_run%d.png",i]];
-            [animFrames4 addObject:frame4];
-        }
-        CCAnimation *animation4 = [CCAnimation animationWithSpriteFrames:animFrames4 delay:0.03f];
-        [catRunSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation4]]];
-        
+        cache = [CCSpriteFrameCache sharedSpriteFrameCache];
+//        [catCache addSpriteFramesWithFile:@"cat_default.plist"];
+        [cache addSpriteFramesWithFile:@"dome1.plist"];
+        [cache addSpriteFramesWithFile:@"dome2.plist"];
+//        catSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"cat_default.png"];
+//        [self addChild:catSpriteSheet z:10];
+//        
+//        catRunSprite = [CCSprite spriteWithSpriteFrameName:@"cat_run1.png"];
+//        catRunSprite.position = ccp(200, 300);
+//        catRunSprite.scale=0.7;
+//        [catSpriteSheet addChild:catRunSprite z:0];
+//        NSMutableArray *animFrames4 = [NSMutableArray array];
+//        for(int i = 1; i <= 30; i++) {
+//            CCSpriteFrame *frame4 = [cache spriteFrameByName:[NSString stringWithFormat:@"cat_run%d.png",i]];
+//            [animFrames4 addObject:frame4];
+//        }
+//        CCAnimation *animation4 = [CCAnimation animationWithSpriteFrames:animFrames4 delay:0.03f];
+//        [catRunSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation4]]];
+//        
         
         [self addStrongMousePushingSprite];
         
@@ -415,14 +416,18 @@ StrongMouseEngineMenu07 *sLayer07;
 
 
 -(void)catFunc{
-    
+    if(!catJumpChe && catObj == nil){
+        catObj = [[StrongLevel7Cat alloc] init];
+        [catObj runCurrentSequence];
+        [self addChild:catObj];
+    }
         if(!catForwardChe){
             if(turnAnimationCount==0){
                 catMovementValue+=1;
                 if(catMovementValue>=(screenMovementFindValue<2?60:500)){
                     catForwardChe=YES;
-                    catRunSprite.visible=NO;
-                    catTurnSprite.visible=YES;
+//                    catRunSprite.visible=NO;
+//                    catTurnSprite.visible=YES;
                     turnAnimationCount=3;
                 }
             }
@@ -432,8 +437,8 @@ StrongMouseEngineMenu07 *sLayer07;
                 if(catMovementValue<=0){
                     catMovementValue=0;
                     catForwardChe=NO;
-                    catRunSprite.visible=NO;
-                    catTurnSprite.visible=YES;
+//                    catRunSprite.visible=NO;
+//                    catTurnSprite.visible=YES;
                     turnAnimationCount=3;
                 }
             }
@@ -446,27 +451,25 @@ StrongMouseEngineMenu07 *sLayer07;
             if(turnAnimationCount>=40){
                 turnAnimationCount=0;
                 if(!catForwardChe){
-                    catRunSprite.flipX=0;
+//                    catRunSprite.flipX=0;
                 }else{
-                    catRunSprite.flipX=1;
+//                    catRunSprite.flipX=1;
                 }
-                catRunSprite.visible=YES;
-                catTurnSprite.visible=NO;
+//                catRunSprite.visible=YES;
+//                catTurnSprite.visible=NO;
             }
         }
         
         if(gameFunc.appleWoodCount<=-30&&screenMovementFindValue<2){
-            catRunSprite.position=ccp(200,catY-appleWoodRotateCount-(appleWoodRotateCount/8.0));
-            catTurnSprite.position=ccp(200,catY-4-appleWoodRotateCount-(appleWoodRotateCount/8.0));
+            [catObj getCatSprite].position=ccp(200,catY-appleWoodRotateCount-(appleWoodRotateCount/8.0));
         }else if(!screenMoveChe){
-            catRunSprite.position=ccp(catX+catMovementValue+gameFunc.appleWoodCount,catY-3);
-            catTurnSprite.position=ccp(catX+catMovementValue+gameFunc.appleWoodCount,catY-3);
+//            catObj.isJumpEnabled = YES;
         }
     CGFloat hx=heroSprite.position.x;
     CGFloat hy=heroSprite.position.y;
     int iValue=(forwardChe?50:0);
     
-    if(hx-iValue>catRunSprite.position.x-90 &&hx-iValue<catRunSprite.position.x+40 &&hy > catRunSprite.position.y-30 &&hy<catRunSprite.position.y+50 &&!gameFunc.
+    if(hx-iValue>[catObj getCatSprite].position.x-90 &&hx-iValue<[catObj getCatSprite].position.x+40 &&hy > [catObj getCatSprite].position.y-30 &&hy<[catObj getCatSprite].position.y+50 &&!gameFunc.
        trappedChe){
         gameFunc.trappedChe=YES;
         trappedTypeValue=2;
@@ -503,10 +506,10 @@ StrongMouseEngineMenu07 *sLayer07;
             screenShowY+=1;
             if(screenShowY>600)
                 screenShowY=600;
+            catObj.isJumpEnabled = YES;
             if(gameFunc.domeMoveCount>=130){
                 screenMovementFindValue=3;
-                catX=230;
-                catY=280;
+                
             }
             
         }else if(screenMovementFindValue==3){
@@ -1545,21 +1548,21 @@ StrongMouseEngineMenu07 *sLayer07;
     return (pValue==0?xx:yy);
 }
 -(void)catSpriteGenerate:(int)fValue animationType:(NSString *)type{
-    NSString *fStr=@"";
-    if([type isEqualToString:@"turn"]){
-        fStr=[NSString stringWithFormat:@"cat_turn_run%d.png",fValue];
-        [catSpriteSheet removeChild:catTurnSprite cleanup:YES];
-        catTurnSprite = [CCSprite spriteWithSpriteFrameName:fStr];
-        catTurnSprite.position = ccp(catX+catMovementValue,catY);
-        catTurnSprite.scale=0.7;
-        if(catForwardChe)
-            catTurnSprite.flipX=0;
-        else
-            catTurnSprite.flipX=1;
-        
-        [catSpriteSheet addChild:catTurnSprite z:0];
-    }
-    
+//    NSString *fStr=@"";
+//    if([type isEqualToString:@"turn"]){
+//        fStr=[NSString stringWithFormat:@"cat_turn_run%d.png",fValue];
+//        [catSpriteSheet removeChild:catTurnSprite cleanup:YES];
+//        catTurnSprite = [CCSprite spriteWithSpriteFrameName:fStr];
+//        catTurnSprite.position = ccp(catX+catMovementValue,catY);
+//        catTurnSprite.scale=0.7;
+//        if(catForwardChe)
+//            catTurnSprite.flipX=0;
+//        else
+//            catTurnSprite.flipX=1;
+//        
+//        [catSpriteSheet addChild:catTurnSprite z:0];
+//    }
+//    
 }
 -(void) dealloc {
     [super dealloc];
