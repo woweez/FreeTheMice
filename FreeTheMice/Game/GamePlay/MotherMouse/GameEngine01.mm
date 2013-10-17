@@ -16,6 +16,7 @@
 #import "FTMConstants.h"
 #import "SimpleAudioEngine.h"
 #import "CatObject.h"
+#import "FTMUtil.h"
 
 enum {
     kTagParentNode = 1,
@@ -223,11 +224,42 @@ GameEngine01Menu *layer01;
         dotSprite.position=ccp(962,240);
         dotSprite.scale=0.3;
         [self addChild:dotSprite z:10];
-        
-        
+
         [self addHudLayerToTheScene];
         [self starCheeseSpriteInitilized];
-        
+        if ([FTMUtil sharedInstance].isFirstTutorial) {
+            
+            [cache addSpriteFramesWithFile:@"tutorial.plist"];
+            pressImage = [CCSprite spriteWithFile:@"move_right_text.png"];
+            pressImage.position = ccp(240, 40);
+            [layer01 addChild:pressImage];
+            
+            tutorialArrow = [CCSprite spriteWithSpriteFrameName:@"hand1_3.png"];
+            tutorialArrow.position = ccp(420, 68);
+            
+            NSMutableArray *animFrames = [NSMutableArray array];
+            for(int i = 4; i > 2; i--) {
+                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"hand1_%d.png",i]];
+                [animFrames addObject:frame];
+            }
+            CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animFrames delay:0.4f];
+            [tutorialArrow runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation]]];
+   
+           [layer01 addChild:tutorialArrow];
+            
+            tutorialCircle = [CCSprite spriteWithSpriteFrameName:@"hand_3.png"];
+            tutorialCircle.position = ccp(443, 30);
+            
+            NSMutableArray *animFrames2 = [NSMutableArray array];
+            for(int i = 3; i < 19; i++) {
+                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"hand_%d.png",i]];
+                [animFrames2 addObject:frame];
+            }
+            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.05f];
+            [tutorialCircle runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            [layer01 addChild:tutorialCircle];
+            
+        }
         [self scheduleUpdate];
     }
     return self;
@@ -251,10 +283,6 @@ GameEngine01Menu *layer01;
 //    }
 //    CCAnimation *aanimation = [CCAnimation animationWithSpriteFrames:animationFramesArr delay:0.03f];
 
-    
-    CatObject *cat = [[CatObject alloc] init];
-//    [cat addCatMovingAnimation];
-    [self addChild:cat z:99999];
 }
 
 -(void) addLevelCompleteLayerToTheScene{
@@ -1012,7 +1040,7 @@ GameEngine01Menu *layer01;
             }
         }
     }else{
-        if((location.x<70 || location.x>winSize.width-70) && location.y < 70){
+        if(((location.x<70 && ![FTMUtil sharedInstance].isFirstTutorial) || (location.x>winSize.width-70 && ([FTMUtil sharedInstance].isFirstTutorial || pressImage == nil))) && location.y < 70){
         if(!jumpingChe&&!landingChe&&!firstRunningChe){
             if(!runningChe&&!mouseWinChe&&!heroTrappedChe){
                 if(screenHeroPosX+25<location.x)
@@ -1023,12 +1051,26 @@ GameEngine01Menu *layer01;
                 runningChe=YES;
                 heroSprite.visible=NO;
                 heroRunSprite.visible=YES;
+                if ([FTMUtil sharedInstance].isFirstTutorial) {
+                    [self schedule:@selector(startTutorialTimer) interval:0.7];
+                }
             }
         }
         }
     }
 }
 
+-(void) startTutorialTimer{
+    [self unschedule:@selector(startTutorialTimer)];
+    if ([FTMUtil sharedInstance].isFirstTutorial) {
+        if(runningChe){
+            heroStandChe=YES;
+            runningChe=NO;
+            heroRunSprite.visible=NO;
+            heroSprite.visible=YES;
+        }
+    }
+}
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     
     UITouch *myTouch = [touches anyObject];
@@ -1084,6 +1126,35 @@ GameEngine01Menu *layer01;
                 heroSprite.visible=YES;
             }
         }
+        if(((location.x<70 && ![FTMUtil sharedInstance].isFirstTutorial) || (location.x>winSize.width-70 && ([FTMUtil sharedInstance].isFirstTutorial || pressImage == nil))) && location.y < 70){
+            if(pressImage != nil && ![FTMUtil sharedInstance].isFirstTutorial ) {
+                [pressImage removeFromParentAndCleanup:YES];
+                [tutorialArrow removeFromParentAndCleanup:YES];
+                [tutorialCircle removeFromParentAndCleanup:YES];
+                tutorialCircle = nil;
+                tutorialArrow = nil;
+                pressImage = nil;
+                NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:[NSNumber numberWithInt:1] forKey:@"firstTutorial"];
+                [defaults synchronize];
+            }
+            if ([FTMUtil sharedInstance].isFirstTutorial) {
+                if (pressImage != nil) {
+                    [pressImage removeFromParentAndCleanup:YES];
+                    pressImage = [CCSprite spriteWithFile:@"move_left_text.png"];
+                    pressImage.position = ccp(240, 40);
+                    [layer01 addChild:pressImage];
+                }
+                
+                tutorialArrow.flipX = 1;
+                tutorialArrow.position = ccp(60, 68);
+                tutorialCircle.position = ccp(37, 30);
+                
+                [FTMUtil sharedInstance].isFirstTutorial = NO;
+                
+            }
+        }
+        
     }
 }
 -(void)clickMenuButton{

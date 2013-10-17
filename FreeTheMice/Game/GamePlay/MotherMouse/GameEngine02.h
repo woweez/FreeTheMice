@@ -34,6 +34,8 @@
     Trigo *trigo;
     b2World* world;
     CGSize winSize;
+    CCSprite *tutorialHand;
+    CCSprite *tutorialText;
 	GLESDebugDraw *m_debugDraw;
 	MyContactListener *_contactListener;
     b2Body *heroBody;

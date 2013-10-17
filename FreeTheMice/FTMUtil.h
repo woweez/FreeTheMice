@@ -13,6 +13,8 @@
 }
 
 @property (readwrite) int mouseClicked;
+@property (readwrite) BOOL isFirstTutorial;
+@property (readwrite) BOOL isSecondTutorial;
 @property (readwrite) BOOL isIphone5;
 @property (readwrite) BOOL isSlowDownTimer;
 @property (readwrite) BOOL isRespawnMice;

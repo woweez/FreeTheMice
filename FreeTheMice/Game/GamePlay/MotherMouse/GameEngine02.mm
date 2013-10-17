@@ -289,9 +289,26 @@ GameEngine02Menu *layer02;
         [self starCheeseSpriteInitilized];
         [self scheduleUpdate];
         
-//        self.scaleX = 0.3;
-//        self.scaleY = 0.4;
-//        self.position = ccp(240, 160);
+        if ([FTMUtil sharedInstance].isSecondTutorial) {
+        
+            tutorialText = [CCSprite spriteWithFile:@"drag_tail_text.png"];
+            tutorialText.position = ccp(100, 282);
+            tutorialText.visible = NO;
+            [self addChild:tutorialText];
+            
+            [cache addSpriteFramesWithFile:@"tutorial.plist"];
+            tutorialHand = [CCSprite spriteWithSpriteFrameName:@"jump_tut_0.png"];
+            tutorialHand.position = heroSprite.position;
+            tutorialHand.visible = NO;
+            NSMutableArray *animFrames2 = [NSMutableArray array];
+            for(int i = 0; i < 19; i++) {
+                CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"jump_tut_%d.png",i]];
+                [animFrames2 addObject:frame];
+            }
+            CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.05f];
+            [tutorialHand runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
+            [self addChild:tutorialHand];
+        }
 
     }
     return self;
@@ -401,11 +418,18 @@ GameEngine02Menu *layer02;
 
 -(void)level01{
     if(firstRunningChe){
-        if(platformX>[heroRunningStopArr[motherLevel-1] intValue]&&screenFirstViewCount==0){
+        float heroX = [heroRunningStopArr[motherLevel-1] intValue];
+        if ([FTMUtil sharedInstance].isSecondTutorial) {
+            heroX = [heroRunningStopArr[motherLevel-1] intValue] + 65;
+        }
+        if(platformX > heroX && screenFirstViewCount==0){
             heroStandChe=YES;
             runningChe=NO;
+            tutorialHand.position = ccp(100, 195);
+            tutorialHand.visible = YES;
+            tutorialText.visible = YES;
             heroRunSprite.visible=NO;
-            heroSprite.visible=YES;
+            heroSprite.visible=NO;
             if([self levelView]){
                 screenFirstViewCount=1;
                 screenShowX=233;
@@ -413,7 +437,7 @@ GameEngine02Menu *layer02;
                 screenShowX2=233;
                 screenShowY2=platformY;
             }else{
-                firstRunningChe=NO;
+                                firstRunningChe=NO;
             }
         }else if(screenFirstViewCount>=1){
             if(screenFirstViewCount==1){
@@ -651,6 +675,9 @@ GameEngine02Menu *layer02;
 
 
 -(void)heroAnimationFunc:(int)fValue animationType:(NSString *)type{
+    if ([type isEqualToString:@"stand"] && [FTMUtil sharedInstance].isSecondTutorial) {
+        return;
+    }
     NSString *fStr=@"";
     if([type isEqualToString:@"jump"]){
         if(fValue!=9)
@@ -1012,24 +1039,30 @@ GameEngine02Menu *layer02;
         int forwadeValue=(!forwardChe?0:heroForwardX);
         if(location.x>=screenHeroPosX-60+forwadeValue && location.x <= screenHeroPosX+40+forwadeValue && location.y>screenHeroPosY-30&&location.y<screenHeroPosY+18){
             if(!jumpingChe&&!dragChe&&!runningChe&&heroStandChe){
-                heroJumpLocationChe=YES;
-                dragChe=YES;
-                heroStandChe=NO;
-                [self heroAnimationFunc:0 animationType:@"jump"];
-                mouseDragSprite.visible=YES;
-                if(!forwardChe){
-                    mouseDragSprite.position=ccp(platformX+2,platformY+3);
-                    mouseDragSprite.rotation=(180-0)-170;
-                }else{
-                    mouseDragSprite.rotation=(180-180)-170;
-                    mouseDragSprite.position=ccp(platformX-2+heroForwardX,platformY+3);
+                
+                if (![FTMUtil sharedInstance].isSecondTutorial) {
+                    heroJumpLocationChe=YES;
+                    dragChe=YES;
+                    heroStandChe=NO;
+                    
+                    [self heroAnimationFunc:0 animationType:@"jump"];
+                    mouseDragSprite.visible=YES;
+                    if(!forwardChe){
+                        mouseDragSprite.position=ccp(platformX+2,platformY+3);
+                        mouseDragSprite.rotation=(180-0)-170;
+                    }else{
+                        mouseDragSprite.rotation=(180-180)-170;
+                        mouseDragSprite.position=ccp(platformX-2+heroForwardX,platformY+3);
+                    }
+                    startVect = b2Vec2(location.x, location.y);
+                    activeVect = startVect - b2Vec2(location.x, location.y);
+                    jumpAngle = fabsf( CC_RADIANS_TO_DEGREES( atan2f(-activeVect.y, activeVect.x)));
                 }
                 startVect = b2Vec2(location.x, location.y);
                 activeVect = startVect - b2Vec2(location.x, location.y);
-                jumpAngle = fabsf( CC_RADIANS_TO_DEGREES( atan2f(-activeVect.y, activeVect.x)));
             }
         }else{
-            if(!jumpingChe&&!landingChe){
+            if(!jumpingChe&&!landingChe && ![FTMUtil sharedInstance].isSecondTutorial){
                 if((location.x<70 || location.x>winSize.width-70) && location.y < 70){
                     if(screenHeroPosX+25<location.x )
                         forwardChe=NO;
@@ -1050,11 +1083,40 @@ GameEngine02Menu *layer02;
     UITouch *myTouch = [touches anyObject];
     CGPoint location = [myTouch locationInView:[myTouch view]];
     location = [[CCDirector sharedDirector] convertToGL:location];
-    
+    int forwadeValue=(!forwardChe?0:heroForwardX);
+    if(location.x>=screenHeroPosX-60+forwadeValue && location.x <= screenHeroPosX+40+forwadeValue && location.y>screenHeroPosY-30&&location.y<screenHeroPosY+18){
+        if(!jumpingChe&&!dragChe&&!runningChe&&heroStandChe){
+            if ([FTMUtil sharedInstance].isSecondTutorial) {
+                heroJumpLocationChe=YES;
+                dragChe=YES;
+                heroStandChe=NO;
+                
+                heroSprite.visible = YES;
+                [tutorialHand removeFromParentAndCleanup:YES];
+                [tutorialText removeFromParentAndCleanup:YES];
+                [FTMUtil sharedInstance].isSecondTutorial = NO;
+                NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:[NSNumber numberWithInt:1] forKey:@"secondTutorial"];
+                [defaults synchronize];
+                [self heroAnimationFunc:0 animationType:@"jump"];
+                mouseDragSprite.visible=YES;
+                if(!forwardChe){
+                    mouseDragSprite.position=ccp(platformX+2,platformY+3);
+                    mouseDragSprite.rotation=(180-0)-170;
+                }else{
+                    mouseDragSprite.rotation=(180-180)-170;
+                    mouseDragSprite.position=ccp(platformX-2+heroForwardX,platformY+3);
+                }
+                jumpAngle = fabsf( CC_RADIANS_TO_DEGREES( atan2f(-activeVect.y, activeVect.x)));
+            }
+   
+        }
+    }
     if(!jumpingChe&&!runningChe&&heroJumpLocationChe&&!mouseWinChe&&motherLevel!=1&&!heroTrappedChe&&!firstRunningChe){
         activeVect = startVect - b2Vec2(location.x, location.y);
         jumpAngle = fabsf( CC_RADIANS_TO_DEGREES( atan2f(-activeVect.y, activeVect.x)));
         [self HeroLiningDraw:0];
+
     }
 }
 
@@ -1075,6 +1137,7 @@ GameEngine02Menu *layer02;
             for (int i = 0; i < 20; i=i+1) {
                 heroPimpleSprite[i].position=ccp(-100,100);
             }
+            
             if(gameFunc.movePlatformChe)
                 gameFunc.movePlatformChe=NO;
             if(gameFunc.trigoVisibleChe)

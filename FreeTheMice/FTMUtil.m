@@ -17,6 +17,8 @@
 @synthesize isIphone5;
 @synthesize isSlowDownTimer;
 @synthesize isRespawnMice;
+@synthesize isFirstTutorial;
+@synthesize isSecondTutorial;
 @synthesize isBoostPowerUpEnabled;
 
 static FTMUtil *sharedInstance =nil;

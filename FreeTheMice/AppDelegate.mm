@@ -12,7 +12,7 @@
 #import "IntroLayer.h"
 #import "Utilities.h"
 #import "InAppUtils.h"
-
+#import "FTMUtil.h"
 @implementation AppController
 
 @synthesize window=window_, navController=navController_, director=director_;
@@ -80,6 +80,26 @@
 	// Assume that PVR images have premultiplied alpha
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
 	int cheese = [[NSUserDefaults standardUserDefaults] integerForKey:@"currentCheese"];
+    int firstTutorial = [[NSUserDefaults standardUserDefaults] integerForKey:@"firstTutorial"];
+    int secondTutorial = [[NSUserDefaults standardUserDefaults] integerForKey:@"secondTutorial"];
+    
+    if (firstTutorial == 0) {
+        [FTMUtil sharedInstance].isFirstTutorial = YES;
+        NSDictionary *appDefaults = [NSDictionary
+                                     dictionaryWithObject:[NSNumber numberWithInt:firstTutorial] forKey:@"firstTutorial"];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+        
+    }else{
+        [FTMUtil sharedInstance].isFirstTutorial = NO;
+    }
+    if (secondTutorial == 0) {
+        [FTMUtil sharedInstance].isSecondTutorial = YES;
+        NSDictionary *appDefaults = [NSDictionary
+                                     dictionaryWithObject:[NSNumber numberWithInt:secondTutorial] forKey:@"secondTutorial"];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    }else{
+        [FTMUtil sharedInstance].isSecondTutorial = NO;
+    }
     if (cheese == 0) {
         NSDictionary *appDefaults = [NSDictionary
                                      dictionaryWithObject:[NSNumber numberWithInt:cheese] forKey:@"currentCheese"];
@@ -99,8 +119,7 @@
 	// set the Navigation Controller as the root view controller
 //	[window_ addSubview:navController_.view];	// Generates flicker.
 	[window_ setRootViewController:navController_];
-	
-	// make main window visible
+    // make main window visible
 	[window_ makeKeyAndVisible];
 	
 	return YES;

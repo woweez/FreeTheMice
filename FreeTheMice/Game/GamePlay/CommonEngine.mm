@@ -365,8 +365,8 @@
         [self schedule:@selector(startTheHudLayerTimer) interval:2];
         
     }
-    if (elapsedSeconds == 1) {
-//        [[SimpleAudioEngine sharedEngine] playEffect:TIMER loop:YES];
+    if (elapsedSeconds == 1 || elapsedSeconds %4 == 0) {
+        [[SimpleAudioEngine sharedEngine] playEffect:TIMER loop:NO];
     }
     int totalTimeInSec = 120;
     int oneMinInSec = 60;
@@ -380,8 +380,8 @@
     if(remainigTimeInSec <= 0){
         [self stopTheHudLayerTimer];
     }else if (remainigTimeInSec == 6){
-//        [[SimpleAudioEngine sharedEngine] stopAllEffects];
-//        [[SimpleAudioEngine sharedEngine] playEffect:TIMER_ALL loop:NO];
+        [[SimpleAudioEngine sharedEngine] stopAllEffects];
+        [[SimpleAudioEngine sharedEngine] playEffect:TIMER_ALL loop:NO];
     }
 }
 
