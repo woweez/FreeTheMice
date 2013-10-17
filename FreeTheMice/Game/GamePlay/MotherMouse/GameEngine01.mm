@@ -229,13 +229,16 @@ GameEngine01Menu *layer01;
         [self starCheeseSpriteInitilized];
         if ([FTMUtil sharedInstance].isFirstTutorial) {
             
+            float scaleFactorX = winSize.width/480;
+            float scaleFactorY = winSize.height/320;
+            
             [cache addSpriteFramesWithFile:@"tutorial.plist"];
             pressImage = [CCSprite spriteWithFile:@"move_right_text.png"];
-            pressImage.position = ccp(240, 40);
+            pressImage.position = ccp(240 * scaleFactorX, 40 *scaleFactorY);
             [layer01 addChild:pressImage];
             
             tutorialArrow = [CCSprite spriteWithSpriteFrameName:@"hand1_3.png"];
-            tutorialArrow.position = ccp(420, 68);
+            tutorialArrow.position = ccp(420 *scaleFactorX, 68 *scaleFactorY);
             
             NSMutableArray *animFrames = [NSMutableArray array];
             for(int i = 4; i > 2; i--) {
@@ -248,7 +251,7 @@ GameEngine01Menu *layer01;
            [layer01 addChild:tutorialArrow];
             
             tutorialCircle = [CCSprite spriteWithSpriteFrameName:@"hand_3.png"];
-            tutorialCircle.position = ccp(443, 30);
+            tutorialCircle.position = ccp(443 *scaleFactorX, 30 *scaleFactorY);
             
             NSMutableArray *animFrames2 = [NSMutableArray array];
             for(int i = 3; i < 19; i++) {
@@ -1139,16 +1142,18 @@ GameEngine01Menu *layer01;
                 [defaults synchronize];
             }
             if ([FTMUtil sharedInstance].isFirstTutorial) {
+                float scaleFactorX = winSize.width/480;
+                float scaleFactorY = winSize.height/320;
                 if (pressImage != nil) {
                     [pressImage removeFromParentAndCleanup:YES];
                     pressImage = [CCSprite spriteWithFile:@"move_left_text.png"];
-                    pressImage.position = ccp(240, 40);
+                    pressImage.position = ccp(240 *scaleFactorX, 40 *scaleFactorY);
                     [layer01 addChild:pressImage];
                 }
                 
                 tutorialArrow.flipX = 1;
-                tutorialArrow.position = ccp(60, 68);
-                tutorialCircle.position = ccp(37, 30);
+                tutorialArrow.position = ccp(60 *scaleFactorX, 68 *scaleFactorY);
+                tutorialCircle.position = ccp(37 *scaleFactorX, 30 *scaleFactorY);
                 
                 [FTMUtil sharedInstance].isFirstTutorial = NO;
                 

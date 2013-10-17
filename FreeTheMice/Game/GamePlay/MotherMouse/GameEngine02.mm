@@ -426,10 +426,8 @@ GameEngine02Menu *layer02;
             heroStandChe=YES;
             runningChe=NO;
             tutorialHand.position = ccp(100, 195);
-            tutorialHand.visible = YES;
-            tutorialText.visible = YES;
             heroRunSprite.visible=NO;
-            heroSprite.visible=NO;
+            heroSprite.visible=YES;
             if([self levelView]){
                 screenFirstViewCount=1;
                 screenShowX=233;
@@ -437,7 +435,7 @@ GameEngine02Menu *layer02;
                 screenShowX2=233;
                 screenShowY2=platformY;
             }else{
-                                firstRunningChe=NO;
+                  firstRunningChe=NO;
             }
         }else if(screenFirstViewCount>=1){
             if(screenFirstViewCount==1){
@@ -455,6 +453,10 @@ GameEngine02Menu *layer02;
                     screenShowY=screenShowY2;
                 }
             }else if(screenFirstViewCount==4){
+                tutorialHand.visible = YES;
+                tutorialText.visible = YES;
+                heroRunSprite.visible=NO;
+                heroSprite.visible=NO;
                 screenShowX-=3;
                 if(screenShowX<screenShowX2){
                     screenFirstViewCount=4;
@@ -675,7 +677,7 @@ GameEngine02Menu *layer02;
 
 
 -(void)heroAnimationFunc:(int)fValue animationType:(NSString *)type{
-    if ([type isEqualToString:@"stand"] && [FTMUtil sharedInstance].isSecondTutorial) {
+    if ([type isEqualToString:@"stand"] && [FTMUtil sharedInstance].isSecondTutorial && screenFirstViewCount == 4) {
         return;
     }
     NSString *fStr=@"";
