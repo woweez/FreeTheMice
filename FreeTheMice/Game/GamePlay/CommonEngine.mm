@@ -226,7 +226,7 @@
             
         }
         else if (frameToLoad == 0){
-            fStr=[NSString stringWithFormat:[self getJumpingFrameNameForMice],0];
+            fStr=[NSString stringWithFormat:[self getJumpingFrameNameForMice],1];
             isLandingAnimationAdded = NO;
             [self removeHeroSpriteFromBatchNode];
             heroSprite = [CCSprite spriteWithSpriteFrameName:fStr];
@@ -259,7 +259,7 @@
     heroSprite.tag = HERO_SPRITE_TAG;
     heroSprite.scale = STRONG_SCALE;
     NSMutableArray *animFrames2 = [NSMutableArray array];
-    for(int i = 2; i <= 8; i++) {
+    for(int i = 2; i <= 10; i++) {
         CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:frameName,i]];
         [animFrames2 addObject:frame];
     }
@@ -282,11 +282,11 @@
     heroSprite.tag = HERO_SPRITE_TAG;
     heroSprite.scale = STRONG_SCALE;
     NSMutableArray *animFrames2 = [NSMutableArray array];
-    int length = 12;
+    int length = 16;
     if ([FTMUtil sharedInstance].isBoostPowerUpEnabled) {
         length = 11;
     }
-    for(int i = 9; i <= length; i++) {
+    for(int i = 11; i <= length; i++) {
 
         CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:frameName,i]];
         [animFrames2 addObject:frame];
