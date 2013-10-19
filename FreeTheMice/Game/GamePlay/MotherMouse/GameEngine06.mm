@@ -112,7 +112,7 @@ GameEngine06Menu *layer06;
             CCSpriteFrame *frame4 = [cache spriteFrameByName:[NSString stringWithFormat:@"cat_run%d.png",i]];
             [animFrames4 addObject:frame4];
         }
-        CCAnimation *animation4 = [CCAnimation animationWithSpriteFrames:animFrames4 delay:0.06f];
+        CCAnimation *animation4 = [CCAnimation animationWithSpriteFrames:animFrames4 delay:0.01f];
         [catRunSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation4]]];
         
         heroRunSprite = [CCSprite spriteWithSpriteFrameName:@"mother_run01.png"];

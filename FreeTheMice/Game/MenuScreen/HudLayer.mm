@@ -122,7 +122,9 @@
 -(void) addPauseBtnMenu{
     
     CCMenuItem *pauseMenuItem = [CCMenuItemImage itemWithNormalImage:@"pause_btn.png" selectedImage:@"pause_btn_press.png" block:^(id sender) {
-        
+        if ([FTMUtil sharedInstance].isFirstTutorial || [FTMUtil sharedInstance].isSecondTutorial) {
+            return;
+        }
         [self showPausingAnimation];
         [[SimpleAudioEngine sharedEngine] setMute:YES];
         
@@ -136,7 +138,12 @@
 
 -(void) addRetryBtnMenu{
     CCMenuItem *retryMenuItem = [CCMenuItemImage itemWithNormalImage:@"retry_btn.png" selectedImage:@"retry_btn_press.png" block:^(id sender) {
-        [self addLevelSceneAgainForRetry];
+        if ([FTMUtil sharedInstance].isFirstTutorial || [FTMUtil sharedInstance].isSecondTutorial) {
+            return;
+        }
+//        [FTMUtil sharedInstance].isBoostPowerUpEnabled = NO;
+//        [FTMUtil sharedInstance].isFirstTutorial = YES;
+//        [self addLevelSceneAgainForRetry];
     }];
     [retryMenuItem setScale:0.5];
     retryMenuItem.position = ccp(-185 *scaleFactorX, 138 *scaleFactorY);
@@ -161,7 +168,10 @@
 }
 -(void) addInventoryBtnMenu{
     CCMenuItem *inventoryMenuItem = [CCMenuItemImage itemWithNormalImage:@"inventory_btn.png" selectedImage:@"inventory_btn_press.png" block:^(id sender) {
-        [FTMUtil sharedInstance].isSlowDownTimer = YES;
+        if ([FTMUtil sharedInstance].isFirstTutorial || [FTMUtil sharedInstance].isSecondTutorial) {
+            return;
+        }
+//        [FTMUtil sharedInstance].isSlowDownTimer = YES;
 //        [self hideFailureScreen];
     }];
     [inventoryMenuItem setScale:0.5];
@@ -176,7 +186,10 @@
 
 -(void) addMagnifyingBtnMenu{
     CCMenuItem *magnifyMenuItem = [CCMenuItemImage itemWithNormalImage:@"zoom_btn.png" selectedImage:@"zoom_btn_press.png" block:^(id sender) {
-
+        if ([FTMUtil sharedInstance].isFirstTutorial || [FTMUtil sharedInstance].isSecondTutorial) {
+            return;
+        }
+//        [FTMUtil sharedInstance].isBoostPowerUpEnabled = YES;
     }];
     [magnifyMenuItem setScale:0.5];
     magnifyMenuItem.position = ccp(220 *scaleFactorX, 138 *scaleFactorY);

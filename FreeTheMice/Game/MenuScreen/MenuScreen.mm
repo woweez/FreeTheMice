@@ -16,7 +16,7 @@
 #import "AppDelegate.h"
 #import "DB.h"
 #import "InAppUtils.h"
-
+#import "FTMUtil.h"
 
 enum {
 	kTagParentNode = 1,

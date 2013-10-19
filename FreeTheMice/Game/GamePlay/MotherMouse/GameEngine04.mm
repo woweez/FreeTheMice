@@ -460,6 +460,26 @@ GameEngineMenu04 *layer04;
     
     world->Step(dt, velocityIterations, positionIterations);
     
+    if ([FTMUtil sharedInstance].isBoostPowerUpEnabled) {
+        if (previousPosition.x == 0 && previousPosition.y == 0) {
+            previousPosition = self.position;
+        }
+        [FTMUtil sharedInstance].isBoostPowerUpEnabled = NO;
+        CCMoveTo *move = [CCMoveTo actionWithDuration:0.5 position:ccp(-126, -85)];
+        CCScaleTo *scale = [CCScaleTo actionWithDuration:0.5 scaleX:0.48 scaleY:0.4571];
+//        CCScaleTo *scale1 = [CCScaleTo actionWithDuration:0.05 scaleX:0.62 scaleY:0.5971];
+        CCSpawn *span = [CCSpawn actions:move,scale, nil];
+//        CCSequence *seq = [CCSequence actions:span,scale1,scale,  nil];
+        [self runAction:span];
+    }else if ([FTMUtil sharedInstance].isFirstTutorial){
+        [FTMUtil sharedInstance].isFirstTutorial = NO;
+        CCMoveTo *move = [CCMoveTo actionWithDuration:0.5 position:previousPosition];
+        CCScaleTo *scale = [CCScaleTo actionWithDuration:0.5 scaleX:1 scaleY:1];
+        CCSpawn *span = [CCSpawn actions:move,scale, nil];
+        [self runAction:span];
+        previousPosition = ccp(0, 0);
+    }
+    
     [self heroJumpingFunc];
     [self heroAnimationFrameFunc];
     [self heroLandingFunc];
@@ -1500,6 +1520,9 @@ GameEngineMenu04 *layer04;
 }
 -(void)setViewpointCenter:(CGPoint) position {
     
+    if ([FTMUtil sharedInstance].isBoostPowerUpEnabled) {
+        return;
+    }
     
     int x = MAX(position.x, winSize.width / 2);
     int y = MAX(position.y, winSize.height / 2);

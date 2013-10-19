@@ -428,6 +428,17 @@ GameEngineMenu05 *layer05;
     
     world->Step(dt, velocityIterations, positionIterations);
     
+    if ([FTMUtil sharedInstance].isBoostPowerUpEnabled) {
+        self.position = ccp(-126, -85);
+        if (self.scaleX > (0.02+ winSize.width/1000)) {
+            self.scaleX = self.scaleX - 0.01;
+            
+        }
+        if (self.scaleY > winSize.height/700) {
+            self.scaleY = self.scaleY - 0.01;
+        }
+    }
+    
     [self heroJumpingFunc];
     [self heroAnimationFrameFunc];
     [self heroLandingFunc];
@@ -1389,7 +1400,9 @@ GameEngineMenu05 *layer05;
     return startingPosition + n * stepVelocity + 0.5f * (n*n+n) * stepGravity;
 }
 -(void)setViewpointCenter:(CGPoint) position {
-    
+    if ([FTMUtil sharedInstance].isBoostPowerUpEnabled) {
+        return;
+    }
     
     int x = MAX(position.x, winSize.width / 2);
     int y = MAX(position.y, winSize.height / 2);

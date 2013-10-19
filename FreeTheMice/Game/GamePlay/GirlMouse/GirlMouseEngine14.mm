@@ -197,16 +197,19 @@ GirlMouseEngineMenu14 *gLayer14;
         iceQubeSprite[0]=[self addFireFlamesAnimation:ccp(0, 0)];
         iceQubeSprite[0].position = ccp(450,244);
         iceQubeSprite[0].scale=0.7;
+        iceQubeSprite[0].visible = NO;
         [self addChild:iceQubeSprite[0] z:10];
         
         iceQubeSprite[1]=[self addFireFlamesAnimation:ccp(0, 0)];
         iceQubeSprite[1].position=ccp(715,244);
         iceQubeSprite[1].scale=0.7;
+        iceQubeSprite[1].visible = NO;
         [self addChild:iceQubeSprite[1] z:10];
         
         iceQubeSprite[2]=[self addFireFlamesAnimation:ccp(0, 0)];
         iceQubeSprite[2].position=ccp(895,244);
         iceQubeSprite[2].scale=0.7;
+        iceQubeSprite[2].visible = NO;
         [self addChild:iceQubeSprite[2] z:10];
         
         CCSprite *slapSprite=[CCSprite spriteWithFile:@"slap.png"];
@@ -1027,13 +1030,13 @@ GirlMouseEngineMenu14 *gLayer14;
             trappedTypeValue=1;
         }
     }
-    if(screenMovementFindValue2==0){
+    if(screenMovementFindValue2==3){
         CGFloat hx=heroSprite.position.x;
         CGFloat hy=heroSprite.position.y;
         int iValue=(forwardChe?60:0);
         
         for(int i=0;i<3;i++){
-            if(hx-iValue>iceQubeSprite[i].position.x-60 &&hx-iValue<iceQubeSprite[i].position.x+20 &&hy > iceQubeSprite[i].position.y-30 &&hy<iceQubeSprite[i].position.y+50 &&!gameFunc.trappedChe){
+            if(hx-iValue>iceQubeSprite[i].position.x-60 &&hx-iValue<iceQubeSprite[i].position.x+20 &&hy > iceQubeSprite[i].position.y-30 &&hy<iceQubeSprite[i].position.y+50 &&!gameFunc.trappedChe && iceQubeSprite[i].visible){
                 gameFunc.trappedChe=YES;
                 trappedTypeValue=1;
             }
@@ -1128,7 +1131,7 @@ GirlMouseEngineMenu14 *gLayer14;
 }
 
 -(void)iceQubeAnimation{
-    if(!screenMoveChe){
+    if(!screenMoveChe && screenMovementFindValue2 == 3){
         for(int i=0;i<5;i++){
             if(iceQubeCount[i]!=0){
                 if(iceQubeCount[i]!=0)
@@ -1175,13 +1178,20 @@ GirlMouseEngineMenu14 *gLayer14;
         }
         
         fireReleaseCount+=1;
-        if(fireReleaseCount>=10){
+        if(fireReleaseCount>=100){
+            iceQubeSprite[2].visible = NO;
+            iceQubeSprite[1].visible = NO;
+            iceQubeSprite[0].visible = NO;
             fireReleaseCount=0;
+            
         }
         
         fireStartCount+=1;
         if(fireStartCount>=200){
-            fireStartCount=0;
+            iceQubeSprite[2].visible = YES;
+            iceQubeSprite[1].visible = YES;
+            iceQubeSprite[0].visible = YES;
+            fireStartCount=0;            
             if(!fireSideChe)
                 fireSideChe=YES;
             else

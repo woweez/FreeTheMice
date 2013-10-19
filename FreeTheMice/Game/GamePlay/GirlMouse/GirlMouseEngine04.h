@@ -21,6 +21,7 @@
 #import "HudLayer.h"
 #import "LevelCompleteScreen.h"
 #import "CommonEngine.h"
+#import "GirlLevel4Cat.h"
 
 #define PTM_RATIO 32
 
@@ -36,6 +37,8 @@
     b2World* world;
     Trigo *trigo;
 //    HudLayer *hudLayer;
+    GirlLevel4Cat *catObj1;
+    GirlLevel4Cat *catObj2;
     CGSize winSize;
 	GLESDebugDraw *m_debugDraw;
 	MyContactListener *_contactListener;
@@ -65,7 +68,7 @@
     CCSprite *cheeseCollectedSprite;
     CCSprite *mouseTrappedBackground;
     CCSprite *timeCheeseSprite;
-    CCSprite *catSprite2;
+//    CCSprite *catSprite2;
     CCSprite *cheeseSprite[5];
     CCSprite *cheeseSprite2[5];
     CCSprite *starSprite[6];
@@ -82,8 +85,8 @@
     int heroJumpingAnimationArrValue;
 //    CCSpriteFrameCache *cache;
 //    CCSpriteBatchNode *spriteSheet;
-    CCSpriteFrameCache *catCache;
-    CCSpriteBatchNode *catSpriteSheet;
+//    CCSpriteFrameCache *catCache;
+//    CCSpriteBatchNode *catSpriteSheet;
     
     NSArray * heroJumpIntervalValue;
     NSArray * cheeseSetValue;

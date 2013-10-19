@@ -26,16 +26,16 @@
         
         catSprite = [CCSprite spriteWithSpriteFrameName:@"cat_run1.png"];
         catSprite.position = ccp(100, 100);
-        catSprite.scale = 0.7;
+        catSprite.scale = 0.6;
         [catSpriteSheet addChild:catSprite];
         
         secondCatSprite = [CCSprite spriteWithSpriteFrameName:@"cat_run1.png"];
         secondCatSprite.position = ccp(100, 100);
-        secondCatSprite.scale = 0.7;
+        secondCatSprite.scale = 0.6;
         secondCatSprite.visible = NO;
         [catSpriteSheet addChild:secondCatSprite];
         
-        walkingSpeed = 50;
+        walkingSpeed = 60;
         
     }
     return self;
@@ -226,7 +226,7 @@
         CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"cat_run%d.png", i]];
         [animationFramesArr addObject:frame];
     }
-    CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animationFramesArr delay:0.03f];
+    CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animationFramesArr delay:0.01f];
     CCAnimate *actionOne = [CCAnimate actionWithAnimation:animation];
     
     CCRepeatForever *repeat = [CCRepeatForever actionWithAction:actionOne];
@@ -240,7 +240,7 @@
         CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"cat_run%d.png", i]];
         [animationFramesArr addObject:frame];
     }
-    CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animationFramesArr delay:0.03f];
+    CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animationFramesArr delay:0.01f];
     CCAnimate *actionOne = [CCAnimate actionWithAnimation:animation];
     
     CCRepeatForever *repeat = [CCRepeatForever actionWithAction:actionOne];

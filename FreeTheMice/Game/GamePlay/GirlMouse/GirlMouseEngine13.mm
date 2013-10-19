@@ -502,6 +502,11 @@ GirlMouseEngineMenu13 *gLayer13;
 }
 -(void)catFunc{
     
+//    if (!catJumpChe && catObj1 == nil) {
+//        catObj1 = [[GirlLevel13Cat alloc] init];
+//        [catObj1 runCurrentSequence];
+//        [self addChild:catObj1];
+//    }
     if(!catBackChe){
         if(catMovementCount<80){
             if(turnAnimationCount==0){
@@ -658,6 +663,11 @@ GirlMouseEngineMenu13 *gLayer13;
 }
 -(void)secondCatFunc{
     
+//    if (!catJumpChe2 && catObj2 == nil) {
+//        catObj2 = [[GirlLevel13Cat alloc] init];
+//        [catObj2 runCurrentSequenceForFirstCat];
+//        [self addChild:catObj2];
+//    }
     if(!catBackChe2){
         if(catMovementCount2<100){
             if(turnAnimationCount2==0){
@@ -870,7 +880,12 @@ GirlMouseEngineMenu13 *gLayer13;
 }
 -(void)thirdCatFunc{
     
-    
+//    if (!catJumpChe3 && catObj3 == nil) {
+//        catObj3 = [[GirlLevel13Cat alloc] init];
+//        [catObj3 runCurrentSequenceForSecondCat];
+//        [self addChild:catObj3];
+//    }
+//    
     if(!catBackChe3){
         if(turnAnimationCount3==0){
             catX3=[trigo circlex:catMovementCount3 a:179]+850;

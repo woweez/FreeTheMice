@@ -21,6 +21,7 @@
 #import "HudLayer.h"
 #import "LevelCompleteScreen.h"
 #import "CommonEngine.h"
+#import "GirlLevel5Cat.h"
 
 #define PTM_RATIO 32
 
@@ -40,6 +41,7 @@
 	GLESDebugDraw *m_debugDraw;
 	MyContactListener *_contactListener;
     b2Body *heroBody;
+    GirlLevel5Cat *catObj;
     b2Vec2 activeVect, startVect;
     float32 jumpPower,jumpAngle;
     CCSprite *heroPimpleSprite[25];

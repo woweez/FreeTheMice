@@ -1214,6 +1214,9 @@ StrongMouseEngineMenu04 *sLayer04;
 }
 -(void)setViewpointCenter:(CGPoint) position {
     
+//    if ([FTMUtil sharedInstance].isBoostPowerUpEnabled) {
+//        return;
+//    }
     int x = MAX(position.x, winSize.width / 2);
     int y = MAX(position.y, winSize.height / 2);
     x = MIN(x, (_tileMap.mapSize.width * _tileMap.tileSize.width)
@@ -1232,6 +1235,7 @@ StrongMouseEngineMenu04 *sLayer04;
     
     CGPoint centerOfView = ccp(winSize.width/2, winSize.height/2);
     CGPoint viewPoint = ccpSub(centerOfView, actualPosition);
+    
     self.position = viewPoint;
     
     

@@ -21,6 +21,7 @@
 #import "HudLayer.h"
 #import "LevelCompleteScreen.h"
 #import "CommonEngine.h"
+#import "GirlLevel6Cat.h"
 
 #define PTM_RATIO 32
 
@@ -36,6 +37,9 @@
     b2World* world;
     Trigo *trigo;
 //    HudLayer *hudLayer;
+    GirlLevel6Cat *catObj1;
+    GirlLevel6Cat *catObj2;
+
     CGSize winSize;
 	GLESDebugDraw *m_debugDraw;
 	MyContactListener *_contactListener;
@@ -66,7 +70,7 @@
     CCSprite *cheeseCollectedSprite;
     CCSprite *mouseTrappedBackground;
     CCSprite *timeCheeseSprite;
-    CCSprite *catSprite2;
+//    CCSprite *catSprite2;
     CCSprite *cheeseSprite[5];
     CCSprite *cheeseSprite2[5];
     CCSprite *starSprite[6];

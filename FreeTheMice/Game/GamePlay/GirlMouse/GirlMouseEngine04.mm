@@ -104,12 +104,12 @@ GirlMouseEngineMenu04 *gLayer04;
         CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animFrames delay:0.07f];
         [heroRunSprite runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation]]];
         
-        
-        catCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-        [catCache addSpriteFramesWithFile:@"cat_default.plist"];
-        catSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"cat_default.png"];
-        [self addChild:catSpriteSheet z:1];
-        
+//        
+//        catCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+//        [catCache addSpriteFramesWithFile:@"cat_default.plist"];
+//        catSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"cat_default.png"];
+//        [self addChild:catSpriteSheet z:1];
+//        
         mouseDragSprite=[CCSprite spriteWithFile:@"mouse_drag.png"];
         mouseDragSprite.position=ccp(platformX+2,platformY+3);
         mouseDragSprite.scale=0.6;
@@ -454,6 +454,13 @@ GirlMouseEngineMenu04 *gLayer04;
     
 }
 -(void)catFunc{
+    
+    if(!catJumpChe && catObj1 == nil){
+        catObj1 = [[GirlLevel4Cat alloc] init];
+        [catObj1 runCurrentSequenceForFirstCat];
+        [self addChild:catObj1];
+    }
+    
     if(!catBackChe){
         if(catMovementCount<75){
             if(turnAnimationCount==0){
@@ -650,13 +657,19 @@ GirlMouseEngineMenu04 *gLayer04;
     }
     catAnimationCount+=2;
     catAnimationCount=(catAnimationCount>=43?0:catAnimationCount);
-    if(turnAnimationCount==0)
-        catSprite.position=ccp(catX,catY+16);
-    else
-        catSprite.position=ccp(catX,catY+13);
+//    if(turnAnimationCount==0)
+//        catSprite.position=ccp(catX,catY+16);
+//    else
+//        catSprite.position=ccp(catX,catY+13);
     
 }
 -(void)secondCatFunc{
+    
+    if(!catJumpChe2 && catObj2 == nil){
+        catObj2 = [[GirlLevel4Cat alloc] init];
+        [catObj2 runCurrentSequenceForSecondCat];
+        [self addChild:catObj2];
+    }
     
     if(!catBackChe2){
         if(catMovementCount2<215){
@@ -912,12 +925,6 @@ GirlMouseEngineMenu04 *gLayer04;
         }
     }
     
-    
-    
-    
-    
-    
-    
     if(turnAnimationCount2>0){
         turnAnimationCount2+=1;
         if(turnAnimationCount2%4==0)
@@ -940,51 +947,51 @@ GirlMouseEngineMenu04 *gLayer04;
     }
     catAnimationCount2+=2;
     catAnimationCount2=(catAnimationCount2>=43?0:catAnimationCount2);
-    if(turnAnimationCount2==0)
-        catSprite2.position=ccp(catX2,catY2+16);
-    else
-        catSprite2.position=ccp(catX2,catY2+13);
+//    if(turnAnimationCount2==0)
+//        catSprite2.position=ccp(catX2,catY2+16);
+//    else
+//        catSprite2.position=ccp(catX2,catY2+13);
 }
 -(void)catSpriteGenerate:(int)fValue animationType:(NSString *)type{
-    NSString *fStr=@"";
-    if([type isEqualToString:@"run"])
-        fStr=[NSString stringWithFormat:@"cat_run%d.png",fValue+1];
-    else if([type isEqualToString:@"turn"]){
-        fStr=[NSString stringWithFormat:@"cat_turn_run%d.png",fValue];
-    }else if([type isEqualToString:@"jump"])
-        fStr=[NSString stringWithFormat:@"cat_jump%d.png",fValue];
-    
-    [catSpriteSheet removeChild:catSprite cleanup:YES];
-    catSprite = [CCSprite spriteWithSpriteFrameName:fStr];
-    catSprite.position = ccp(catX,catY);
-    catSprite.scale=0.6;
-    if(!catForwardChe){
-        catSprite.flipX=0;
-    }else{
-        catSprite.flipX=1;
-    }
-    [catSpriteSheet addChild:catSprite z:10];
+//    NSString *fStr=@"";
+//    if([type isEqualToString:@"run"])
+//        fStr=[NSString stringWithFormat:@"cat_run%d.png",fValue+1];
+//    else if([type isEqualToString:@"turn"]){
+//        fStr=[NSString stringWithFormat:@"cat_turn_run%d.png",fValue];
+//    }else if([type isEqualToString:@"jump"])
+//        fStr=[NSString stringWithFormat:@"cat_jump%d.png",fValue];
+//    
+//    [catSpriteSheet removeChild:catSprite cleanup:YES];
+//    catSprite = [CCSprite spriteWithSpriteFrameName:fStr];
+//    catSprite.position = ccp(catX,catY);
+//    catSprite.scale=0.6;
+//    if(!catForwardChe){
+//        catSprite.flipX=0;
+//    }else{
+//        catSprite.flipX=1;
+//    }
+//    [catSpriteSheet addChild:catSprite z:10];
 }
 
 -(void)secondCatSpriteGenerate:(int)fValue animationType:(NSString *)type{
-    NSString *fStr=@"";
-    if([type isEqualToString:@"run"])
-        fStr=[NSString stringWithFormat:@"cat_run%d.png",fValue+1];
-    else if([type isEqualToString:@"turn"]){
-        fStr=[NSString stringWithFormat:@"cat_turn_run%d.png",fValue];
-    }else if([type isEqualToString:@"jump"])
-        fStr=[NSString stringWithFormat:@"cat_jump%d.png",fValue];
-    
-    [catSpriteSheet removeChild:catSprite2 cleanup:YES];
-    catSprite2 = [CCSprite spriteWithSpriteFrameName:fStr];
-    catSprite2.position = ccp(catX2,catY2);
-    catSprite2.scale=0.6;
-    if(!catForwardChe2){
-        catSprite2.flipX=0;
-    }else{
-        catSprite2.flipX=1;
-    }
-    [catSpriteSheet addChild:catSprite2 z:10];
+//    NSString *fStr=@"";
+//    if([type isEqualToString:@"run"])
+//        fStr=[NSString stringWithFormat:@"cat_run%d.png",fValue+1];
+//    else if([type isEqualToString:@"turn"]){
+//        fStr=[NSString stringWithFormat:@"cat_turn_run%d.png",fValue];
+//    }else if([type isEqualToString:@"jump"])
+//        fStr=[NSString stringWithFormat:@"cat_jump%d.png",fValue];
+//    
+//    [catSpriteSheet removeChild:catSprite2 cleanup:YES];
+//    catSprite2 = [CCSprite spriteWithSpriteFrameName:fStr];
+//    catSprite2.position = ccp(catX2,catY2);
+//    catSprite2.scale=0.6;
+//    if(!catForwardChe2){
+//        catSprite2.flipX=0;
+//    }else{
+//        catSprite2.flipX=1;
+//    }
+//    [catSpriteSheet addChild:catSprite2 z:10];
 }
 
 -(void)collisionFunc{
@@ -1026,12 +1033,11 @@ GirlMouseEngineMenu04 *gLayer04;
         trappedTypeValue=3;
     }
     
-    if(hx-iValue>catSprite.position.x-90 &&hx-iValue<catSprite.position.x+40 &&hy > catSprite.position.y-30 &&hy<catSprite.position.y+50 &&!gameFunc.
+    if(hx-iValue>[catObj1 getCatSprite].position.x-90 &&hx-iValue<[catObj1 getCatSprite].position.x+40 &&hy > [catObj1 getCatSprite].position.y-30 &&hy<[catObj1 getCatSprite].position.y+50 &&!gameFunc.
        trappedChe&&!gameFunc.stickyChe){
         gameFunc.trappedChe=YES;
         trappedTypeValue=4;
-    }else if(hx-iValue>catSprite2.position.x-90 &&hx-iValue<catSprite2.position.x+40 &&hy > catSprite2.position.y-30 &&hy<catSprite2.position.y+50 &&!gameFunc.
-             trappedChe&&!gameFunc.stickyChe){
+    }else if(hx-iValue>[catObj2 getCatSprite].position.x-90 &&hx-iValue<[catObj2 getCatSprite].position.x+40 &&hy > [catObj2 getCatSprite].position.y-30 &&hy<[catObj2 getCatSprite].position.y+50 &&!gameFunc.trappedChe&&!gameFunc.stickyChe){
         gameFunc.trappedChe=YES;
         trappedTypeValue=4;
     }

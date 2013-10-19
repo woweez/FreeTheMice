@@ -113,10 +113,10 @@ NSString *const ToolShedUpdateProductPurchasedNotification = @"ToolShedUpdatePro
     cost.scale=0.5;
     [cell addChild:cost z:0];
     
-    CCLabelAtlas *name = [CCLabelAtlas labelWithString:@"121242112" charMapFile:@"numbers.png" itemWidth:15 itemHeight:20 startCharMap:'.'];
-    name.position= ccp(powrUpSpr.position.x -20 *scaleFactorX, powrUpSpr.position.y - 35 *scaleFactorY);
-    name.scale=0.5;
-//    [cell addChild:name z:0];
+//    CCLabelBMFont *name = [CCLabelBMFont labelWithString:@"AAA" fntFile:@"font1.fnt"];
+//    name.position= ccp(powrUpSpr.position.x -10 *scaleFactorX, powrUpSpr.position.y - 35 *scaleFactorY);
+////    name.scale=0.5;
+//    [cell addChild:name z:99999];
     
     
     CCLabelAtlas *multiplier = [CCLabelAtlas labelWithString:@"3" charMapFile:@"numbers.png" itemWidth:15 itemHeight:20 startCharMap:'.'];

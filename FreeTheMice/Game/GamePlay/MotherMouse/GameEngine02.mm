@@ -310,6 +310,9 @@ GameEngine02Menu *layer02;
             [self addChild:tutorialHand];
         }
 
+        self.scaleX = winSize.width/1000;
+        self.scaleY = winSize.height/700;
+        self.position = ccp(-126, -85);
     }
     return self;
 }
@@ -411,7 +414,7 @@ GameEngine02Menu *layer02;
     [self progressBarFunc];
     [self cheeseCollisionFunc];
     [self heroJumpingRunning];
-    
+
     gameFunc.runChe=runningChe;
     [gameFunc render];
 }
@@ -1033,7 +1036,7 @@ GameEngine02Menu *layer02;
     UITouch *myTouch = [touches anyObject];
     CGPoint location = [myTouch locationInView:[myTouch view]];
     location = [[CCDirector sharedDirector] convertToGL:location];
-    
+//    self.position = location;
     CGPoint prevLocation = [myTouch previousLocationInView: [myTouch view]];
     prevLocation = [[CCDirector sharedDirector] convertToGL: prevLocation];
     
@@ -1085,6 +1088,20 @@ GameEngine02Menu *layer02;
     UITouch *myTouch = [touches anyObject];
     CGPoint location = [myTouch locationInView:[myTouch view]];
     location = [[CCDirector sharedDirector] convertToGL:location];
+//    if (location.x > self.position.x && location.y > self.position.y) {
+//        self.position = ccp(self.position.x + (location.x -self.position.x), self.position.y + (location.y -self.position.y));
+//    }
+//    else if (location.x < self.position.x && location.y < self.position.y){
+//        self.position = ccp(self.position.x - (self.position.x - location.x), self.position.y - (self.position.y - location.y ));
+//    }
+//    else if (location.x > self.position.x && location.y < self.position.y){
+//        self.position = ccp(self.position.x + (location.x - self.position.x ), self.position.y - (self.position.y - location.y ));
+//    }
+//    else if (location.x < self.position.x && location.y > self.position.y){
+//        self.position = ccp(self.position.x - (self.position.x - location.x ), self.position.y + (location.y - self.position.y  ));
+//    }
+    
+
     int forwadeValue=(!forwardChe?0:heroForwardX);
     if(location.x>=screenHeroPosX-60+forwadeValue && location.x <= screenHeroPosX+40+forwadeValue && location.y>screenHeroPosY-30&&location.y<screenHeroPosY+18){
         if(!jumpingChe&&!dragChe&&!runningChe&&heroStandChe){

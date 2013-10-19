@@ -21,6 +21,7 @@
 #import "HudLayer.h"
 #import "LevelCompleteScreen.h"
 #import "CommonEngine.h"
+#import "GirlLevel9Cat.h"
 
 #define PTM_RATIO 32
 
@@ -36,6 +37,9 @@
     b2World* world;
     Trigo *trigo;
 //    HudLayer *hudLayer;
+    GirlLevel9Cat *catObj1;
+    GirlLevel9Cat *catObj2;
+    
     CGSize winSize;
 	GLESDebugDraw *m_debugDraw;
 	MyContactListener *_contactListener;

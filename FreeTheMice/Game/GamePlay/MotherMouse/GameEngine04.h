@@ -36,6 +36,7 @@
     CGSize winSize;
     b2World* world;
 //    HudLayer *hudLayer;
+    CGPoint previousPosition;
 	GLESDebugDraw *m_debugDraw;
 	MyContactListener *_contactListener;
     b2Body *heroBody;
