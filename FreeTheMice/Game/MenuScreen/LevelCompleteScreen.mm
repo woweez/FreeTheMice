@@ -109,7 +109,7 @@ enum {
     
     
     CCMenuItem *levelsMenuItem = [CCMenuItemImage itemWithNormalImage:@"level_select_btn.png" selectedImage:@"level_select_btn_press.png" block:^(id sender) {
-
+        [soundEffect button_1];
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
     }];
     [levelsMenuItem setScale:0.5];
@@ -127,6 +127,7 @@ enum {
 
 -(void) addRetryBtnMenu{
     CCMenuItem *retryMenuItem = [CCMenuItemImage itemWithNormalImage:@"retry_btn.png" selectedImage:@"retry_btn_press.png" block:^(id sender) {
+        [soundEffect button_1];
         int selectedMouse = [FTMUtil sharedInstance].mouseClicked;
         switch (selectedMouse) {
             case FTM_MAMA_MICE_ID:
@@ -150,7 +151,7 @@ enum {
 
 -(void) addNextLevelBtnMenu{
     CCMenuItem *nextLevelMenuItem = [CCMenuItemImage itemWithNormalImage:@"next_level_btn.png" selectedImage:@"next_level_btn_press.png" block:^(id sender) {
-        
+        [soundEffect button_1];
         int nextLevelTag = self.tag +1;
         int selectedMouse = [FTMUtil sharedInstance].mouseClicked;
         switch (selectedMouse) {
@@ -352,6 +353,7 @@ enum {
 }
 
 -(void)clickMouse:(CCMenuItem *)sender {
+    [soundEffect button_1];
 //    DB *db = [DB new];
 //    [db setSettingsFor:@"CurrentMouse" withValue:[NSString stringWithFormat:@"%d",sender.tag]];
 //    [db release];

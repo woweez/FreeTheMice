@@ -56,7 +56,7 @@ NSString *const ToolShedUpdateProductPurchasedNotification = @"ToolShedUpdatePro
         [cell.children removeAllObjects];
 
     }
-
+    soundEffect = [[sound alloc] init];
     //configure the sprite.. do all kinds of super cool things you can do with cocos2d.
     CCSprite *temp = [CCSprite node];
     GLubyte *buffer = (GLubyte *) malloc(sizeof(GLubyte)*4);
@@ -85,7 +85,7 @@ NSString *const ToolShedUpdateProductPurchasedNotification = @"ToolShedUpdatePro
     
     
     CCMenuItem *buyItem = [CCMenuItemImage itemWithNormalImage:@"buy-btn.png" selectedImage:@"buy-btn-press.png" block:^(id sender) {
-        
+        [soundEffect button_1];
         CCMenuItem *item = (CCMenuItem *)sender;
         int cost = [self getCostWithItemID:item.tag];
         int cheese = [[NSUserDefaults standardUserDefaults] integerForKey:@"currentCheese"];

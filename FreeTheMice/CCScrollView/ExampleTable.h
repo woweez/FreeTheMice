@@ -26,11 +26,12 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "SWTableView.h"
-
+#import "sound.h"
 @interface ExampleTable : NSObject<SWTableViewDelegate, SWTableViewDataSource>
 {
     float scaleFactorX;
     float scaleFactorY;
+    sound *soundEffect;
 }
 
 @end

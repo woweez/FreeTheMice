@@ -36,6 +36,7 @@
     sound *soundEffect;
     Trigo *trigo;
     b2World* world;
+    BOOL box1,box2,box3,box4,box5,box6;
 //    HudLayer *hudLayer;
     CGSize winSize;
 	GLESDebugDraw *m_debugDraw;

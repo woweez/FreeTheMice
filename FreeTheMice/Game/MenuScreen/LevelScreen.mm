@@ -104,6 +104,7 @@ enum {
         [self addChild: kitchenTitle z:0];
         
         CCMenuItem *backMenuItem = [CCMenuItemImage itemWithNormalImage:@"back_button_1.png" selectedImage:@"back_button_2.png" block:^(id sender) {
+            [soundEffect button_1];
             [[CCDirector sharedDirector] replaceScene:[MouseSelectionScreen scene]];
             
 		}];
@@ -187,12 +188,13 @@ enum {
 }
 
 -(void)clickMouse:(CCMenuItem *)sender {
+    [soundEffect button_1];
 //    DB *db = [DB new];
 //    [db setSettingsFor:@"CurrentMouse" withValue:[NSString stringWithFormat:@"%d",sender.tag]];
 //    [db release];
 }
 -(void)clickLevel:(CCMenuItem *)sender {
-    
+    [soundEffect button_1];
     if(sender.tag==1){
         if(currentMouse==1)
             [[CCDirector sharedDirector] replaceScene:[GameEngine01 scene]];

@@ -10,11 +10,13 @@
 #import "Box2D.h"
 #import "GLES-Render.h"
 #import "SWScrollView.h"
+#import "sound.h"
 @interface StoreScreen : CCLayer{
     
     float scaleFactorX;
     float scaleFactorY;
     CCLabelAtlas *totalCheese;
+    sound *soundEffect;
 }
 +(CCScene *) scene;
 - (void)updateStoreAboutPurchased :(NSString *) updateNotification;

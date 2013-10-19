@@ -44,7 +44,7 @@ NSString *const ToolShedUpdateProductPurchasedNotification = @"ToolShedUpdatePro
         shedBg.scaleY = 0.5 * scaleFactorY;
         [self addChild:shedBg];
     
-
+        soundEffect = [[sound alloc] init];
         CCSprite *currentCheeseBg = [CCSprite spriteWithFile: @"cheese_available.png"];
         currentCheeseBg.position = ccp(160 *scaleFactorX, 300 *scaleFactorY);
         currentCheeseBg.scaleX = 0.5 *scaleFactorX;
@@ -80,6 +80,7 @@ NSString *const ToolShedUpdateProductPurchasedNotification = @"ToolShedUpdatePro
         [self addChild:tapPowerupInfo z:10];
         
         CCMenuItem *buyCheeseItem = [CCMenuItemImage itemWithNormalImage:@"buy_cheese_btn.png" selectedImage:@"buy_cheese_btn.png" block:^(id sender) {
+            [soundEffect button_1];
             [[CCDirector sharedDirector] replaceScene:[StoreScreen node]];
 //            open up the store here for inApp..
 		}];
@@ -92,6 +93,7 @@ NSString *const ToolShedUpdateProductPurchasedNotification = @"ToolShedUpdatePro
         
     
         CCMenuItem *backMenuItem = [CCMenuItemImage itemWithNormalImage:@"back_button_1.png" selectedImage:@"back_button_2.png" block:^(id sender) {
+            [soundEffect button_1];
             [[CCDirector sharedDirector] replaceScene:[MenuScreen scene]];
             
 		}];
@@ -103,6 +105,7 @@ NSString *const ToolShedUpdateProductPurchasedNotification = @"ToolShedUpdatePro
         [self addChild: menu z:100];
 
         powerUpItem = [CCMenuItemImage itemWithNormalImage:@"powerups_btn.png" selectedImage:@"powerups_btn_disable.png" disabledImage:@"powerups_btn_disable.png"  block:^(id sender) {
+            [soundEffect button_1];
 //            [[CCDirector sharedDirector] replaceScene:[MenuScreen node]];
             [powerUpItem selected];
             powerUpItem.isEnabled = NO;
@@ -120,6 +123,7 @@ NSString *const ToolShedUpdateProductPurchasedNotification = @"ToolShedUpdatePro
         
         
         costumesItem = [CCMenuItemImage itemWithNormalImage:@"costumes_btn.png" selectedImage:@"costumes_btn_disable.png" disabledImage:@"costumes_btn_disable.png"  block:^(id sender) {
+            [soundEffect button_1];
             [self removeChildByTag:8888 cleanup:YES];
             [powerUpItem unselected];
             powerUpItem.isEnabled = YES;

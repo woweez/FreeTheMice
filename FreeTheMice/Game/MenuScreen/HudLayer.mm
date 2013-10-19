@@ -109,6 +109,26 @@
 }
 
 -(void) updateNoOfCheeseCollected:(int)currentValue andMaxValue:(int)maxValue{
+    
+    switch (currentValue) {
+        case 1:
+            [soundEffect cheese_1];
+            break;
+        case 2:
+            [soundEffect cheese_2];
+            break;
+        case 3:
+            [soundEffect cheese_3];
+            break;
+        case 4:
+            [soundEffect cheese_3];
+            break;
+        case 5:
+            [soundEffect cheese_all];
+            break;
+        default:
+            break;
+    }
     [noOfCollectedCheese setString:[NSString stringWithFormat:@"%d/%d",currentValue,maxValue]];
 }
 
@@ -122,6 +142,7 @@
 -(void) addPauseBtnMenu{
     
     CCMenuItem *pauseMenuItem = [CCMenuItemImage itemWithNormalImage:@"pause_btn.png" selectedImage:@"pause_btn_press.png" block:^(id sender) {
+        [soundEffect button_1];
         if ([FTMUtil sharedInstance].isFirstTutorial || [FTMUtil sharedInstance].isSecondTutorial) {
             return;
         }
@@ -138,12 +159,13 @@
 
 -(void) addRetryBtnMenu{
     CCMenuItem *retryMenuItem = [CCMenuItemImage itemWithNormalImage:@"retry_btn.png" selectedImage:@"retry_btn_press.png" block:^(id sender) {
+        [soundEffect button_1];
         if ([FTMUtil sharedInstance].isFirstTutorial || [FTMUtil sharedInstance].isSecondTutorial) {
             return;
         }
 //        [FTMUtil sharedInstance].isBoostPowerUpEnabled = NO;
 //        [FTMUtil sharedInstance].isFirstTutorial = YES;
-//        [self addLevelSceneAgainForRetry];
+        [self addLevelSceneAgainForRetry];
     }];
     [retryMenuItem setScale:0.5];
     retryMenuItem.position = ccp(-185 *scaleFactorX, 138 *scaleFactorY);
@@ -168,6 +190,7 @@
 }
 -(void) addInventoryBtnMenu{
     CCMenuItem *inventoryMenuItem = [CCMenuItemImage itemWithNormalImage:@"inventory_btn.png" selectedImage:@"inventory_btn_press.png" block:^(id sender) {
+        [soundEffect button_1];
         if ([FTMUtil sharedInstance].isFirstTutorial || [FTMUtil sharedInstance].isSecondTutorial) {
             return;
         }
@@ -186,6 +209,7 @@
 
 -(void) addMagnifyingBtnMenu{
     CCMenuItem *magnifyMenuItem = [CCMenuItemImage itemWithNormalImage:@"zoom_btn.png" selectedImage:@"zoom_btn_press.png" block:^(id sender) {
+        [soundEffect button_1];
         if ([FTMUtil sharedInstance].isFirstTutorial || [FTMUtil sharedInstance].isSecondTutorial) {
             return;
         }
@@ -231,6 +255,7 @@
     [self addChild: pauseScreenBg z:0];
     
     CCMenuItem *levelsMenuItem = [CCMenuItemImage itemWithNormalImage:@"level_select_btn.png" selectedImage:@"level_select_btn_press.png" block:^(id sender) {
+        [soundEffect button_1];
         [[CCDirector sharedDirector] resume];
         [[SimpleAudioEngine sharedEngine] setMute:NO];
         [[CCDirector sharedDirector] replaceScene:[LevelScreen scene]];
@@ -239,13 +264,14 @@
     levelsMenuItem.position = ccp(0 *scaleFactorX, 10 *scaleFactorY);
     
     CCMenuItem *soundMenuItem = [CCMenuItemImage itemWithNormalImage:@"sound_on.png" selectedImage:@"sound_off.png" block:^(id sender) {
-        
+        [soundEffect button_1];
         
     }];
 
     soundMenuItem.position = ccp(0 *scaleFactorX, 10 *scaleFactorY);
     
     CCMenuItem *homeMenuItem = [CCMenuItemImage itemWithNormalImage:@"home_btn.png" selectedImage:@"home_btn_press.png" block:^(id sender) {
+        [soundEffect button_1];
         [[CCDirector sharedDirector] resume];
         [[SimpleAudioEngine sharedEngine] setMute:NO];
         [[CCDirector sharedDirector] replaceScene:[MenuScreen scene]];
@@ -254,6 +280,7 @@
     homeMenuItem.position = ccp(0 *scaleFactorX, 10 *scaleFactorY);
     
     CCMenuItem *resumeMenuItem = [CCMenuItemImage itemWithNormalImage:@"play_btn.png" selectedImage:@"play_btn_press.png" block:^(id sender) {
+        [soundEffect button_1];
         [self showPausingAnimation];
         [[SimpleAudioEngine sharedEngine] setMute:NO];
         
@@ -519,6 +546,7 @@
 
 
 -(void)clickMouse:(CCMenuItem *)sender {
+    [soundEffect button_1];
     DB *db = [DB new];
     [db setSettingsFor:@"CurrentMouse" withValue:[NSString stringWithFormat:@"%d",sender.tag]];
     [db release];
@@ -548,6 +576,7 @@
 }
 
 -(void)retryOptionsCallback:(CCMenuItem *)sender {
+    [soundEffect button_1];
     if(sender.tag == 1){
         [self addLevelSceneAgainForRetry];
     }else if(sender.tag ==2){

@@ -309,10 +309,6 @@ GameEngine02Menu *layer02;
             [tutorialHand runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation2]]];
             [self addChild:tutorialHand];
         }
-
-        self.scaleX = winSize.width/1000;
-        self.scaleY = winSize.height/700;
-        self.position = ccp(-126, -85);
     }
     return self;
 }

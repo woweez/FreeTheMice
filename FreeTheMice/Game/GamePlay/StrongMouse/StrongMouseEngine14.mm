@@ -784,7 +784,38 @@ StrongMouseEngineMenu14 *sLayer14;
 //    
     
 }
-
+-(void) playBlockSound: (int) tag{
+    //chusss tareeen code karthik ;(
+    BOOL playSound = NO;
+    if (tag == 1 && !box1) {
+        box1 = YES;
+        playSound = YES;
+    }
+    else if (tag == 2 && !box2) {
+        box2 = YES;
+        playSound = YES;
+    }
+    else if (tag == 3 && !box3) {
+        box3 = YES;
+        playSound = YES;
+    }
+    else if (tag == 4 && !box4) {
+        box4 = YES;
+        playSound = YES;
+    }
+    else if (tag == 5 && !box5) {
+        box5 = YES;
+        playSound = YES;
+    }
+    else if (tag == 6 && !box6) {
+        box6 = YES;
+        playSound = YES;
+    }
+    
+    if (playSound) {
+        [soundEffect blocks_hitting_ground];
+    }
+}
 
 -(void)collision{
     
@@ -824,11 +855,13 @@ StrongMouseEngineMenu14 *sLayer14;
             if(blockSuccessCount<=6)
                 blockSuccessCount+=1;
             checkCheese3[0]=1;
+            [self playBlockSound: 1];
         }
         if(blockSprite[i].position.x>=460 && blockSprite[i].position.x<=480 && blockSprite[i].position.y <= 275){
             if(blockSuccessCount<=6)
                 blockSuccessCount+=1;
             checkCheese3[1]=1;
+            [self playBlockSound: 2];
         }
         
         
@@ -837,11 +870,13 @@ StrongMouseEngineMenu14 *sLayer14;
             if(blockSuccessCount<=6)
                 blockSuccessCount+=1;
             checkCheese2[0]=1;
+            [self playBlockSound: 3];
         }
         if(blockSprite[i].position.x>=725 && blockSprite[i].position.x<=745 && blockSprite[i].position.y <= 275){
             if(blockSuccessCount<=6)
                 blockSuccessCount+=1;
             checkCheese2[1]=1;
+            [self playBlockSound: 4];
         }
         
         //Block 3
@@ -849,11 +884,13 @@ StrongMouseEngineMenu14 *sLayer14;
             if(blockSuccessCount<=6)
                 blockSuccessCount+=1;
             checkCheese[0]=1;
+            [self playBlockSound: 5];
         }
         if(blockSprite[i].position.x >= 905 && blockSprite[i].position.x<=925 && blockSprite[i].position.y <= 275){
             if(blockSuccessCount<=6)
                 blockSuccessCount+=1;
             checkCheese[1]=1;
+           [self playBlockSound: 6];
         }
         if(blockSuccessCount>=6)
             gameFunc.notCollideBlockChe=YES;
@@ -1327,7 +1364,7 @@ StrongMouseEngineMenu14 *sLayer14;
         if(heroWinCount==15){
             
             heroWinSprite = [CCSprite spriteWithSpriteFrameName:@"strong_win1.png"];
-            heroWinSprite.scale = 0.6;
+            heroWinSprite.scale = STRONG_SCALE;
             if(!forwardChe)
                 heroWinSprite.position = ccp(platformX+30, platformY+5);
             else

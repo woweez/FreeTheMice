@@ -355,8 +355,11 @@
     isScheduledTime = YES;
     [self schedule:@selector(startTheHudLayerTimer) interval:1];
 }
-
+BOOL isFist;
 -(void) startTheHudLayerTimer{
+    if (elapsedSeconds == 0) {
+        [[SimpleAudioEngine sharedEngine] playEffect:TIMER loop:NO];
+    }
     elapsedSeconds += 1;
     
     if ([FTMUtil sharedInstance].isSlowDownTimer) {
@@ -365,15 +368,17 @@
         [self schedule:@selector(startTheHudLayerTimer) interval:2];
         
     }
-    if (elapsedSeconds == 1 || elapsedSeconds %4 == 0) {
-        [[SimpleAudioEngine sharedEngine] playEffect:TIMER loop:NO];
-    }
+    
     int totalTimeInSec = 120;
     int oneMinInSec = 60;
     int remainigTimeInSec = totalTimeInSec - elapsedSeconds;
     int mins = remainigTimeInSec > oneMinInSec? 1:0;
     int seconnds = remainigTimeInSec>oneMinInSec?remainigTimeInSec-oneMinInSec:remainigTimeInSec;
-    
+
+    if ((remainigTimeInSec > 6 && elapsedSeconds %4 == 0 )) {
+
+        [[SimpleAudioEngine sharedEngine] playEffect:TIMER loop:NO];
+    }
     if(!mouseWinChe){
            [hudLayer updateTimeRemaining:mins andTimeInSec:seconnds];
         }

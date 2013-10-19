@@ -68,6 +68,7 @@ enum {
         [background runAction:[CCRepeatForever actionWithAction:fadingSequence]];
         
         CCMenuItem *playMenuItem = [CCMenuItemImage itemWithNormalImage:@"play.png" selectedImage:@"play_press.png" block:^(id sender) {
+            [soundEffect button_1];
             [[CCDirector sharedDirector] replaceScene:[MouseSelectionScreen scene]];
 		}];
         [playMenuItem setScale:0.5];
@@ -78,6 +79,7 @@ enum {
         
         CCMenuItem *optionMenuItem = [CCMenuItemImage itemWithNormalImage:@"setting.png" selectedImage:@"setting_press.png" block:^(id sender) {
 //            [[CCDirector sharedDirector] replaceScene:[OptionsScreen scene]];
+            [soundEffect button_1];
             [self addSettingsSlidingAnimation];
 		}];
         [optionMenuItem setScale:0.5];
@@ -87,6 +89,7 @@ enum {
         [self addChild:optionBtnMenu z:10];
         
         CCMenuItem *aboutMenuItem = [CCMenuItemImage itemWithNormalImage:@"arrow.png" selectedImage:@"arrow_press.png" block:^(id sender) {
+            [soundEffect button_1];
             [self addAboutSlidingAnimation];
             // DB *db = [DB new];
 //            [db setSettingsFor:@"About" withValue:[NSString stringWithFormat:@"%d",1]];
@@ -99,6 +102,7 @@ enum {
         [self addChild:aboutBtnMenu z:10];
         
         CCMenuItem *storeMenuItem = [CCMenuItemImage itemWithNormalImage:@"store.png" selectedImage:@"store_press.png" block:^(id sender) {
+            [soundEffect button_1];
             //add functionality here.
             if ([[InAppUtils sharedInstance]._products count] == 0) {
                 [[InAppUtils sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
@@ -119,6 +123,7 @@ enum {
         
         CCMenuItem *gameCenterMenuItem = [CCMenuItemImage itemWithNormalImage:@"game_center.png" selectedImage:@"game_center_press.png" block:^(id sender) {
             //add functionality here.
+            [soundEffect button_1];
             [[InAppUtils sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
                 if (success) {
                     [InAppUtils sharedInstance]._products = products;
@@ -340,6 +345,7 @@ enum {
     [self addChild: slidingBgForAbout z:0];
     
     CCMenuItem *twitterMenuItem = [CCMenuItemImage itemWithNormalImage:@"twitter.png" selectedImage:@"twitter.png" block:^(id sender) {
+        [soundEffect button_1];
        // do nothing...
         
     }];
@@ -349,6 +355,7 @@ enum {
     [slidingBgForAbout addChild:twitterBtnMenu z:10];
     
     CCMenuItem *facebookMenuItem = [CCMenuItemImage itemWithNormalImage:@"facebook_like.png" selectedImage:@"facebook_like.png" block:^(id sender) {
+        [soundEffect button_1];
         // do nothing...
     }];
 
@@ -367,6 +374,7 @@ enum {
     [self addChild: slidingBgForSettings z:0];
     
     CCMenuItem *soundMenuItem = [CCMenuItemImage itemWithNormalImage:@"sound_on.png" selectedImage:@"sound_off.png" block:^(id sender) {
+        [soundEffect button_1];
         // do nothing...
         
     }];
@@ -381,6 +389,7 @@ enum {
     [slidingBgForSettings addChild:soundBtnMenu z:10];
     
     CCMenuItem *infoMenuItem = [CCMenuItemImage itemWithNormalImage:@"info.png" selectedImage:@"info_press.png" block:^(id sender) {
+        [soundEffect button_1];
         // do nothing...
         [[CCDirector sharedDirector] replaceScene:[OptionsScreen scene]];
     }];

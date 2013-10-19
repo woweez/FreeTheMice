@@ -1053,7 +1053,7 @@ StrongMouseEngineMenu09 *sLayer09;
 
         if(heroWinCount==15){
             heroWinSprite = [CCSprite spriteWithSpriteFrameName:@"strong_win1.png"];
-            heroWinSprite.scale = 0.6;
+            heroWinSprite.scale = STRONG_SCALE;
             if(!forwardChe)
                 heroWinSprite.position = ccp(platformX+30, platformY+5);
             else

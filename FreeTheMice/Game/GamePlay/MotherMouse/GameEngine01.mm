@@ -68,7 +68,6 @@ GameEngine01Menu *layer01;
         [self initValue];
         gameFunc.gameLevel=motherLevel;
         
-        
         self.isTouchEnabled = YES;
         self.isAccelerometerEnabled = YES;
         b2Vec2 gravity;
@@ -507,7 +506,6 @@ GameEngine01Menu *layer01;
                     cheeseSprite2[i].visible=NO;
                     cheeseCollectedScore+=1;
                     starSprite[i].visible=NO;
-                    [[SimpleAudioEngine sharedEngine] playEffect:CHEESE_1 loop:NO];
                     [hudLayer updateNoOfCheeseCollected:cheeseCollectedScore andMaxValue:[cheeseSetValue[motherLevel-1] intValue]];
                     [self createExplosionX:cheeseX+mValue y:cheeseY];
                     break;
@@ -520,7 +518,6 @@ GameEngine01Menu *layer01;
                     cheeseSprite2[i].visible=NO;
                     cheeseCollectedScore+=1;
                     starSprite[i].visible=NO;
-                    [[SimpleAudioEngine sharedEngine] playEffect:CHEESE_1 loop:NO];
                     [hudLayer updateNoOfCheeseCollected:cheeseCollectedScore andMaxValue:[cheeseSetValue[motherLevel-1] intValue]];
                     [self createExplosionX:cheeseX+mValue y:cheeseY];
                     break;

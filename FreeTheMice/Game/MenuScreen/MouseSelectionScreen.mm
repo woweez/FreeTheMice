@@ -102,6 +102,7 @@ int counter;
         [self addChild: selectMouseTitle z:0];
         
         CCMenuItem *backMenuItem = [CCMenuItemImage itemWithNormalImage:@"back_button_1.png" selectedImage:@"back_button_2.png" block:^(id sender) {
+            [soundEffect button_1];
             [[CCDirector sharedDirector] replaceScene:[MenuScreen scene]];
             
 		}];
@@ -164,6 +165,7 @@ int counter;
         [self addChild: menu3];
         
         CCMenuItem *magnifyMenuItem = [CCMenuItemImage itemWithNormalImage:@"debugBtn_nor.png" selectedImage:@"debugBtn.png" block:^(id sender) {
+            [soundEffect button_1];
             counter++;
             if(counter == 10){
                 DB *db = [DB new];
@@ -193,6 +195,7 @@ int counter;
 }
 
 -(void)clickMouse:(CCMenuItem *)sender {
+    [soundEffect button_1];
 //    DB *db = [DB new];
 //    [db setSettingsFor:@"CurrentMouse" withValue:[NSString stringWithFormat:@"%d",sender.tag]];
 //    [db release];

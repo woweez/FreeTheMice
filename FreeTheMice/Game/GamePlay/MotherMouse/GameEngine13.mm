@@ -598,8 +598,9 @@ GameEngine13Menu *layer13;
 -(void)wavesFunc{
     
     
-    wavesScaleCount+=0.01;
+    wavesScaleCount+=0.008;
     if(wavesScaleCount<=0.6){
+        [soundEffect electricity];
 //        wavesSprite.scale=0.4+wavesScaleCount;
         wavesSprite.position = ccp(570+(wavesScaleCount*810), 630);
 //        wavesSprite2.scale=0.4+wavesScaleCount;

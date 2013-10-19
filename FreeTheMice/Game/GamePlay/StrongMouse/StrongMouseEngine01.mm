@@ -10,7 +10,7 @@
 #import "StrongMouseEngine01.h"
 #import "LevelScreen.h"
 #import "LevelCompleteScreen.h"
-
+#import "FTMConstants.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -98,7 +98,7 @@ StrongMouseEngineMenu01 *sLayer01;
         [self addChild:spriteSheet z:10];
         
         heroRunSprite = [CCSprite spriteWithSpriteFrameName:@"strong_run01.png"];
-        heroRunSprite.scale = 0.5;
+        heroRunSprite.scale = STRONG_SCALE;
         heroRunSprite.position = ccp(200, 200);
         [spriteSheet addChild:heroRunSprite];
         
@@ -113,7 +113,7 @@ StrongMouseEngineMenu01 *sLayer01;
         
         
         heroPushSprite = [CCSprite spriteWithSpriteFrameName:@"push1.png"];
-        heroPushSprite.scale = 0.5;
+        heroPushSprite.scale = STRONG_SCALE;
         heroPushSprite.position = ccp(200, 200);
         heroPushSprite.visible=NO;
         [spriteSheet addChild:heroPushSprite];
@@ -476,7 +476,7 @@ StrongMouseEngineMenu01 *sLayer01;
         
         if(heroWinCount==15){
             heroWinSprite = [CCSprite spriteWithSpriteFrameName:@"strong_win1.png"];
-            heroWinSprite.scale = 0.5;
+            heroWinSprite.scale = STRONG_SCALE;
             if(!forwardChe)
                 heroWinSprite.position = ccp(platformX+30, platformY+5);
             else
@@ -579,7 +579,7 @@ StrongMouseEngineMenu01 *sLayer01;
     [spriteSheet removeChild:heroSprite cleanup:YES];
     heroSprite = [CCSprite spriteWithSpriteFrameName:fStr];
     heroSprite.position = ccp(platformX, platformY);
-    heroSprite.scale = 0.5;
+    heroSprite.scale = STRONG_SCALE;
     //heroSprite.scale=0.9;
     [spriteSheet addChild:heroSprite z:10];
     [self heroUpdateForwardPosFunc];

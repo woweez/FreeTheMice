@@ -44,8 +44,9 @@ NSString *const StoreUpdateProductPurchasedNotification = @"StoreUpdateProductPu
         totalCheese.position= ccp(225 *scaleFactorX, 38 *scaleFactorY);
         totalCheese.scale=0.8;
         [self addChild:totalCheese z:0];
-        
+        soundEffect = [[sound alloc] init];
         CCMenuItem *backButtonItem = [CCMenuItemImage itemWithNormalImage:@"back_button_1.png" selectedImage:@"back_button_2.png" block:^(id sender) {
+            [soundEffect button_1];
             [[CCDirector sharedDirector] replaceScene:[ToolShedScreen scene]];
         }];
         
@@ -83,6 +84,7 @@ NSString *const StoreUpdateProductPurchasedNotification = @"StoreUpdateProductPu
 -(void) addBuyButtons{
     for (int i = 1; i<= 3; i++) {
         CCMenuItem *buyItem = [CCMenuItemImage itemWithNormalImage:@"buy-btn.png" selectedImage:@"buy-btn-press.png" block:^(id sender) {
+            [soundEffect button_1];
             if ([[InAppUtils sharedInstance]._products count] <3) {
                 return;
             }
