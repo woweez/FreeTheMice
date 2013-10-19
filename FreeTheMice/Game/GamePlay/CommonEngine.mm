@@ -24,12 +24,13 @@
         [FTMUtil sharedInstance].isRespawnMice = NO;
         currentAnim = 0;
         isLandingAnimationAdded = NO;
+        soundManager = [[sound alloc]  init];
         if ([FTMUtil sharedInstance].mouseClicked == FTM_STRONG_MICE_ID) {
             cache = [CCSpriteFrameCache sharedSpriteFrameCache];
 
             [cache addSpriteFramesWithFile:@"strong0_boots.plist"];
             bootsSpriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"strong0_boots.png"];
-
+            
             [self addChild:bootsSpriteSheet z:100];
         }
 
@@ -430,6 +431,7 @@ BOOL isFist;
     }
     CCAnimation *animation2 = [CCAnimation animationWithSpriteFrames:animFrames2 delay:0.03f];
     [heroPushSprite runAction:[CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:animation2]]];
+    [soundManager pushing];
 
 // for boots.
 //    

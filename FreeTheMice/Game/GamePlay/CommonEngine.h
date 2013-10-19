@@ -16,6 +16,7 @@
 #import "AppDelegate.h"
 #import "HudLayer.h"
 #import "CatObject.h"
+#import "sound.h"
 @interface CommonEngine : CCLayer {
     
     CCSprite *heroRunSprite;
@@ -23,7 +24,7 @@
     CCSprite *flamesSprite;
     CCSprite *heroPushSprite;
     CCSprite *catSprite;
-
+    sound *soundManager;
     CCSpriteBatchNode *spriteSheet;
     //boots power up feature..
     CCSpriteBatchNode *bootsSpriteSheet;

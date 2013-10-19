@@ -805,6 +805,7 @@ StrongMouseEngineMenu03 *sLayer03;
             
             heroRunSprite.visible=NO;
             heroPushSprite.visible=YES;
+//            [soundEffect pushing];//bhai
         }
     }
 }
